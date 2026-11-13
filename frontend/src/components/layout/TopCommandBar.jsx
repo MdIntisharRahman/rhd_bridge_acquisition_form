@@ -5,6 +5,7 @@ import {
   Globe, 
   PanelLeftClose, 
   PanelLeftOpen, 
+  UserCog,
   Search 
 } from 'lucide-react';
 import { api } from '../../services/api';
@@ -186,6 +187,7 @@ export default function TopCommandBar({
                 disabled={switching}
                 className="flex items-center space-x-2.5 px-3 py-1.5 rounded-xs bg-white/80 hover:bg-white text-[#00225a] border border-slate-300/80 transition-all cursor-pointer shadow-xs hover:shadow-sm active:scale-98"
               >
+                <UserCog className="w-3.5 h-3.5" />
                 <div className="flex flex-col text-right">
                   <span className="font-bold text-xs" style={{ fontFamily: 'var(--font-body)' }}>
                     {isDivisionAccount ? `${currentUser.full_name}` : currentRoleMeta.label}

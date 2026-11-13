@@ -121,7 +121,7 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
               </span>
               <div className="flex items-center space-x-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
-                <span className="text-[9px] font-semibold tracking-wider text-[#5b6b7a]" style={{ fontFamily: 'var(--font-caption)' }}>
+                <span className="text-[11px] font-semibold tracking-wider text-[#5b6b7a]">
                   Registries & Views
                 </span>
               </div>
