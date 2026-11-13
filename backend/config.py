@@ -4,7 +4,7 @@ from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "RHD ADDS (Automated Design Data System)"
+    PROJECT_NAME: str = "RHD ADDS (System for Coordinated Exchange of Design Data)"
     API_V1_STR: str = "/api"
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     

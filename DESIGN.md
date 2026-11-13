@@ -1,5 +1,5 @@
 ---
-name: RHD ADDS (Automated Design Data System)
+name: RHD ADDS (System for Coordinated Exchange of Design Data)
 description: Precision civil & structural engineering acquisition instrument and hierarchical ministerial endorsement pipeline for Bangladesh Roads and Highways Department
 colors:
   primary: "#025ec7"
@@ -75,7 +75,7 @@ components:
 
 ## Overview
 
-RHD ADDS (Automated Design Data System) is an authoritative civil and structural engineering acquisition instrument for the Roads and Highways Department (RHD), Government of the People's Republic of Bangladesh. The visual architecture pairs a double-beveled glassmorphism aesthetic with high-density tabular precision, designed for bright daylight field conditions on tablets and dual-monitor engineering scrutiny at Sarak Bhaban, Dhaka.
+RHD ADDS (System for Coordinated Exchange of Design Data) is an authoritative civil and structural engineering acquisition instrument for the Roads and Highways Department (RHD), Government of the People's Republic of Bangladesh. The visual architecture pairs a double-beveled glassmorphism aesthetic with high-density tabular precision, designed for bright daylight field conditions on tablets and dual-monitor engineering scrutiny at Sarak Bhaban, Dhaka.
 
 ## Colors
 

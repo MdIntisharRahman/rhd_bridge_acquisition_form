@@ -168,7 +168,7 @@ class BridgeAcquisition(Base):
     # Existing Bridge & Reference Datum (Fields 9-12, 20)
     existing_bridge_length = Column(String(100), nullable=True)
     existing_span_arrangement = Column(String(100), nullable=True)
-    reference_datum_type = Column(String(50), default="PWD", nullable=False)  # PWD, SOB, BIWTA, BWDB, Local, MSL, TBM
+    reference_datum_type = Column(String(50), default="MSL", nullable=False)  # MSL, SOB, BIWTA, BWDB, Local, PWD, TBM
     reference_benchmark_location = Column(String(255), nullable=True)
     reference_benchmark_map_link = Column(String(500), nullable=True)
     reference_benchmark_lat_lng = Column(String(100), nullable=True)
@@ -279,7 +279,7 @@ class CulvertAcquisition(Base):
     is_tidal_area = Column(String(10), default="No", nullable=True)
 
     # Reference Benchmark (Section 2)
-    reference_datum_type = Column(String(50), default="PWD", nullable=False)  # MSL, SOB, PWD, TBM
+    reference_datum_type = Column(String(50), default="MSL", nullable=False)  # MSL, SOB, PWD, TBM
     reference_benchmark_location = Column(String(255), nullable=True)
     reference_benchmark_map_link = Column(String(500), nullable=True)
     reference_benchmark_lat_lng = Column(String(100), nullable=True)

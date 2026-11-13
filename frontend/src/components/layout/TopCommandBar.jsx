@@ -157,7 +157,7 @@ export default function TopCommandBar({
                 </span>
                 <span className="text-[#d5dbe7]">|</span>
                 <span className="text-xs text-[#034081] font-extrabold px-1.5 py-0.5 tracking-wider hidden sm:inline" style={{ fontFamily: 'var(--font-subhead)' }}>
-                  Automated Design Data System
+                  System for Coordinated Exchange of Design Data
                 </span>
               </div>
               <span className="text-[10.5px] text-[#5b6b7a] font-medium hidden md:inline">

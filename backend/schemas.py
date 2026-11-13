@@ -140,7 +140,7 @@ class BridgeAcquisitionBase(BaseModel):
     # Existing Bridge & Reference Datum
     existing_bridge_length: Optional[str] = None
     existing_span_arrangement: Optional[str] = None
-    reference_datum_type: Optional[str] = "PWD"
+    reference_datum_type: Optional[str] = "MSL"
     reference_benchmark_location: Optional[str] = None
     reference_benchmark_map_link: Optional[str] = None
     reference_benchmark_lat_lng: Optional[str] = None
@@ -243,7 +243,7 @@ class CulvertAcquisitionBase(BaseModel):
     is_haor_area: Optional[str] = "No"
     is_tidal_area: Optional[str] = "No"
 
-    reference_datum_type: Optional[str] = "PWD"
+    reference_datum_type: Optional[str] = "MSL"
     reference_benchmark_location: Optional[str] = None
     reference_benchmark_map_link: Optional[str] = None
     reference_benchmark_lat_lng: Optional[str] = None

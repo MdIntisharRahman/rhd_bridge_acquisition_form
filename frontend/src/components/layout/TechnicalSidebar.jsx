@@ -116,12 +116,12 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
             </div> */}
 
             <div className="flex flex-col">
-              <span className="text-xs font-black tracking-tight uppercase text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
+              <span className="text-xs pl-1 font-black tracking-tight uppercase text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
                 Technical Console
               </span>
               <div className="flex items-center space-x-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
-                <span className="text-[11px] font-semibold tracking-wider text-[#5b6b7a]" style={{ fontFamily: 'var(--font-subhead)' }}>
+                {/* <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" /> */}
+                <span className="text-[11px] pl-1 font-semibold tracking-wider text-[#5b6b7a]" style={{ fontFamily: 'var(--font-subhead)' }}>
                   Registries & Views
                 </span>
               </div>

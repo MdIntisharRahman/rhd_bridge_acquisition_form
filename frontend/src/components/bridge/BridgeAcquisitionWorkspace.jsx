@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import gsap from "gsap";
 import {
   Save,
@@ -76,7 +76,7 @@ export default function BridgeAcquisitionWorkspace({
     nav_others_note: "",
     existing_bridge_length: "",
     existing_span_arrangement: "",
-    reference_datum_type: "PWD",
+    reference_datum_type: "MSL",
     reference_benchmark_location: "",
     reference_benchmark_map_link: "",
     reference_benchmark_lat_lng: "",
@@ -116,20 +116,23 @@ export default function BridgeAcquisitionWorkspace({
     total_borehole_count: 0,
   });
 
-  // Jurisdiction check: Editing an existing placement is strictly reserved for personnel inside the corresponding division
+  // Field Division Jurisdiction Check:
+  // Survey and demand placement inputs are strictly reserved for field personnel belonging to this specific field division (or Supreme/Webmaster)
   const isSupremeOrWebmaster = ["SUPREME", "WEBMASTER"].includes(currentUser?.role);
-  const isDivisionPersonnel = Boolean(
+  const isFieldRole = ["FIELD_SAE", "FIELD_SDE", "FIELD_EE"].includes(currentUser?.role);
+  const isSameFieldDivision = Boolean(
     currentUser?.office_division_id &&
     formData?.division_id &&
     Number(currentUser.office_division_id) === Number(formData.division_id)
   );
-  const canEditPlacement = !acquisitionId || isSupremeOrWebmaster || isDivisionPersonnel;
+  const canEditPlacement = isSupremeOrWebmaster || (isFieldRole && (!acquisitionId || isSameFieldDivision));
 
   const [zones, setZones] = useState([]);
   const [circles, setCircles] = useState([]);
   const [divisions, setDivisions] = useState([]);
   const [roadTypes, setRoadTypes] = useState([]);
   const [roads, setRoads] = useState([]);
+  const [roadCodeInput, setRoadCodeInput] = useState("");
   const [attachments, setAttachments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -158,25 +161,98 @@ export default function BridgeAcquisitionWorkspace({
     }
   };
 
-  // Road Code & Road Name Auto-Sync from 968 GeoJSON network
+  // Road Code & Road Name Auto-Sync from 967 GeoJSON network
   const currentRoad = roads.find((r) => r.id === Number(formData.road_id)) || roads.find((r) => r.road_number && formData.road_name && r.road_name === formData.road_name);
   const currentRoadNumber = currentRoad ? currentRoad.road_number : (roads.find((r) => r.id === Number(formData.road_id))?.road_number || "");
 
+  // Sync roadCodeInput when currentRoad or existing record changes
+  useEffect(() => {
+    if (currentRoadNumber) {
+      setRoadCodeInput(currentRoadNumber);
+    }
+  }, [currentRoadNumber]);
+
+  // Road filtering by category/type per institutional specification:
+  // - National: only N-***
+  // - Regional: only R-***
+  // - Zilla: only Z-***
+  // - Others: other roads / custom entry
+  const filteredRoads = useMemo(() => {
+    const typeId = Number(formData.road_type_id);
+    if (typeId === 1) {
+      return roads.filter((r) => r.road_type_id === 1 || (r.road_number && r.road_number.toUpperCase().startsWith("N")));
+    }
+    if (typeId === 2) {
+      return roads.filter((r) => r.road_type_id === 2 || (r.road_number && r.road_number.toUpperCase().startsWith("R")));
+    }
+    if (typeId === 3) {
+      return roads.filter((r) => r.road_type_id === 3 || (r.road_number && r.road_number.toUpperCase().startsWith("Z")));
+    }
+    if (typeId === 4) {
+      return roads.filter((r) => r.road_type_id === 4 || (!r.road_number?.toUpperCase().startsWith("N") && !r.road_number?.toUpperCase().startsWith("R") && !r.road_number?.toUpperCase().startsWith("Z")));
+    }
+    return roads;
+  }, [roads, formData.road_type_id]);
+
+  const handleRoadTypeSelect = (newTypeId) => {
+    setFormData((prev) => {
+      const next = { ...prev, road_type_id: newTypeId };
+      // Check if current selection matches newly chosen road type
+      if (currentRoad) {
+        const code = (currentRoad.road_number || "").toUpperCase().replace(/[-\s]/g, "");
+        const isMatch = (newTypeId === 1 && code.startsWith("N")) ||
+                        (newTypeId === 2 && code.startsWith("R")) ||
+                        (newTypeId === 3 && code.startsWith("Z")) ||
+                        (newTypeId === 4);
+        if (!isMatch) {
+          next.road_id = null;
+          next.road_name = "";
+          setRoadCodeInput("");
+        }
+      } else if (roadCodeInput) {
+        const code = roadCodeInput.toUpperCase().replace(/[-\s]/g, "");
+        const isMatch = (newTypeId === 1 && code.startsWith("N")) ||
+                        (newTypeId === 2 && code.startsWith("R")) ||
+                        (newTypeId === 3 && code.startsWith("Z")) ||
+                        (newTypeId === 4);
+        if (!isMatch) {
+          setRoadCodeInput("");
+        }
+      }
+      return next;
+    });
+  };
+
   const handleRoadCodeInput = (code) => {
+    setRoadCodeInput(code);
     const clean = (code || "").trim().toUpperCase();
-    const matched = roads.find((r) => r.road_number.toUpperCase() === clean);
+    const normalized = clean.replace(/[-\s]/g, "");
+
+    // Synchronize road_type_id from prefix if typed
+    let detectedTypeId = formData.road_type_id;
+    if (normalized.startsWith("N")) detectedTypeId = 1;
+    else if (normalized.startsWith("R")) detectedTypeId = 2;
+    else if (formData.road_type_id !== 4 && normalized.startsWith("Z")) detectedTypeId = 3;
+
+    const matched = roads.find((r) => {
+      const rClean = (r.road_number || "").toUpperCase();
+      const rNorm = rClean.replace(/[-\s]/g, "");
+      return rClean === clean || rNorm === normalized;
+    });
+
     if (matched) {
       setFormData((prev) => ({
         ...prev,
         road_id: matched.id,
         road_name: matched.road_name,
-        road_type_id: matched.road_type_id || prev.road_type_id,
+        road_type_id: matched.road_type_id || detectedTypeId || prev.road_type_id,
         division_id: prev.division_id || matched.division_id || prev.division_id,
       }));
     } else {
       setFormData((prev) => ({
         ...prev,
         road_id: null,
+        road_type_id: detectedTypeId || prev.road_type_id,
       }));
     }
   };
@@ -184,6 +260,7 @@ export default function BridgeAcquisitionWorkspace({
   const handleRoadNameInput = (name) => {
     const matched = roads.find((r) => (r.road_name || "").toLowerCase() === (name || "").trim().toLowerCase());
     if (matched) {
+      setRoadCodeInput(matched.road_number);
       setFormData((prev) => ({
         ...prev,
         road_id: matched.id,
@@ -245,7 +322,7 @@ export default function BridgeAcquisitionWorkspace({
     }));
   };
 
-  const datum = formData.reference_datum_type || "PWD";
+  const datum = formData.reference_datum_type || "MSL";
 
   useEffect(() => {
     loadMasterData();
@@ -850,22 +927,27 @@ export default function BridgeAcquisitionWorkspace({
       </div>
 
       {/* Read-Only Notice if user is outside this division */}
-      {!canEditPlacement && acquisitionId && (
+      {/* Read-Only Notice if user is outside this division or non-field personnel */}
+      {!canEditPlacement && (
         <div className="border border-amber-300 bg-amber-50/90 text-amber-900 p-3 rounded-xl flex items-center justify-between text-xs font-mono shadow-xs">
           <div className="flex items-center space-x-2">
             <Lock className="w-4 h-4 text-amber-700 shrink-0" />
             <span>
-              <strong>Jurisdiction Notice:</strong> Bringing edits to this demand placement is strictly reserved for personnel inside the <strong>{formData.division_name || `Division #${formData.division_id}`}</strong> division. You are currently viewing in read-only mode.
+              <strong>Jurisdiction Notice:</strong> {!acquisitionId
+                ? "Originating new bridge acquisition demand placements is strictly reserved for Field Division survey personnel (FIELD_SAE, FIELD_SDE, FIELD_EE). Design Division and review roles cannot originate field survey records."
+                : <>Bringing edits to this demand placement is strictly reserved for field personnel inside <strong>{divisions.find((d) => d.id === Number(formData.division_id))?.name || formData.division_name || `Division #${formData.division_id}`}</strong>. Survey data is presented in frozen view-only mode.</>}
             </span>
           </div>
-          <button
-            type="button"
-            onClick={() => setActiveTab("TAB-08")}
-            className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer ml-3 shrink-0 flex items-center space-x-1"
-          >
-            <History className="w-3 h-3" />
-            <span>View Change Logs</span>
-          </button>
+          {acquisitionId && (
+            <button
+              type="button"
+              onClick={() => setActiveTab("TAB-08")}
+              className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer ml-3 shrink-0 flex items-center space-x-1"
+            >
+              <History className="w-3 h-3" />
+              <span>View Change Logs</span>
+            </button>
+          )}
         </div>
       )}
 
@@ -934,25 +1016,29 @@ export default function BridgeAcquisitionWorkspace({
         {/* RIGHT COLUMN: The Active Tab's Form Inputs Page */}
         <div className="flex-1 min-w-0 w-full" id="workspace-form-pane">
           {/* Read-Only Jurisdiction Frozen Placement Banner */}
-          {!canEditPlacement && acquisitionId && (
+          {!canEditPlacement && (
             <div className="p-3 bg-amber-50/90 border border-amber-300 rounded-xl flex items-center justify-between text-xs text-amber-900 font-mono shadow-xs mb-4">
               <div className="flex items-center space-x-2">
                 <Lock className="w-4 h-4 text-amber-700 shrink-0" />
                 <span>
-                  <strong>Data Frozen (Read-Only Profile):</strong> This demand placement belongs to <strong>{formData.division_name || `Division #${formData.division_id}`}</strong>. All input controls are frozen; engineering specifications are displayed as read-only values.
+                  <strong>Data Frozen (Read-Only Profile):</strong> {!acquisitionId
+                    ? "Field survey placement origination is strictly reserved for Field Division engineers (FIELD_SAE, FIELD_SDE, FIELD_EE)."
+                    : <>This demand placement belongs to <strong>{divisions.find((d) => d.id === Number(formData.division_id))?.name || formData.division_name || `Division #${formData.division_id}`}</strong>. All input controls are frozen; engineering specifications are displayed as read-only values.</>}
                 </span>
               </div>
-              <div className="flex items-center space-x-2 shrink-0 ml-3">
-                <button
-                  type="button"
-                  onClick={(e) => handleExport(e, "pdf")}
-                  disabled={downloadingExport === "pdf"}
-                  className="px-2.5 py-1 rounded bg-amber-200/90 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer flex items-center space-x-1"
-                >
-                  <Download className="w-3 h-3" />
-                  <span>{downloadingExport === "pdf" ? "Exporting..." : "Export PDF"}</span>
-                </button>
-              </div>
+              {acquisitionId && (
+                <div className="flex items-center space-x-2 shrink-0 ml-3">
+                  <button
+                    type="button"
+                    onClick={(e) => handleExport(e, "pdf")}
+                    disabled={downloadingExport === "pdf"}
+                    className="px-2.5 py-1 rounded bg-amber-200/90 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer flex items-center space-x-1"
+                  >
+                    <Download className="w-3 h-3" />
+                    <span>{downloadingExport === "pdf" ? "Exporting..." : "Export PDF"}</span>
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -1298,12 +1384,7 @@ export default function BridgeAcquisitionWorkspace({
                       <label className="eng-label">1) Type of Road</label>
                       <select
                         value={formData.road_type_id || 1}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            road_type_id: parseInt(e.target.value),
-                          })
-                        }
+                        onChange={(e) => handleRoadTypeSelect(parseInt(e.target.value))}
                         className="eng-input"
                       >
                         {roadTypes.map((rt) => (
@@ -1344,20 +1425,25 @@ export default function BridgeAcquisitionWorkspace({
                       </div>
                       {!canEditPlacement ? (
                         <div className="eng-input bg-slate-100/90 text-slate-800 font-bold flex items-center border-slate-200 cursor-default select-text">
-                          {currentRoadNumber || (formData.road_id ? `Road #${formData.road_id}` : "—")}
+                          {roadCodeInput || currentRoadNumber || (formData.road_id ? `Road #${formData.road_id}` : "—")}
                         </div>
                       ) : (
                         <div className="relative">
                           <input
                             type="text"
                             list="bridge-road-codes-list"
-                            placeholder="Type code e.g. N1, R140, Z1001..."
-                            value={currentRoadNumber}
+                            placeholder={
+                              formData.road_type_id === 1 ? "Select/Type National e.g. N1, N5..." :
+                              formData.road_type_id === 2 ? "Select/Type Regional e.g. R140, R160..." :
+                              formData.road_type_id === 3 ? "Select/Type Zilla e.g. Z1001, Z1024..." :
+                              "Type Road Number / Code..."
+                            }
+                            value={roadCodeInput || currentRoadNumber}
                             onChange={(e) => handleRoadCodeInput(e.target.value)}
                             className="eng-input font-bold text-sky-900 uppercase"
                           />
                           <datalist id="bridge-road-codes-list">
-                            {roads.map((r) => (
+                            {filteredRoads.map((r) => (
                               <option key={r.id} value={r.road_number}>
                                 {r.road_number} — {r.road_name}
                               </option>
@@ -1386,7 +1472,7 @@ export default function BridgeAcquisitionWorkspace({
                             className="eng-input bg-slate-50 font-medium"
                           />
                           <datalist id="bridge-road-names-list">
-                            {roads.map((r) => (
+                            {filteredRoads.map((r) => (
                               <option key={r.id} value={r.road_name}>
                                 {r.road_number} — {r.road_name}
                               </option>
@@ -1741,7 +1827,7 @@ export default function BridgeAcquisitionWorkspace({
                       20) Reference Benchmark / Datum Type
                     </label>
                     <select
-                      value={formData.reference_datum_type || "PWD"}
+                      value={formData.reference_datum_type || "MSL"}
                       onChange={(e) =>
                         setFormData({
                           ...formData,

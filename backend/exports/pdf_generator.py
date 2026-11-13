@@ -157,7 +157,7 @@ def generate_acquisition_pdf(item, acq_type: str, audit_logs=None, attachments=N
         road_str = road_name_val or road_number or "N/A"
 
     # Metadata Grid
-    datum_label = getattr(item, "reference_datum_type", "PWD") or "PWD"
+    datum_label = getattr(item, "reference_datum_type", "MSL") or "MSL"
     meta_data = [
         [
             Paragraph("<b>Dossier Code:</b>", style_cell),

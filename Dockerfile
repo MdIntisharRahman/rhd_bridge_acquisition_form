@@ -1,4 +1,4 @@
-# Multi-Stage Dockerfile for RHD ADDS (Automated Design Data System)
+# Multi-Stage Dockerfile for RHD ADDS (System for Coordinated Exchange of Design Data)
 # Stage 1: Build Frontend SPA
 FROM node:22-alpine AS frontend-builder
 WORKDIR /app/frontend

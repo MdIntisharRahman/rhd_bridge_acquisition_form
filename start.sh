@@ -24,7 +24,7 @@ CLR_WHITE="\033[38;5;255m"
 
 echo -e "\n${CLR_BLUE}╭─────────────────────────────────────────────────────────────╮${CLR_RESET}"
 echo -e "${CLR_BLUE}│${CLR_RESET}  ${CLR_BOLD}${CLR_CYAN}⚡ RHD-ADDS${CLR_RESET} ${CLR_SLATE}::${CLR_RESET} ${CLR_BOLD}${CLR_WHITE}Universal Linux & VPS Server Launcher${CLR_RESET}    ${CLR_BLUE}│${CLR_RESET}"
-echo -e "${CLR_BLUE}│${CLR_RESET}  ${CLR_SLATE}Roads & Highways Department · Automated Design Data System${CLR_RESET}  ${CLR_BLUE}│${CLR_RESET}"
+echo -e "${CLR_BLUE}│${CLR_RESET}  ${CLR_SLATE}Roads & Highways Department · System for Coordinated Exchange of Design Data${CLR_RESET}  ${CLR_BLUE}│${CLR_RESET}"
 echo -e "${CLR_BLUE}│${CLR_RESET}  ${CLR_SLATE}Bridge Management Wing / Bridge Design Circle${CLR_RESET}               ${CLR_BLUE}│${CLR_RESET}"
 echo -e "${CLR_BLUE}╰─────────────────────────────────────────────────────────────╯${CLR_RESET}\n"
 

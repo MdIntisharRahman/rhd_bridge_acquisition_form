@@ -58,7 +58,7 @@ RHD ADDS is a specialized civil and structural engineering acquisition instrumen
 
 ## Brand Commitments
 
-- **Official Name:** RHD ADDS (Automated Design Data System).
+- **Official Name:** RHD ADDS (System for Coordinated Exchange of Design Data).
 - **Institutional Owner:** Roads and Highways Department (RHD), Ministry of Road Transport and Bridges, Government of the People's Republic of Bangladesh.
 - **Color Palette & Visual Tone:** Webmap Festive Palette: Vibrant Azure (`#025ec7`), Forest Emerald (`#089a2d`), Tomato Orange (`#ff6347`), Deep Teal (`#077b9f`), Royal Violet (`#9400d3`), Slateblue (`#6a5acd`), Frosted Glass panels (`rgba(255, 255, 255, 0.85)`), and Slate (`#1e293b`).
 

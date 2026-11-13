@@ -4,7 +4,7 @@ title RHD-ADDS Universal Server Launcher
 cd /d "%~dp0"
 
 echo ========================================================================
-echo    RHD-ADDS: Automated Design Data System (Universal Windows Launcher)
+echo    RHD-ADDS: System for Coordinated Exchange of Design Data (Universal Windows Launcher)
 echo    Roads and Highways Department (RHD), Bangladesh
 echo ========================================================================
 echo.

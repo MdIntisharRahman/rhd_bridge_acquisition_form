@@ -1,4 +1,4 @@
-# RHD ADDS — Automated Design Data System
+# RHD ADDS — System for Coordinated Exchange of Design Data
 ## Master Codebase Index & Architectural Catalog
 
 > **Institutional Scope**: Roads and Highways Department (RHD), Ministry of Road Transport and Bridges, Government of the People's Republic of Bangladesh.  

@@ -1,5 +1,5 @@
 [Unit]
-Description=RHD ADDS (Automated Design Data System) Acquisition Form Service
+Description=RHD ADDS (System for Coordinated Exchange of Design Data) Acquisition Form Service
 After=network.target
 
 [Service]

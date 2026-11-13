@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RHD ADDS (Automated Design Data System) — Universal Server Launcher & Orchestrator
+RHD ADDS (System for Coordinated Exchange of Design Data) — Universal Server Launcher & Orchestrator
 Roads and Highways Department (RHD), Bangladesh
 Bridge Management Wing / Bridge Design Circle
 
@@ -344,7 +344,7 @@ def main():
 
     print(f"""{Style.BLUE}╭─────────────────────────────────────────────────────────────╮
 │  {Style.CYAN}⚡ RHD-ADDS{Style.RESET} {Style.SLATE}::{Style.RESET} {Style.BOLD}{Style.WHITE}Universal Server Launcher{Style.RESET}                      {Style.BLUE}│
-│  {Style.DIM}Roads and Highways Department · Automated Design Data System{Style.RESET}   {Style.BLUE}│
+│  {Style.DIM}Roads and Highways Department · System for Coordinated Exchange of Design Data{Style.RESET}   {Style.BLUE}│
 │  {Style.SLATE}Bridge Management Wing / Bridge Design Circle{Style.RESET}               {Style.BLUE}│
 ╰─────────────────────────────────────────────────────────────╯{Style.RESET}""")
 

@@ -503,13 +503,6 @@
   ],
   "roads": [
     {
-      "road_type_code": "O",
-      "road_number": "BBA Road",
-      "road_name": "Dhaka -Mawa-Bhanga-Barishal-Patuakhali Road",
-      "division_name": "Sirajganj",
-      "length_km": 19.032
-    },
-    {
       "road_type_code": "N",
       "road_number": "N1",
       "road_name": "Dhaka-Cumilla-Chattogram-Teknaf Road",

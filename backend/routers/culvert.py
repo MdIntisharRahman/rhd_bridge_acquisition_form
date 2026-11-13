@@ -63,6 +63,20 @@ def create_culvert_acquisition(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    # Creation authorization: Only field division survey personnel or system admins can originate culvert acquisition placements
+    allowed_field_creators = [
+        settings.ROLE_FIELD_SAE,
+        settings.ROLE_FIELD_SDE,
+        settings.ROLE_FIELD_EE,
+        settings.ROLE_SUPREME,
+        settings.ROLE_WEBMASTER,
+    ]
+    if current_user.role not in allowed_field_creators:
+        raise HTTPException(
+            status_code=403,
+            detail="Creating new culvert acquisition records is strictly reserved for Field Division personnel (FIELD_SAE, FIELD_SDE, FIELD_EE) or System Administrators. Design Division and review roles cannot originate field survey records."
+        )
+
     code = generate_culvert_code(db)
     item_dict = data.model_dump()
 
@@ -143,15 +157,21 @@ def update_culvert_acquisition(
     if not item:
         raise HTTPException(status_code=404, detail="Culvert acquisition record not found")
 
-    # 1. Division Reservation Check:
-    # Edits to a demand placement are strictly reserved for personnel inside the corresponding division (or Supreme/Webmaster)
+    # 1. Field Division Jurisdiction Check:
+    # Edits to field survey data on a demand placement are strictly reserved for field personnel inside the corresponding division (or Supreme/Webmaster)
     if current_user.role not in [settings.ROLE_SUPREME, settings.ROLE_WEBMASTER]:
+        allowed_field_roles = [settings.ROLE_FIELD_SAE, settings.ROLE_FIELD_SDE, settings.ROLE_FIELD_EE]
+        if current_user.role not in allowed_field_roles:
+            raise HTTPException(
+                status_code=403,
+                detail=f"Modifying field survey data is strictly restricted to Field Division personnel. Role '{current_user.role}' cannot alter field division data."
+            )
         if item.division_id is not None:
             if not current_user.office_division_id or current_user.office_division_id != item.division_id:
                 div_name = item.division.name if item.division else f"ID {item.division_id}"
                 raise HTTPException(
                     status_code=403,
-                    detail=f"Editing is strictly reserved for personnel inside the corresponding division ({div_name}). Your profile belongs to division ID: {current_user.office_division_id}."
+                    detail=f"Editing is strictly reserved for field personnel inside the corresponding division ({div_name}). Your profile belongs to division ID: {current_user.office_division_id}."
                 )
 
     # 2. Workflow Edit Locking: Field editing locked when escalated unless current holder, Supreme, or Webmaster

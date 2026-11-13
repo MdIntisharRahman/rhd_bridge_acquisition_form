@@ -40,7 +40,7 @@ def generate_acquisition_excel(item, acq_type: str, audit_logs=None, boreholes=N
         ("Road Name", getattr(item, 'road_name', 'N/A')),
         ("Location / Chainage", getattr(item, 'location_chainage_gps_text', None) or getattr(item, 'location_chainage_lrp_gps', 'N/A')),
         ("GPS Coordinates", str(item.location_lat_lng or 'N/A')),
-        ("Reference Datum", getattr(item, 'reference_datum_type', 'PWD')),
+        ("Reference Datum", getattr(item, 'reference_datum_type', 'MSL')),
         ("Webmap Link", f"https://webmap.rhdbridge.com/?code={item.code}"),
         ("Created At", str(item.created_at)),
         ("Last Updated", str(item.updated_at))
@@ -69,7 +69,7 @@ def generate_acquisition_excel(item, acq_type: str, audit_logs=None, boreholes=N
         ws2[f"{col}1"].fill = fill_header
         ws2[f"{col}1"].alignment = Alignment(horizontal="center", vertical="center")
 
-    datum = getattr(item, 'reference_datum_type', 'PWD') or 'PWD'
+    datum = getattr(item, 'reference_datum_type', 'MSL') or 'MSL'
     if acq_type == "BRIDGE":
         t_params = [
             ("BRG-01", "Proposed Bridge Type", getattr(item, 'proposed_bridge_type', 'N/A'), "—"),

@@ -23,7 +23,7 @@ logger = logging.getLogger("rhd_adds")
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    description="RHD Automated Design Data System (RHD ADDS) for the Bridge Design Circle, Roads and Highways Department, Bangladesh.",
+    description="RHD System for Coordinated Exchange of Design Data (RHD ADDS) for the Bridge Design Circle, Roads and Highways Department, Bangladesh.",
     version="2.0.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",

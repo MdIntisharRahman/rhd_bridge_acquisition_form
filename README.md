@@ -1,4 +1,4 @@
-# RHD ADDS — Automated Design Data System (Bridge & Culvert Acquisition)
+# RHD ADDS — System for Coordinated Exchange of Design Data (Bridge & Culvert Acquisition)
 
 [![Roads and Highways Department](https://img.shields.io/badge/RHD-Government%20of%20Bangladesh-00225a?style=flat-square)](https://rhd.gov.bd)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
@@ -7,7 +7,7 @@
 [![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite%20Fallback-336791?style=flat-square&logo=postgresql)](https://postgresql.org)
 [![Nginx](https://img.shields.io/badge/Reverse%20Proxy-Nginx%20HTTPS-009639?style=flat-square&logo=nginx)](https://nginx.org)
 
-**RHD ADDS (Automated Design Data System)** is the official digital acquisition, structural vetting, and endorsement orchestration portal developed for the **Bridge Management Wing (BMW)** and **Bridge Design Circle (BDC)** of the **Roads and Highways Department (RHD)**, Ministry of Road Transport and Bridges, Bangladesh.
+**RHD ADDS (System for Coordinated Exchange of Design Data)** is the official digital acquisition, structural vetting, and endorsement orchestration portal developed for the **Bridge Management Wing (BMW)** and **Bridge Design Circle (BDC)** of the **Roads and Highways Department (RHD)**, Ministry of Road Transport and Bridges, Bangladesh.
 
 The platform bridges the gap between field engineering reconnaissance (sub-divisions/divisions across all 10 RHD zones) and central structural design bureaus in Sarak Bhaban, Tejgaon, Dhaka.
 
