@@ -365,14 +365,27 @@ def main():
     else:
         db_url = os.getenv("DATABASE_URL", "postgresql+psycopg2://postgres:postgres@localhost:5432/rhd_adds")
         if "postgresql" in db_url:
-            pg_active = check_postgres_listening()
-            if not pg_active:
+            pg_host = "127.0.0.1"
+            pg_port = 5432
+            try:
+                from urllib.parse import urlparse
+                clean_url = db_url.split("://", 1)[-1]
+                parsed = urlparse("http://" + clean_url)
+                if parsed.hostname:
+                    pg_host = parsed.hostname
+                if parsed.port:
+                    pg_port = parsed.port
+            except Exception:
+                pass
+
+            pg_active = check_postgres_listening(host=pg_host, port=pg_port)
+            if not pg_active and pg_host in ("127.0.0.1", "localhost", ""):
                 pg_active = attempt_kickstart_postgres()
 
             if pg_active:
-                print(f"   {Style.MINT}✓{Style.RESET} Primary PostgreSQL database active on port 5432.")
+                print(f"   {Style.MINT}✓{Style.RESET} Primary PostgreSQL database active on {pg_host}:{pg_port}.")
             else:
-                print(f"   {Style.AMBER}↳ PostgreSQL is not responding on 5432.{Style.RESET}")
+                print(f"   {Style.AMBER}↳ PostgreSQL is not responding on {pg_host}:{pg_port}.{Style.RESET}")
                 print(f"   {Style.MINT}✓{Style.RESET} Seamless auto-fallback: utilizing embedded SQLite engine (rhd_adds_fallback.db).")
                 os.environ["DATABASE_URL"] = "sqlite:///./rhd_adds_fallback.db"
         else:
