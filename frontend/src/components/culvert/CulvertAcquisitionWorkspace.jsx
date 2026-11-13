@@ -14,13 +14,15 @@ import {
   FileCheck,
   ExternalLink,
   Trash2,
-  Lock
+  Lock,
+  History
 } from 'lucide-react';
 import { api } from '../../services/api';
 import UnifiedSideFlowPanel from '../workflow/UnifiedSideFlowPanel';
 import ReturnForCorrectionModal from '../workflow/ReturnForCorrectionModal';
 import RhdWebmapBorelogForm from '../borelog/RhdWebmapBorelogForm';
 import PreparedDesignPackageCard from '../workflow/PreparedDesignPackageCard';
+import DemandPlacementAuditLog from '../workflow/DemandPlacementAuditLog';
 
 const CLV_TABS = [
   { id: 'CLV-TAB-01', title: '1. Location & Flood/Haor Context', code: '[CLV-01]' },
@@ -29,7 +31,8 @@ const CLV_TABS = [
   { id: 'CLV-TAB-04', title: '4. Proposed Culvert Geometry', code: '[CLV-04]' },
   { id: 'CLV-TAB-05', title: '5. Photos & Extension Diagrams', code: '[CLV-05]' },
   { id: 'CLV-TAB-06', title: '6. Webmap GIS & Borelogs', code: '[CLV-06]' },
-  { id: 'CLV-TAB-07', title: '7. Prepared Design Deliverables', code: '[CLV-07]' }
+  { id: 'CLV-TAB-07', title: '7. Prepared Design Deliverables', code: '[CLV-07]' },
+  { id: 'CLV-TAB-08', title: '8. Audit & Change History', code: '[CLV-08]' }
 ];
 
 export default function CulvertAcquisitionWorkspace({
@@ -121,6 +124,15 @@ export default function CulvertAcquisitionWorkspace({
     proposed_widening_remarks: '',
     total_borehole_count: 0
   });
+
+  // Jurisdiction check: Editing an existing placement is strictly reserved for personnel inside the corresponding division
+  const isSupremeOrWebmaster = ['SUPREME', 'WEBMASTER'].includes(currentUser?.role);
+  const isDivisionPersonnel = Boolean(
+    currentUser?.office_division_id &&
+    formData?.division_id &&
+    Number(currentUser.office_division_id) === Number(formData.division_id)
+  );
+  const canEditPlacement = !acquisitionId || isSupremeOrWebmaster || isDivisionPersonnel;
 
   const [zones, setZones] = useState([]);
   const [circles, setCircles] = useState([]);
@@ -289,6 +301,13 @@ export default function CulvertAcquisitionWorkspace({
   };
 
   const handleSaveDraft = async () => {
+    if (!canEditPlacement) {
+      setMsg({
+        type: 'error',
+        text: `Editing is strictly reserved for personnel inside the ${formData.division_name || 'corresponding'} division.`
+      });
+      return;
+    }
     try {
       setSaving(true);
       setMsg(null);
@@ -596,16 +615,61 @@ export default function CulvertAcquisitionWorkspace({
             </>
           )}
 
-          <button
-            onClick={handleSaveDraft}
-            disabled={saving}
-            className="btn-festive-plum text-xs font-semibold px-4 py-1.5 cursor-pointer"
-          >
-            <Save className="w-3.5 h-3.5" />
-            <span>{saving ? 'Saving...' : 'Save Draft'}</span>
-          </button>
+          {acquisitionId && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('CLV-TAB-08')}
+              className={`px-3 py-1.5 rounded-xs border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                activeTab === 'CLV-TAB-08'
+                  ? 'bg-[#7a3869] text-white border-[#7a3869]'
+                  : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-300'
+              }`}
+            >
+              <History className="w-3.5 h-3.5 text-[#8e4b7b]" />
+              <span>Change History</span>
+            </button>
+          )}
+
+          {canEditPlacement ? (
+            <button
+              onClick={handleSaveDraft}
+              disabled={saving}
+              className="btn-festive-plum text-xs font-semibold px-4 py-1.5 cursor-pointer"
+            >
+              <Save className="w-3.5 h-3.5" />
+              <span>{saving ? 'Saving...' : (acquisitionId ? 'Update Placement' : 'Save Draft')}</span>
+            </button>
+          ) : (
+            <div
+              className="text-xs px-3 py-1.5 rounded-xs bg-slate-200/90 text-slate-700 font-semibold flex items-center space-x-1.5 border border-slate-300"
+              title="Editing is reserved for personnel inside the corresponding division"
+            >
+              <Lock className="w-3.5 h-3.5 text-slate-500" />
+              <span>Read-Only Jurisdiction</span>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Read-Only Notice if user is outside this division */}
+      {!canEditPlacement && acquisitionId && (
+        <div className="border border-amber-300 bg-amber-50/90 text-amber-900 p-3 rounded-xl flex items-center justify-between text-xs font-mono shadow-xs">
+          <div className="flex items-center space-x-2">
+            <Lock className="w-4 h-4 text-amber-700 shrink-0" />
+            <span>
+              <strong>Jurisdiction Notice:</strong> Bringing edits to this demand placement is strictly reserved for personnel inside the <strong>{formData.division_name || `Division #${formData.division_id}`}</strong> division. You are currently viewing in read-only mode.
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setActiveTab('CLV-TAB-08')}
+            className="px-2.5 py-1 rounded bg-amber-200/80 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer ml-3 shrink-0 flex items-center space-x-1"
+          >
+            <History className="w-3 h-3" />
+            <span>View Change Logs</span>
+          </button>
+        </div>
+      )}
 
       {msg && (
         <div className={`p-3 text-xs flex items-center justify-between border notification-banner-appear ${msg.type === 'error' ? 'bg-rose-50 text-rose-800 border-rose-300' : 'bg-emerald-50 text-emerald-800 border-emerald-300'}`}>
@@ -1694,6 +1758,20 @@ export default function CulvertAcquisitionWorkspace({
         />
       </div>
 
+      {/* CLV-TAB-08: Audit & Change History */}
+      <div
+        id="panel-CLV-TAB-08"
+        role="tabpanel"
+        aria-labelledby="tab-CLV-TAB-08"
+        tabIndex={0}
+        className={`space-y-6 focus:outline-none ${activeTab === 'CLV-TAB-08' ? 'tab-pane-active' : 'hidden'}`}
+      >
+        <DemandPlacementAuditLog
+          acquisitionType="CULVERT"
+          acquisitionId={acquisitionId}
+        />
+      </div>
+
       {/* Bottom Command Strip */}
       <div className="sticky bottom-2 z-30 glass-panel border border-white/80 p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xl backdrop-blur-md rounded-2xl mb-2">
         <div className="flex items-center space-x-3 text-xs font-mono">
@@ -1728,6 +1806,15 @@ export default function CulvertAcquisitionWorkspace({
               <>
                 <button
                   type="button"
+                  onClick={() => setShowReturnModal(true)}
+                  className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>RETURN FOR CORRECTION</span>
+                </button>
+
+                <button
+                  type="button"
                   onClick={() =>
                     handleTransition(
                       'PASS_TO_FIELD_SDE',
@@ -1760,6 +1847,17 @@ export default function CulvertAcquisitionWorkspace({
           {formData.workflow_status === 'PASS_TO_FIELD_SDE' &&
             ['FIELD_SDE', 'FIELD_EE', 'SUPREME'].includes(currentUser?.role) && (
               <>
+                {['FIELD_EE', 'SUPREME'].includes(currentUser?.role) && (
+                  <button
+                    type="button"
+                    onClick={() => setShowReturnModal(true)}
+                    className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>RETURN FOR CORRECTION</span>
+                  </button>
+                )}
+
                 <button
                   type="button"
                   onClick={() =>

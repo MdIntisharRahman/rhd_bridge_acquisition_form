@@ -1,5 +1,6 @@
 import os
 import uuid
+import json
 import datetime
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query
@@ -136,7 +137,18 @@ def update_bridge_acquisition(
     if not item:
         raise HTTPException(status_code=404, detail="Bridge acquisition record not found")
 
-    # Workflow Edit Locking: Field editing locked when escalated unless current holder, Supreme, or Webmaster
+    # 1. Division Reservation Check:
+    # Edits to a demand placement are strictly reserved for personnel inside the corresponding division (or Supreme/Webmaster)
+    if current_user.role not in [settings.ROLE_SUPREME, settings.ROLE_WEBMASTER]:
+        if item.division_id is not None:
+            if not current_user.office_division_id or current_user.office_division_id != item.division_id:
+                div_name = item.division.name if item.division else f"ID {item.division_id}"
+                raise HTTPException(
+                    status_code=403,
+                    detail=f"Editing is strictly reserved for personnel inside the corresponding division ({div_name}). Your profile belongs to division ID: {current_user.office_division_id}."
+                )
+
+    # 2. Workflow Edit Locking: Field editing locked when escalated unless current holder, Supreme, or Webmaster
     if item.workflow_status not in ["DRAFT_FIELD", "RETURNED_FOR_CORRECTION"]:
         privileged_roles = [settings.ROLE_SUPREME, settings.ROLE_WEBMASTER, item.current_holder_role]
         if current_user.role not in privileged_roles:
@@ -147,6 +159,12 @@ def update_bridge_acquisition(
 
     update_dict = data.model_dump(exclude_unset=True)
 
+    # Prevent non-admin users from altering division, circle or zone on an established placement
+    if current_user.role not in [settings.ROLE_SUPREME, settings.ROLE_WEBMASTER]:
+        update_dict.pop("division_id", None)
+        update_dict.pop("circle_id", None)
+        update_dict.pop("zone_id", None)
+
     # Coordinate sanity check if updated
     if update_dict.get("location_lat_lng"):
         try:
@@ -156,10 +174,55 @@ def update_bridge_acquisition(
         except (ValueError, IndexError):
             pass
 
+    # Track field-by-field changes brought to this demand placement
+    changed_fields = {}
+    for key, new_val in update_dict.items():
+        if not hasattr(item, key):
+            continue
+        old_val = getattr(item, key)
+        if old_val == new_val:
+            continue
+        if old_val is None and (new_val == "" or new_val == [] or new_val == {}):
+            continue
+        if isinstance(old_val, float) and isinstance(new_val, (int, float)):
+            if round(old_val, 4) == round(float(new_val), 4):
+                continue
+        old_str = old_val.isoformat() if hasattr(old_val, "isoformat") else str(old_val) if old_val is not None else None
+        new_str = new_val.isoformat() if hasattr(new_val, "isoformat") else str(new_val) if new_val is not None else None
+        if old_str != new_str:
+            changed_fields[key] = {
+                "old": old_str,
+                "new": new_str
+            }
+
     for key, value in update_dict.items():
         setattr(item, key, value)
 
     item.updated_at = datetime.datetime.utcnow()
+
+    # Save edit audit log to permanently track modifications over time
+    if changed_fields:
+        summary_keys = list(changed_fields.keys())
+        preview = ", ".join(summary_keys[:5])
+        if len(summary_keys) > 5:
+            preview += f" (+{len(summary_keys) - 5} more)"
+
+        edit_log = WorkflowAuditLog(
+            acquisition_type="BRIDGE",
+            acquisition_id=item.id,
+            actor_id=current_user.id,
+            actor_name=current_user.full_name or current_user.username,
+            actor_role=current_user.role,
+            actor_office=current_user.designation or (item.division.name if item.division else None),
+            from_status=item.workflow_status,
+            to_status=item.workflow_status,
+            action="PLACEMENT_EDITED",
+            endorsement_note=f"Demand placement updated by {current_user.role}: modified {len(changed_fields)} field(s) [{preview}]",
+            flagged_sections_json=json.dumps(changed_fields),
+            timestamp=datetime.datetime.utcnow()
+        )
+        db.add(edit_log)
+
     db.commit()
     db.refresh(item)
     return item

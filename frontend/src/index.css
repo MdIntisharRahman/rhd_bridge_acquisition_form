@@ -1236,7 +1236,7 @@ select.eng-input option {
 :root {
   /* Dynamic Background Controls - easily adjustable */
   --ambient-photo-opacity: 0.95;
-  --ambient-veil-bg: rgba(255, 255, 255, 0.27);
+  --ambient-veil-bg: #ffffff7f;
   --ambient-veil-blur: 3px;
 }
 

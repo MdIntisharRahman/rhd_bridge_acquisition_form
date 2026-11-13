@@ -171,19 +171,28 @@ def transition_workflow(
         _log_audit(db, acq_type, item.id, current_user, from_status, to_status, "FIELD_EE_DISPATCH_TO_SDE", endorsement_note, req.demand_letter_id, flagged_json)
         return from_status, to_status
 
-    # 9. Return for Correction (by BDD EE or BDD SDE back to Field EE)
-    if from_status in [
-        STATUS_TRANSMITTED_TO_BDD_EE, STATUS_ASSIGNED_TO_BDD_SDE, STATUS_DESIGN_PREPARED_PENDING_EE,
-        "ASSIGNED_TO_BDD_EE", "ASSIGNED_TO_BDD_SDE"
-    ] and action in ["RETURN", "RETURN_FOR_CORRECTION"]:
-        if current_user.role not in [settings.ROLE_BDD_EE, settings.ROLE_BDD_SDE, settings.ROLE_SUPREME]:
-            raise HTTPException(status_code=403, detail="Only Bridge Design Engineers (BDD_EE / BDD_SDE) can return dossiers for correction.")
+    # 9. Return for Correction (by BDD EE/SDE or Field EE back for field technical revision)
+    if (
+        from_status in [
+            STATUS_TRANSMITTED_TO_BDD_EE, STATUS_ASSIGNED_TO_BDD_SDE, STATUS_DESIGN_PREPARED_PENDING_EE,
+            "ASSIGNED_TO_BDD_EE", "ASSIGNED_TO_BDD_SDE",
+            STATUS_PENDING_FIELD_EE_AUTH, STATUS_PASS_TO_FIELD_SDE
+        ] and action in ["RETURN", "RETURN_FOR_CORRECTION"]
+    ):
+        if current_user.role not in [
+            settings.ROLE_BDD_EE, settings.ROLE_BDD_SDE, settings.ROLE_FIELD_EE, settings.ROLE_SUPREME
+        ]:
+            raise HTTPException(status_code=403, detail="Only Bridge Design Engineers (BDD_EE / BDD_SDE) or Field Executive Engineers can return dossiers for correction.")
+        
         to_status = STATUS_RETURNED_FOR_CORRECTION
-        item.current_holder_role = settings.ROLE_FIELD_EE
+        item.current_holder_role = settings.ROLE_FIELD_SAE if current_user.role == settings.ROLE_FIELD_EE else settings.ROLE_FIELD_EE
         item.workflow_status = to_status
-        item.return_reason_notes = req.return_reason or endorsement_note
+        return_note = req.return_reason or endorsement_note or "Returned for technical correction"
+        item.return_reason_notes = return_note
         item.flagged_sections_json = flagged_json
-        _log_audit(db, acq_type, item.id, current_user, from_status, to_status, "RETURN_FOR_CORRECTION", endorsement_note, req.demand_letter_id, flagged_json)
+        
+        return_action = "RETURNED_BY_FIELD_EE" if current_user.role == settings.ROLE_FIELD_EE else "RETURNED_FOR_CORRECTION"
+        _log_audit(db, acq_type, item.id, current_user, from_status, to_status, return_action, return_note, req.demand_letter_id, flagged_json)
         return from_status, to_status
 
     raise HTTPException(

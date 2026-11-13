@@ -133,7 +133,7 @@ export default function App() {
       <div className="min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 text-slate-700">
         <div className="w-16 h-16 bg-white border border-slate-300 p-1 flex items-center justify-center mb-4">
           <img 
-            src="/RHD_Logo.svg" 
+            src="/RHD_Logo.png" 
             alt="RHD Logo" 
             className="w-full h-full object-contain"
             onError={(e) => { e.currentTarget.src = '/RHD_Logo.png'; }}

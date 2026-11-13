@@ -1,7 +1,0 @@
-https://obcdas.revstack.tech/user_manual
-https://obcdas.revstack.tech/culvert_acquisition_form
-https://obcdas.revstack.tech/bridge_acquisition_form
-https://obcdas.revstack.tech/home
-
-username: 
-password:

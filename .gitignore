@@ -37,3 +37,7 @@ Thumbs.db
 [Ee]xcluded/
 Desktop.ini
 .DS_Store
+
+# Sources & Reference Documents
+sources/
+
