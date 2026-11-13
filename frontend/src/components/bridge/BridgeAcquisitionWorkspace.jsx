@@ -19,6 +19,7 @@ import {
   Trash2,
   Lock,
   History,
+  Shield
 } from "lucide-react";
 import { api } from "../../services/api";
 import UnifiedSideFlowPanel from "../workflow/UnifiedSideFlowPanel";
@@ -929,9 +930,9 @@ export default function BridgeAcquisitionWorkspace({
       {/* Read-Only Notice if user is outside this division */}
       {/* Read-Only Notice if user is outside this division or non-field personnel */}
       {!canEditPlacement && (
-        <div className="border border-amber-300 bg-amber-50/90 text-amber-900 p-3 rounded-xl flex items-center justify-between text-xs font-mono shadow-xs">
+        <div className="  text-amber-900 p-3 rounded-xs flex items-center justify-between text-xs font-subhead shadow-xs">
           <div className="flex items-center space-x-2">
-            <Lock className="w-4 h-4 text-amber-700 shrink-0" />
+            <Shield className="w-7 h-7 text-amber-700 shrink-0" />
             <span>
               <strong>Jurisdiction Notice:</strong> {!acquisitionId
                 ? "Originating new bridge acquisition demand placements is strictly reserved for Field Division survey personnel (FIELD_SAE, FIELD_SDE, FIELD_EE). Design Division and review roles cannot originate field survey records."
@@ -1017,9 +1018,9 @@ export default function BridgeAcquisitionWorkspace({
         <div className="flex-1 min-w-0 w-full" id="workspace-form-pane">
           {/* Read-Only Jurisdiction Frozen Placement Banner */}
           {!canEditPlacement && (
-            <div className="p-3 bg-amber-50/90 border border-amber-300 rounded-xl flex items-center justify-between text-xs text-amber-900 font-mono shadow-xs mb-4">
+            <div className="p-3 rounded-xs flex items-center justify-between text-xs text-amber-700 shadow-xs mb-4">
               <div className="flex items-center space-x-2">
-                <Lock className="w-4 h-4 text-amber-700 shrink-0" />
+                <Lock className="w-5 h-5 text-amber-700 shrink-0" />
                 <span>
                   <strong>Data Frozen (Read-Only Profile):</strong> {!acquisitionId
                     ? "Field survey placement origination is strictly reserved for Field Division engineers (FIELD_SAE, FIELD_SDE, FIELD_EE)."
@@ -1418,7 +1419,7 @@ export default function BridgeAcquisitionWorkspace({
                       <div className="flex items-center justify-between mb-1">
                         <label className="eng-label">2) Road Number / Code</label>
                         {currentRoad && (
-                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sky-100 text-sky-800 font-bold">
+                          <span className="text-[10px] px-1.5 py-0.2 rounded-xs bg-sky-100 text-sky-800 font-bold">
                             {currentRoad.road_type_code === 'N' ? 'National Highway' : currentRoad.road_type_code === 'R' ? 'Regional Highway' : currentRoad.road_type_code === 'Z' ? 'Zilla Road' : 'RHD'}
                           </span>
                         )}

@@ -2,7 +2,7 @@ import os
 import re
 import json
 import logging
-from sqlalchemy import text
+from sqlalchemy import text, func
 from sqlalchemy.orm import Session
 from backend.database import engine, SessionLocal, Base
 from backend.models import (
@@ -111,14 +111,46 @@ def seed_database(seed_file_path: str = None):
         db.delete(s_circ)
     db.flush()
 
-    # 3. Seed Roads (Complete 967 National, Regional, and Zilla Roads Network, omitting BBA)
+    # 3. Seed Roads (Clean 967 Deduplicated National, Regional, and Zilla Roads Network from rhd_road_name_catalog_code.csv)
     valid_road_numbers = set()
+    seed_roads_list = []
     for r in data.get("roads", []):
         r_num = (r.get("road_number") or "").strip()
         if not r_num or "BBA" in r_num:
             continue
+        if r_num in valid_road_numbers:
+            continue
         valid_road_numbers.add(r_num)
-        existing = db.query(Road).filter(Road.road_number == r_num).first()
+        seed_roads_list.append(r)
+
+    # 3.1. Clean up stale, legacy non-hyphenated, or BBA roads not in the active 967 catalog
+    stale_roads = db.query(Road).filter(~Road.road_number.in_(valid_road_numbers) | Road.road_number.ilike("%BBA%")).all()
+    for sr in stale_roads:
+        db.query(BridgeAcquisition).filter(BridgeAcquisition.road_id == sr.id).update({"road_id": None})
+        db.query(CulvertAcquisition).filter(CulvertAcquisition.road_id == sr.id).update({"road_id": None})
+        db.delete(sr)
+    db.flush()
+
+    # 3.2. Deduplicate any duplicate rows that might already share the same road_number in existing DB
+    duplicate_road_groups = (
+        db.query(Road.road_number)
+        .filter(Road.road_number.in_(valid_road_numbers))
+        .group_by(Road.road_number)
+        .having(func.count(Road.id) > 1)
+        .all()
+    )
+    for (dup_code,) in duplicate_road_groups:
+        dup_rows = db.query(Road).filter(Road.road_number == dup_code).order_by(Road.id.asc()).all()
+        keeper = dup_rows[0]
+        for extra in dup_rows[1:]:
+            db.query(BridgeAcquisition).filter(BridgeAcquisition.road_id == extra.id).update({"road_id": keeper.id})
+            db.query(CulvertAcquisition).filter(CulvertAcquisition.road_id == extra.id).update({"road_id": keeper.id})
+            db.delete(extra)
+    db.flush()
+
+    # 3.3. Insert or update the 967 roads strictly once
+    for r in seed_roads_list:
+        r_num = r["road_number"].strip()
         r_type_id = road_type_map.get(r.get("road_type_code", "N"), 1)
         target_div_name = r.get("division_name")
         if target_div_name == "Cumilla":
@@ -129,6 +161,7 @@ def seed_database(seed_file_path: str = None):
             target_div_name = "Cox's Bazar"
         div_id = division_map.get(target_div_name)
 
+        existing = db.query(Road).filter(Road.road_number == r_num).first()
         if not existing:
             new_road = Road(
                 road_type_id=r_type_id,
@@ -145,13 +178,6 @@ def seed_database(seed_file_path: str = None):
                 existing.length_km = r.get("length_km")
             if not existing.division_id and div_id:
                 existing.division_id = div_id
-
-    # Prune any stale or BBA roads not in the official 967 RHD network
-    stale_roads = db.query(Road).filter(~Road.road_number.in_(valid_road_numbers) | Road.road_number.ilike("%BBA%")).all()
-    for sr in stale_roads:
-        db.query(BridgeAcquisition).filter(BridgeAcquisition.road_id == sr.id).update({"road_id": None})
-        db.query(CulvertAcquisition).filter(CulvertAcquisition.road_id == sr.id).update({"road_id": None})
-        db.delete(sr)
     db.flush()
 
     # 4. Seed Users (Strict Singleton Supreme verification & Hierarchy Linking)
