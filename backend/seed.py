@@ -111,9 +111,14 @@ def seed_database(seed_file_path: str = None):
         db.delete(s_circ)
     db.flush()
 
-    # 3. Seed Roads (Complete 968 National, Regional, and Zilla Roads Network)
+    # 3. Seed Roads (Complete 967 National, Regional, and Zilla Roads Network, omitting BBA)
+    valid_road_numbers = set()
     for r in data.get("roads", []):
-        existing = db.query(Road).filter(Road.road_number == r["road_number"]).first()
+        r_num = (r.get("road_number") or "").strip()
+        if not r_num or "BBA" in r_num:
+            continue
+        valid_road_numbers.add(r_num)
+        existing = db.query(Road).filter(Road.road_number == r_num).first()
         r_type_id = road_type_map.get(r.get("road_type_code", "N"), 1)
         target_div_name = r.get("division_name")
         if target_div_name == "Cumilla":
@@ -127,7 +132,7 @@ def seed_database(seed_file_path: str = None):
         if not existing:
             new_road = Road(
                 road_type_id=r_type_id,
-                road_number=r["road_number"],
+                road_number=r_num,
                 road_name=r["road_name"],
                 division_id=div_id,
                 length_km=r.get("length_km", 0.0)
@@ -140,6 +145,14 @@ def seed_database(seed_file_path: str = None):
                 existing.length_km = r.get("length_km")
             if not existing.division_id and div_id:
                 existing.division_id = div_id
+
+    # Prune any stale or BBA roads not in the official 967 RHD network
+    stale_roads = db.query(Road).filter(~Road.road_number.in_(valid_road_numbers) | Road.road_number.ilike("%BBA%")).all()
+    for sr in stale_roads:
+        db.query(BridgeAcquisition).filter(BridgeAcquisition.road_id == sr.id).update({"road_id": None})
+        db.query(CulvertAcquisition).filter(CulvertAcquisition.road_id == sr.id).update({"road_id": None})
+        db.delete(sr)
+    db.flush()
 
     # 4. Seed Users (Strict Singleton Supreme verification & Hierarchy Linking)
     user_map = {}
