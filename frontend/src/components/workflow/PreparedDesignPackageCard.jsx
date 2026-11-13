@@ -113,7 +113,7 @@ export default function PreparedDesignPackageCard({
               <h2 className="text-base font-extrabold text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
                 Prepared Design Package & Deliverables
               </h2>
-              <span className="text-[11px] font-bold px-2 py-0.5 text-slate-700 border-slate-300 border-l shadow-2xs font-mono">
+              <span className="text-[11px] rounded-xs font-bold px-2 py-0.5 text-slate-700 border-l-4 border-1 border-slate-300 shadow-2xs font-mono">
                 {structureType === 'bridge' ? 'BDD / BRG-PKG' : 'BDD / CLV-PKG'}
               </span>
             </div>
