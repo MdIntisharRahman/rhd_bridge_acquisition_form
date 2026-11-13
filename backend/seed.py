@@ -111,17 +111,20 @@ def seed_database(seed_file_path: str = None):
         db.delete(s_circ)
     db.flush()
 
-    # 3. Seed Roads
+    # 3. Seed Roads (Complete 968 National, Regional, and Zilla Roads Network)
     for r in data.get("roads", []):
         existing = db.query(Road).filter(Road.road_number == r["road_number"]).first()
+        r_type_id = road_type_map.get(r.get("road_type_code", "N"), 1)
+        target_div_name = r.get("division_name")
+        if target_div_name == "Cumilla":
+            target_div_name = "Comilla"
+        elif target_div_name == "Chattogram South":
+            target_div_name = "Chattogram"
+        elif target_div_name == "Coxsbazar":
+            target_div_name = "Cox's Bazar"
+        div_id = division_map.get(target_div_name)
+
         if not existing:
-            r_type_id = road_type_map.get(r.get("road_type_code", "N"), 1)
-            target_div_name = r.get("division_name")
-            if target_div_name == "Chattogram South":
-                target_div_name = "Chattogram"
-            elif target_div_name == "Coxsbazar":
-                target_div_name = "Cox's Bazar"
-            div_id = division_map.get(target_div_name)
             new_road = Road(
                 road_type_id=r_type_id,
                 road_number=r["road_number"],
@@ -130,6 +133,13 @@ def seed_database(seed_file_path: str = None):
                 length_km=r.get("length_km", 0.0)
             )
             db.add(new_road)
+        else:
+            existing.road_name = r["road_name"]
+            existing.road_type_id = r_type_id
+            if r.get("length_km"):
+                existing.length_km = r.get("length_km")
+            if not existing.division_id and div_id:
+                existing.division_id = div_id
 
     # 4. Seed Users (Strict Singleton Supreme verification & Hierarchy Linking)
     user_map = {}

@@ -665,6 +665,64 @@
   cursor: not-allowed;
 }
 
+/* ====================================================================== */
+/* FROZEN / READ-ONLY PLACEMENT (OUTSIDE DIVISION PROFILE)                */
+/* When demand placement is outside user's division, freeze all input     */
+/* data and display clean, prominent values rather than editable controls. */
+/* ====================================================================== */
+.placement-frozen {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: block;
+}
+
+.placement-frozen input.eng-input,
+.placement-frozen select.eng-input,
+.placement-frozen textarea.eng-textarea,
+.placement-frozen textarea.eng-input,
+.placement-frozen .eng-input {
+  background-color: rgba(241, 245, 249, 0.75) !important;
+  border-color: rgba(203, 213, 225, 0.7) !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+  cursor: default !important;
+  user-select: text !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  box-shadow: none !important;
+}
+
+.placement-frozen select.eng-input {
+  background-image: none !important;
+  padding-right: 10px !important;
+}
+
+.placement-frozen input:focus,
+.placement-frozen select:focus,
+.placement-frozen textarea:focus {
+  outline: none !important;
+  border-color: rgba(203, 213, 225, 0.7) !important;
+  box-shadow: none !important;
+}
+
+.placement-frozen .eng-label {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* Hide editable triggers, add/delete controls, and upload buttons when frozen */
+.placement-frozen .action-btn-modify,
+.placement-frozen .btn-add-borehole,
+.placement-frozen .file-upload-trigger,
+.placement-frozen .btn-delete-row,
+.placement-frozen label[class*="cursor-pointer"]:has(input[type="file"]),
+.placement-frozen .action-btn-delete {
+  display: none !important;
+}
+
 .chainage {
   flex-direction: row;
   display: flex;

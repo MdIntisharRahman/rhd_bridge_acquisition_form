@@ -14,7 +14,8 @@ export default function RhdWebmapBorelogForm({
   acquisitionType, 
   acquisitionId,
   totalBoreholes = 0,
-  onBoreholeCountChange 
+  onBoreholeCountChange,
+  readOnly = false
 }) {
   const [bhCount, setBhCount] = useState(totalBoreholes || 0);
   const [activeBhIndex, setActiveBhIndex] = useState(1);
@@ -239,9 +240,10 @@ export default function RhdWebmapBorelogForm({
             type="number"
             min="0"
             max="40"
+            disabled={readOnly}
             value={bhCount}
             onChange={e => handleCountChange(e.target.value)}
-            className="w-16 p-1 text-center font-bold text-[#034081] outline-none tabular-nums"
+            className={`w-16 p-1 text-center font-bold text-[#034081] outline-none tabular-nums ${readOnly ? 'bg-slate-100 cursor-default' : ''}`}
           />
         </div>
       </div>
@@ -555,27 +557,35 @@ export default function RhdWebmapBorelogForm({
               <span className="font-semibold">Ready for RHD Geotechnical & Substructure Analysis</span>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <button
-                type="button"
-                onClick={handleSaveBorehole}
-                disabled={saving}
-                className="px-4 py-2 rounded-xl bg-[#00225a] hover:bg-[#034081] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
-              >
-                <Save className="w-3.5 h-3.5 text-sky-300" />
-                <span>{saving ? 'Saving...' : `Save BH-${activeBhIndex} to Dossier`}</span>
-              </button>
+            {readOnly ? (
+              <div className="flex items-center space-x-2 text-slate-500 font-mono text-xs">
+                <span className="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 font-bold border border-slate-200">
+                  Geotechnical Borehole Data Frozen (Read-Only Jurisdiction)
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <button
+                  type="button"
+                  onClick={handleSaveBorehole}
+                  disabled={saving}
+                  className="px-4 py-2 rounded-xl bg-[#00225a] hover:bg-[#034081] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                >
+                  <Save className="w-3.5 h-3.5 text-sky-300" />
+                  <span>{saving ? 'Saving...' : `Save BH-${activeBhIndex} to Dossier`}</span>
+                </button>
 
-              <button
-                type="button"
-                onClick={handleSyncToWebmap}
-                disabled={syncing}
-                className="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 text-emerald-200 ${syncing ? 'animate-spin' : ''}`} />
-                <span>Sync with Webmap (webmap.rhdbridge.com)</span>
-              </button>
-            </div>
+                <button
+                  type="button"
+                  onClick={handleSyncToWebmap}
+                  disabled={syncing}
+                  className="px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 text-emerald-200 ${syncing ? 'animate-spin' : ''}`} />
+                  <span>Sync with Webmap (webmap.rhdbridge.com)</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

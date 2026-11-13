@@ -299,7 +299,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
 
                           {/* PDF Datasheet */}
                           <a
-                            href={`/api/acquisitions/culvert/${c.id}/export-pdf`}
+                            href={api.getExportUrl('culvert', c.id, 'pdf')}
                             target="_blank"
                             rel="noreferrer"
                             className="p-1 rounded-xs text-[#7a3869] table-action-icon"
@@ -310,7 +310,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
 
                           {/* ZIP Archive */}
                           <a
-                            href={`/api/acquisitions/culvert/${c.id}/export-zip`}
+                            href={api.getExportUrl('culvert', c.id, 'zip')}
                             target="_blank"
                             rel="noreferrer"
                             className="p-1 rounded-xs text-[#e95a24] table-action-icon"
@@ -321,7 +321,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
 
                           {/* Excel Schedule */}
                           <a
-                            href={`/api/acquisitions/culvert/${c.id}/export-excel`}
+                            href={api.getExportUrl('culvert', c.id, 'excel')}
                             target="_blank"
                             rel="noreferrer"
                             className="p-1 rounded-xs text-[#00225a] table-action-icon"

@@ -212,5 +212,43 @@ export const api = {
     method: 'PUT',
     body: JSON.stringify(data)
   }),
-  getPipelineKpiSummary: () => request('/pipeline/kpi-summary')
+  getPipelineKpiSummary: () => request('/pipeline/kpi-summary'),
+
+  // --- Engineering Exports (PDF / Excel / ZIP) ---
+  getExportUrl: (acqType, id, format = 'pdf') => {
+    const token = getStoredToken();
+    const tokenParam = token ? `?token=${encodeURIComponent(token)}` : '';
+    return `${API_BASE}/acquisitions/${acqType}/${id}/export-${format}${tokenParam}`;
+  },
+  downloadExport: async (acqType, id, format = 'pdf') => {
+    const token = getStoredToken();
+    const tokenParam = token ? `?token=${encodeURIComponent(token)}` : '';
+    const res = await fetch(`${API_BASE}/acquisitions/${acqType}/${id}/export-${format}${tokenParam}`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!res.ok) {
+      let detail = `Export download failed (${res.status})`;
+      try {
+        const err = await res.json();
+        detail = err.detail || err.message || detail;
+      } catch (_) {}
+      throw new Error(detail);
+    }
+    const blob = await res.blob();
+    const disposition = res.headers.get('Content-Disposition');
+    let filename = `${acqType}_${id}_export.${format === 'excel' ? 'xlsx' : format}`;
+    if (disposition && disposition.includes('filename=')) {
+      const match = disposition.match(/filename="?([^"]+)"?/);
+      if (match && match[1]) filename = match[1];
+    }
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+    return true;
+  }
 };

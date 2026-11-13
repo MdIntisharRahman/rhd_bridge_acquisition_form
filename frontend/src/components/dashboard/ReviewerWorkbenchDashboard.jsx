@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   CheckCircle, 
   RotateCcw, 
-  Eye, 
+  Construction, 
   Check, 
   MapPin, 
   Building2 
@@ -249,9 +249,9 @@ export default function ReviewerWorkbenchDashboard({ currentUser, onOpenBridge, 
                 <div className="flex items-center space-x-2 text-xs shrink-0">
                   <button
                     onClick={() => item.type === 'BRIDGE' ? onOpenBridge(item.id) : onOpenCulvert(item.id)}
-                    className="px-3 py-1.5 rounded-lg bg-white/80 hover:bg-[#034081] hover:text-white text-[#00225a] font-bold flex items-center space-x-1.5 border border-white/90 transition-all cursor-pointer shadow-xs table-action-icon"
+                    className="px-3 py-1.5 rounded-xs bg-white/80 hover:bg-[#034081] hover:text-white text-[#00225a] font-bold flex items-center space-x-1.5 border border-white/90 transition-all cursor-pointer shadow-xs table-action-icon"
                   >
-                    <Eye className="w-3.5 h-3.5" />
+                    <Construction className="w-3.5 h-3.5" />
                     <span>Deliberate & Scrutinize</span>
                   </button>
 

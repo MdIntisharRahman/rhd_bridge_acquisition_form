@@ -291,7 +291,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
 
                         {/* PDF Datasheet */}
                         <a
-                          href={`/api/acquisitions/bridge/${b.id}/export-pdf`}
+                          href={api.getExportUrl('bridge', b.id, 'pdf')}
                           target="_blank"
                           rel="noreferrer"
                           className="p-1 rounded-xs hover:text-[#034081] table-action-icon"
@@ -302,7 +302,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
 
                         {/* ZIP Archive */}
                         <a
-                          href={`/api/acquisitions/bridge/${b.id}/export-zip`}
+                          href={api.getExportUrl('bridge', b.id, 'zip')}
                           target="_blank"
                           rel="noreferrer"
                           className="p-1 rounded-xs hover:text-[#e95a24] table-action-icon"

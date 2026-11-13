@@ -6,7 +6,7 @@ from backend.models import BridgeAcquisition, CulvertAcquisition, Attachment, Wo
 from backend.exports.pdf_generator import generate_acquisition_pdf
 from backend.exports.excel_generator import generate_acquisition_excel
 from backend.exports.zip_packager import package_acquisition_zip
-from backend.auth import get_current_user
+from backend.auth import get_current_user, get_current_user_flexible
 
 router = APIRouter(prefix="/acquisitions", tags=["Engineering Export Suite"])
 
@@ -40,9 +40,9 @@ def _fetch_record_and_data(acq_type: str, id: int, db: Session):
     return item, acq_type_upper, audit_logs, attachments, boreholes
 
 @router.get("/{acq_type}/{id}/export-pdf")
-def export_pdf(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    item, acq_type_upper, audit_logs, attachments, _ = _fetch_record_and_data(acq_type, id, db)
-    pdf_bytes = generate_acquisition_pdf(item, acq_type_upper, audit_logs, attachments)
+def export_pdf(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user_flexible)):
+    item, acq_type_upper, audit_logs, attachments, boreholes = _fetch_record_and_data(acq_type, id, db)
+    pdf_bytes = generate_acquisition_pdf(item, acq_type_upper, audit_logs, attachments, boreholes)
 
     filename = f"{item.code}_Engineering_Datasheet.pdf"
     return Response(
@@ -52,7 +52,7 @@ def export_pdf(acq_type: str, id: int, db: Session = Depends(get_db), current_us
     )
 
 @router.get("/{acq_type}/{id}/export-excel")
-def export_excel(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def export_excel(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user_flexible)):
     item, acq_type_upper, audit_logs, _, boreholes = _fetch_record_and_data(acq_type, id, db)
     excel_bytes = generate_acquisition_excel(item, acq_type_upper, audit_logs, boreholes)
 
@@ -64,7 +64,7 @@ def export_excel(acq_type: str, id: int, db: Session = Depends(get_db), current_
     )
 
 @router.get("/{acq_type}/{id}/export-zip")
-def export_zip(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def export_zip(acq_type: str, id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user_flexible)):
     item, acq_type_upper, audit_logs, attachments, boreholes = _fetch_record_and_data(acq_type, id, db)
     zip_bytes = package_acquisition_zip(item, acq_type_upper, audit_logs, attachments, boreholes)
 

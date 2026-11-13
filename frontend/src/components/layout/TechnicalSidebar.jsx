@@ -108,12 +108,12 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
 
           <div className="flex items-center space-x-2.5">
             {/* Architectural RHD Crest Badge */}
-            <div className="relative w-8 h-8 rounded-xl bg-gradient-to-br from-[#034081] via-[#023166] to-[#001f54] text-white flex items-center justify-center font-black text-xs shadow-md shadow-[#034081]/25 border border-white/30 group-hover/header:scale-105 transition-transform duration-300">
+            {/* <div className="relative w-8 h-8 rounded-xl bg-gradient-to-br from-[#034081] via-[#023166] to-[#001f54] text-white flex items-center justify-center font-black text-xs shadow-md shadow-[#034081]/25 border border-white/30 group-hover/header:scale-105 transition-transform duration-300">
               <span style={{ fontFamily: 'var(--font-display)' }} className="tracking-tighter text-white font-extrabold text-[11px]">
                 RHD
               </span>
               <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#15db7c] ring-2 ring-white comfort-status-pulse" />
-            </div>
+            </div> */}
 
             <div className="flex flex-col">
               <span className="text-xs font-black tracking-tight uppercase text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
@@ -121,7 +121,7 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
               </span>
               <div className="flex items-center space-x-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]" />
-                <span className="text-[11px] font-semibold tracking-wider text-[#5b6b7a]">
+                <span className="text-[11px] font-semibold tracking-wider text-[#5b6b7a]" style={{ fontFamily: 'var(--font-subhead)' }}>
                   Registries & Views
                 </span>
               </div>

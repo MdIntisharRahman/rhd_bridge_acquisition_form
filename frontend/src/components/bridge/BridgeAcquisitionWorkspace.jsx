@@ -134,11 +134,70 @@ export default function BridgeAcquisitionWorkspace({
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploadingSlot, setUploadingSlot] = useState(null);
+  const [downloadingExport, setDownloadingExport] = useState(null);
   const [msg, setMsg] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
 
   // Demand letter deduplication state
   const [demandOfficerType, setDemandOfficerType] = useState("EE");
+
+  // Export handler with active blob download + authenticated URL fallback
+  const handleExport = async (e, format = "pdf") => {
+    e.preventDefault();
+    if (!acquisitionId) return;
+    setDownloadingExport(format);
+    try {
+      await api.downloadExport("bridge", acquisitionId, format);
+      setMsg({ type: "success", text: `${format.toUpperCase()} datasheet downloaded successfully.` });
+    } catch (err) {
+      console.warn("Direct blob download failed, opening via token URL:", err);
+      const url = api.getExportUrl("bridge", acquisitionId, format);
+      window.open(url, "_blank");
+    } finally {
+      setDownloadingExport(null);
+    }
+  };
+
+  // Road Code & Road Name Auto-Sync from 968 GeoJSON network
+  const currentRoad = roads.find((r) => r.id === Number(formData.road_id)) || roads.find((r) => r.road_number && formData.road_name && r.road_name === formData.road_name);
+  const currentRoadNumber = currentRoad ? currentRoad.road_number : (roads.find((r) => r.id === Number(formData.road_id))?.road_number || "");
+
+  const handleRoadCodeInput = (code) => {
+    const clean = (code || "").trim().toUpperCase();
+    const matched = roads.find((r) => r.road_number.toUpperCase() === clean);
+    if (matched) {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: matched.id,
+        road_name: matched.road_name,
+        road_type_id: matched.road_type_id || prev.road_type_id,
+        division_id: prev.division_id || matched.division_id || prev.division_id,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: null,
+      }));
+    }
+  };
+
+  const handleRoadNameInput = (name) => {
+    const matched = roads.find((r) => (r.road_name || "").toLowerCase() === (name || "").trim().toLowerCase());
+    if (matched) {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: matched.id,
+        road_name: matched.road_name,
+        road_type_id: matched.road_type_id || prev.road_type_id,
+        division_id: prev.division_id || matched.division_id || prev.division_id,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        road_name: name,
+      }));
+    }
+  };
 
   // Chainage Helper: Parse string e.g. "Ch 194+210" or "194+210" into { km, m }
   const parseChainageValues = (str) => {
@@ -716,34 +775,40 @@ export default function BridgeAcquisitionWorkspace({
           {acquisitionId && (
             <>
               <a
-                href={`/api/acquisitions/bridge/${acquisitionId}/export-pdf`}
+                href={api.getExportUrl("bridge", acquisitionId, "pdf")}
+                onClick={(e) => handleExport(e, "pdf")}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs"
+                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs cursor-pointer"
                 style={{ fontFamily: "var(--font-body)" }}
+                title="Download Technical Engineering Datasheet PDF"
               >
-                <Download className="w-3.5 h-3.5 text-[#034081]" />
-                <span>Datasheet PDF</span>
+                <Download className={`w-3.5 h-3.5 text-[#034081] ${downloadingExport === "pdf" ? "animate-spin" : ""}`} />
+                <span>{downloadingExport === "pdf" ? "Exporting..." : "Datasheet PDF"}</span>
               </a>
               <a
-                href={`/api/acquisitions/bridge/${acquisitionId}/export-excel`}
+                href={api.getExportUrl("bridge", acquisitionId, "excel")}
+                onClick={(e) => handleExport(e, "excel")}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs"
+                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs cursor-pointer"
                 style={{ fontFamily: "var(--font-body)" }}
+                title="Download Excel Engineering Schedule"
               >
-                <Download className="w-3.5 h-3.5 text-[#087f43]" />
-                <span>Excel Schedule</span>
+                <Download className={`w-3.5 h-3.5 text-[#087f43] ${downloadingExport === "excel" ? "animate-spin" : ""}`} />
+                <span>{downloadingExport === "excel" ? "Exporting..." : "Excel Schedule"}</span>
               </a>
               <a
-                href={`/api/acquisitions/bridge/${acquisitionId}/export-zip`}
+                href={api.getExportUrl("bridge", acquisitionId, "zip")}
+                onClick={(e) => handleExport(e, "zip")}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs"
+                className="px-3 py-1.5 rounded-xs bg-white/75 hover:bg-white border border-white/90 text-slate-800 font-semibold flex items-center space-x-1.5 transition-all shadow-xs backdrop-blur-xs cursor-pointer"
                 style={{ fontFamily: "var(--font-body)" }}
+                title="Download Complete Technical ZIP Dossier"
               >
-                <Download className="w-3.5 h-3.5 text-amber-700" />
-                <span>ZIP Dossier</span>
+                <Download className={`w-3.5 h-3.5 text-amber-700 ${downloadingExport === "zip" ? "animate-spin" : ""}`} />
+                <span>{downloadingExport === "zip" ? "Exporting..." : "ZIP Dossier"}</span>
               </a>
             </>
           )}
@@ -868,6 +933,34 @@ export default function BridgeAcquisitionWorkspace({
 
         {/* RIGHT COLUMN: The Active Tab's Form Inputs Page */}
         <div className="flex-1 min-w-0 w-full" id="workspace-form-pane">
+          {/* Read-Only Jurisdiction Frozen Placement Banner */}
+          {!canEditPlacement && acquisitionId && (
+            <div className="p-3 bg-amber-50/90 border border-amber-300 rounded-xl flex items-center justify-between text-xs text-amber-900 font-mono shadow-xs mb-4">
+              <div className="flex items-center space-x-2">
+                <Lock className="w-4 h-4 text-amber-700 shrink-0" />
+                <span>
+                  <strong>Data Frozen (Read-Only Profile):</strong> This demand placement belongs to <strong>{formData.division_name || `Division #${formData.division_id}`}</strong>. All input controls are frozen; engineering specifications are displayed as read-only values.
+                </span>
+              </div>
+              <div className="flex items-center space-x-2 shrink-0 ml-3">
+                <button
+                  type="button"
+                  onClick={(e) => handleExport(e, "pdf")}
+                  disabled={downloadingExport === "pdf"}
+                  className="px-2.5 py-1 rounded bg-amber-200/90 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer flex items-center space-x-1"
+                >
+                  <Download className="w-3 h-3" />
+                  <span>{downloadingExport === "pdf" ? "Exporting..." : "Export PDF"}</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Division Engineering Inputs Fieldset (Frozen when outside division profile) */}
+          <fieldset
+            disabled={!canEditPlacement}
+            className={`border-0 p-0 m-0 ${!canEditPlacement ? "placement-frozen" : ""}`}
+          >
           {/* ====================================================================== */}
           {/* [TAB-01] DEMAND LETTERS & ROAD IDENTIFICATION */}
           {/* ====================================================================== */}
@@ -1240,37 +1333,67 @@ export default function BridgeAcquisitionWorkspace({
                       </div>
                     )}
 
-                    <div className="col-span-12 md:col-span-3 eng-field">
-                      <label className="eng-label">2) Road Number</label>
-                      <select
-                        value={formData.road_id || ""}
-                        onChange={(e) => handleRoadSelect(e.target.value)}
-                        className="eng-input font-bold text-sky-900"
-                      >
-                        <option value="">Select Road Number</option>
-                        {roads.map((r) => (
-                          <option key={r.id} value={r.id}>
-                            {r.road_number} — {r.road_name.substring(0, 30)}
-                          </option>
-                        ))}
-                      </select>
+                    <div className="col-span-12 md:col-span-4 eng-field">
+                      <div className="flex items-center justify-between mb-1">
+                        <label className="eng-label">2) Road Number / Code</label>
+                        {currentRoad && (
+                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sky-100 text-sky-800 font-bold">
+                            {currentRoad.road_type_code === 'N' ? 'National Highway' : currentRoad.road_type_code === 'R' ? 'Regional Highway' : currentRoad.road_type_code === 'Z' ? 'Zilla Road' : 'RHD'}
+                          </span>
+                        )}
+                      </div>
+                      {!canEditPlacement ? (
+                        <div className="eng-input bg-slate-100/90 text-slate-800 font-bold flex items-center border-slate-200 cursor-default select-text">
+                          {currentRoadNumber || (formData.road_id ? `Road #${formData.road_id}` : "—")}
+                        </div>
+                      ) : (
+                        <div className="relative">
+                          <input
+                            type="text"
+                            list="bridge-road-codes-list"
+                            placeholder="Type code e.g. N1, R140, Z1001..."
+                            value={currentRoadNumber}
+                            onChange={(e) => handleRoadCodeInput(e.target.value)}
+                            className="eng-input font-bold text-sky-900 uppercase"
+                          />
+                          <datalist id="bridge-road-codes-list">
+                            {roads.map((r) => (
+                              <option key={r.id} value={r.road_number}>
+                                {r.road_number} — {r.road_name}
+                              </option>
+                            ))}
+                          </datalist>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="col-span-12 md:col-span-6 eng-field">
+                    <div className="col-span-12 md:col-span-8 eng-field">
                       <label className="eng-label">
-                        3) Name of the Road (Auto-Filled)
+                        3) Name of the Road (Auto-Filled from Official RHD GeoJSON Network)
                       </label>
-                      <input
-                        type="text"
-                        value={formData.road_name || ""}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            road_name: e.target.value,
-                          })
-                        }
-                        className="eng-input bg-slate-50 font-medium"
-                      />
+                      {!canEditPlacement ? (
+                        <div className="eng-input bg-slate-100/90 text-slate-800 font-semibold flex items-center border-slate-200 cursor-default select-text">
+                          {formData.road_name || "—"}
+                        </div>
+                      ) : (
+                        <div className="relative">
+                          <input
+                            type="text"
+                            list="bridge-road-names-list"
+                            placeholder="Type or select official road name..."
+                            value={formData.road_name || ""}
+                            onChange={(e) => handleRoadNameInput(e.target.value)}
+                            className="eng-input bg-slate-50 font-medium"
+                          />
+                          <datalist id="bridge-road-names-list">
+                            {roads.map((r) => (
+                              <option key={r.id} value={r.road_name}>
+                                {r.road_number} — {r.road_name}
+                              </option>
+                            ))}
+                          </datalist>
+                        </div>
+                      )}
                     </div>
 
                     <div className="col-span-12 md:col-span-4 eng-field">
@@ -2415,22 +2538,27 @@ export default function BridgeAcquisitionWorkspace({
                   <div className="font-bold text-[#001139]">
                     23) Soil Investigation Report (Signed &amp; Sealed by EE)
                   </div>
-                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                    <span>{uploadingSlot === "soil_report" ? "Uploading..." : "Upload Soil Report PDF"}</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.png,.jpg,.jpeg"
-                      onChange={(e) => {
-                        if (e.target.files[0]) {
-                          handleFileUpload("soil_report", e.target.files[0]);
-                          e.target.value = "";
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
+                  {canEditPlacement && (
+                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                      <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                      <span>{uploadingSlot === "soil_report" ? "Uploading..." : "Upload Soil Report PDF"}</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg"
+                        onChange={(e) => {
+                          if (e.target.files[0]) {
+                            handleFileUpload("soil_report", e.target.files[0]);
+                            e.target.value = "";
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   <div className="space-y-1 text-[11px]">
+                    {attachments.filter((a) => a.slot_code === "soil_report").length === 0 && (
+                      <div className="text-[11px] text-slate-500 italic py-1">No soil report document attached.</div>
+                    )}
                     {attachments
                       .filter((a) => a.slot_code === "soil_report")
                       .map((a) => (
@@ -2456,13 +2584,15 @@ export default function BridgeAcquisitionWorkspace({
                             >
                               View
                             </a>
-                            <button
-                              onClick={() => handleDeleteAttachment(a.id)}
-                              className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
-                              title="Delete attachment"
-                            >
-                              ✕
-                            </button>
+                            {canEditPlacement && (
+                              <button
+                                onClick={() => handleDeleteAttachment(a.id)}
+                                className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
+                                title="Delete attachment"
+                              >
+                                ✕
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -2474,22 +2604,27 @@ export default function BridgeAcquisitionWorkspace({
                   <div className="font-bold text-[#001139]">
                     25) Site Plan of Proposed Bridge (Hat-Bazar, Town, GPS)
                   </div>
-                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                    <span>{uploadingSlot === "site_plan" ? "Uploading..." : "Upload Site Plan Drawing"}</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
-                      onChange={(e) => {
-                        if (e.target.files[0]) {
-                          handleFileUpload("site_plan", e.target.files[0]);
-                          e.target.value = "";
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
+                  {canEditPlacement && (
+                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                      <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                      <span>{uploadingSlot === "site_plan" ? "Uploading..." : "Upload Site Plan Drawing"}</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
+                        onChange={(e) => {
+                          if (e.target.files[0]) {
+                            handleFileUpload("site_plan", e.target.files[0]);
+                            e.target.value = "";
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   <div className="space-y-1 text-[11px]">
+                    {attachments.filter((a) => a.slot_code === "site_plan").length === 0 && (
+                      <div className="text-[11px] text-slate-500 italic py-1">No site plan drawing attached.</div>
+                    )}
                     {attachments
                       .filter((a) => a.slot_code === "site_plan")
                       .map((a) => (
@@ -2515,13 +2650,15 @@ export default function BridgeAcquisitionWorkspace({
                             >
                               View
                             </a>
-                            <button
-                              onClick={() => handleDeleteAttachment(a.id)}
-                              className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
-                              title="Delete attachment"
-                            >
-                              ✕
-                            </button>
+                            {canEditPlacement && (
+                              <button
+                                onClick={() => handleDeleteAttachment(a.id)}
+                                className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
+                                title="Delete attachment"
+                              >
+                                ✕
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -2533,22 +2670,27 @@ export default function BridgeAcquisitionWorkspace({
                   <div className="font-bold text-[#001139]">
                     26) Cross-Sections (&gt;= 3 Sections: CL, 10m U/S, 10m D/S)
                   </div>
-                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                    <span>{uploadingSlot === "cross_section" ? "Uploading..." : "Upload Cross-Sections"}</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
-                      onChange={(e) => {
-                        if (e.target.files[0]) {
-                          handleFileUpload("cross_section", e.target.files[0]);
-                          e.target.value = "";
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
+                  {canEditPlacement && (
+                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                      <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                      <span>{uploadingSlot === "cross_section" ? "Uploading..." : "Upload Cross-Sections"}</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
+                        onChange={(e) => {
+                          if (e.target.files[0]) {
+                            handleFileUpload("cross_section", e.target.files[0]);
+                            e.target.value = "";
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   <div className="space-y-1 text-[11px]">
+                    {attachments.filter((a) => a.slot_code === "cross_section").length === 0 && (
+                      <div className="text-[11px] text-slate-500 italic py-1">No cross-section survey attached.</div>
+                    )}
                     {attachments
                       .filter((a) => a.slot_code === "cross_section")
                       .map((a) => (
@@ -2574,13 +2716,15 @@ export default function BridgeAcquisitionWorkspace({
                             >
                               View
                             </a>
-                            <button
-                              onClick={() => handleDeleteAttachment(a.id)}
-                              className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
-                              title="Delete attachment"
-                            >
-                              ✕
-                            </button>
+                            {canEditPlacement && (
+                              <button
+                                onClick={() => handleDeleteAttachment(a.id)}
+                                className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
+                                title="Delete attachment"
+                              >
+                                ✕
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -2592,22 +2736,27 @@ export default function BridgeAcquisitionWorkspace({
                   <div className="font-bold text-[#001139]">
                     31) Hydro-Morphological Study Report
                   </div>
-                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                    <span>{uploadingSlot === "hydro_morphological" ? "Uploading..." : "Upload Hydro Study"}</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.docx,.doc"
-                      onChange={(e) => {
-                        if (e.target.files[0]) {
-                          handleFileUpload("hydro_morphological", e.target.files[0]);
-                          e.target.value = "";
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
+                  {canEditPlacement && (
+                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                      <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                      <span>{uploadingSlot === "hydro_morphological" ? "Uploading..." : "Upload Hydro Study"}</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.docx,.doc"
+                        onChange={(e) => {
+                          if (e.target.files[0]) {
+                            handleFileUpload("hydro_morphological", e.target.files[0]);
+                            e.target.value = "";
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   <div className="space-y-1 text-[11px]">
+                    {attachments.filter((a) => a.slot_code === "hydro_morphological").length === 0 && (
+                      <div className="text-[11px] text-slate-500 italic py-1">No hydro study document attached.</div>
+                    )}
                     {attachments
                       .filter((a) => a.slot_code === "hydro_morphological")
                       .map((a) => (
@@ -2633,13 +2782,15 @@ export default function BridgeAcquisitionWorkspace({
                             >
                               View
                             </a>
-                            <button
-                              onClick={() => handleDeleteAttachment(a.id)}
-                              className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
-                              title="Delete attachment"
-                            >
-                              ✕
-                            </button>
+                            {canEditPlacement && (
+                              <button
+                                onClick={() => handleDeleteAttachment(a.id)}
+                                className="text-red-600 font-bold hover:text-red-800 cursor-pointer"
+                                title="Delete attachment"
+                              >
+                                ✕
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -2665,21 +2816,23 @@ export default function BridgeAcquisitionWorkspace({
                     <span className=" font-bold uppercase text-[#001139] block">
                       {dir} Side View
                     </span>
-                    <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#00225a]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
-                      <span>Select Image</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                          e.target.files[0] &&
-                          handleFileUpload(
-                            `site_photo_${dir}`,
-                            e.target.files[0],
-                          )
-                        }
-                        className="hidden"
-                      />
-                    </label>
+                    {canEditPlacement && (
+                      <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#00225a]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
+                        <span>Select Image</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) =>
+                            e.target.files[0] &&
+                            handleFileUpload(
+                              `site_photo_${dir}`,
+                              e.target.files[0],
+                            )
+                          }
+                          className="hidden"
+                        />
+                      </label>
+                    )}
                     {attachments.find(
                       (a) => a.slot_code === `site_photo_${dir}`,
                     ) ? (
@@ -2711,11 +2864,13 @@ export default function BridgeAcquisitionWorkspace({
               acquisitionType="BRIDGE"
               acquisitionId={acquisitionId}
               totalBoreholes={formData.total_borehole_count}
+              readOnly={!canEditPlacement}
               onBoreholeCountChange={(count) =>
                 setFormData({ ...formData, total_borehole_count: count })
               }
             />
           </div>
+          </fieldset>
 
           {/* TAB-07: Prepared Design Deliverables Package */}
           <div

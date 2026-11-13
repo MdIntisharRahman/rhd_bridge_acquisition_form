@@ -142,10 +142,69 @@ export default function CulvertAcquisitionWorkspace({
   const [attachments, setAttachments] = useState([]);
   const [saving, setSaving] = useState(false);
   const [uploadingSlot, setUploadingSlot] = useState(null);
+  const [downloadingExport, setDownloadingExport] = useState(null);
   const [msg, setMsg] = useState(null);
   const [showReturnModal, setShowReturnModal] = useState(false);
 
   const [demandOfficerType, setDemandOfficerType] = useState('EE');
+
+  // Export handler with active blob download + authenticated URL fallback
+  const handleExport = async (e, format = 'pdf') => {
+    e.preventDefault();
+    if (!acquisitionId) return;
+    setDownloadingExport(format);
+    try {
+      await api.downloadExport('culvert', acquisitionId, format);
+      setMsg({ type: 'success', text: `${format.toUpperCase()} datasheet downloaded successfully.` });
+    } catch (err) {
+      console.warn('Direct blob download failed, opening via token URL:', err);
+      const url = api.getExportUrl('culvert', acquisitionId, format);
+      window.open(url, '_blank');
+    } finally {
+      setDownloadingExport(null);
+    }
+  };
+
+  // Road Code & Road Name Auto-Sync from 968 GeoJSON network
+  const currentRoad = roads.find((r) => r.id === Number(formData.road_id)) || roads.find((r) => r.road_number && formData.road_name && r.road_name === formData.road_name);
+  const currentRoadNumber = currentRoad ? currentRoad.road_number : (roads.find((r) => r.id === Number(formData.road_id))?.road_number || "");
+
+  const handleRoadCodeInput = (code) => {
+    const clean = (code || "").trim().toUpperCase();
+    const matched = roads.find((r) => r.road_number.toUpperCase() === clean);
+    if (matched) {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: matched.id,
+        road_name: matched.road_name,
+        road_type_id: matched.road_type_id || prev.road_type_id,
+        division_id: prev.division_id || matched.division_id || prev.division_id,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: null,
+      }));
+    }
+  };
+
+  const handleRoadNameInput = (name) => {
+    const matched = roads.find((r) => (r.road_name || "").toLowerCase() === (name || "").trim().toLowerCase());
+    if (matched) {
+      setFormData((prev) => ({
+        ...prev,
+        road_id: matched.id,
+        road_name: matched.road_name,
+        road_type_id: matched.road_type_id || prev.road_type_id,
+        division_id: prev.division_id || matched.division_id || prev.division_id,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        road_name: name,
+      }));
+    }
+  };
 
   const parseChainageValues = (str) => {
     if (!str) return { km: "", m: "" };
@@ -583,34 +642,40 @@ export default function CulvertAcquisitionWorkspace({
           {acquisitionId && (
             <>
               <a
-                href={`/api/acquisitions/culvert/${acquisitionId}/export-pdf`}
+                href={api.getExportUrl('culvert', acquisitionId, 'pdf')}
+                onClick={(e) => handleExport(e, 'pdf')}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors"
+                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors cursor-pointer"
                 style={{ fontFamily: 'var(--font-body)' }}
+                title="Download Culvert Technical Datasheet PDF"
               >
-                <Download className="w-3.5 h-3.5 text-[#8e4b7b]" />
-                <span>Datasheet PDF</span>
+                <Download className={`w-3.5 h-3.5 text-[#8e4b7b] ${downloadingExport === 'pdf' ? 'animate-spin' : ''}`} />
+                <span>{downloadingExport === 'pdf' ? 'Exporting...' : 'Datasheet PDF'}</span>
               </a>
               <a
-                href={`/api/acquisitions/culvert/${acquisitionId}/export-excel`}
+                href={api.getExportUrl('culvert', acquisitionId, 'excel')}
+                onClick={(e) => handleExport(e, 'excel')}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors"
+                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors cursor-pointer"
                 style={{ fontFamily: 'var(--font-body)' }}
+                title="Download Culvert Excel Schedule"
               >
-                <Download className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Excel Schedule</span>
+                <Download className={`w-3.5 h-3.5 text-emerald-700 ${downloadingExport === 'excel' ? 'animate-spin' : ''}`} />
+                <span>{downloadingExport === 'excel' ? 'Exporting...' : 'Excel Schedule'}</span>
               </a>
               <a
-                href={`/api/acquisitions/culvert/${acquisitionId}/export-zip`}
+                href={api.getExportUrl('culvert', acquisitionId, 'zip')}
+                onClick={(e) => handleExport(e, 'zip')}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors"
+                className="px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold flex items-center space-x-1.5 transition-colors cursor-pointer"
                 style={{ fontFamily: 'var(--font-body)' }}
+                title="Download Complete Culvert ZIP Dossier"
               >
-                <Download className="w-3.5 h-3.5 text-amber-700" />
-                <span>ZIP Dossier</span>
+                <Download className={`w-3.5 h-3.5 text-amber-700 ${downloadingExport === 'zip' ? 'animate-spin' : ''}`} />
+                <span>{downloadingExport === 'zip' ? 'Exporting...' : 'ZIP Dossier'}</span>
               </a>
             </>
           )}
@@ -715,6 +780,34 @@ export default function CulvertAcquisitionWorkspace({
 
         {/* RIGHT COLUMN: The Active Tab's Form Inputs Page */}
         <div className="flex-1 min-w-0 w-full" id="culvert-workspace-form-pane">
+          {/* Read-Only Jurisdiction Frozen Placement Banner */}
+          {!canEditPlacement && acquisitionId && (
+            <div className="p-3 bg-amber-50/90 border border-amber-300 rounded-xl flex items-center justify-between text-xs text-amber-900 font-mono shadow-xs mb-4">
+              <div className="flex items-center space-x-2">
+                <Lock className="w-4 h-4 text-amber-700 shrink-0" />
+                <span>
+                  <strong>Data Frozen (Read-Only Profile):</strong> This demand placement belongs to <strong>{formData.division_name || `Division #${formData.division_id}`}</strong>. All input controls are frozen; engineering specifications are displayed as read-only values.
+                </span>
+              </div>
+              <div className="flex items-center space-x-2 shrink-0 ml-3">
+                <button
+                  type="button"
+                  onClick={(e) => handleExport(e, 'pdf')}
+                  disabled={downloadingExport === 'pdf'}
+                  className="px-2.5 py-1 rounded bg-amber-200/90 hover:bg-amber-300 text-amber-900 font-bold text-[11px] cursor-pointer flex items-center space-x-1"
+                >
+                  <Download className="w-3 h-3" />
+                  <span>{downloadingExport === 'pdf' ? 'Exporting...' : 'Export PDF'}</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Division Engineering Inputs Fieldset (Frozen when outside division profile) */}
+          <fieldset
+            disabled={!canEditPlacement}
+            className={`border-0 p-0 m-0 ${!canEditPlacement ? 'placement-frozen' : ''}`}
+          >
           {/* ====================================================================== */}
           {/* [CLV-TAB-01] DEMAND LETTER, HIERARCHY & FLOOD/HAOR CONTEXT */}
           {/* ====================================================================== */}
@@ -888,25 +981,64 @@ export default function CulvertAcquisitionWorkspace({
                   </div>
 
                   <div className="col-span-12 md:col-span-4 eng-field">
-                    <label className="eng-label">b.2) Road Number</label>
-                    <select
-                      value={formData.road_id || ''}
-                      onChange={e => handleRoadSelect(e.target.value)}
-                      className="eng-input font-bold text-[#4a1e46]"
-                    >
-                      <option value="">Select Road Number</option>
-                      {roads.map(r => <option key={r.id} value={r.id}>{r.road_number} — {r.road_name.substring(0, 30)}</option>)}
-                    </select>
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="eng-label">b.2) Road Number / Code</label>
+                      {currentRoad && (
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-100 text-[#4a1e46] font-bold">
+                          {currentRoad.road_type_code === 'N' ? 'National Highway' : currentRoad.road_type_code === 'R' ? 'Regional Highway' : currentRoad.road_type_code === 'Z' ? 'Zilla Road' : 'RHD'}
+                        </span>
+                      )}
+                    </div>
+                    {!canEditPlacement ? (
+                      <div className="eng-input bg-slate-100/90 text-slate-800 font-bold flex items-center border-slate-200 cursor-default select-text">
+                        {currentRoadNumber || (formData.road_id ? `Road #${formData.road_id}` : '—')}
+                      </div>
+                    ) : (
+                      <div className="relative">
+                        <input
+                          type="text"
+                          list="culvert-road-codes-list"
+                          placeholder="Type code e.g. N1, R140, Z1001..."
+                          value={currentRoadNumber}
+                          onChange={(e) => handleRoadCodeInput(e.target.value)}
+                          className="eng-input font-bold text-[#4a1e46] uppercase"
+                        />
+                        <datalist id="culvert-road-codes-list">
+                          {roads.map((r) => (
+                            <option key={r.id} value={r.road_number}>
+                              {r.road_number} — {r.road_name}
+                            </option>
+                          ))}
+                        </datalist>
+                      </div>
+                    )}
                   </div>
 
                   <div className="col-span-12 md:col-span-4 eng-field">
-                    <label className="eng-label">b.3) Name of the Road</label>
-                    <input
-                      type="text"
-                      value={formData.road_name || ''}
-                      onChange={e => setFormData({ ...formData, road_name: e.target.value })}
-                      className="eng-input bg-slate-50 font-medium"
-                    />
+                    <label className="eng-label">b.3) Name of the Road (Auto-Filled from Official RHD GeoJSON Network)</label>
+                    {!canEditPlacement ? (
+                      <div className="eng-input bg-slate-100/90 text-slate-800 font-semibold flex items-center border-slate-200 cursor-default select-text">
+                        {formData.road_name || '—'}
+                      </div>
+                    ) : (
+                      <div className="relative">
+                        <input
+                          type="text"
+                          list="culvert-road-names-list"
+                          placeholder="Type or select official road name..."
+                          value={formData.road_name || ''}
+                          onChange={(e) => handleRoadNameInput(e.target.value)}
+                          className="eng-input bg-slate-50 font-medium"
+                        />
+                        <datalist id="culvert-road-names-list">
+                          {roads.map((r) => (
+                            <option key={r.id} value={r.road_name}>
+                              {r.road_number} — {r.road_name}
+                            </option>
+                          ))}
+                        </datalist>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1471,7 +1603,7 @@ export default function CulvertAcquisitionWorkspace({
                   )}
                 </select>
 
-                {availableDemandOptions.length > 0 && (
+                {canEditPlacement && availableDemandOptions.length > 0 && (
                   <label className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center space-x-1 cursor-pointer rounded-xs">
                     <Upload className="w-3.5 h-3.5" />
                     <span>{uploadingSlot === `demand_letter_${demandOfficerType.toLowerCase()}` ? 'Uploading...' : 'Upload Demand Letter'}</span>
@@ -1534,14 +1666,16 @@ export default function CulvertAcquisitionWorkspace({
                           >
                             View
                           </a>
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteAttachment(att.id)}
-                            className="text-red-600 hover:text-red-800 p-1"
-                            title="Delete attachment"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
+                          {canEditPlacement && (
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteAttachment(att.id)}
+                              className="text-red-600 hover:text-red-800 p-1 cursor-pointer"
+                              title="Delete attachment"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
                         </div>
                       </div>
                     ))
@@ -1555,71 +1689,43 @@ export default function CulvertAcquisitionWorkspace({
             <div className="eng-section-header accent-plum">
               <span>Culvert Soil Reports &amp; Cross-Section Drawings</span>
             </div>
-            <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-              {/* Soil Report */}
-              {/* <div className="p-3.5 rounded-xs space-y-2 ">
-                <div className="font-bold text-[#001139]">
-                  Soil Investigation Report
-                </div>
-                <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                  <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                  <span>{uploadingSlot === 'soil_report' ? 'Uploading...' : 'Upload Soil Report'}</span>
-                  <input
-                    type="file"
-                    accept=".pdf,.png,.jpg,.jpeg"
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        handleFileUpload('soil_report', e.target.files[0]);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="hidden"
-                  />
-                </label>
-                <div className="space-y-1 text-[11px]">
-                  {attachments.filter((a) => a.slot_code === 'soil_report').map((a) => (
-                    <div key={a.id} className="flex justify-between items-center text-slate-800 bg-white/60 p-1.5 rounded-lg border border-white/80">
-                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline">
-                        {a.file_name}
-                      </a>
-                      <div className="flex items-center space-x-1">
-                        <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
-                        <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800">✕</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
-
+            <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               {/* Site Plan */}
-              <div className="p-3.5 rounded-xs space-y-2 ">
+              <div className="p-3.5 rounded-xs space-y-2">
                 <div className="font-bold text-[#001139]">
                   Site Plan / Catchment Map
                 </div>
-                <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                  <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                  <span>{uploadingSlot === 'site_plan' ? 'Uploading...' : 'Upload Site Plan'}</span>
-                  <input
-                    type="file"
-                    accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        handleFileUpload('site_plan', e.target.files[0]);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="hidden"
-                  />
-                </label>
+                {canEditPlacement && (
+                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                    <span>{uploadingSlot === 'site_plan' ? 'Uploading...' : 'Upload Site Plan'}</span>
+                    <input
+                      type="file"
+                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
+                      onChange={(e) => {
+                        if (e.target.files[0]) {
+                          handleFileUpload('site_plan', e.target.files[0]);
+                          e.target.value = '';
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                )}
                 <div className="space-y-1 text-[11px]">
+                  {attachments.filter((a) => a.slot_code === 'site_plan').length === 0 && (
+                    <div className="text-[11px] text-slate-500 italic py-1">No site plan attached.</div>
+                  )}
                   {attachments.filter((a) => a.slot_code === 'site_plan').map((a) => (
                     <div key={a.id} className="flex justify-between items-center text-slate-800 bg-white/60 p-1.5 rounded-lg border border-white/80">
-                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline">
+                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
                         {a.file_name}
                       </a>
                       <div className="flex items-center space-x-1">
                         <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
-                        <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800">✕</button>
+                        {canEditPlacement && (
+                          <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800 cursor-pointer">✕</button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -1627,34 +1733,41 @@ export default function CulvertAcquisitionWorkspace({
               </div>
 
               {/* Cross Section */}
-              <div className="p-3.5 rounded-xs space-y-2 ">
+              <div className="p-3.5 rounded-xs space-y-2">
                 <div className="font-bold text-[#001139]">
                   Cross-Sections / Barrel Layout
                 </div>
-                <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
-                  <Upload className="w-3.5 h-3.5 text-cyan-300" />
-                  <span>{uploadingSlot === 'cross_section' ? 'Uploading...' : 'Upload Cross-Section'}</span>
-                  <input
-                    type="file"
-                    accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
-                    onChange={(e) => {
-                      if (e.target.files[0]) {
-                        handleFileUpload('cross_section', e.target.files[0]);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="hidden"
-                  />
-                </label>
+                {canEditPlacement && (
+                  <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <Upload className="w-3.5 h-3.5 text-cyan-300" />
+                    <span>{uploadingSlot === 'cross_section' ? 'Uploading...' : 'Upload Cross-Section'}</span>
+                    <input
+                      type="file"
+                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
+                      onChange={(e) => {
+                        if (e.target.files[0]) {
+                          handleFileUpload('cross_section', e.target.files[0]);
+                          e.target.value = '';
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                )}
                 <div className="space-y-1 text-[11px]">
+                  {attachments.filter((a) => a.slot_code === 'cross_section').length === 0 && (
+                    <div className="text-[11px] text-slate-500 italic py-1">No cross-section attached.</div>
+                  )}
                   {attachments.filter((a) => a.slot_code === 'cross_section').map((a) => (
                     <div key={a.id} className="flex justify-between items-center text-slate-800 bg-white/60 p-1.5 rounded-lg border border-white/80">
-                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline">
+                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
                         {a.file_name}
                       </a>
                       <div className="flex items-center space-x-1">
                         <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
-                        <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800">✕</button>
+                        {canEditPlacement && (
+                          <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800 cursor-pointer">✕</button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -1674,20 +1787,22 @@ export default function CulvertAcquisitionWorkspace({
                   <span className="font-bold uppercase text-[#001139] block">
                     {dir} Direction Photo
                   </span>
-                  <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#00225a]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
-                    <span>{uploadingSlot === `clv_photo_${dir.toLowerCase()}` ? 'Uploading...' : 'Select Image'}</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={e => {
-                        if (e.target.files[0]) {
-                          handleFileUpload(`clv_photo_${dir.toLowerCase()}`, e.target.files[0]);
-                          e.target.value = '';
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
+                  {canEditPlacement && (
+                    <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#00225a]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
+                      <span>{uploadingSlot === `clv_photo_${dir.toLowerCase()}` ? 'Uploading...' : 'Select Image'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={e => {
+                          if (e.target.files[0]) {
+                            handleFileUpload(`clv_photo_${dir.toLowerCase()}`, e.target.files[0]);
+                            e.target.value = '';
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  )}
                   {attachments.find(a => a.slot_code === `clv_photo_${dir.toLowerCase()}`) ? (
                     <div className="space-y-1">
                       <div className="text-emerald-700 font-mono text-[10px] font-bold bg-emerald-100/80 rounded-md py-0.5 border border-emerald-300">Image Attached ✓</div>
@@ -1700,13 +1815,15 @@ export default function CulvertAcquisitionWorkspace({
                         >
                           View
                         </a>
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteAttachment(attachments.find(a => a.slot_code === `clv_photo_${dir.toLowerCase()}`).id)}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          Delete
-                        </button>
+                        {canEditPlacement && (
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteAttachment(attachments.find(a => a.slot_code === `clv_photo_${dir.toLowerCase()}`).id)}
+                            className="text-red-500 hover:text-red-700 cursor-pointer"
+                          >
+                            Delete
+                          </button>
+                        )}
                       </div>
                     </div>
                   ) : (
@@ -1732,9 +1849,11 @@ export default function CulvertAcquisitionWorkspace({
           acquisitionType="CULVERT"
           acquisitionId={acquisitionId}
           totalBoreholes={formData.total_borehole_count}
+          readOnly={!canEditPlacement}
           onBoreholeCountChange={count => setFormData({ ...formData, total_borehole_count: count })}
         />
       </div>
+      </fieldset>
 
       {/* CLV-TAB-07: Prepared Design Deliverables Package */}
       <div

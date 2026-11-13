@@ -269,7 +269,7 @@ export default function TopCommandBar({
                             value={divisionSearch}
                             onChange={e => setDivisionSearch(e.target.value)}
                             placeholder="Search division (e.g. Dhaka, Comilla)..."
-                            className="eng-input text-xs py-1.5 pl-8 pr-2 w-full bg-slate-50 focus:bg-white rounded-lg transition-all"
+                            className="eng-input text-xs py-1.5 pl-9! pr-2 w-full bg-slate-50 focus:bg-white rounded-lg transition-all"
                             autoFocus
                           />
                           <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />

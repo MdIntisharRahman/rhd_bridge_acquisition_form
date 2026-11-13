@@ -15,7 +15,8 @@ import {
   ArrowRight,
   AlertCircle,
   HardHat,
-  Compass
+  Compass,
+  PackageCheck
 } from 'lucide-react';
 
 const SLOTS = [
@@ -105,14 +106,14 @@ export default function PreparedDesignPackageCard({
           <div 
             className="w-10 h-10 flex items-center justify-center shrink-0"
           >
-            <Compass className="w-5 h-5" style={{ color: accentColor }} />
+            <PackageCheck className="w-7 h-7" style={{ color: accentColor }} />
           </div>
           <div>
             <div className="flex items-center space-x-2">
               <h2 className="text-base font-extrabold text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
                 Prepared Design Package & Deliverables
               </h2>
-              <span className="text-[11px] font-bold px-2 py-0.5 text-slate-700 shadow-2xs font-mono">
+              <span className="text-[11px] font-bold px-2 py-0.5 text-slate-700 border-slate-300 border-l shadow-2xs font-mono">
                 {structureType === 'bridge' ? 'BDD / BRG-PKG' : 'BDD / CLV-PKG'}
               </span>
             </div>
