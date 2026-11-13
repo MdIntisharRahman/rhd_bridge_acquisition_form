@@ -1,0 +1,107 @@
+/* RhdWebmapBorelogForm.css — Frosted Glass Geotechnical Table & Transparent Inputs */
+
+.borelog-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.borelog-table th {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #00225a;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  letter-spacing: 0.025em;
+  font-family: var(--font-subhead);
+  text-transform: uppercase;
+}
+
+.borelog-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 6px 10px;
+  background-color: transparent;
+}
+
+.borelog-table tr:last-child td {
+  border-bottom: none;
+}
+
+.borelog-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.borelog-input {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: #001139;
+  background-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.borelog-input:focus {
+  background-color: rgba(255, 255, 255, 0.38);
+  border-color: #429afe;
+  box-shadow: 0 0 0 3px rgba(66, 154, 254, 0.3), 0 2px 8px rgba(66, 154, 254, 0.15);
+}
+
+.borelog-input option {
+  background-color: #ffffff;
+  color: #001139;
+}
+
+.action-pill-btn {
+  padding: 4px 10px;
+  background-color: #034081;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: all 0.15s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0, 34, 90, 0.15);
+}
+
+.action-pill-btn:hover {
+  background-color: #00225a;
+  box-shadow: 0 2px 6px rgba(0, 34, 90, 0.25);
+  transform: translateY(-0.5px);
+}
+
+.action-pill-btn:active {
+  transform: translateY(1px);
+}
+
+.action-pill-btn-danger {
+  background-color: #dc2626;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.action-pill-btn-danger:hover {
+  background-color: #b91c1c;
+}

@@ -1,0 +1,1439 @@
+{
+  "system": "RHD Online Bridge & Culvert Design Data Acquisition System (OBDDAS / OBCDAS)",
+  "version": "2.0.0",
+  "zones": [
+    {
+      "code": "BARISHAL",
+      "name": "Barishal Zone",
+      "circles": [
+        {
+          "code": "CIR_001",
+          "name": "Barishal",
+          "divisions": [
+            {
+              "code": "DIV_001",
+              "name": "Barishal"
+            },
+            {
+              "code": "DIV_002",
+              "name": "Bhola"
+            },
+            {
+              "code": "DIV_003",
+              "name": "Jhalokati"
+            },
+            {
+              "code": "DIV_004",
+              "name": "Pirojpur"
+            }
+          ]
+        },
+        {
+          "code": "CIR_002",
+          "name": "Patuakhali",
+          "divisions": [
+            {
+              "code": "DIV_005",
+              "name": "Barguna"
+            },
+            {
+              "code": "DIV_006",
+              "name": "Patuakhali"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CHATTOGRAM",
+      "name": "Chattogram Zone",
+      "circles": [
+        {
+          "code": "CIR_003",
+          "name": "Chattogram",
+          "divisions": [
+            {
+              "code": "DIV_007",
+              "name": "Chattogram"
+            },
+            {
+              "code": "DIV_008",
+              "name": "Cox's Bazar"
+            }
+          ]
+        },
+        {
+          "code": "CIR_004",
+          "name": "Rangamati",
+          "divisions": [
+            {
+              "code": "DIV_009",
+              "name": "Bandarban"
+            },
+            {
+              "code": "DIV_010",
+              "name": "Khagrachhari"
+            },
+            {
+              "code": "DIV_011",
+              "name": "Rangamati"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "CUMILLA",
+      "name": "Comilla Zone",
+      "circles": [
+        {
+          "code": "CIR_005",
+          "name": "Comilla",
+          "divisions": [
+            {
+              "code": "DIV_012",
+              "name": "Brahmanbaria"
+            },
+            {
+              "code": "DIV_013",
+              "name": "Chandpur"
+            },
+            {
+              "code": "DIV_014",
+              "name": "Comilla"
+            }
+          ]
+        },
+        {
+          "code": "CIR_006",
+          "name": "Noakhali",
+          "divisions": [
+            {
+              "code": "DIV_015",
+              "name": "Feni"
+            },
+            {
+              "code": "DIV_016",
+              "name": "Lakshmipur"
+            },
+            {
+              "code": "DIV_017",
+              "name": "Noakhali"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "DHAKA",
+      "name": "Dhaka Zone",
+      "circles": [
+        {
+          "code": "CIR_007",
+          "name": "Dhaka",
+          "divisions": [
+            {
+              "code": "DIV_018",
+              "name": "Dhaka"
+            },
+            {
+              "code": "DIV_019",
+              "name": "Gazipur"
+            },
+            {
+              "code": "DIV_020",
+              "name": "Manikganj"
+            }
+          ]
+        },
+        {
+          "code": "CIR_008",
+          "name": "Narayanganj",
+          "divisions": [
+            {
+              "code": "DIV_021",
+              "name": "Munshiganj"
+            },
+            {
+              "code": "DIV_022",
+              "name": "Narayanganj"
+            },
+            {
+              "code": "DIV_023",
+              "name": "Narsingdi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "GOPALGANJ",
+      "name": "Gopalganj Zone",
+      "circles": [
+        {
+          "code": "CIR_009",
+          "name": "Faridpur",
+          "divisions": [
+            {
+              "code": "DIV_024",
+              "name": "Faridpur"
+            },
+            {
+              "code": "DIV_025",
+              "name": "Rajbari"
+            }
+          ]
+        },
+        {
+          "code": "CIR_010",
+          "name": "Gopalganj",
+          "divisions": [
+            {
+              "code": "DIV_026",
+              "name": "Gopalganj"
+            },
+            {
+              "code": "DIV_027",
+              "name": "Madaripur"
+            },
+            {
+              "code": "DIV_028",
+              "name": "Shariatpur"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "KHULNA",
+      "name": "Khulna Zone",
+      "circles": [
+        {
+          "code": "CIR_011",
+          "name": "Jashore",
+          "divisions": [
+            {
+              "code": "DIV_029",
+              "name": "Jashore"
+            },
+            {
+              "code": "DIV_030",
+              "name": "Magura"
+            },
+            {
+              "code": "DIV_031",
+              "name": "Narail"
+            }
+          ]
+        },
+        {
+          "code": "CIR_012",
+          "name": "Khulna",
+          "divisions": [
+            {
+              "code": "DIV_032",
+              "name": "Bagerhat"
+            },
+            {
+              "code": "DIV_033",
+              "name": "Khulna"
+            },
+            {
+              "code": "DIV_034",
+              "name": "Satkhira"
+            }
+          ]
+        },
+        {
+          "code": "CIR_013",
+          "name": "Kushtia",
+          "divisions": [
+            {
+              "code": "DIV_035",
+              "name": "Chuadanga"
+            },
+            {
+              "code": "DIV_036",
+              "name": "Jhenaidah"
+            },
+            {
+              "code": "DIV_037",
+              "name": "Kushtia"
+            },
+            {
+              "code": "DIV_038",
+              "name": "Meherpur"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MYMENSINGH",
+      "name": "Mymensingh Zone",
+      "circles": [
+        {
+          "code": "CIR_014",
+          "name": "Jamalpur",
+          "divisions": [
+            {
+              "code": "DIV_039",
+              "name": "Jamalpur"
+            },
+            {
+              "code": "DIV_040",
+              "name": "Sherpur"
+            },
+            {
+              "code": "DIV_041",
+              "name": "Tangail"
+            }
+          ]
+        },
+        {
+          "code": "CIR_015",
+          "name": "Mymensingh",
+          "divisions": [
+            {
+              "code": "DIV_042",
+              "name": "Kishoreganj"
+            },
+            {
+              "code": "DIV_043",
+              "name": "Mymensingh"
+            },
+            {
+              "code": "DIV_044",
+              "name": "Netrokona"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "RAJSHAHI",
+      "name": "Rajshahi Zone",
+      "circles": [
+        {
+          "code": "CIR_016",
+          "name": "Pabna",
+          "divisions": [
+            {
+              "code": "DIV_045",
+              "name": "Natore"
+            },
+            {
+              "code": "DIV_046",
+              "name": "Pabna"
+            },
+            {
+              "code": "DIV_047",
+              "name": "Sirajganj"
+            }
+          ]
+        },
+        {
+          "code": "CIR_017",
+          "name": "Rajshahi",
+          "divisions": [
+            {
+              "code": "DIV_048",
+              "name": "Naogaon"
+            },
+            {
+              "code": "DIV_049",
+              "name": "Nawabganj"
+            },
+            {
+              "code": "DIV_050",
+              "name": "Rajshahi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "RANGPUR",
+      "name": "Rangpur Zone",
+      "circles": [
+        {
+          "code": "CIR_018",
+          "name": "Bogura",
+          "divisions": [
+            {
+              "code": "DIV_051",
+              "name": "Bogura"
+            },
+            {
+              "code": "DIV_052",
+              "name": "Gaibandha"
+            },
+            {
+              "code": "DIV_053",
+              "name": "Joypurhat"
+            }
+          ]
+        },
+        {
+          "code": "CIR_019",
+          "name": "Dinajpur",
+          "divisions": [
+            {
+              "code": "DIV_054",
+              "name": "Dinajpur"
+            },
+            {
+              "code": "DIV_055",
+              "name": "Nilphamari"
+            },
+            {
+              "code": "DIV_056",
+              "name": "Panchagarh"
+            },
+            {
+              "code": "DIV_057",
+              "name": "Thakurgaon"
+            }
+          ]
+        },
+        {
+          "code": "CIR_020",
+          "name": "Rangpur",
+          "divisions": [
+            {
+              "code": "DIV_058",
+              "name": "Kurigram"
+            },
+            {
+              "code": "DIV_059",
+              "name": "Lalmonirhat"
+            },
+            {
+              "code": "DIV_060",
+              "name": "Rangpur"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "SYLHET",
+      "name": "Sylhet Zone",
+      "circles": [
+        {
+          "code": "CIR_021",
+          "name": "Moulvibazar",
+          "divisions": [
+            {
+              "code": "DIV_061",
+              "name": "Habiganj"
+            },
+            {
+              "code": "DIV_062",
+              "name": "Moulvibazar"
+            }
+          ]
+        },
+        {
+          "code": "CIR_022",
+          "name": "Sylhet",
+          "divisions": [
+            {
+              "code": "DIV_063",
+              "name": "Sunamganj"
+            },
+            {
+              "code": "DIV_064",
+              "name": "Sylhet"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "TECH_SERVICES",
+      "name": "Technical Services Zone (Dhaka)",
+      "circles": [
+        {
+          "code": "CIR_BDC",
+          "name": "Bridge Design Circle, Sarak Bhaban, Tejgaon, Dhaka",
+          "divisions": [
+            {
+              "code": "BDD_1",
+              "name": "Bridge Design Division-1"
+            },
+            {
+              "code": "BDD_2",
+              "name": "Bridge Design Division-2"
+            },
+            {
+              "code": "BDD_3",
+              "name": "Bridge Design Division-3"
+            },
+            {
+              "code": "SOIL_INV",
+              "name": "Soil Investigation Division, Dhaka"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "road_types": [
+    {
+      "code": "N",
+      "name": "National Highway",
+      "description": "Main national arterial highway network"
+    },
+    {
+      "code": "R",
+      "name": "Regional Highway",
+      "description": "Inter-district connecting regional highways"
+    },
+    {
+      "code": "Z",
+      "name": "Zilla Road",
+      "description": "District connecting feeder roads"
+    },
+    {
+      "code": "O",
+      "name": "Others",
+      "description": "Other designated road categories or municipal connections"
+    }
+  ],
+  "roads": [
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Dhaka -Mawa-Bhanga-Barishal-Patuakhali Road",
+      "division_name": "Madaripur",
+      "length_km": 17.64
+    },
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Dhaka -Mawa-Bhanga-Barishal-Patuakhali Road",
+      "division_name": "Munshiganj",
+      "length_km": 2.61
+    },
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Elenga-Nalka-Hatikamrul Road",
+      "division_name": "Sirajganj",
+      "length_km": 17.45
+    },
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Elenga-Nalka-Hatikamrul Road",
+      "division_name": "Tangail",
+      "length_km": 19.03
+    },
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Fatullah (Panchabati)-Muktarpur Road",
+      "division_name": "Dhaka",
+      "length_km": 8.83
+    },
+    {
+      "road_type_code": "O",
+      "road_number": "BBA Road",
+      "road_name": "Fatullah (Panchabati)-Muktarpur Road",
+      "division_name": "Munshiganj",
+      "length_km": 0.68
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Chattogram",
+      "length_km": 72.84
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Chattogram",
+      "length_km": 67.43
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Cox's Bazar",
+      "length_km": 146.27
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Comilla",
+      "length_km": 101.1
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Feni",
+      "length_km": 26.77
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Dhaka-Comilla-Chattogram-Teknaf Road",
+      "division_name": "Narayanganj",
+      "length_km": 37.06
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N1",
+      "road_name": "Patiya Bypass",
+      "division_name": "Chattogram",
+      "length_km": 5.07
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N101",
+      "road_name": "Comilla - Bibirbazar Land Port Road",
+      "division_name": "Comilla",
+      "length_km": 5.54
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N102",
+      "road_name": "Comilla-Brahmanbaria (Sarail) Road",
+      "division_name": "Brahmanbaria",
+      "length_km": 82.24
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N102",
+      "road_name": "Comilla-Brahmanbaria (Sarail) Road",
+      "division_name": "Comilla",
+      "length_km": 82.24
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N103",
+      "road_name": "Brahmanbaria Town Road",
+      "division_name": "Brahmanbaria",
+      "length_km": 4.67
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N104",
+      "road_name": "Feni-Noakhali Road",
+      "division_name": "Feni",
+      "length_km": 18.68
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N104",
+      "road_name": "Feni-Noakhali Road",
+      "division_name": "Noakhali",
+      "length_km": 30.47
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N105",
+      "road_name": "Madanpur -Joydevpur",
+      "division_name": "Dhaka",
+      "length_km": 10.33
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N105",
+      "road_name": "Madanpur -Joydevpur",
+      "division_name": "Gazipur",
+      "length_km": 17.5
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N105",
+      "road_name": "Madanpur -Joydevpur",
+      "division_name": "Narayanganj",
+      "length_km": 20.44
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N106",
+      "road_name": "Chattogram-Hathazari-Rangamati",
+      "division_name": "Chattogram",
+      "length_km": 30.17
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N106",
+      "road_name": "Chattogram-Hathazari-Rangamati",
+      "division_name": "Rangamati",
+      "length_km": 36.45
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N107",
+      "road_name": "Kalurghat-Maneswartek Road",
+      "division_name": "Chattogram",
+      "length_km": 10.49
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N108",
+      "road_name": "Keranirhat-Bandarban Road",
+      "division_name": "Bandarban",
+      "length_km": 22.4
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N109",
+      "road_name": "Ramu Old Section Road",
+      "division_name": "Cox's Bazar",
+      "length_km": 2.5
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N110",
+      "road_name": "Link Road-Cox`s Bazar  Road",
+      "division_name": "Cox's Bazar",
+      "length_km": 7.99
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N111",
+      "road_name": "Chattogram Port Connecting Road",
+      "division_name": "Chattogram",
+      "length_km": 12.82
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N112",
+      "road_name": "Feni-Noakhali Highway Link Road",
+      "division_name": "Feni",
+      "length_km": 2.7
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N113",
+      "road_name": "Ramu-Fatehkharkul-Maricha Road",
+      "division_name": "Cox's Bazar",
+      "length_km": 14.07
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N114",
+      "road_name": "Comilla-Shalda-Kashba Road",
+      "division_name": "Brahmanbaria",
+      "length_km": 14.6
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N114",
+      "road_name": "Comilla-Shalda-Kashba Road",
+      "division_name": "Comilla",
+      "length_km": 25.35
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N115",
+      "road_name": "Shikalbaha-Anwara Road",
+      "division_name": "Chattogram",
+      "length_km": 8.03
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N116",
+      "road_name": "Mirsarai Economic Zone Connecting Road",
+      "division_name": "Chattogram",
+      "length_km": 9.38
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N117",
+      "road_name": "Comilla Economic Zone Connecting Road",
+      "division_name": "Narayanganj",
+      "length_km": 1.63
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N119",
+      "road_name": "Chandina Town Old Section  Road",
+      "division_name": "Comilla",
+      "length_km": 2.84
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N120",
+      "road_name": "Comilla Town Old Section Road",
+      "division_name": "Comilla",
+      "length_km": 20.71
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N121",
+      "road_name": "Chaturi (Chowmuhani) - Karnafuli Drydock - Fakirnirhat Road",
+      "division_name": "Chattogram",
+      "length_km": 14.34
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N123",
+      "road_name": "Baraiyerhat-Joraganj Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 7.94
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N124",
+      "road_name": "Mithachara Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 0.87
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N125",
+      "road_name": "Bartakia Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 1.13
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N126",
+      "road_name": "Komoldoho Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 1.37
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N127",
+      "road_name": "Choto Darogarhat Old section Road",
+      "division_name": "Chattogram",
+      "length_km": 0.31
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N128",
+      "road_name": "Sitakunda Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 1.28
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N129",
+      "road_name": "Kumira Old Section Road",
+      "division_name": "Chattogram",
+      "length_km": 2.69
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N130",
+      "road_name": "Demra-Rupganj-Beldi-Agla-Bartul-Kaliganj (Kanchan Bridge -Donga Potion) Road",
+      "division_name": "Narayanganj",
+      "length_km": 16.24
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Brahmanbaria",
+      "length_km": 34.85
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Habiganj",
+      "length_km": 82.69
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Kishoreganj",
+      "length_km": 3.73
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Narayanganj",
+      "length_km": 21.04
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Narsingdi",
+      "length_km": 47.3
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N2",
+      "road_name": "Dhaka-Bhairab-Sylhet-Tamabil Road",
+      "division_name": "Sylhet",
+      "length_km": 95.21
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N201",
+      "road_name": "Batpara GC -Amdia Union Office Road",
+      "division_name": "Narsingdi",
+      "length_km": 13.59
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N203",
+      "road_name": "Bhairab Bazar Old Ferryghat link Road",
+      "division_name": "Kishoreganj",
+      "length_km": 0.98
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N204",
+      "road_name": "Jagadishpur-Chunarughat-Shaistaganj Road",
+      "division_name": "Habiganj",
+      "length_km": 34.36
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N205",
+      "road_name": "Chandipool-Keean Bridge Road",
+      "division_name": "Sylhet",
+      "length_km": 2.5
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N206",
+      "road_name": "Keean Bridge-Nayarpool Road",
+      "division_name": "Sylhet",
+      "length_km": 1.73
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N207",
+      "road_name": "Mirpur-Srimongal-Moulvibazar-Sherpur Road",
+      "division_name": "Habiganj",
+      "length_km": 4.46
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N207",
+      "road_name": "Mirpur-Srimongal-Moulvibazar-Sherpur Road",
+      "division_name": "Habiganj",
+      "length_km": 11.01
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N207",
+      "road_name": "Mirpur-Srimongal-Moulvibazar-Sherpur Road",
+      "division_name": "Moulvibazar",
+      "length_km": 52.23
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N208",
+      "road_name": "Moulvibazar-Rajnagar-Fenchuganj-Sylhet Road",
+      "division_name": "Moulvibazar",
+      "length_km": 30.44
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N208",
+      "road_name": "Moulvibazar-Rajnagar-Fenchuganj-Sylhet Road",
+      "division_name": "Sylhet",
+      "length_km": 26.82
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N209",
+      "road_name": "Sylhet Railway Station Town By-Pass Road",
+      "division_name": "Sylhet",
+      "length_km": 1.47
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N210",
+      "road_name": "Sylhet Town Bypass Road",
+      "division_name": "Sylhet",
+      "length_km": 10.84
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N211",
+      "road_name": "Beripar-Moulvibazar Court Road",
+      "division_name": "Moulvibazar",
+      "length_km": 1.16
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N212",
+      "road_name": "Tamabil Landport Connecting Road",
+      "division_name": "Sylhet",
+      "length_km": 0.32
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N213",
+      "road_name": "Ashuganj River Port Connecting Road",
+      "division_name": "Brahmanbaria",
+      "length_km": 0.55
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N214",
+      "road_name": "Sylhet Osmani Airport to Bholaganj Road",
+      "division_name": "Sylhet",
+      "length_km": 30.73
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N3",
+      "road_name": "Dhaka (Banani)-Joydebpur-Mymensingh Road",
+      "division_name": "Dhaka",
+      "length_km": 9.31
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N3",
+      "road_name": "Dhaka (Banani)-Joydebpur-Mymensingh Road",
+      "division_name": "Gazipur",
+      "length_km": 46.61
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N3",
+      "road_name": "Dhaka (Banani)-Joydebpur-Mymensingh Road",
+      "division_name": "Mymensingh",
+      "length_km": 54.77
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N302",
+      "road_name": "Tongi-Ashulia-Zerabo-EPZ Road",
+      "division_name": "Dhaka",
+      "length_km": 17.48
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N303",
+      "road_name": "Churkhai Bazar Link Road",
+      "division_name": "Mymensingh",
+      "length_km": 0.9
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N309",
+      "road_name": "Mymensingh Town By-Pass Road",
+      "division_name": "Mymensingh",
+      "length_km": 13.27
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N360",
+      "road_name": "Mymensingh -Kishoreganj -Bhairab Road",
+      "division_name": "Kishoreganj",
+      "length_km": 115.61
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N4",
+      "road_name": "Joydebpur-Tangail-Jamalpur Road",
+      "division_name": "Gazipur",
+      "length_km": 24.64
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N4",
+      "road_name": "Joydebpur-Tangail-Jamalpur Road",
+      "division_name": "Jamalpur",
+      "length_km": 20.35
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N4",
+      "road_name": "Joydebpur-Tangail-Jamalpur Road",
+      "division_name": "Tangail",
+      "length_km": 101.35
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N401",
+      "road_name": "Madhupur-Mymensingh Road",
+      "division_name": "Mymensingh",
+      "length_km": 31.35
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N401",
+      "road_name": "Madhupur-Mymensingh Road",
+      "division_name": "Tangail",
+      "length_km": 15.54
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N402",
+      "road_name": "Nakla-Nalitabadi-Nakugaon Road",
+      "division_name": "Sherpur",
+      "length_km": 27.29
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N403",
+      "road_name": "Mirzapur Town old Section Road",
+      "division_name": "Tangail",
+      "length_km": 3.71
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N404",
+      "road_name": "Tangail Old Section (Nagarjalpai-Baila) Road",
+      "division_name": "Tangail",
+      "length_km": 6.51
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N405",
+      "road_name": "Elenga-Nalka-Hatikamrul Road",
+      "division_name": "Sirajganj",
+      "length_km": 4.16
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N406",
+      "road_name": "Kaliakoir Town Old Section",
+      "division_name": "Gazipur",
+      "length_km": 3.29
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N407",
+      "road_name": "Korotia-Bhanga Road",
+      "division_name": "Tangail",
+      "length_km": 2.18
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N408",
+      "road_name": "Korotia Bazar Portion Road",
+      "division_name": "Tangail",
+      "length_km": 3.37
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Bogura",
+      "length_km": 64.11
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Dhaka",
+      "length_km": 21.97
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Dinajpur",
+      "length_km": 51.32
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Gaibandha",
+      "length_km": 32.17
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Manikganj",
+      "length_km": 55.98
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Nilphamari",
+      "length_km": 12.73
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Pabna",
+      "length_km": 31.53
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Panchagarh",
+      "length_km": 70.02
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Rangpur",
+      "length_km": 79.93
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Sirajganj",
+      "length_km": 53.77
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N5",
+      "road_name": "Dhaka (Mirpur)- Bogura-Rangpur- Banglabandha Road",
+      "division_name": "Thakurgaon",
+      "length_km": 31.3
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N501",
+      "road_name": "Mirpur Bridge-Dhour Road",
+      "division_name": "Dhaka",
+      "length_km": 13.94
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N502",
+      "road_name": "Bogura (Jahangirabad)-Natore Road",
+      "division_name": "Bogura",
+      "length_km": 30.36
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N502",
+      "road_name": "Bogura (Jahangirabad)-Natore Road",
+      "division_name": "Natore",
+      "length_km": 32.34
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N503",
+      "road_name": "Utholi-Aricha Road",
+      "division_name": "Manikganj",
+      "length_km": 3.23
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N504",
+      "road_name": "Nagarbari (Pratappur)-Kashinathpur Road",
+      "division_name": "Pabna",
+      "length_km": 6.0
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N505",
+      "road_name": "Baderhat-Kazirhat (Latifpur) Road",
+      "division_name": "Pabna",
+      "length_km": 7.3
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N506",
+      "road_name": "Rangpur-Barobari-Kurigram Road",
+      "division_name": "Kurigram",
+      "length_km": 12.21
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N506",
+      "road_name": "Rangpur-Barobari-Kurigram Road",
+      "division_name": "Lalmonirhat",
+      "length_km": 16.5
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N506",
+      "road_name": "Rangpur-Barobari-Kurigram Road",
+      "division_name": "Rangpur",
+      "length_km": 21.13
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N507",
+      "road_name": "Hatikamrul-Banpara Road",
+      "division_name": "Natore",
+      "length_km": 26.06
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N507",
+      "road_name": "Hatikamrul-Banpara Road",
+      "division_name": "Sirajganj",
+      "length_km": 24.86
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N508",
+      "road_name": "Dinajpur-Beldanga Road",
+      "division_name": "Dinajpur",
+      "length_km": 16.03
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N509",
+      "road_name": "Barabari-Lalmonirhat-Burimary Road",
+      "division_name": "Lalmonirhat",
+      "length_km": 104.63
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N510",
+      "road_name": "Bogura Station Road",
+      "division_name": "Bogura",
+      "length_km": 2.78
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N511",
+      "road_name": "Mirpur (Birulia)-Ashulia (Yearpur) Road",
+      "division_name": "Dhaka",
+      "length_km": 9.34
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N512",
+      "road_name": "Kurigram-Nageswari-Sonahat Landport Road",
+      "division_name": "Kurigram",
+      "length_km": 50.05
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N513",
+      "road_name": "Baderhat-Khayerchar Road",
+      "division_name": "Pabna",
+      "length_km": 11.75
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N514",
+      "road_name": "Bogura (Banani)-Matidali Road",
+      "division_name": "Bogura",
+      "length_km": 8.69
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N515",
+      "road_name": "Bogura 2nd Town By-Pass Road",
+      "division_name": "Bogura",
+      "length_km": 15.81
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N517",
+      "road_name": "Rangpur Town Old Section",
+      "division_name": "Rangpur",
+      "length_km": 8.07
+    },
+    {
+      "road_type_code": "N",
+      "road_number": "N518",
+      "road_name": "Sayedpur Town Old Section",
+      "division_name": "Nilphamari",
+      "length_km": 4.19
+    }
+  ],
+  "users": [
+    {
+      "username": "supreme",
+      "full_name": "Supreme Commander of Infrastructure",
+      "email": "supreme@rhdbridge.com",
+      "role": "SUPREME",
+      "designation": "Supreme Controller"
+    },
+    {
+      "username": "webmaster",
+      "full_name": "RHD Central Webmaster",
+      "email": "webmaster@rhdbridge.com",
+      "role": "WEBMASTER",
+      "designation": "Senior System Analyst"
+    },
+    {
+      "username": "field_sae",
+      "full_name": "Md. Tareq Hasan",
+      "email": "sae.dhaka@rhd.gov.bd",
+      "role": "FIELD_SAE",
+      "designation": "Sub-Assistant Engineer, Dhaka Road Division"
+    },
+    {
+      "username": "field_sde",
+      "full_name": "Engr. Nusrat Jahan",
+      "email": "sde.dhaka@rhd.gov.bd",
+      "role": "FIELD_SDE",
+      "designation": "Sub-Divisional Engineer, Dhaka Road Sub-Division-1"
+    },
+    {
+      "username": "field_ee",
+      "full_name": "Engr. Shamim Ahmed",
+      "email": "ee.dhaka@rhd.gov.bd",
+      "role": "FIELD_EE",
+      "designation": "Executive Engineer, Dhaka Road Division"
+    },
+    {
+      "username": "field_se",
+      "full_name": "Engr. Mahbubur Rahman",
+      "email": "se.dhaka@rhd.gov.bd",
+      "role": "FIELD_SE",
+      "designation": "Superintending Engineer, Dhaka Road Circle"
+    },
+    {
+      "username": "field_ace",
+      "full_name": "Engr. AKM Fazlul Haque",
+      "email": "ace.dhaka@rhd.gov.bd",
+      "role": "FIELD_ACE",
+      "designation": "Additional Chief Engineer, Dhaka Zone"
+    },
+    {
+      "username": "bmw_ace",
+      "full_name": "Engr. Md. Shahadat Hossain",
+      "email": "ace.bmw@rhd.gov.bd",
+      "role": "BMW_ACE",
+      "designation": "Additional Chief Engineer, Bridge Management Wing"
+    },
+    {
+      "username": "bdc_se",
+      "full_name": "Engr. Kaosar Ahmed",
+      "email": "se.bdc@rhd.gov.bd",
+      "role": "BDC_SE",
+      "designation": "Superintending Engineer, Bridge Design Circle"
+    },
+    {
+      "username": "bdd_ee_1",
+      "full_name": "Engr. Md. Rafiqul Islam",
+      "email": "ee.bdd1@rhd.gov.bd",
+      "role": "BDD_EE",
+      "designation": "Executive Engineer, Bridge Design Division-1"
+    },
+    {
+      "username": "bdd_ee_2",
+      "full_name": "Engr. Md. Shariful Alam",
+      "email": "ee.bdd2@rhd.gov.bd",
+      "role": "BDD_EE",
+      "designation": "Executive Engineer, Bridge Design Division-2"
+    },
+    {
+      "username": "bdd_ee_3",
+      "full_name": "Engr. Md. Golam Mostofa",
+      "email": "ee.bdd3@rhd.gov.bd",
+      "role": "BDD_EE",
+      "designation": "Executive Engineer, Bridge Design Division-3"
+    },
+    {
+      "username": "bdd_sde_1",
+      "full_name": "Engr. Asif Iqbal",
+      "email": "sde.bdd1@rhd.gov.bd",
+      "role": "BDD_SDE",
+      "designation": "Sub-Divisional Engineer, Bridge Design Division-1"
+    }
+  ]
+}

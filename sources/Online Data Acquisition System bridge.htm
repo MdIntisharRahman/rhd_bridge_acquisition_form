@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html data-lt-installed="true"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Online Data Acquisition System</title>
+
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/bootstrap.min_d1Gw.css">
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/font-awesome.min_d1Gw.css">
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/jquery.ime_d1Gw.css">
+
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/dataTables.bootstrap_d1Gw.css">
+
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/app.min_d1Gw.css">
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/all-skins.min_d1Gw.css">
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/custom_d1Gw.css">
+
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/sweetalert2.min_d1Gw.css">
+<link rel="stylesheet" href="Online%20Data%20Acquisition%20System%20bridge_files/datepicker3_d1Gw.css">
+
+<!--[if lt IE 9]>
+<script src="assets/js/plugins/html5shiv.min.js?v=1.0"></script>
+<script src="assets/js/plugins/respond.min.js?v=1.0"></script>
+<![endif]-->
+
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery-2.2.3.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery-ui.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/bootstrap.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.slimscroll.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/bootstrap-datepicker_d1Gw.js"></script>
+
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.validate.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.backstretch.min_d1Gw.js"></script>
+
+    
+    
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.dataTables_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/dataTables.bootstrap_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/notify.min_d1Gw.js"></script><style type="text/css" id="notify-bootstrap">.notifyjs-bootstrap-base {
+	font-weight: bold;
+	padding: 8px 15px 8px 14px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	white-space: nowrap;
+	padding-left: 25px;
+	background-repeat: no-repeat;
+	background-position: 3px 7px;
+}
+.notifyjs-bootstrap-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border-color: #EED3D7;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAtRJREFUeNqkVc1u00AQHq+dOD+0poIQfkIjalW0SEGqRMuRnHos3DjwAH0ArlyQeANOOSMeAA5VjyBxKBQhgSpVUKKQNGloFdw4cWw2jtfMOna6JOUArDTazXi/b3dm55socPqQhFka++aHBsI8GsopRJERNFlY88FCEk9Yiwf8RhgRyaHFQpPHCDmZG5oX2ui2yilkcTT1AcDsbYC1NMAyOi7zTX2Agx7A9luAl88BauiiQ/cJaZQfIpAlngDcvZZMrl8vFPK5+XktrWlx3/ehZ5r9+t6e+WVnp1pxnNIjgBe4/6dAysQc8dsmHwPcW9C0h3fW1hans1ltwJhy0GxK7XZbUlMp5Ww2eyan6+ft/f2FAqXGK4CvQk5HueFz7D6GOZtIrK+srupdx1GRBBqNBtzc2AiMr7nPplRdKhb1q6q6zjFhrklEFOUutoQ50xcX86ZlqaZpQrfbBdu2R6/G19zX6XSgh6RX5ubyHCM8nqSID6ICrGiZjGYYxojEsiw4PDwMSL5VKsC8Yf4VRYFzMzMaxwjlJSlCyAQ9l0CW44PBADzXhe7xMdi9HtTrdYjFYkDQL0cn4Xdq2/EAE+InCnvADTf2eah4Sx9vExQjkqXT6aAERICMewd/UAp/IeYANM2joxt+q5VI+ieq2i0Wg3l6DNzHwTERPgo1ko7XBXj3vdlsT2F+UuhIhYkp7u7CarkcrFOCtR3H5JiwbAIeImjT/YQKKBtGjRFCU5IUgFRe7fF4cCNVIPMYo3VKqxwjyNAXNepuopyqnld602qVsfRpEkkz+GFL1wPj6ySXBpJtWVa5xlhpcyhBNwpZHmtX8AGgfIExo0ZpzkWVTBGiXCSEaHh62/PoR0p/vHaczxXGnj4bSo+G78lELU80h1uogBwWLf5YlsPmgDEd4M236xjm+8nm4IuE/9u+/PH2JXZfbwz4zw1WbO+SQPpXfwG/BBgAhCNZiSb/pOQAAAAASUVORK5CYII=);
+}
+.notifyjs-bootstrap-success {
+	color: #468847;
+	background-color: #DFF0D8;
+	border-color: #D6E9C6;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAutJREFUeNq0lctPE0Ecx38zu/RFS1EryqtgJFA08YCiMZIAQQ4eRG8eDGdPJiYeTIwHTfwPiAcvXIwXLwoXPaDxkWgQ6islKlJLSQWLUraPLTv7Gme32zoF9KSTfLO7v53vZ3d/M7/fIth+IO6INt2jjoA7bjHCJoAlzCRw59YwHYjBnfMPqAKWQYKjGkfCJqAF0xwZjipQtA3MxeSG87VhOOYegVrUCy7UZM9S6TLIdAamySTclZdYhFhRHloGYg7mgZv1Zzztvgud7V1tbQ2twYA34LJmF4p5dXF1KTufnE+SxeJtuCZNsLDCQU0+RyKTF27Unw101l8e6hns3u0PBalORVVVkcaEKBJDgV3+cGM4tKKmI+ohlIGnygKX00rSBfszz/n2uXv81wd6+rt1orsZCHRdr1Imk2F2Kob3hutSxW8thsd8AXNaln9D7CTfA6O+0UgkMuwVvEFFUbbAcrkcTA8+AtOk8E6KiQiDmMFSDqZItAzEVQviRkdDdaFgPp8HSZKAEAL5Qh7Sq2lIJBJwv2scUqkUnKoZgNhcDKhKg5aH+1IkcouCAdFGAQsuWZYhOjwFHQ96oagWgRoUov1T9kRBEODAwxM2QtEUl+Wp+Ln9VRo6BcMw4ErHRYjH4/B26AlQoQQTRdHWwcd9AH57+UAXddvDD37DmrBBV34WfqiXPl61g+vr6xA9zsGeM9gOdsNXkgpEtTwVvwOklXLKm6+/p5ezwk4B+j6droBs2CsGa/gNs6RIxazl4Tc25mpTgw/apPR1LYlNRFAzgsOxkyXYLIM1V8NMwyAkJSctD1eGVKiq5wWjSPdjmeTkiKvVW4f2YPHWl3GAVq6ymcyCTgovM3FzyRiDe2TaKcEKsLpJvNHjZgPNqEtyi6mZIm4SRFyLMUsONSSdkPeFtY1n0mczoY3BHTLhwPRy9/lzcziCw9ACI+yql0VLzcGAZbYSM5CCSZg1/9oc/nn7+i8N9p/8An4JMADxhH+xHfuiKwAAAABJRU5ErkJggg==);
+}
+.notifyjs-bootstrap-info {
+	color: #3A87AD;
+	background-color: #D9EDF7;
+	border-color: #BCE8F1;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QYFAhkSsdes/QAAA8dJREFUOMvVlGtMW2UYx//POaWHXg6lLaW0ypAtw1UCgbniNOLcVOLmAjHZolOYlxmTGXVZdAnRfXQm+7SoU4mXaOaiZsEpC9FkiQs6Z6bdCnNYruM6KNBw6YWewzl9z+sHImEWv+vz7XmT95f/+3/+7wP814v+efDOV3/SoX3lHAA+6ODeUFfMfjOWMADgdk+eEKz0pF7aQdMAcOKLLjrcVMVX3xdWN29/GhYP7SvnP0cWfS8caSkfHZsPE9Fgnt02JNutQ0QYHB2dDz9/pKX8QjjuO9xUxd/66HdxTeCHZ3rojQObGQBcuNjfplkD3b19Y/6MrimSaKgSMmpGU5WevmE/swa6Oy73tQHA0Rdr2Mmv/6A1n9w9suQ7097Z9lM4FlTgTDrzZTu4StXVfpiI48rVcUDM5cmEksrFnHxfpTtU/3BFQzCQF/2bYVoNbH7zmItbSoMj40JSzmMyX5qDvriA7QdrIIpA+3cdsMpu0nXI8cV0MtKXCPZev+gCEM1S2NHPvWfP/hL+7FSr3+0p5RBEyhEN5JCKYr8XnASMT0xBNyzQGQeI8fjsGD39RMPk7se2bd5ZtTyoFYXftF6y37gx7NeUtJJOTFlAHDZLDuILU3j3+H5oOrD3yWbIztugaAzgnBKJuBLpGfQrS8wO4FZgV+c1IxaLgWVU0tMLEETCos4xMzEIv9cJXQcyagIwigDGwJgOAtHAwAhisQUjy0ORGERiELgG4iakkzo4MYAxcM5hAMi1WWG1yYCJIcMUaBkVRLdGeSU2995TLWzcUAzONJ7J6FBVBYIggMzmFbvdBV44Corg8vjhzC+EJEl8U1kJtgYrhCzgc/vvTwXKSib1paRFVRVORDAJAsw5FuTaJEhWM2SHB3mOAlhkNxwuLzeJsGwqWzf5TFNdKgtY5qHp6ZFf67Y/sAVadCaVY5YACDDb3Oi4NIjLnWMw2QthCBIsVhsUTU9tvXsjeq9+X1d75/KEs4LNOfcdf/+HthMnvwxOD0wmHaXr7ZItn2wuH2SnBzbZAbPJwpPx+VQuzcm7dgRCB57a1uBzUDRL4bfnI0RE0eaXd9W89mpjqHZnUI5Hh2l2dkZZUhOqpi2qSmpOmZ64Tuu9qlz/SEXo6MEHa3wOip46F1n7633eekV8ds8Wxjn37Wl63VVa+ej5oeEZ/82ZBETJjpJ1Rbij2D3Z/1trXUvLsblCK0XfOx0SX2kMsn9dX+d+7Kf6h8o4AIykuffjT8L20LU+w4AZd5VvEPY+XpWqLV327HR7DzXuDnD8r+ovkBehJ8i+y8YAAAAASUVORK5CYII=);
+}
+.notifyjs-bootstrap-warn {
+	color: #C09853;
+	background-color: #FCF8E3;
+	border-color: #FBEED5;
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAABJlBMVEXr6eb/2oD/wi7/xjr/0mP/ykf/tQD/vBj/3o7/uQ//vyL/twebhgD/4pzX1K3z8e349vK6tHCilCWbiQymn0jGworr6dXQza3HxcKkn1vWvV/5uRfk4dXZ1bD18+/52YebiAmyr5S9mhCzrWq5t6ufjRH54aLs0oS+qD751XqPhAybhwXsujG3sm+Zk0PTwG6Shg+PhhObhwOPgQL4zV2nlyrf27uLfgCPhRHu7OmLgAafkyiWkD3l49ibiAfTs0C+lgCniwD4sgDJxqOilzDWowWFfAH08uebig6qpFHBvH/aw26FfQTQzsvy8OyEfz20r3jAvaKbhgG9q0nc2LbZxXanoUu/u5WSggCtp1anpJKdmFz/zlX/1nGJiYmuq5Dx7+sAAADoPUZSAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfdBgUBGhh4aah5AAAAlklEQVQY02NgoBIIE8EUcwn1FkIXM1Tj5dDUQhPU502Mi7XXQxGz5uVIjGOJUUUW81HnYEyMi2HVcUOICQZzMMYmxrEyMylJwgUt5BljWRLjmJm4pI1hYp5SQLGYxDgmLnZOVxuooClIDKgXKMbN5ggV1ACLJcaBxNgcoiGCBiZwdWxOETBDrTyEFey0jYJ4eHjMGWgEAIpRFRCUt08qAAAAAElFTkSuQmCC);
+}
+</style>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.chained_d1Gw.js"></script>    
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/sweetalert2.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.playSound_d1Gw.js"></script>
+
+<script>
+
+var moneyKeyPress = function(k, id) {
+	
+    if (k > 47 && k < 58 || k == 44 || k == 46 || k == 0 || k == 8 || k == 9 || k == 37 || k == 39 || k == 190 || k == 45 || k == 35 || k == 40 || k == 34 || k == 37 || k == 12 || k == 39 || k == 36 || k == 38 || k == 33) {
+		
+	} else {
+        swal({
+            title: "Only input the number.",
+            type: "warning",
+            showCancelButton: false,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Ok",
+            closeOnConfirm: true
+        }, function() {
+			
+		});
+    }
+}
+
+
+</script>
+<style type="text/css" id="core-notify">.notifyjs-corner {
+	position: fixed;
+	margin: 5px;
+	z-index: 1050;
+}
+
+.notifyjs-corner .notifyjs-wrapper,
+.notifyjs-corner .notifyjs-container {
+	position: relative;
+	display: block;
+	height: inherit;
+	width: inherit;
+	margin: 3px;
+}
+
+.notifyjs-wrapper {
+	z-index: 1;
+	position: absolute;
+	display: inline-block;
+	height: 0;
+	width: 0;
+}
+
+.notifyjs-container {
+	display: none;
+	z-index: 1;
+	position: absolute;
+}
+
+.notifyjs-hidable {
+	cursor: pointer;
+}
+
+[data-notify-text],[data-notify-html] {
+	position: relative;
+}
+
+.notifyjs-arrow {
+	position: absolute;
+	z-index: 2;
+	width: 0;
+	height: 0;
+}</style><style>:is([id*='google_ads_iframe'],[id*='taboola-'],.taboolaHeight,.taboola-placeholder,#top-ad,#credential_picker_container,#credentials-picker-container,#credential_picker_iframe,#onetap_google_intermediate_iframe,[id*='google-one-tap-iframe'],#google-one-tap-popup-container,.google-one-tap__module,.google-one-tap-modal-div,.adthrive-auto-injected-player-container,.adthrive[id^="cls-video-container"]:has(.adthrive-auto-injected-player-container),#amp_floatingAdDiv,#ez-content-blocker-container) {display:none!important;min-height:0!important;height:0!important;}</style><!-- base href="https://obcdas.revstack.tech/bridge_acquisition_form" --></head><body class="skin-blue sidebar-mini"><div class="wrapper">
+     
+<header class="main-header">
+    <a href="https://obcdas.revstack.tech/home" class="logo">
+        <span class="logo-mini"><b>Bridge D</b></span>
+        <span class="logo-lg"><b>Bridge Division</b></span>
+    </a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu" id="responsecontainer_article"></li>
+                <li class="dropdown notifications-menu" id="responsecontainer_reviewer"></li>
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                                            <img src="Online%20Data%20Acquisition%20System%20bridge_files/default-50x50_d1Gw.gif" alt="Admin Image" onerror="this.style.display='none'" class="user-image">
+                        <span class="hidden-xs">Demo Road Design User</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="user-header">
+                            <img src="Online%20Data%20Acquisition%20System%20bridge_files/default-50x50_d1Gw.gif" alt="Demo Road Design User Image" onerror="this.style.display='none'" class="img-circle">
+                            <p>Demo Road Design User</p>
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-left"> <a href="https://obcdas.revstack.tech/index.php?view=profile" class="btn btn-default btn-flat">Profile</a> </div>
+                            <div class="pull-right"> <a href="https://obcdas.revstack.tech/index.php?view=logout" class="btn btn-default btn-flat">Sign out</a> </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="log_out">
+                    <a href="https://obcdas.revstack.tech/index.php?view=logout" class="log-out">
+                        <em class="fa fa-power-off"></em>
+                    </a>
+                    
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</header>
+
+<aside class="main-sidebar ">
+    <section class="sidebar" style="height: auto;">
+
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <label for="search-q" class="control-label display-hide"></label>
+                <input type="text" id="search-q" name="q" class="form-control input-sm" placeholder="Search..." onkeyup="search_nav()" fdprocessedid="6owbyc">
+            </div>
+        </form>
+        <script>
+            var search_nav = function() {
+                var txt = $('#search-q').val();
+
+                if (txt == '') {
+                    $('.navigation-search').show();
+                } else {
+                    $('.navigation-search').hide();
+                    $('.navigation-search:contains("' + txt + '")').show();
+                }
+            };
+        </script>
+        <!-- /.search form -->
+
+        <ul class="sidebar-menu tree navigation-list" data-widget="tree">
+            <li class="treeview navigation-search " id="module_1"><a href="https://obcdas.revstack.tech/home"><em class="fa fa-home"></em>Dashboard</a> </li><li class="treeview navigation-search " id="module_1129"><a href="https://obcdas.revstack.tech/culvert_acquisition_form"><em class="fa fa-bullhorn"></em>Culvert Acquisition Form</a> </li><li class="treeview navigation-search active" id="module_1132"><a href="https://obcdas.revstack.tech/bridge_acquisition_form"><em class="fa fa-road"></em>Bridge Acquisition Form</a>             </li><li class="treeview navigation-search" id="module_100">
+                <a href="https://obcdas.revstack.tech/user_manual"><em class="fa fa-circle-thin"></em> User Manual</a>
+            </li>
+            
+        </ul>
+    </section>
+</aside>
+
+<div class="content-wrapper" style="min-height: 663px;">
+<div class="">
+    <link href="Online%20Data%20Acquisition%20System%20bridge_files/select2.min_d1Gw.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="Online%20Data%20Acquisition%20System%20bridge_files/select2.min_d1Gw.js"></script>
+
+
+
+<section class="content-header">
+<h1>Friday 30 October, 2026</h1>
+<ol class="breadcrumb">
+
+<li class="active"><span id="clock" class="clock">1:46:55</span></li>
+</ol>
+</section>
+
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/moment.min_d1Gw.js"></script>
+<script src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.fittext.min_d1Gw.js"></script>
+<script>
+
+function update() {
+$('#clock').html(moment().format('H:mm:ss'));
+}
+
+setInterval(update, 1000);
+
+</script>	<section class="content">
+<div class="row">
+<div class="col-md-12">
+<div class="nav-tabs-custom">
+<ul class="nav nav-tabs pull-right">
+<li class="pull-left header">Bridge Acquisition Form</li>
+<li class=""><a href="#tab_list" data-toggle="tab" aria-expanded="false">Bridge Acquisition Form List</a></li>
+<li class="active"><a href="#form" data-toggle="tab" aria-expanded="true">Acquisition Entry Form</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane" id="tab_list">
+<div id="tbl-client_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-6"><div class="dataTables_length" id="tbl-client_length"><label>Show <select name="tbl-client_length" aria-controls="tbl-client" class="form-control input-sm dataTables_bangla" fdprocessedid="l0emsa"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="tbl-client_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm dataTables_bangla" placeholder="" aria-controls="tbl-client"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="tbl-client" class="table table-bordered table-striped dataTable no-footer" role="grid" aria-describedby="tbl-client_info" style="width: 100%;">
+<thead>
+	<tr role="row"><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 8.2px;" aria-label="#: activate to sort column ascending">#</th><th class="sorting_asc" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 35.4px;" aria-label="Code: activate to sort column descending" aria-sort="ascending">Code</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 68.4px;" aria-label="Type Of Road: activate to sort column ascending">Type Of Road</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 76.4px;" aria-label="Road Number: activate to sort column ascending">Road Number</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 86.4px;" aria-label="Name of the Road: activate to sort column ascending">Name of the Road</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 162.4px;" aria-label="Name of the Bridge(Structure): activate to sort column ascending">Name of the Bridge(Structure)</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 203.4px;" aria-label="Location of the Bridge with Chainage and GPS: activate to sort column ascending">Location of the Bridge with Chainage and GPS</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 55.4px;" aria-label="Added By: activate to sort column ascending">Added By</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 35.4px;" aria-label="Form: activate to sort column ascending">Form</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 42.4px;" aria-label="Status: activate to sort column ascending">Status</th><th class="sorting" tabindex="0" aria-controls="tbl-client" rowspan="1" colspan="1" style="width: 50.2px;" aria-label=": activate to sort column ascending"></th></tr>
+</thead>
+<tbody>
+<tr class="odd"><td valign="top" colspan="11" class="dataTables_empty">No data available in table</td></tr></tbody>
+</table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="tbl-client_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="tbl-client_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="tbl-client_previous"><a href="#" aria-controls="tbl-client" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button next disabled" id="tbl-client_next"><a href="#" aria-controls="tbl-client" data-dt-idx="1" tabindex="0">Next</a></li></ul></div></div></div></div>
+</div>
+<div class="tab-pane active" id="form">
+<form action="#" class="horizontal-form" id="sampleForm" novalidate="novalidate">
+<div class="form-body">
+	<div class="loaderDiv display-hide">
+		<center><img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif"></center>
+	</div>
+	<div class="loaderExtraDiv">
+		<div id="update_close" class="display-hide">
+		<a class="btn btn-danger btn-xs pull-right" href="javascript:void(0)" onclick="formReset()">
+            <i class="fa fa-close"></i>&nbsp;Cancel
+        </a>
+		<br>
+		<div class="clearfix"></div>
+		</div>
+        <input type="hidden" id="random_number" class="random_number" name="random_number" value="pmkYfl9cgR">
+        <fieldset>
+            <legend>
+                <b>Demand letter</b>
+            </legend>
+            <div class="clearfix"></div>
+            <div class="list_of_attchFileEleven row"></div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label">Attachment File</label>
+                        <br>
+                        <!--<span class="btn btn-sm btn-primary fileinput-button">
+                        <span>Please select a file</span>
+                        <input type="file"
+                               name="attchFileElevenName"
+                               id="attchFileElevenName"
+                               class="input-sm "/>
+                        </span>-->
+                        <input type="file" name="attchFileElevenName" id="attchFileElevenName" class="input-sm ">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="preview_attchFileEleven"></div>
+                    <div id="loader_attchFileEleven" class="display-hide">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-eleven"></div>
+                        </div>
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="attchElevenName" class="control-label">Attachment Name</label>
+                        <select class="form-control input-sm" id="attchElevenName" name="attchElevenName" data-ddg-inputtype="unknown" fdprocessedid="sn55vm">
+                            <option value="" selected="selected">Select an option</option>
+                            <option value="Attachment for ACE">Attachment for ACE</option>
+                            <option value="Attachment for SE">Attachment for SE</option>
+                            <option value="Attachment for EE">Attachment for EE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="control-label">Click this button to upload</label>
+                        <button type="button" id="upload_btn_eleven" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_eleven()" fdprocessedid="08t8k">
+                            <i class="fa fa-upload"></i> Upload
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <script type="text/javascript">
+                    function arr_diff (a1, a2) {
+                        var a = [], diff = [];
+                        for (var i = 0; i < a1.length; i++) {
+                            a[a1[i]] = true;
+                        }
+                        for (var i = 0; i < a2.length; i++) {
+                            if (a[a2[i]]) {
+                                delete a[a2[i]];
+                            } else {
+                                a[a2[i]] = true;
+                            }
+                        }
+                        for (var k in a) {
+                            diff.push(k);
+                        }
+                        return diff;
+                    }
+
+                    function remove_demand(){
+                        var option_name  = [];
+                            option_name.push("Attachment for ACE");
+                            option_name.push("Attachment for SE");
+                            option_name.push("Attachment for EE");
+
+                        //if($('.selected-officer-name').len > 0) {
+                            var array = [];
+                            $('.selected-officer-name').each(function (i, obj) {
+                                var name = $(this).html();
+                                array.push(name);
+                                $("#attchElevenName option[value='" + name + "']").remove();
+                            });
+                        //}
+                        var diff = arr_diff(option_name, array);
+
+
+                        /*console.log('option',option_name);
+                        console.log('selected',array);
+                        console.log('diff',diff);*/
+
+                        $('#attchElevenName').find('option').remove();
+
+                        jQuery.each(diff, function(index, item) {
+                            $("#attchElevenName").append(new Option(item,item));
+                        });
+
+                    }
+                    function upload_eleven(){
+                        var attchFileElevenName = $( '#attchFileElevenName' ).val();
+                        var attchElevenName = $( '#attchElevenName' ).val();
+                        if ( attchFileElevenName == '' ) {
+                            swal( {
+                                title: 'Please select a demand letter!',
+                                text: "",
+                                type: 'error',
+                            } );
+                            //$( '#attchFileElevenName' ).val( '' );
+                        } else if ( attchElevenName == '' ) {
+                            swal( {
+                                title: 'Attachment name is required!',
+                                text: "",
+                                type: 'error',
+                            } );
+                            //$( '#attchFileElevenName' ).val( '' );
+                        } else {
+                            $("#upload_btn_eleven").button('loading');
+                            var random_number = $('#random_number').val();
+                            var form = new FormData();
+                            var file_data = $( "#attchFileElevenName" ).prop( "files" )[ 0 ];
+                            form.append( "attchFileElevenName", file_data );
+
+
+                            jQuery( '.btn-add-client' ).hide();
+                            jQuery( '#loader_attchFileEleven' ).show();
+
+                            $.ajax({
+                                "async": true,
+                                "crossDomain": true,
+                                "url": "submit/file_upload_eleven.php?id=" + encodeURIComponent(random_number)+"&attchElevenName=" + encodeURIComponent(attchElevenName ),
+                                "method": "POST",
+                                "processData": false,
+                                "contentType": false,
+                                "mimeType": "multipart/form-data",
+                                "data": form,
+                                beforeSend: function (xhr) {
+                                    $(".progress-bar-eleven").width('0%');
+                                    $(".progress-bar-eleven").html('0%');
+                                },
+                                xhr: function () {
+                                    var xhr = new window.XMLHttpRequest();
+                                    xhr.upload.addEventListener("progress", function (evt) {
+                                        if (evt.lengthComputable) {
+                                            var percentComplete = ((evt.loaded / evt.total) * 100);
+                                            $(".progress-bar-eleven").width(percentComplete + '%');
+                                            $(".progress-bar-eleven").html(percentComplete + '%');
+                                        }
+                                    }, false);
+                                    return xhr;
+                                },
+                            }).done( function ( response ) {
+
+                                jQuery( '#loader_attchFileEleven' ).hide();
+                                jQuery( '#preview_attchFileEleven' ).html( response );
+                                jQuery( '.btn-add-client' ).show();
+                                $( '#attchElevenName' ).val( '' );
+                                $( '#attchFileElevenName' ).val( '' );
+
+                                remove_demand();
+                            });
+
+                            /*
+                            var settings = {
+                                "async": true,
+                                "crossDomain": true,
+                                "url": "submit/file_upload_eleven.php?id=" + encodeURIComponent(random_number)+"&attchElevenName=" + encodeURIComponent(
+                                    attchElevenName ),
+                                "method": "POST",
+                                "processData": false,
+                                "contentType": false,
+                                "mimeType": "multipart/form-data",
+                                "data": form
+                            }
+
+                            $.ajax( settings ).done( function ( response ) {
+                                jQuery( '#loader_attchFileEleven' ).hide();
+                                jQuery( '#preview_attchFileEleven' ).html( response );
+                                jQuery( '.btn-add-client' ).show();
+                                $( '#attchElevenName' ).val( '' );
+                                $( '#attchFileElevenName' ).val( '' );
+
+                                remove_demand();
+                            });*/
+                            $("#upload_btn_eleven").button('reset');
+                        }
+                    }
+                    /*$( "#attchFileElevenName" ).on( "change", function () {
+
+                    });*/
+                </script>
+            </div>
+        </fieldset>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="acquisitionProposedBridgeType" class="control-label">Proposed Bridge Type</label>
+                    <input type="text" class="form-control input-sm" id="acquisitionProposedBridgeType" name="acquisitionProposedBridgeType" data-ddg-inputtype="unknown" fdprocessedid="zdygvo">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="acquisitionRoadTypeFkId" class="control-label">1) Type Of Road</label>
+                    <select class="form-control input-sm required" id="acquisitionRoadTypeFkId" name="acquisitionRoadTypeFkId" onchange="show_road_type_others_option()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="uhm7yk">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="2">National Highway</option><option value="0">Others</option><option value="3">Regional Highway</option><option value="4">Zilla Road</option>                    </select>
+				</div>
+			</div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="acquisitionRoadTypeOthersName" class="control-label">1.1) Others</label>
+                    <input type="text" class="form-control input-sm required" id="acquisitionRoadTypeOthersName" name="acquisitionRoadTypeOthersName" disabled="disabled" minlength="0" maxlength="255" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="mtraek">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">2) Road Number</label>
+                    <select class="form-control input-sm required select2 select2-hidden-accessible" id="acquisitionRoadListFk" name="acquisitionRoadListFk" onchange="show_road_name();" tabindex="-1" aria-hidden="true" aria-required="true" data-ddg-inputtype="unknown">
+                    <option value="" selected="selected">Select an option</option>
+                                        </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-acquisitionRoadListFk-container"><span class="select2-selection__rendered" id="select2-acquisitionRoadListFk-container" title="Select an option">Select an option</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+				</div>
+			</div>
+		</div>
+        <div class="row">            
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="acquisitionRoadName" class="control-label">3) Name of the Road</label>
+					<input type="text" class="form-control input-sm required" id="acquisitionRoadName" name="acquisitionRoadName" readonly="readonly" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="feel97">
+				</div>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+						<label for="acquisitionLocationOfTheBridge" class="control-label">5) Location of the Bridge with Chainage and GPS</label>
+                    <input type="text" class="form-control input-sm required" id="acquisitionLocationOfTheBridge" name="acquisitionLocationOfTheBridge" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="l6j0zk">
+				</div>
+			</div>
+        </div>
+        <fieldset>
+            <legend>
+                <b>5.1)  Location of the Bridge with GPS</b>
+            </legend>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="acquisitionLocationOfTheBridgeGPSGoogleMapLink" class="control-label">Google Map Link</label>
+                        <input type="text" class="form-control input-sm required url" id="acquisitionLocationOfTheBridgeGPSGoogleMapLink" name="acquisitionLocationOfTheBridgeGPSGoogleMapLink" onchange="get_lat_long_from_map_url()" onblur="get_lat_long_from_map_url()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="4pj51b">
+                        <label class="help-block"><a href="https://www.google.com/maps/search/?api=1&amp;query=" id="acquisitionLocationOfTheBridgeGPSGoogleMapLinkHref" target="_blank">Go to Google Map</a></label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="acquisitionLocationOfTheBridgeGPSLatitudeLongitude" class="control-label">Latitude,Longitude</label>
+                        <input type="text" class="form-control input-sm required" id="acquisitionLocationOfTheBridgeGPSLatitudeLongitude" name="acquisitionLocationOfTheBridgeGPSLatitudeLongitude" maxlength="45" onchange="convert_to_google_map_url()" onblur="convert_to_google_map_url()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="cs8zkc">
+                    </div>
+                </div>
+                <div class="col-md-2" style="display:none;">
+                    <div class="form-group">
+                        <label for="acquisitionLocationOfTheBridgeGPSLatitude" class="control-label">Latitude</label>
+                        <input type="text" class="form-control input-sm" id="acquisitionLocationOfTheBridgeGPSLatitude" name="acquisitionLocationOfTheBridgeGPSLatitude" maxlength="45" data-ddg-inputtype="unknown">
+                    </div>
+                </div>
+                <div class="col-md-2" style="display:none;">
+                    <div class="form-group">
+                        <label for="acquisitionLocationOfTheBridgeGPSLongitude" class="control-label">Longitude</label>
+                        <input type="text" class="form-control input-sm" id="acquisitionLocationOfTheBridgeGPSLongitude" name="acquisitionLocationOfTheBridgeGPSLongitude" maxlength="45" data-ddg-inputtype="unknown">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <div class="row">
+            <div class="col-md-5">
+				<div class="form-group">
+					<label for="acquisitionNameOfTheBridge" class="control-label">6) Name of the Bridge(Structure)</label>
+					<input type="text" class="form-control input-sm " id="acquisitionNameOfTheBridge" name="acquisitionNameOfTheBridge" data-ddg-inputtype="unknown" fdprocessedid="pknqcr">
+				</div>
+			</div>
+            <div class="col-md-5">
+				<div class="form-group">
+					<label for="Name" class="control-label">7) Name of River/Channel </label>
+					<input type="text" class="form-control input-sm " id="acquisitionNameOfTheRiver" name="acquisitionNameOfTheRiver" data-ddg-inputtype="unknown" fdprocessedid="89cy3">
+				</div>
+			</div>
+            <div class="col-md-2">
+				<div class="form-group">
+					<label for="acquisitionWidthOfChannel" class="control-label">7.1) Width of the Channel </label>
+					<input type="text" class="form-control input-sm required" id="acquisitionWidthOfChannel" name="acquisitionWidthOfChannel" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="ozomu">
+				</div>
+			</div>
+        </div>
+        
+<div class="row">
+<div class="col-md-12">
+    <div class="form-group" style="margin-bottom: -20px;">
+        <label for="Name" class="control-label">8) Navigational Clearance Required (vertical clearance of channel)</label>
+        <br>
+        <div class="col-md-2">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="acquisitionNavigationalClearanceValue" id="acquisitionNavigationalClearanceValue_biwta" class="required" value="BIWTA" onclick="show_navigational_option(this.value)" aria-required="true">BIWTA
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2 display-hide">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="acquisitionNavigationalClearanceValue" id="acquisitionNavigationalClearanceValue_bwdb" class="required" value="BWDB" onclick="show_navigational_option(this.value)" aria-required="true">BWDB
+                </label>
+            </div>
+        </div>    
+        <div class="col-md-2 display-hide">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="acquisitionNavigationalClearanceValue" id="acquisitionNavigationalClearanceValue_local" class="required" value="Local" onclick="show_navigational_option(this.value)" aria-required="true">Local
+                </label>
+            </div>
+        </div>    
+        <div class="col-md-2">    
+            <div class="radio">
+                <label>
+                    <input type="radio" name="acquisitionNavigationalClearanceValue" id="acquisitionNavigationalClearanceValue_railway" class="required" value="Railway" onclick="show_navigational_option(this.value)" aria-required="true">Railway
+                </label>
+            </div>
+        </div>    
+        <div class="col-md-2">    
+            <div class="radio">
+                <label>
+                    <input type="radio" name="acquisitionNavigationalClearanceValue" id="acquisitionNavigationalClearanceValue_others" class="required" value="Others" onclick="show_navigational_option(this.value)" aria-required="true">Others
+                </label>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <label id="acquisitionNavigationalClearanceValue-error" class="error"></label>
+    </div>
+</div>
+</div>
+        
+        
+<div class="row biwtaDiv" style="display: none;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                    <select class="form-control input-sm required" id="acquisitionNavigationalClearanceBIWTAClass" name="acquisitionNavigationalClearanceBIWTAClass" onchange="show_biwta_value()" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                    <option value="" data-value="" data-height="" selected="selected">Select an option</option>
+                    <option value="Class-I" data-value="18.30" data-height="76.22">Class-I</option>
+                    <option value="Class-II" data-value="12.20" data-height="76.22">Class-II</option>
+                    <option value="Class-III" data-value="7.62" data-height="30.48">Class-III</option>
+                    <option value="Class-IV" data-value="5.00" data-height="20.00">Class-IV</option>
+                    <option value="Others" data-value="" data-height="">Others</option>    
+                    </select>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">V(Vertical):</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceBIWTAValue" name="acquisitionNavigationalClearanceBIWTAValue" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                <span class="input-group-addon">m</span>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">H(Horizontal):</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceBIWTAHeight" name="acquisitionNavigationalClearanceBIWTAHeight" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                <span class="input-group-addon">m</span>
+            </div>    
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var show_biwta_value = function(){
+    var val = $('#acquisitionNavigationalClearanceBIWTAClass').val();
+    var value= $('#acquisitionNavigationalClearanceBIWTAClass').find(':selected').data('value');
+    var height= $('#acquisitionNavigationalClearanceBIWTAClass').find(':selected').data('height');
+    $('#acquisitionNavigationalClearanceBIWTAValue').val(value);
+    $('#acquisitionNavigationalClearanceBIWTAHeight').val(height);
+}   
+</script>
+
+<div class="row bwdbDiv" style="display: none;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                    <select class="form-control input-sm required" id="acquisitionNavigationalClearanceBWDBClass" name="acquisitionNavigationalClearanceBWDBClass" onchange="show_bwdb_value()" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                    <option value="BWDB" data-value="" data-height="" selected="selected">BWDB</option>  
+                    </select>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">V:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceBWDBValue" name="acquisitionNavigationalClearanceBWDBValue" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">H:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceBWDBHeight" name="acquisitionNavigationalClearanceBWDBHeight" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var show_bwdb_value = function(){
+    var val = $('#acquisitionNavigationalClearanceBWDBClass').val();
+    var value= $('#acquisitionNavigationalClearanceBWDBClass').find(':selected').data('value');
+    var height= $('#acquisitionNavigationalClearanceBWDBClass').find(':selected').data('height');
+    $('#acquisitionNavigationalClearanceBWDBValue').val(value);
+    $('#acquisitionNavigationalClearanceBWDBHeight').val(height);
+}   
+</script>        
+        
+
+  
+        
+<div class="row localDiv" style="display: none;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                    <select class="form-control input-sm required" id="acquisitionNavigationalClearanceLOCALClass" name="acquisitionNavigationalClearanceLOCALClass" onchange="show_local_value()" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                    <option value="Local" data-value="" data-height="" selected="selected">Local</option>  
+                    </select>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">V:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceLOCALValue" name="acquisitionNavigationalClearanceLOCALValue" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">H:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceLOCALHeight" name="acquisitionNavigationalClearanceLOCALHeight" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var show_local_value = function(){
+    var val = $('#cquisitionNavigationalClearanceLOCALClass').val();
+    var value= $('#cquisitionNavigationalClearanceLOCALClass').find(':selected').data('value');
+    var height= $('#cquisitionNavigationalClearanceLOCALClass').find(':selected').data('height');
+    $('#cquisitionNavigationalClearanceLOCALValue').val(value);
+    $('#cquisitionNavigationalClearanceLOCALHeight').val(height);
+}   
+</script>
+        
+        
+        
+<div class="row railwayDiv" style="display: none;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                    <select class="form-control input-sm required" id="acquisitionNavigationalClearanceRailWayClass" name="acquisitionNavigationalClearanceRailWayClass" onchange="show_railway_value()" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                    <option value="" data-value="" data-height="" selected="selected">Select an option</option> 
+                    <option value="General" data-value="7.25" data-height="30.50">General</option>
+                    <option value="Others" data-value="" data-height="">Others</option>        
+                    </select>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">V:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceRailWayValue" name="acquisitionNavigationalClearanceRailWayValue" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">H:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceRailWayHeight" name="acquisitionNavigationalClearanceRailWayHeight" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var show_railway_value = function(){
+    var val = $('#acquisitionNavigationalClearanceRailWayClass').val();
+    var value= $('#acquisitionNavigationalClearanceRailWayClass').find(':selected').data('value');
+    var height= $('#acquisitionNavigationalClearanceRailWayClass').find(':selected').data('height');
+    $('#acquisitionNavigationalClearanceRailWayValue').val(value);
+    $('#acquisitionNavigationalClearanceRailWayHeight').val(height);
+}   
+</script>
+<div class="row othersDiv" style="display: none;">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="acquisitionNameOfTheBridge" class="control-label">Note</label>
+            <input type="text" class="form-control input-sm " id="acquisitionNavigationalClearanceOTHERSNote" name="acquisitionNavigationalClearanceOTHERSNote" disabled="disabled" data-ddg-inputtype="unknown">
+        </div>
+    </div>
+</div>
+<div class="row othersDiv" style="display: none;">
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Type</span>
+                    <select class="form-control input-sm required" id="acquisitionNavigationalClearanceOTHERSClass" name="acquisitionNavigationalClearanceOTHERSClass" onchange="show_others_value()" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+                        <option value="Others" data-value="" data-height="" selected="selected">Others</option>
+                    </select>
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">V:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceOTHERSValue" name="acquisitionNavigationalClearanceOTHERSValue" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">H:</span>
+                <input type="number" class="form-control input-sm required" id="acquisitionNavigationalClearanceOTHERSHeight" name="acquisitionNavigationalClearanceOTHERSHeight" disabled="disabled" aria-required="true" data-ddg-inputtype="unknown">
+            </div>    
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var show_others_value = function(){
+    var val = $('#acquisitionNavigationalClearanceOTHERSClass').val();
+    var value= $('#acquisitionNavigationalClearanceOTHERSClass').find(':selected').data('value');
+    var height= $('#acquisitionNavigationalClearanceOTHERSClass').find(':selected').data('height');
+    $('#acquisitionNavigationalClearanceOTHERSValue').val(value);
+    $('#acquisitionNavigationalClearanceOTHERSHeight').val(height);
+}   
+</script>
+        
+        
+<script type="text/javascript">
+var show_navigational_option = function(val){
+    if(val == 'BIWTA'){
+        $('.biwtaDiv').find(':input').prop('disabled',false);
+        $('.bwdbDiv').find(':input').prop('disabled',true);
+        $('.localDiv').find(':input').prop('disabled',true);
+        $('.railwayDiv').find(':input').prop('disabled',true);
+        $('.othersDiv').find(':input').prop('disabled',true);
+        
+        $('.biwtaDiv').show();
+        $('.bwdbDiv').hide();
+        $('.localDiv').hide();
+        $('.railwayDiv').hide();
+        $('.othersDiv').hide();
+    }else if(val == 'BWDB'){
+        $('.biwtaDiv').find(':input').prop('disabled',true);
+        $('.bwdbDiv').find(':input').prop('disabled',false);
+        $('.localDiv').find(':input').prop('disabled',true);
+        $('.railwayDiv').find(':input').prop('disabled',true);
+        $('.othersDiv').find(':input').prop('disabled',true);
+                
+        $('.biwtaDiv').hide();
+        $('.bwdbDiv').show();
+        $('.localDiv').hide();
+        $('.railwayDiv').hide();
+        $('.othersDiv').hide();
+    }else if(val == 'Local'){
+        $('.biwtaDiv').find(':input').prop('disabled',true);
+        $('.bwdbDiv').find(':input').prop('disabled',true);
+        $('.localDiv').find(':input').prop('disabled',false);
+        $('.railwayDiv').find(':input').prop('disabled',true);
+        $('.othersDiv').find(':input').prop('disabled',true);
+                
+        $('.biwtaDiv').hide();
+        $('.bwdbDiv').hide();
+        $('.localDiv').show();
+        $('.railwayDiv').hide();
+        $('.othersDiv').hide();
+    }else if(val == 'Railway'){
+        $('.biwtaDiv').find(':input').prop('disabled',true);
+        $('.bwdbDiv').find(':input').prop('disabled',true);
+        $('.localDiv').find(':input').prop('disabled',true);
+        $('.railwayDiv').find(':input').prop('disabled',false);
+        $('.othersDiv').find(':input').prop('disabled',true);
+                
+        $('.biwtaDiv').hide();
+        $('.bwdbDiv').hide();
+        $('.localDiv').hide();
+        $('.railwayDiv').show();
+        $('.othersDiv').hide();
+    }else if(val == 'Others'){
+        $('.biwtaDiv').find(':input').prop('disabled',true);
+        $('.bwdbDiv').find(':input').prop('disabled',true);
+        $('.localDiv').find(':input').prop('disabled',true);
+        $('.railwayDiv').find(':input').prop('disabled',true);
+        $('.othersDiv').find(':input').prop('disabled',false);
+                
+        $('.biwtaDiv').hide();
+        $('.bwdbDiv').hide();
+        $('.localDiv').hide();
+        $('.railwayDiv').hide();
+        $('.othersDiv').show();
+    }else{
+        $('.biwtaDiv').find(':input').prop('disabled',true);
+        $('.bwdbDiv').find(':input').prop('disabled',true);
+        $('.localDiv').find(':input').prop('disabled',true);
+        $('.railwayDiv').find(':input').prop('disabled',true);
+        $('.othersDiv').find(':input').prop('disabled',true);
+                
+        $('.biwtaDiv').hide();
+        $('.bwdbDiv').hide();
+        $('.localDiv').hide();
+        $('.railwayDiv').hide();
+        $('.othersDiv').hide();
+    }
+}
+show_navigational_option('no');
+</script>    
+<fieldset>
+    <legend>
+        <b>8.2) Navigational Clearance [Attachment]</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileEight row"></div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <!--<span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select a file</span>
+                <input type="file" name="attchFileEightName" id="attchFileEightName" class="input-sm "/>
+                </span>-->
+                <input type="file" name="attchFileEightName" id="attchFileEightName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileEight"></div>
+            <div id="loader_attchFileEight" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-eight"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchEightName" name="attchEightName" data-ddg-inputtype="unknown" fdprocessedid="hrenf5">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_eight" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_eight()" fdprocessedid="caaklc">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_eight(){
+                var attchFileEightName = $( '#attchFileEightName' ).val();
+                var attchEightName = $( '#attchEightName' ).val();
+                if ( attchFileEightName == '' ) {
+                    swal( {
+                        title: 'Please select a Navigational Clearance file!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileEightName' ).val( '' );
+                } else if ( attchEightName == '' ) {
+                    swal( {
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileEightName' ).val( '' );
+                } else {
+                    $("#upload_btn_eight").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileEightName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileEightName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_eight.php?id=" + encodeURIComponent(random_number)+"&attchEightName=" + encodeURIComponent( attchEightName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileEight' ).hide();
+                        jQuery( '#preview_attchFileEight' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchEightName' ).val( '' );
+                        $( '#attchFileEightName' ).val( '' );
+                    });*/
+
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileEight' ).show();
+
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_eight.php?id=" + encodeURIComponent(random_number)+"&attchEightName=" + encodeURIComponent( attchEightName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-eight").width('0%');
+                            $(".progress-bar-eight").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar-eight").width(percentComplete + '%');
+                                    $(".progress-bar-eight").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileEight' ).hide();
+                        jQuery( '#preview_attchFileEight' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchEightName' ).val( '' );
+                        $( '#attchFileEightName' ).val( '' );
+                    });
+
+
+
+
+
+
+
+                    $("#upload_btn_eight").button('reset');
+                }
+            }
+            /*$( "#attchFileEightName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>
+<br>   
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Existing Bridge Information</h4>
+                <div style="height: 4px; background-color: #337ab7; margin-top: 6px; margin-bottom: 15px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="Name" class="control-label">9.1) Length of the existing bridge</label>
+                    <input type="text" class="form-control input-sm required" id="acquisitionLengthOfTheExistingBridge" name="acquisitionLengthOfTheExistingBridge" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="bignqi">
+				</div>
+			</div>
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="Name" class="control-label">9.2) Span arrangement of the existing bridge</label>
+                    <input type="text" class="form-control input-sm required" id="acquisitionSpanArrangementOfTheExistingBridge" name="acquisitionSpanArrangementOfTheExistingBridge" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="67szui">
+				</div>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Name" class="control-label">20) Reference Bench mark or datum (Preferably SOB/PWD/BIWTA/BWDB/LOCAL)</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <select class="form-control input-sm " id="acquisitionReferenceType" name="acquisitionReferenceType" style="width: 140px;" data-ddg-inputtype="unknown" fdprocessedid="t8l98">
+                            <!--<option value="">Select an option</option>-->
+                                <option value="PWD" selected="selected">PWD</option>
+                            <option value="SOB">SOB</option>
+                            <option value="BIWTA">BIWTA</option>
+                            <option value="BWDB">BWDB</option>
+                            <option value="Local">Local</option>
+                            </select>
+                        </span>
+                        <input type="text" class="form-control input-sm " id="acquisitionReferenceBenchMark" name="acquisitionReferenceBenchMark" data-ddg-inputtype="unknown" fdprocessedid="s95rjf">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="acquisitionReferenceBenchMarkGPSGoogleMapLink" class="control-label">20.1) Google Map Link</label>
+                    <input type="text" class="form-control input-sm required url" id="acquisitionReferenceBenchMarkGPSGoogleMapLink" name="acquisitionReferenceBenchMarkGPSGoogleMapLink" onchange="get_lat_long_from_reference_dautm_map_url()" onblur="get_lat_long_from_reference_dautm_map_url()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="5d2mp7">
+                    <label class="help-block">
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=" id="acquisitionReferenceBenchMarkGPSGoogleMapLinkHref" target="_blank">Go to Google Map</a></label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="acquisitionReferenceBenchMarkGPSLatitudeLongitude" class="control-label">20.2) Latitude,Longitude</label>
+                    <input type="text" class="form-control input-sm required" id="acquisitionReferenceBenchMarkGPSLatitudeLongitude" name="acquisitionReferenceBenchMarkGPSLatitudeLongitude" maxlength="45" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="35kmq">
+                    <!--
+                    onchange="convert_to_reference_dautm_google_map_url()"
+                    onblur="convert_to_reference_dautm_google_map_url()"
+                    -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="acquisitionBottomRlOfTheMidSpanGirderOfTheExistingBridge" class="control-label">10) Bottom R.L. of the mid span girder of the existing bridge</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm required" id="acquisitionBottomRlOfTheMidSpanGirderOfTheExistingBridge" name="acquisitionBottomRlOfTheMidSpanGirderOfTheExistingBridge" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="nwdvu">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>
+				</div>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">11) Existing Foundation</label>
+                    <select class="form-control input-sm required" id="acquisitionExistingFoundation" name="acquisitionExistingFoundation" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="ebjhhh">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="6">Not Applicable</option><option value="1">Open Foundation</option><option value="5">Others</option><option value="2">Pile</option><option value="4">Shal Balli</option><option value="3">Well</option>                    </select>
+				</div>
+			</div>
+        </div>
+   
+        
+        <fieldset>
+            <legend>
+                <b>12) Existing Foundation Layout (Position,Shape,Dimension etc. with chainage) utility (Gas, Water, Internet, Phone, Electricity etc.) within the existing/proposed bridge location inside Right of Way (ROW) with chainaige</b>
+            </legend>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" style="margin-bottom: -20px;">
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="existingFoundationLayout" id="existingFoundationLayout_yes" class="required" value="Yes" onclick="show_existing_foundation_layout_option(this.value)" aria-required="true">Yes
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="existingFoundationLayout" id="existingFoundationLayout_No" class="required" value="No" onclick="show_existing_foundation_layout_option(this.value)" checked="checked" aria-required="true">No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <label id="existingFoundationLayout-error" class="error"></label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="clearfix"></div>
+            <div class="div_existingFoundationLayout" style="display: none;">
+                <div class="list_of_attchFileSeven row"></div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label">Attachment File</label>
+                            <br>
+                            <!--<span class="btn btn-sm btn-primary fileinput-button">
+                            <span>Please select a file</span>
+                            <input type="file" name="attchFileSevenName" id="attchFileSevenName" class="input-sm "/>
+                            </span>-->
+                            <input type="file" name="attchFileSevenName" id="attchFileSevenName" class="input-sm ">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div id="preview_attchFileSeven"></div>
+                        <div id="loader_attchFileSeven" class="display-hide">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-seven"></div>
+                            </div>
+                            <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Name" class="control-label">Attachment Name</label>
+                            <input type="text" class="form-control input-sm bangla" id="attchSevenName" name="attchSevenName" data-ddg-inputtype="unknown">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="" class="control-label">Click this button to upload</label>
+                            <button type="button" id="upload_btn_seven" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_seven()">
+                                <i class="fa fa-upload"></i> Upload
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                    <script type="text/javascript">
+                        function upload_seven(){
+                            var attchFileSevenName = $( '#attchFileSevenName' ).val();
+                            var attchSevenName = $( '#attchSevenName' ).val();
+                            if ( attchFileSevenName == '' ) {
+                                swal( {
+                                    title: 'Please select a Existing Foundation Layout file!',
+                                    text: "",
+                                    type: 'error',
+                                } );
+                                //$( '#attchFileSevenName' ).val( '' );
+                            } else if ( attchSevenName == '' ) {
+                                swal( {
+                                    title: 'Attachment name is required!',
+                                    text: "",
+                                    type: 'error',
+                                } );
+                                //$( '#attchFileSevenName' ).val( '' );
+                            } else {
+                                $("#upload_btn_seven").button('loading');
+
+                                var random_number = $('#random_number').val();
+                                var form = new FormData();
+                                var file_data = $( "#attchFileSevenName" ).prop( "files" )[ 0 ];
+                                form.append( "attchFileSevenName", file_data );
+
+                                /*var settings = {
+                                    "async": true,
+                                    "crossDomain": true,
+                                    "url": "submit/file_upload_seven.php?id=" + encodeURIComponent(random_number)+"&attchSevenName=" + encodeURIComponent( attchSevenName ),
+                                    "method": "POST",
+                                    "processData": false,
+                                    "contentType": false,
+                                    "mimeType": "multipart/form-data",
+                                    "data": form
+                                }
+
+                                $.ajax( settings ).done( function ( response ) {
+                                    jQuery( '#loader_attchFileSeven' ).hide();
+                                    jQuery( '#preview_attchFileSeven' ).html( response );
+                                    jQuery( '.btn-add-client' ).show();
+                                    $( '#attchSevenName' ).val( '' );
+                                    $( '#attchFileSevenName' ).val( '' );
+                                });*/
+
+
+                                jQuery( '.btn-add-client' ).hide();
+                                jQuery( '#loader_attchFileSeven' ).show();
+                                $.ajax({
+                                    "async": true,
+                                    "crossDomain": true,
+                                    "url": "submit/file_upload_seven.php?id=" + encodeURIComponent(random_number)+"&attchSevenName=" + encodeURIComponent( attchSevenName ),
+                                    "method": "POST",
+                                    "processData": false,
+                                    "contentType": false,
+                                    "mimeType": "multipart/form-data",
+                                    "data": form,
+                                    beforeSend: function (xhr) {
+                                        $(".progress-bar-seven").width('0%');
+                                        $(".progress-bar-seven").html('0%');
+                                    },
+                                    xhr: function () {
+                                        var xhr = new window.XMLHttpRequest();
+                                        xhr.upload.addEventListener("progress", function (evt) {
+                                            if (evt.lengthComputable) {
+                                                var percentComplete = ((evt.loaded / evt.total) * 100);
+                                                $(".progress-bar-seven").width(percentComplete + '%');
+                                                $(".progress-bar-seven").html(percentComplete + '%');
+                                            }
+                                        }, false);
+                                        return xhr;
+                                    },
+                                }).done( function ( response ) {
+                                    jQuery( '#loader_attchFileSeven' ).hide();
+                                    jQuery( '#preview_attchFileSeven' ).html( response );
+                                    jQuery( '.btn-add-client' ).show();
+                                    $( '#attchSevenName' ).val( '' );
+                                    $( '#attchFileSevenName' ).val( '' );
+                                });
+
+
+
+
+
+
+
+                                $("#upload_btn_seven").button('reset');
+                            }
+                        }
+                        /*$( "#attchFileSevenName" ).on( "change", function () {
+
+                        });*/
+                    </script>
+                </div>
+            </div>
+        </fieldset>
+        <br>
+        <script>
+            function show_existing_foundation_layout_option(val) {
+                if(val == 'No'){
+                    $('.div_existingFoundationLayout').slideUp();
+                }else{
+                    $('.div_existingFoundationLayout').slideDown();
+                }
+            }
+            show_existing_foundation_layout_option('No');
+        </script>
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">13) Highest Flood Level (From Water Development Board)</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control input-sm required number" id="acquisitionHighestFloodLevel" name="acquisitionHighestFloodLevel" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="devh8s">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>
+				</div>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+				<div class="form-group">
+					<label for="Name" class="control-label">14) Standard High Water Level</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm required number" id="acquisitionStandardHighWaterLevel" name="acquisitionStandardHighWaterLevel" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="77nshn">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>    
+				</div>
+			</div>
+            <div class="col-md-4">
+				<div class="form-group">
+					<label for="Name" class="control-label">15) Lowest Water Level</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm number" id="acquisitionLowestWaterLevel" name="acquisitionLowestWaterLevel" data-ddg-inputtype="unknown" fdprocessedid="q4xlqk">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>     
+				</div>
+			</div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Name" class="control-label">15.1) Highest Tide Level (Where Applicable)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm number" id="acquisitionHighestTideLevel" name="acquisitionHighestTideLevel" data-ddg-inputtype="unknown" fdprocessedid="px927">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="acquisitionLowestTideLevel" class="control-label">15.2) Lowest Tide Level (Where Applicable)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm number" id="acquisitionLowestTideLevel" name="acquisitionLowestTideLevel" data-ddg-inputtype="unknown" fdprocessedid="eurm5">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+				<div class="form-group">
+					<label for="Name" class="control-label">16) Water level at the time of Survey</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm " id="acquisitionWaterLevelAtTheTimeOfSurvey" name="acquisitionWaterLevelAtTheTimeOfSurvey" data-ddg-inputtype="unknown" fdprocessedid="hbcab">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div> 
+				</div>
+			</div>
+            <div class="col-md-4">
+				<div class="form-group">
+					<label for="Name" class="control-label">17) Survey Date</label>
+                    <input type="text" class="form-control input-sm " id="acquisitionDate" name="acquisitionDate" readonly="readonly" data-ddg-inputtype="unknown" fdprocessedid="dwwcf8">
+				</div>
+			</div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">18) Type of River/Channel (Tidal/Not Tidal)</label>
+                    <select class="form-control input-sm required" id="acquisitionTypeOfRiver" name="acquisitionTypeOfRiver" onchange="show_option_for_river()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="j2tik">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="Tidal">Tidal</option>
+                    <option value="Not Tidal">Not Tidal</option>    
+                    </select>
+				</div>
+			</div>
+        </div>
+        
+        <fieldset class="tidalDiv" style="display: none;">
+            <legend>
+                <b>Water Level Information for tidal River</b>
+            </legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name" class="control-label">a) At Dry Season</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">HTL:</span>
+                        <input type="text" class="form-control input-sm required" id="acquisitionTidalAtDryHTL" name="acquisitionTidalAtDryHTL" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown">
+                        <span class="input-group-addon">LTL:</span>
+                        <input type="text" class="form-control input-sm required" id="acquisitionTidalAtDryLTL" name="acquisitionTidalAtDryLTL" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown">
+                    </div>    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name" class="control-label">b) At Rainy Season</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">HTL:</span>
+                        <input type="text" class="form-control input-sm required" id="acquisitionTidalAtRainyHTL" name="acquisitionTidalAtRainyHTL" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown">
+                        <span class="input-group-addon">LTL:</span>
+                        <input type="text" class="form-control input-sm required" id="acquisitionTidalAtRainyLTL" name="acquisitionTidalAtRainyLTL" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown">
+                    </div>    
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">19) Direction of stream flow</label>
+                    <input type="text" class="form-control input-sm " id="acquisitionDirectionOfStreamFlow" name="acquisitionDirectionOfStreamFlow" data-ddg-inputtype="unknown" fdprocessedid="g5nbv">
+				</div>
+			</div>
+        </div>
+        
+
+
+        <div class="row">
+            <div class="col-md-12">
+				<div class="form-group">
+					<label for="Name" class="control-label">21) Reference point of zero chainage of Road</label>
+                    <input type="text" class="form-control input-sm " id="acquisitionReferencePointOfZeroChainage" name="acquisitionReferencePointOfZeroChainage" data-ddg-inputtype="unknown" fdprocessedid="tudl7q">
+				</div>
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="acquisitionReferencePointOfZeroChainageGoogleMapLink" class="control-label">21.1) Google Map Link</label>
+                    <input type="text" class="form-control input-sm url" id="acquisitionReferencePointOfZeroChainageGoogleMapLink" name="acquisitionReferencePointOfZeroChainageGoogleMapLink" onchange="get_lat_long_from_tbm_dautm_map_url()" onblur="get_lat_long_from_tbm_dautm_map_url()" data-ddg-inputtype="unknown" fdprocessedid="eg5ccq">
+                    <label class="help-block">
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=" id="acquisitionReferencePointOfZeroChainageGoogleMapLinkHref" target="_blank">Go to Google Map</a></label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="acquisitionReferencePointOfZeroChainageLatitudeLongitude" class="control-label">21.2) Latitude,Longitude</label>
+                    <input type="text" class="form-control input-sm " id="acquisitionReferencePointOfZeroChainageLatitudeLongitude" name="acquisitionReferencePointOfZeroChainageLatitudeLongitude" maxlength="45" data-ddg-inputtype="unknown" fdprocessedid="6wuam3">
+                    <!--
+                    onchange="convert_to_reference_dautm_google_map_url()"
+                    onblur="convert_to_reference_dautm_google_map_url()"
+                    -->
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="Name" class="control-label">22) Existence of any cross road falling at the approach of the bridge</label>
+                    <select class="form-control input-sm " id="acquisitionExistenceOfAnyCrossRoad" name="acquisitionExistenceOfAnyCrossRoad" data-ddg-inputtype="unknown" fdprocessedid="j970nm">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="Shown In Drawing">Yes, Shown In Drawing</option>
+                    <option value="Not Shown In Drawing">Yes, But Not Shown In Drawing</option>
+                    <option value="Not Applicable">Not Applicable</option>    
+                    </select>
+				</div>
+			</div>
+        </div>
+        
+<fieldset>
+    <legend>
+        <b>23) Soil investigation report with sign and seal of EE</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileSix row"></div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <!--<span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select a file</span>
+                <input type="file" name="attchFileSixName" id="attchFileSixName" class="input-sm "/>
+                </span>-->
+                <input type="file" name="attchFileSixName" id="attchFileSixName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileSix"></div>
+            <div id="loader_attchFileSix" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-six"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchSixName" name="attchSixName" data-ddg-inputtype="unknown" fdprocessedid="j1kyom">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_six" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_six()" fdprocessedid="2nmoub">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_six(){
+                var attchFileSixName = $( '#attchFileSixName' ).val();
+                var attchSixName = $( '#attchSixName' ).val();
+                if ( attchFileSixName == '' ) {
+                    swal( {
+                        title: 'Please select a Soil investigation report file!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileSixName' ).val( '' );
+                } else if ( attchSixName == '' ) {
+                    swal( {
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileSixName' ).val( '' );
+                } else {
+                    $("#upload_btn_six").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileSixName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileSixName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_six.php?id=" + encodeURIComponent(random_number)+"&attchSixName=" + encodeURIComponent( attchSixName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileSix' ).hide();
+                        jQuery( '#preview_attchFileSix' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchSixName' ).val( '' );
+                        $( '#attchFileSixName' ).val( '' );
+                    });*/
+
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileSix' ).show();
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_six.php?id=" + encodeURIComponent(random_number)+"&attchSixName=" + encodeURIComponent( attchSixName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-six").width('0%');
+                            $(".progress-bar-six").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar-six").width(percentComplete + '%');
+                                    $(".progress-bar-six").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileSix' ).hide();
+                        jQuery( '#preview_attchFileSix' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchSixName' ).val( '' );
+                        $( '#attchFileSixName' ).val( '' );
+                    });
+
+
+                    $("#upload_btn_six").button('reset');
+                }
+            }
+            /*$( "#attchFileSixName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>
+<br>   
+        
+        
+        
+        <div class="row">
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="Name" class="control-label">24) Proposed alignment of bridge</label>
+                    <select class="form-control input-sm required" id="acquisitionAlternateBridgeAlignment" name="acquisitionAlternateBridgeAlignment" onchange="change_alignment()" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="gys1ub">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="New Alignment">New Alignment</option>
+                    <option value="For Existing Bridge">For Existing Bridge</option>  
+                    </select>
+				</div>
+			</div>
+            <div class="col-md-6">
+				<div class="form-group">
+					<label for="Name" class="control-label">24.a) For Existing Bridge</label>
+                    <select class="form-control input-sm required" id="acquisitionExistingAlignment" name="acquisitionExistingAlignment" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown" fdprocessedid="5mgj8c">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="At the same alignment">At the same alignment</option>
+                    <option value="Upstream of the existing bridge">Upstream of the existing bridge</option> 
+                    <option value="Downstream of the existing bridge">Downstream of the existing bridge</option>  
+                    </select>
+				</div>
+			</div>
+        </div>
+        <script type="text/javascript">
+        var change_alignment = function(){
+            var val = $('#acquisitionAlternateBridgeAlignment').val();
+            if(val == 'For Existing Bridge'){
+                $('#acquisitionExistingAlignment').prop('disabled',false);
+            }else{
+                $('#acquisitionExistingAlignment').prop('disabled',true);
+            }
+        }
+        
+        </script>
+
+<fieldset>
+    <legend>
+        <b>25) Site plan of proposed bridge (showing Hat-Bazar,Town etc. and attached bridge location pictures, Google Map  with GPS)</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileFive row"></div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <!--<span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select a file</span>
+                <input type="file" name="attchFileFiveName" id="attchFileFiveName" class="input-sm "/>
+                </span>-->
+                <input type="file" name="attchFileFiveName" id="attchFileFiveName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileFive"></div>
+            <div id="loader_attchFileFive" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-five"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchFiveName" name="attchFiveName" data-ddg-inputtype="unknown" fdprocessedid="diwbke">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_five" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_five()" fdprocessedid="yk2xwj">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_five(){
+                var attchFileFiveName = $( '#attchFileFiveName' ).val();
+                var attchFiveName = $( '#attchFiveName' ).val();
+                if ( attchFileFiveName == '' ) {
+                    swal( {
+                        title: 'Please select a Site plan file!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileFiveName' ).val( '' );
+                } else if ( attchFiveName == '' ) {
+                    swal( {
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileFiveName' ).val( '' );
+                } else {
+                    $("#upload_btn_five").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileFiveName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileFiveName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_index_map.php?id=" + encodeURIComponent(random_number)+"&attchFiveName=" + encodeURIComponent( attchFiveName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileFive' ).hide();
+                        jQuery( '#preview_attchFileFive' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchFiveName' ).val( '' );
+                        $( '#attchFileFiveName' ).val( '' );
+                    });*/
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileFive' ).show();
+
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_index_map.php?id=" + encodeURIComponent(random_number)+"&attchFiveName=" + encodeURIComponent( attchFiveName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-five").width('0%');
+                            $(".progress-bar-five").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar-five").width(percentComplete + '%');
+                                    $(".progress-bar-five").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileFive' ).hide();
+                        jQuery( '#preview_attchFileFive' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchFiveName' ).val( '' );
+                        $( '#attchFileFiveName' ).val( '' );
+                    });
+
+                    $("#upload_btn_five").button('loading');
+                }
+            }
+            /*$( "#attchFileFiveName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>
+<br>        
+<fieldset>
+    <legend>
+        <b>26) At least 3 cross sections with road chainage Reduced Level (at proposed centre line, 10 m up stream, 10 m down Stream)<br>Note: 3 m interval (for river width equal or less then 100 m) 5 m interval (for river width more then 100 m)</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileThree row"></div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <!--<span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select a file</span>
+                <input type="file" name="attchFileThreeName" id="attchFileThreeName" class="input-sm "/>
+                </span>-->
+                <input type="file" name="attchFileThreeName" id="attchFileThreeName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileThree"></div>
+            <div id="loader_attchFileThree" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-three"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchThreeName" name="attchThreeName" data-ddg-inputtype="unknown" fdprocessedid="ylrlo4">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_three" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_three()" fdprocessedid="fwz2q">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_three(){
+                var attchFileThreeName = $( '#attchFileThreeName' ).val();
+                var attchThreeName = $( '#attchThreeName' ).val();
+                if ( attchFileThreeName == '' ) {
+                    swal({
+                        title: 'Please select a cross sections file!',
+                        text: "",
+                        type: 'error',
+                    });
+                    //$( '#attchFileThreeName' ).val( '' );
+                } else if ( attchThreeName == '' ) {
+                    swal({
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    });
+                    //$( '#attchFileThreeName' ).val( '' );
+                } else {
+                    $("#upload_btn_three").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileThreeName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileThreeName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_reduced_level.php?id=" + encodeURIComponent(random_number)+"&attchThreeName=" + encodeURIComponent( attchThreeName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileThree' ).hide();
+                        jQuery( '#preview_attchFileThree' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchThreeName' ).val( '' );
+                        $( '#attchFileThreeName' ).val( '' );
+                    });*/
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileThree' ).show();
+
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_reduced_level.php?id=" + encodeURIComponent(random_number)+"&attchThreeName=" + encodeURIComponent( attchThreeName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-three").width('0%');
+                            $(".progress-bar-three").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar-three").width(percentComplete + '%');
+                                    $(".progress-bar-three").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileThree' ).hide();
+                        jQuery( '#preview_attchFileThree' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchThreeName' ).val( '' );
+                        $( '#attchFileThreeName' ).val( '' );
+                    });
+
+                    $("#upload_btn_three").button('reset');
+                }
+            }
+            /*$( "#attchFileThreeName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>
+<br>
+        <div class="row">
+            <div class="col-md-3">
+				<div class="form-group">
+					<label for="Name" class="control-label">27) Electrification work required? </label>
+                    <select class="form-control input-sm required" id="acquisitionAncillaryWork" name="acquisitionAncillaryWork" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="zl86rr">
+                    <option value="" selected="selected">Select an option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>    
+                    </select>
+				</div>
+			</div>
+            <div class="col-md-3">
+				<div class="form-group">
+					<label for="Name" class="control-label">28) Proposed Length of Bridge (m) </label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm number" id="acquisitionProposedLengthOfBridge" name="acquisitionProposedLengthOfBridge" data-ddg-inputtype="unknown" fdprocessedid="tu78i">
+                        <span class="input-group-addon"><!--in m PWD--></span>
+                    </div>
+
+				</div>
+			</div>
+            <div class="col-md-3">
+				<div class="form-group">
+					<label for="Name" class="control-label">29) Proposed  Span arrangement of the Bridge (m)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" id="acquisitionProposedSpanArrangementOfTheBridge" name="acquisitionProposedSpanArrangementOfTheBridge" data-ddg-inputtype="unknown" fdprocessedid="y22q8f">
+                        <span class="input-group-addon"><!--in m PWD--></span>
+                    </div>
+				</div>
+			</div>
+            <div class="col-md-3">
+				<div class="form-group">
+					<label for="Name" class="control-label">30) Mid Span Bottom R.L. for proposed Bridge</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control input-sm required number" id="acquisitionBottomRLOfMidSpan" name="acquisitionBottomRLOfMidSpan" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="l2t1jin">
+                        <span class="input-group-addon reference-datum-unit">in m PWD</span>
+                    </div>
+				</div>
+			</div>
+        </div>
+        
+<fieldset>
+    <legend>
+        <b>31) Hydro-Morphological Study Report</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileNine row"></div>
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <!--<span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select a file</span>
+                <input type="file" name="attchFileNineName" id="attchFileNineName" class="input-sm "/>
+                </span>-->
+                <input type="file" name="attchFileNineName" id="attchFileNineName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileNine"></div>
+            <div id="loader_attchFileNine" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-nine"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchNineName" name="attchNineName" data-ddg-inputtype="unknown" fdprocessedid="1b2wlq">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_nine" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_nine()" fdprocessedid="rh0m2q">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_nine(){
+                var attchFileNineName = $( '#attchFileNineName' ).val();
+                var attchNineName = $( '#attchNineName' ).val();
+                if ( attchFileNineName == '' ) {
+                    swal( {
+                        title: 'Please select a Hydro-Morphological Study Report file!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileNineName' ).val( '' );
+                } else if ( attchNineName == '' ) {
+                    swal( {
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    } );
+                    //$( '#attchFileNineName' ).val( '' );
+                } else {
+                    $("#upload_btn_nine").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileNineName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileNineName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_nine.php?id=" + encodeURIComponent(random_number)+"&attchNineName=" + encodeURIComponent( attchNineName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileNine' ).hide();
+                        jQuery( '#preview_attchFileNine' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchNineName' ).val( '' );
+                        $( '#attchFileNineName' ).val( '' );
+                    });*/
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileNine' ).show();
+
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_nine.php?id=" + encodeURIComponent(random_number)+"&attchNineName=" + encodeURIComponent( attchNineName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-nine").width('0%');
+                            $(".progress-bar-nine").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar-nine").width(percentComplete + '%');
+                                    $(".progress-bar-nine").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileNine' ).hide();
+                        jQuery( '#preview_attchFileNine' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchNineName' ).val( '' );
+                        $( '#attchFileNineName' ).val( '' );
+                    });
+                    $("#upload_btn_nine").button('reset');
+                }
+            }
+            /*$( "#attchFileNineName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>
+<br>   
+<hr>
+<fieldset>
+    <legend>
+        <!--<b></b>-->
+        <b>Proposed structured site location picture</b>
+    </legend>
+    <div class="row">
+    <div class="col-sm-2">
+        <label for="file" class="control-label">
+            <center><h5>Image<br>(East Side)</h5></center>
+        </label>
+        <br>
+        <div id="preview_11" class="preview">
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/600x600&amp;text=No%20Image_d1Gw.png" id="imgpreview_11" class="thumbnail img-responsive">
+        </div>
+        <div id="loader_11" class="display-hide">
+            <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_d1Gw.gif" class="img-responsive">
+        </div>
+        <center>
+            <span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select an image</span>
+                <input type="file" name="image" id="file_11" class="form-control input-sm">
+            </span>
+        </center>
+        <label id="file-error" class="error" for="file"></label>
+        <script type="text/javascript">
+            $("#file_11").on("change", function () {
+                var form = new FormData();
+                var file_data = $("#file_11").prop("files")[0];
+                form.append("image", file_data);
+                var random_number = $('#random_number').val();
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "submit/imageupload_11.php?id=" + encodeURIComponent(random_number)+"&attchFileName=East&imgpreview=imgpreview_11",
+                    "method": "POST",
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }
+                jQuery('.button-next').hide();
+                jQuery('#loader_11').show();
+                //jQuery('#imgpreview_11').hide();
+                $.ajax(settings).done(function (response) {
+                    jQuery('#imgpreview_11').show();
+                    jQuery('#loader_11').hide();
+                    jQuery('#preview_11').html(response);
+                    jQuery('.button-next').show();
+                });
+            });
+        </script>
+    </div>
+
+
+    <div class="col-sm-2">
+        <label for="file" class="control-label">
+            <center><h5>Image<br>(West Side)</h5></center>
+        </label>
+        <br>
+        <div id="preview_12" class="preview">
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/600x600&amp;text=No%20Image_d1Gw.png" id="imgpreview_12" class="thumbnail img-responsive">
+        </div>
+        <div id="loader_12" class="display-hide">
+            <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_d1Gw.gif" class="img-responsive">
+        </div>
+        <center>
+            <span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select an image</span>
+                <input type="file" name="image" id="file_12" class="form-control input-sm">
+            </span>
+        </center>
+        <label id="file-error" class="error" for="file"></label>
+        <script type="text/javascript">
+            $("#file_12").on("change", function () {
+                var form = new FormData();
+                var file_data = $("#file_12").prop("files")[0];
+                form.append("image", file_data);
+                var random_number = $('#random_number').val();
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "submit/imageupload_11.php?id=" + encodeURIComponent(random_number)+"&attchFileName=West&imgpreview=imgpreview_12",
+                    "method": "POST",
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }
+                jQuery('.button-next').hide();
+                jQuery('#loader_12').show();
+                //jQuery('#imgpreview').hide();
+                $.ajax(settings).done(function (response) {
+                    jQuery('#imgpreview_12').show();
+                    jQuery('#loader_12').hide();
+                    jQuery('#preview_12').html(response);
+                    jQuery('.button-next').show();
+                });
+            });
+        </script>
+    </div>
+
+    <div class="col-sm-2">
+        <label for="file" class="control-label">
+            <center><h5>Image<br>(North Side)</h5></center>
+        </label>
+        <br>
+        <div id="preview_13" class="preview">
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/600x600&amp;text=No%20Image_d1Gw.png" id="imgpreview_13" class="thumbnail img-responsive">
+        </div>
+        <div id="loader_13" class="display-hide">
+            <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_d1Gw.gif" class="img-responsive">
+        </div>
+        <center>
+            <span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select an image</span>
+                <input type="file" name="image" id="file_13" class="form-control input-sm">
+            </span>
+        </center>
+        <label id="file-error" class="error" for="file"></label>
+        <script type="text/javascript">
+            $("#file_13").on("change", function () {
+                var form = new FormData();
+                var file_data = $("#file_13").prop("files")[0];
+                form.append("image", file_data);
+                var random_number = $('#random_number').val();
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "submit/imageupload_11.php?id=" + encodeURIComponent(random_number)+"&attchFileName=North&imgpreview=imgpreview_13",
+                    "method": "POST",
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }
+                jQuery('.button-next').hide();
+                jQuery('#loader_13').show();
+                //jQuery('#imgpreview').hide();
+                $.ajax(settings).done(function (response) {
+                    jQuery('#imgpreview_13').show();
+                    jQuery('#loader_13').hide();
+                    jQuery('#preview_13').html(response);
+                    jQuery('.button-next').show();
+                });
+            });
+        </script>
+    </div>
+
+    <div class="col-sm-2">
+        <label for="file" class="control-label">
+            <center><h5>Image<br>(South Side)</h5></center>
+        </label>
+        <br>
+        <div id="preview_14" class="preview">
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/600x600&amp;text=No%20Image_d1Gw.png" id="imgpreview_14" class="thumbnail img-responsive">
+        </div>
+        <div id="loader_14" class="display-hide">
+            <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_d1Gw.gif" class="img-responsive">
+        </div>
+        <center>
+            <span class="btn btn-sm btn-primary fileinput-button">
+                <span>Please select an image</span>
+                <input type="file" name="image" id="file_14" class="form-control input-sm">
+            </span>
+        </center>
+        <label id="file-error" class="error" for="file"></label>
+        <script type="text/javascript">
+            $("#file_14").on("change", function () {
+                var form = new FormData();
+                var file_data = $("#file_14").prop("files")[0];
+                form.append("image", file_data);
+                var random_number = $('#random_number').val();
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "submit/imageupload_11.php?id=" + encodeURIComponent(random_number)+"&attchFileName=South&imgpreview=imgpreview_14",
+                    "method": "POST",
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": form
+                }
+                jQuery('.button-next').hide();
+                jQuery('#loader_14').show();
+                //jQuery('#imgpreview').hide();
+                $.ajax(settings).done(function (response) {
+                    jQuery('#imgpreview_14').show();
+                    jQuery('#loader_14').hide();
+                    jQuery('#preview_14').html(response);
+                    jQuery('.button-next').show();
+                });
+            });
+        </script>
+    </div>
+</div>
+</fieldset>        <hr>
+        <hr>
+<fieldset>
+    <legend>
+        <b>Photo(s) of the existing culvert (if any): (to be attached)</b>
+    </legend>
+    <div class="clearfix"></div>
+    <div class="list_of_attchFileThirteen row"></div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="blockquote">
+                <hr>
+                (i) View from roadside (from both ends)
+                <br>
+                (ii) View from channel side (from both ends)
+                <br>
+                (iii) Image of damaged portions (if any)
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label">Attachment File</label>
+                <br>
+                <input type="file" name="attchFileThirteenName" id="attchFileThirteenName" class="input-sm ">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div id="preview_attchFileThirteen"></div>
+            <div id="loader_attchFileThirteen" class="display-hide">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-three"></div>
+                </div>
+                <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Name" class="control-label">Attachment Name</label>
+                <input type="text" class="form-control input-sm bangla" id="attchThirteenName" name="attchThirteenName" data-ddg-inputtype="unknown" fdprocessedid="u8ib5">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="" class="control-label">Click this button to upload</label>
+                <button type="button" id="upload_btn_three" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_thirteen()" fdprocessedid="rol1a">
+                    <i class="fa fa-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <br>
+        <script type="text/javascript">
+            function upload_thirteen(){
+                var attchFileThirteenName = $( '#attchFileThirteenName' ).val();
+                var attchThirteenName = $( '#attchThirteenName' ).val();
+                if ( attchFileThirteenName == '' ) {
+                    swal({
+                        title: 'Please select a photo of the existing culvert file!',
+                        text: "",
+                        type: 'error',
+                    });
+                    //$( '#attchFileThirteenName' ).val( '' );
+                } else if ( attchThirteenName == '' ) {
+                    swal({
+                        title: 'Attachment name is required!',
+                        text: "",
+                        type: 'error',
+                    });
+                    //$( '#attchFileThirteenName' ).val( '' );
+                } else {
+                    $("#upload_btn_three").button('loading');
+                    var random_number = $('#random_number').val();
+                    var form = new FormData();
+                    var file_data = $( "#attchFileThirteenName" ).prop( "files" )[ 0 ];
+                    form.append( "attchFileThirteenName", file_data );
+
+                    /*var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_reduced_level.php?id=" + encodeURIComponent(random_number)+"&attchThirteenName=" + encodeURIComponent( attchThirteenName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form
+                    }
+                    $.ajax( settings ).done( function ( response ) {
+                        jQuery( '#loader_attchFileThirteen' ).hide();
+                        jQuery( '#preview_attchFileThirteen' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchThirteenName' ).val( '' );
+                        $( '#attchFileThirteenName' ).val( '' );
+                    });*/
+
+                    jQuery( '.btn-add-client' ).hide();
+                    jQuery( '#loader_attchFileThirteen' ).show();
+
+                    $.ajax({
+                        "async": true,
+                        "crossDomain": true,
+                        "url": "submit/file_upload_Thirteen.php?id=" + encodeURIComponent(random_number)+"&attchThirteenName=" + encodeURIComponent( attchThirteenName ),
+                        "method": "POST",
+                        "processData": false,
+                        "contentType": false,
+                        "mimeType": "multipart/form-data",
+                        "data": form,
+                        beforeSend: function (xhr) {
+                            $(".progress-bar-three").width('0%');
+                            $(".progress-bar-three").html('0%');
+                        },
+                        xhr: function () {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function (evt) {
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    var percentComplete = parseInt(percentComplete);
+                                    $(".progress-bar-three").width(percentComplete + '%');
+                                    $(".progress-bar-three").html(percentComplete + '%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                    }).done( function ( response ) {
+                        jQuery( '#loader_attchFileThirteen' ).hide();
+                        jQuery( '#preview_attchFileThirteen' ).html( response );
+                        jQuery( '.btn-add-client' ).show();
+                        $( '#attchThirteenName' ).val( '' );
+                        $( '#attchFileThirteenName' ).val( '' );
+                    });
+
+                    $("#upload_btn_three").button('reset');
+                }
+            }
+            /*$( "#attchFileThirteenName" ).on( "change", function () {
+
+            });*/
+        </script>
+    </div>
+</fieldset>        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name" class="control-label">Requirement of Pier Protective Work</label>
+                    <select class="form-control input-sm " id="acquisitionRequirementPierWork" name="acquisitionRequirementPierWork" data-ddg-inputtype="unknown" fdprocessedid="65r95a">
+                        <option value="" selected="selected">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Not Applicable">Not Applicable</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Name" class="control-label">Proposed Maximum Height of Approach Road(m)</label>
+                    <select class="form-control input-sm " id="acquisitionProposedMaxHeightRoad" name="acquisitionProposedMaxHeightRoad" data-ddg-inputtype="unknown" fdprocessedid="e0chb">
+                        <option value="" selected="selected">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Not Applicable">Not Applicable</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Name" class="control-label">Ancillary Work(Electrification, Bank Protection Required)</label>
+                    <select class="form-control input-sm " id="acquisitionAncillaryWork" name="acquisitionAncillaryWork" data-ddg-inputtype="unknown" fdprocessedid="gsdvh">
+                        <option value="" selected="selected">Select an option</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Not Applicable">Not Applicable</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="Name" class="control-label">Remarks(if any)</label>
+        <textarea class="form-control input-sm" id="acquisitionExistingCulvertNote" name="acquisitionExistingCulvertNote"></textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <fieldset>
+            <legend>
+                <b>BMS Chainage &amp; GPS Info</b>
+            </legend>
+            <div class="clearfix"></div>
+            <div class="list_of_attchFileBmsChainage row"></div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label">Attachment File</label>
+                        <br>
+                        <input type="file" name="attchFileBmsChainageName" id="attchFileBmsChainageName" class="input-sm ">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div id="preview_attchFileBmsChainage"></div>
+                    <div id="loader_attchFileBmsChainage" class="display-hide">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-bms-chainage"></div>
+                        </div>
+                        <img src="Online%20Data%20Acquisition%20System%20bridge_files/please_wait_animation_002_d1Gw.gif" class="img-responsive col-sm-8" onerror="this.style.display='none'">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="attchBmsChainageName" class="control-label">Attachment Name</label>
+                        <input type="text" class="form-control input-sm bangla" id="attchBmsChainageName" name="attchBmsChainageName" data-ddg-inputtype="unknown" fdprocessedid="2bocv">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="" class="control-label">Click this button to upload</label>
+                        <button type="button" id="upload_btn_bms_chainage" class="btn btn-sm btn-warning btn-block" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" onclick="upload_bms_chainage()" fdprocessedid="o7iht">
+                            <i class="fa fa-upload"></i> Upload
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="acquisitionBmsChainageGpsGoogleMapLink" class="control-label">Google Map Link</label>
+                        <input type="text" class="form-control input-sm url" id="acquisitionBmsChainageGpsGoogleMapLink" name="acquisitionBmsChainageGpsGoogleMapLink" onchange="get_lat_long_from_bms_chainage_map_url()" onblur="get_lat_long_from_bms_chainage_map_url()" data-ddg-inputtype="unknown" fdprocessedid="612i6">
+                        <label class="help-block">
+                            <a href="https://www.google.com/maps/search/?api=1&amp;query=" id="acquisitionBmsChainageGpsGoogleMapLinkHref" target="_blank">Go to Google Map</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="acquisitionBmsChainageGpsLatitudeLongitude" class="control-label">Latitude,Longitude</label>
+                        <input type="text" class="form-control input-sm" id="acquisitionBmsChainageGpsLatitudeLongitude" name="acquisitionBmsChainageGpsLatitudeLongitude" maxlength="145" data-ddg-inputtype="unknown" fdprocessedid="ik2ri3">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="acquisitionBmsChainageChainage" class="control-label">Chainage</label>
+                        <input type="text" class="form-control input-sm" id="acquisitionBmsChainageChainage" name="acquisitionBmsChainageChainage" data-ddg-inputtype="unknown" fdprocessedid="uk24ly">
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                function upload_bms_chainage(){
+                    var attchFileBmsChainageName = $( '#attchFileBmsChainageName' ).val();
+                    var attchBmsChainageName = $( '#attchBmsChainageName' ).val();
+                    if ( attchFileBmsChainageName == '' ) {
+                        swal( {
+                            title: 'Please select a BMS Chainage & GPS attachment file!',
+                            text: "",
+                            type: 'error',
+                        } );
+                    } else if ( attchBmsChainageName == '' ) {
+                        swal( {
+                            title: 'Attachment name is required!',
+                            text: "",
+                            type: 'error',
+                        } );
+                    } else {
+                        $("#upload_btn_bms_chainage").button('loading');
+                        var random_number = $('#random_number').val();
+                        var form = new FormData();
+                        var file_data = $( "#attchFileBmsChainageName" ).prop( "files" )[ 0 ];
+                        form.append( "attchFileBmsChainageName", file_data );
+
+                        jQuery( '.btn-add-client' ).hide();
+                        jQuery( '#loader_attchFileBmsChainage' ).show();
+
+                        $.ajax({
+                            "async": true,
+                            "crossDomain": true,
+                            "url": "submit/file_upload_bms_chainage.php?id=" + encodeURIComponent(random_number)+"&attchBmsChainageName=" + encodeURIComponent( attchBmsChainageName ),
+                            "method": "POST",
+                            "processData": false,
+                            "contentType": false,
+                            "mimeType": "multipart/form-data",
+                            "data": form,
+                            beforeSend: function (xhr) {
+                                $(".progress-bar-bms-chainage").width('0%');
+                                $(".progress-bar-bms-chainage").html('0%');
+                            },
+                            xhr: function () {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function (evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $(".progress-bar-bms-chainage").width(percentComplete + '%');
+                                        $(".progress-bar-bms-chainage").html(percentComplete + '%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                        }).done( function ( response ) {
+                            jQuery( '#loader_attchFileBmsChainage' ).hide();
+                            jQuery( '#preview_attchFileBmsChainage' ).html( response );
+                            jQuery( '.btn-add-client' ).show();
+                            $( '#attchBmsChainageName' ).val( '' );
+                            $( '#attchFileBmsChainageName' ).val( '' );
+                        });
+                        $("#upload_btn_bms_chainage").button('reset');
+                    }
+                }
+            </script>
+        </fieldset>
+        <hr>
+        <hr>
+<fieldset>
+    <legend><b>Borehole NOS</b></legend>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="borehole_nos_total" class="control-label">Total Borehole NOS</label>
+                <div class="input-group" style="width: 130px !important;">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-danger btn-sm btn-number" data-type="minus" data-field="quant[1]" fdprocessedid="3kwlla">
+                            <span class="fa fa-minus"></span>
+                        </button>
+                    </span>
+                    <input type="text" id="borehole_nos_total" name="borehole_nos_total" class="form-control input-number" value="0" min="0" max="40" style="height: 40px; font-size: 17px;" data-ddg-inputtype="unknown" fdprocessedid="7z1j59">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary btn-sm btn-number" data-type="plus" data-field="quant[1]" fdprocessedid="boqwte">
+                            <span class="fa fa-plus"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .input-number {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
+    <div id="culvertBoreHoleNosForm" style="display: block;">
+        
+        <div id="culvertBoreHoleNosForm_noforms_template" style="">No HTML DOM</div>
+        <div id="culvertBoreHoleNosForm_controls" style="">
+            <div id="culvertBoreHoleNosForm_add" style="">
+                <button type="button" class="btn btn-info btn-sm" style="display: none"> Add More
+                </button>
+            </div>
+        </div>
+    </div>
+</fieldset>
+        <hr>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+
+            <label for="Name" class="control-label">Status</label>
+            <select class="form-control input-sm required" id="acquisitionFormStatus" name="acquisitionFormStatus" onchange="show_bridge_design_user();" aria-required="true" data-ddg-inputtype="unknown" fdprocessedid="6f1a9">
+            <option value="Draft" selected="selected">Draft</option>
+            <option value="Send To Bridge Division">Send To Bridge Division</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Name" class="control-label">Bridge Design</label>
+            <select class="form-control input-sm required" id="acquisitionBridgeApprovedBy" name="acquisitionBridgeApprovedBy" aria-required="true" disabled="disabled" data-ddg-inputtype="unknown" fdprocessedid="ldcz1">
+            <option value="" selected="selected">Select an option</option>
+            <option value="6">Abdur Rahman Kaoser[Bridge Design Division-3]</option><option value="7">Abul Barkot Md. Khurshid Alam[Bridge Cons. &amp; Main. -1]</option><option value="11">Demo Bridge Design User[Bridge Design]</option><option value="3">eebdd1[Bridge Design Devision-1]</option><option value="8">Md. Golam Mostofa[Bridge Cons. &amp; Main-2]</option><option value="5">Mohammed Yousuf[Bridge Design Division-2]</option><option value="9">Swapna Begum[Bridge Cons. &amp; Main. -4]</option>            </select>
+        </div>
+    </div>
+</div>        
+        
+        
+	</div>
+</div>
+<div class="clearfix"></div>
+<div class="form-actions right">
+	<div class="loaderExtraDiv">
+	<hr>
+	<input type="hidden" id="Editid" name="Editid" value="">
+	<button type="submit" class="btn btn-sm btn-success pull-right btn-add-client" name="enrol_submit" value="Add" data-loading-text="&lt;i class='fa fa-circle-o-notch fa-spin'&gt;&lt;/i&gt; Processing" fdprocessedid="8x6mu8">
+			<i class="fa fa-paper-plane"></i> SUBMIT
+	</button>
+	</div>
+	<div class="clearfix"></div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="modal fade modal-block-lg" id="modalBootstrap">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"> 
+				<span aria-hidden="true">×</span> 
+				<span class="sr-only">Close</span> 
+				</button>
+				<h4 class="modal-title" id="modalTitle"></h4>
+			</div>
+			<div class="modal-body"> </div>
+		</div>
+	</div>
+</div>
+    <script type="text/javascript" src="Online%20Data%20Acquisition%20System%20bridge_files/jquery.sheepItPlugin_d1Gw.js"></script>
+<script type="text/javascript" src="Online%20Data%20Acquisition%20System%20bridge_files/bridge_acquisition_form_d1Gw.js"></script>
+<script type="text/javascript">
+$('#acquisitionRoadListFk').chained('#acquisitionRoadTypeFkId');
+$('.select2').select2(); 
+$('#acquisitionDate').datepicker({
+    format:'dd/mm/yyyy',
+    autoclose: true,
+});
+function show_road_type_others_option() {
+    var val =  $('#acquisitionRoadTypeFkId').val();
+    if(val == '0'){
+        $('#acquisitionRoadTypeOthersName').prop('disabled',false);
+    }else{
+        $('#acquisitionRoadTypeOthersName').prop('disabled',true);
+    }
+}
+function show_road_name(){
+    var val = $('#acquisitionRoadListFk').val();
+   
+    if(val == ''){
+        $('#acquisitionRoadName').val('');
+        $('#acquisitionRoadName').removeClass('no-border');
+    }else{
+        var road_name = $('#acquisitionRoadListFk').find(':selected').data('road_name');
+        $('#acquisitionRoadName').val(road_name);
+        $('#acquisitionRoadName').addClass('no-border');
+    }
+    var val =  $('#acquisitionRoadTypeFkId').val();
+    if(val == '0'){
+        $('#acquisitionRoadName').prop('readonly',false);
+        $('#acquisitionRoadName').removeClass('no-border');
+    }else{
+        $('#acquisitionRoadName').prop('readonly',true);
+    }
+}
+function update_reference_datum_unit() {
+    var val = $('#acquisitionReferenceType').val();
+    var unit = val ? val.toUpperCase() : 'PWD';
+    $('.reference-datum-unit').text('in m ' + unit);
+}
+$('#acquisitionReferenceType').on('change', update_reference_datum_unit);
+update_reference_datum_unit();
+$(document).on('click', 'a[data-target="#modalBootstrap"]', function(event) {
+    event.preventDefault();
+    var id = $(this).attr('id');
+    var pagelink = $(this).data('pagelink');
+    var modalTitle = $(this).data('modal_title');
+    $('#modalTitle').html(modalTitle);
+    var myModal = $('#modalBootstrap');
+    var modalBody = myModal.find('.modal-body');
+    modalBody.html('<center><i class="fa fa-4x fa-spin fa-spinner"></i></center>');
+    modalBody.load(pagelink, function() {
+        myModal.modal('show');
+		
+    });
+});
+
+var convert_to_google_map_url = function (){
+    var acquisitionLocationOfTheBridgeGPSLatitudeLongitude = $('#acquisitionLocationOfTheBridgeGPSLatitudeLongitude').val();
+    if (acquisitionLocationOfTheBridgeGPSLatitudeLongitude == ''){
+        $('#acquisitionLocationOfTheBridgeGPSGoogleMapLink').val('');
+        $('#acquisitionLocationOfTheBridgeGPSGoogleMapLinkHref').attr("href", 'https://www.google.com/maps/search/?api=1&query=');
+    }else{
+        $('#acquisitionLocationOfTheBridgeGPSGoogleMapLink').val('https://www.google.com/maps/search/?api=1&query='+acquisitionLocationOfTheBridgeGPSLatitudeLongitude);
+        $('#acquisitionLocationOfTheBridgeGPSGoogleMapLinkHref').attr("href", 'https://www.google.com/maps/search/?api=1&query='+acquisitionLocationOfTheBridgeGPSLatitudeLongitude);
+    }
+}
+convert_to_google_map_url();
+
+var get_lat_long_from_map_url = function (){
+    var url = $('#acquisitionLocationOfTheBridgeGPSGoogleMapLink').val();
+    var longlat = /\/\@(.*),(.*),/.exec(url);
+
+    if (longlat) {
+        var lat = longlat[1];
+        var lng = longlat[2];
+
+        $('#acquisitionLocationOfTheBridgeGPSLatitudeLongitude').val(lat + ',' + lng);
+    }
+}
+get_lat_long_from_map_url();
+
+var get_lat_long_from_reference_dautm_map_url = function (){
+    var url = $('#acquisitionReferenceBenchMarkGPSGoogleMapLink').val();
+    var longlat = /\/\@(.*),(.*),/.exec(url);
+
+    if (longlat) {
+        var lat = longlat[1];
+        var lng = longlat[2];
+
+        $('#acquisitionReferenceBenchMarkGPSLatitudeLongitude').val(lat + ',' + lng);
+    }
+}
+get_lat_long_from_reference_dautm_map_url();
+
+var get_lat_long_from_tbm_dautm_map_url = function (){
+    var url = $('#acquisitionReferencePointOfZeroChainageGoogleMapLink').val();
+    var longlat = /\/\@(.*),(.*),/.exec(url);
+
+    if (longlat) {
+        var lat = longlat[1];
+        var lng = longlat[2];
+
+        $('#acquisitionReferencePointOfZeroChainageLatitudeLongitude').val(lat + ',' + lng);
+    }
+}
+get_lat_long_from_tbm_dautm_map_url();
+
+var get_lat_long_from_bms_chainage_map_url = function (){
+    var url = $('#acquisitionBmsChainageGpsGoogleMapLink').val();
+    var longlat = /\/\@(.*),(.*),/.exec(url);
+
+    if (longlat) {
+        var lat = longlat[1];
+        var lng = longlat[2];
+
+        $('#acquisitionBmsChainageGpsLatitudeLongitude').val(lat + ',' + lng);
+    }
+}
+get_lat_long_from_bms_chainage_map_url();
+
+var get_lat_long_from_borehole_nos_map_url = function (e){
+    var inputID     = $(e).attr('id');
+    var url         = $(e).val();
+    var longlat     = /\/\@(.*),(.*),/.exec(url);
+
+    if (longlat) {
+        var onlyNumbers = inputID.replace(/\D+/g, '');
+
+        var lat = longlat[1];
+        var lng = longlat[2];
+
+        $('#culvertBoreHoleNosForm_'+onlyNumbers+'_acquisitionBoreHoleNosLatitudeLongitude').val(lat + ',' + lng);
+    }
+}
+get_lat_long_from_borehole_nos_map_url();
+</script>
+
+
+
+    <script type="text/javascript">
+        var culvertBoreHoleNosForm = {};
+
+        $(document).ready(function () {
+            culvertBoreHoleNosForm = $('#culvertBoreHoleNosForm').sheepIt({
+                separator: '',
+                allowRemoveCurrent: true,
+                allowRemoveAll: true,
+                allowAdd: true,
+                maxFormsCount: 10,
+                minFormsCount: 0,
+                iniFormsCount: 0,
+                afterAdd: function (source, newForm) {
+                    $(".div_potro").find(':input').prop('disabled', false);
+                },
+                afterRemoveCurrent: function (source) {
+                },
+                continuousIndex: true,
+                allowRemoveLast: true,
+                allowRemoveCurrent: true,
+                allowRemoveAll: true
+            });
+
+            $('.btn-number').click(function(e){
+                e.preventDefault();
+
+                fieldName = $(this).attr('data-field');
+                type      = $(this).attr('data-type');
+                var input = $("#borehole_nos_total");
+                var currentVal = parseInt(input.val());
+
+                if (!isNaN(currentVal)) {
+                    if(type == 'minus') {
+                        if(currentVal > input.attr('min')) {
+                            input.val(currentVal - 1).change();
+                        }
+                        if(parseInt(input.val()) == input.attr('min')) {
+                            $(this).attr('disabled', true);
+                        }
+
+                    } else if(type == 'plus') {
+                        if(currentVal < input.attr('max')) {
+                            input.val(currentVal + 1).change();
+                        }
+                        if(parseInt(input.val()) == input.attr('max')) {
+                            $(this).attr('disabled', true);
+                        }
+                    }
+                } else {
+                    input.val(0);
+                }
+
+                var currentVal = parseInt(input.val());
+                var form_count = culvertBoreHoleNosForm.getFormsCount();
+                if (currentVal >= form_count){
+                    var newFormNeedToAdd = parseInt(currentVal) - parseInt(form_count);
+                    for (let i = 1; i <= newFormNeedToAdd; i++) {
+                        culvertBoreHoleNosForm.addForm();
+                    }
+                }else{
+                    var newFormNeedToDelete = parseInt(form_count) - parseInt(currentVal);
+                    var form_count = culvertBoreHoleNosForm.getFormsCount();
+                    var newI = parseInt(form_count) - parseInt(newFormNeedToDelete);
+                    for (let i = newI; i <= form_count; i++) {
+                        culvertBoreHoleNosForm.removeForm(i);
+                    };
+                }
+            });
+        });
+
+    </script>
+ 
+</div>
+</div>
+            <style>
+            .nav-tabs-custom>.nav-tabs {
+                border-bottom-color: #f39c12;
+                background-color: #f39c12;
+                border-color: #f39c12;
+            }
+            .nav-tabs-custom>.nav-tabs>li.active {
+                border-top-color: #f39c12;
+            }
+            .nav-tabs-custom {
+                border: 1px solid #f39c12;
+            }
+            .panel-primary {
+                border-color: #f39c12;
+            }
+            .panel-primary>.panel-heading {
+                background-color: #f39c12;
+                border-color: #f39c12;
+            }
+        </style>
+        <script src="Online%20Data%20Acquisition%20System%20bridge_files/app.min_d1Gw.js"></script>
+<footer class="main-footer">
+<div class="row">
+<div class="col-md-6">
+<span>RHD MIS © 2026 - All Rights Reserved.</span>    
+</div>
+<div class="col-md-6"><span class="pull-right">Powered By:&nbsp;<a href="http://sanfisys.com/" target="_blank">SANFI SYS</a></span> </div>
+</div>    
+
+
+  
+</footer></div>
+
+
+<div class="swal2-container"><div class="swal2-overlay" tabindex="-1"></div><div class="swal2-modal" style="display: none" tabindex="-1"><div class="swal2-icon swal2-error"><span class="x-mark"><span class="line left"></span><span class="line right"></span></span></div><div class="swal2-icon swal2-question">?</div><div class="swal2-icon swal2-warning">!</div><div class="swal2-icon swal2-info">i</div><div class="swal2-icon swal2-success"><span class="line tip"></span> <span class="line long"></span><div class="placeholder"></div> <div class="fix"></div></div><img class="swal2-image"><h2></h2><div class="swal2-content"></div><input class="swal2-input" data-ddg-inputtype="unknown"><select class="swal2-select" data-ddg-inputtype="unknown"></select><div class="swal2-radio"></div><label for="swal2-checkbox" class="swal2-checkbox"><input type="checkbox" id="swal2-checkbox"></label><textarea class="swal2-textarea"></textarea><div class="swal2-validationerror"></div><hr class="swal2-spacer"><button class="swal2-confirm">OK</button><button class="swal2-cancel">Cancel</button><span class="swal2-close">×</span></div></div><div id="highlighter--hover-tools" style="display: none;">
+    <div id="highlighter--hover-tools--container">
+        <div class="highlighter--icon highlighter--icon-copy" title="Copy"></div>
+        <div class="highlighter--icon highlighter--icon-change-color" title="Change Color"></div>
+        <div class="highlighter--icon highlighter--icon-delete" title="Delete"></div>
+    </div>
+</div><div style="position: absolute !important; top: 0px !important; left: 0px !important; height: 0px !important; width: 0px !important; display: initial !important;" data-lastpass-root=""></div><span style="border-radius: 10px !important; text-indent: 12px !important; width: auto !important; height: 20px !important; padding: 0px 8px !important; text-align: center !important; vertical-align: middle !important; font: bold 11px / 20px Helvetica Neue, Helvetica, sans-serif !important; color: rgb(255, 255, 255) !important; background: url(&quot;data:image/svg+xml;base64,PHN2ZyBpZD0ic291cmNlIiB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNiIgY3k9IjYiIHI9IjYiIGZpbGw9IiNFNjAwMjMiPjwvY2lyY2xlPgo8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNkMwIDguNTYxNSAxLjYwNTUgMTAuNzQ4NSAzLjg2NSAxMS42MDlDMy44MSAxMS4xNDA1IDMuNzUxNSAxMC4zNjggMy44Nzc1IDkuODI2QzMuOTg2IDkuMzYgNC41NzggNi44NTcgNC41NzggNi44NTdDNC41NzggNi44NTcgNC4zOTk1IDYuNDk5NSA0LjM5OTUgNS45N0M0LjM5OTUgNS4xNCA0Ljg4MDUgNC41MiA1LjQ4IDQuNTJDNS45OSA0LjUyIDYuMjM2IDQuOTAyNSA2LjIzNiA1LjM2MUM2LjIzNiA1Ljg3MzUgNS45MDk1IDYuNjM5NSA1Ljc0MSA3LjM1QzUuNjAwNSA3Ljk0NDUgNi4wMzk1IDguNDI5NSA2LjYyNTUgOC40Mjk1QzcuNjg3IDguNDI5NSA4LjUwMzUgNy4zMSA4LjUwMzUgNS42OTRDOC41MDM1IDQuMjYzNSA3LjQ3NTUgMy4yNjQgNi4wMDggMy4yNjRDNC4zMDkgMy4yNjQgMy4zMTE1IDQuNTM4NSAzLjMxMTUgNS44NTZDMy4zMTE1IDYuMzY5NSAzLjUwOSA2LjkxOTUgMy43NTYgNy4yMTlDMy44MDQ1IDcuMjc4NSAzLjgxMiA3LjMzIDMuNzk3NSA3LjM5MDVDMy43NTIgNy41Nzk1IDMuNjUxIDcuOTg1IDMuNjMxNSA4LjA2OEMzLjYwNSA4LjE3NyAzLjU0NSA4LjIwMDUgMy40MzE1IDguMTQ3NUMyLjY4NTUgNy44MDA1IDIuMjE5NSA2LjcxIDIuMjE5NSA1LjgzNEMyLjIxOTUgMy45NDk1IDMuNTg4IDIuMjE5NSA2LjE2NTUgMi4yMTk1QzguMjM3NSAyLjIxOTUgOS44NDggMy42OTYgOS44NDggNS42NjlDOS44NDggNy43Mjc1IDguNTUwNSA5LjM4NDUgNi43NDg1IDkuMzg0NUM2LjE0MyA5LjM4NDUgNS41NzQ1IDkuMDY5NSA1LjM3OTUgOC42OThDNS4zNzk1IDguNjk4IDUuMDggOS44MzkgNS4wMDc1IDEwLjExOEM0Ljg2NjUgMTAuNjYgNC40NzU1IDExLjM0NiA0LjIzMyAxMS43MzU1QzQuNzkyIDExLjkwNzUgNS4zODUgMTIgNiAxMkM5LjMxMzUgMTIgMTIgOS4zMTM1IDEyIDZDMTIgMi42ODY1IDkuMzEzNSAwIDYgMEMyLjY4NjUgMCAwIDIuNjg2NSAwIDZaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPgo8L3N2Zz4=&quot;) 4px 50% / 12px 12px no-repeat rgb(230, 0, 35) !important; position: absolute !important; opacity: 1 !important; z-index: 8675309 !important; display: none; cursor: pointer !important; border: medium !important; top: 3365px; left: 911px;">Save</span><span style="width: 24px !important; height: 24px !important; background: url(&quot;data:image/svg+xml;base64,PHN2ZyBpZD0ic291cmNlIiB3aWR0aD0iMjIiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyMiAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTEiIGN5PSIxMSIgcj0iMTEiIGZpbGw9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuOCI+PC9jaXJjbGU+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTUuMDgzNCA0LjU4MzMzSDEzLjMzMzRWNS43NDk5OUgxNS4wODM0QzE1LjcyNjggNS43NDk5OSAxNi4yNSA2LjI3MzI0IDE2LjI1IDYuOTE2NjZWOC42NjY2NkgxNy40MTY3VjYuOTE2NjZDMTcuNDE2NyA1LjYyOTgzIDE2LjM3MDIgNC41ODMzMyAxNS4wODM0IDQuNTgzMzNaTTE2LjI1IDE1LjA4MzNDMTYuMjUgMTUuNzI2NyAxNS43MjY4IDE2LjI1IDE1LjA4MzQgMTYuMjVIMTMuMzMzNFYxNy40MTY3SDE1LjA4MzRDMTYuMzcwMiAxNy40MTY3IDE3LjQxNjcgMTYuMzcwMiAxNy40MTY3IDE1LjA4MzNWMTMuMzMzM0gxNi4yNVYxNS4wODMzWk01Ljc1MDA0IDE1LjA4MzNWMTMuMzMzM0g0LjU4MzM3VjE1LjA4MzNDNC41ODMzNyAxNi4zNzAyIDUuNjI5ODcgMTcuNDE2NyA2LjkxNjcxIDE3LjQxNjdIOC42NjY3MVYxNi4yNUg2LjkxNjcxQzYuMjczMjkgMTYuMjUgNS43NTAwNCAxNS43MjY3IDUuNzUwMDQgMTUuMDgzM1pNNS43NTAwNCA2LjkxNjY2QzUuNzUwMDQgNi4yNzMyNCA2LjI3MzI5IDUuNzQ5OTkgNi45MTY3MSA1Ljc0OTk5SDguNjY2NzFWNC41ODMzM0g2LjkxNjcxQzUuNjI5ODcgNC41ODMzMyA0LjU4MzM3IDUuNjI5ODMgNC41ODMzNyA2LjkxNjY2VjguNjY2NjZINS43NTAwNFY2LjkxNjY2Wk05LjI1MDA0IDEwLjcwODNDOS4yNTAwNCA5LjkwNDQ5IDkuOTA0NTQgOS4yNDk5OSAxMC43MDg0IDkuMjQ5OTlDMTEuNTEyMiA5LjI0OTk5IDEyLjE2NjcgOS45MDQ0OSAxMi4xNjY3IDEwLjcwODNDMTIuMTY2NyAxMS41MTIyIDExLjUxMjIgMTIuMTY2NyAxMC43MDg0IDEyLjE2NjdDOS45MDQ1NCAxMi4xNjY3IDkuMjUwMDQgMTEuNTEyMiA5LjI1MDA0IDEwLjcwODNaTTEzLjYyNSAxNC41QzEzLjg0OSAxNC41IDE0LjA3MyAxNC40MTQ4IDE0LjI0NCAxNC4yNDM5QzE0LjU4NTIgMTMuOTAyMSAxNC41ODUyIDEzLjM0NzkgMTQuMjQ0IDEzLjAwNjFMMTMuMDcwMyAxMS44MzNDMTMuMjM0MiAxMS40OTA2IDEzLjMzMzQgMTEuMTEyNiAxMy4zMzM0IDEwLjcwODNDMTMuMzMzNCA5LjI2MTA4IDEyLjE1NTYgOC4wODMzMyAxMC43MDg0IDguMDgzMzNDOS4yNjExMiA4LjA4MzMzIDguMDgzMzcgOS4yNjEwOCA4LjA4MzM3IDEwLjcwODNDOC4wODMzNyAxMi4xNTU2IDkuMjYxMTIgMTMuMzMzMyAxMC43MDg0IDEzLjMzMzNDMTEuMTEyNiAxMy4zMzMzIDExLjQ5MDYgMTMuMjM0MiAxMS44MzMgMTMuMDcwMkwxMy4wMDYxIDE0LjI0MzlDMTMuMTc3IDE0LjQxNDggMTMuNDAxIDE0LjUgMTMuNjI1IDE0LjVaIiBmaWxsPSJ3aGl0ZSI+PC9wYXRoPgo8L3N2Zz4=&quot;) 50% 50% / 24px 24px no-repeat rgba(0, 0, 0, 0.4) !important; position: absolute !important; opacity: 1 !important; z-index: 8675309 !important; display: none; cursor: pointer !important; border: medium !important; border-radius: 12px; top: 3365px; left: 1048px;"></span></body><div id="pt-ext-selection" role="presentation" data-pt-ext-root="true" data-pt-instance="cb67ad6f-75dd-4f62-a8bb-568b48ab16b8"></div></html>

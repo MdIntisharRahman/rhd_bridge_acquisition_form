@@ -1,0 +1,17 @@
+[Unit]
+Description=RHD ADDS (Automated Design Data System) Acquisition Form Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/acqform
+EnvironmentFile=/opt/acqform/.env
+ExecStart=/usr/bin/python3 /opt/acqform/start.py --prod --host 127.0.0.1 --port 8787
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

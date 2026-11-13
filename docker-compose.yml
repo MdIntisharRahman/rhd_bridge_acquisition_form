@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  acqform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rhd-acqform
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      - PORT=8787
+      - ENVIRONMENT=production
+      - HOST=0.0.0.0
+      - SECRET_KEY=${SECRET_KEY:-rhd-adds-precision-engineering-secret-key-prod-2026}
+      - DATABASE_URL=${DATABASE_URL:-postgresql+psycopg2://postgres:postgres@host.docker.internal:5433/rhd_adds}
+      - SQLITE_FALLBACK_URL=sqlite:////app/data/rhd_adds_fallback.db
+      - WEBMAP_BASE_URL=https://webmap.rhdbridge.com
+      - CORS_ALLOWED_ORIGINS=https://acqform.rhdbridge.com,https://acq.rhdbridge.com,https://webmap.rhdbridge.com,https://rhdbridge.com,http://127.0.0.1:8787,http://localhost:8787
+    volumes:
+      - acqform_data:/app/data
+      - acqform_uploads:/app/uploads
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  acqform_data:
+  acqform_uploads:

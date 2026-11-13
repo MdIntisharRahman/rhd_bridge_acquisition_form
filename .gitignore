@@ -1,0 +1,39 @@
+# Environments & Secrets
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+env/
+venv/
+*.db
+*.sqlite3
+*.log
+
+# Node / Frontend
+node_modules/
+dist/
+frontend/dist/
+.npm
+.eslintcache
+
+# Development & Agent Metadata
+.impeccable/
+.impeccable-live/
+.impeccable-live.json
+.agents/
+.codebase-memory/
+.rtk/
+build_err.txt
+
+# OS Files
+Thumbs.db
+[Ee]xcluded/
+Desktop.ini
+.DS_Store
