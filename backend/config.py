@@ -21,7 +21,21 @@ class Settings(BaseSettings):
     SQLITE_FALLBACK_URL: str = "sqlite:///./rhd_adds_fallback.db"
     
     WEBMAP_BASE_URL: str = os.getenv("WEBMAP_BASE_URL", "https://webmap.rhdbridge.com")
-    UPLOAD_DIR: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
+    UPLOAD_DIR: str = os.getenv(
+        "UPLOAD_DIR",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
+    )
+    
+    # Network Attached Storage (NAS) & Nextcloud Staging Architecture
+    NAS_STAGING_DIR: str = os.getenv(
+        "NAS_STAGING_DIR",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "storage", "nas")
+    )
+    STORAGE_BACKEND: str = os.getenv("STORAGE_BACKEND", "local")  # 'local' or 'nextcloud'
+    NEXTCLOUD_URL: str = os.getenv("NEXTCLOUD_URL", "")
+    NEXTCLOUD_USERNAME: str = os.getenv("NEXTCLOUD_USERNAME", "")
+    NEXTCLOUD_PASSWORD: str = os.getenv("NEXTCLOUD_PASSWORD", "")
+    NEXTCLOUD_ROOT_DIR: str = os.getenv("NEXTCLOUD_ROOT_DIR", "/RHD_ADDS_Acquisitions")
     
     # Server binding
     HOST: str = os.getenv("HOST", "0.0.0.0")

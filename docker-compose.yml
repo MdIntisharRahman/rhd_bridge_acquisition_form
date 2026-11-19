@@ -20,7 +20,8 @@ services:
       - CORS_ALLOWED_ORIGINS=https://acqform.rhdbridge.com,https://acq.rhdbridge.com,https://webmap.rhdbridge.com,https://rhdbridge.com,http://127.0.0.1:8787,http://localhost:8787
     volumes:
       - acqform_data:/app/data
-      - acqform_uploads:/app/uploads
+      - acqform_uploads:/app/backend/uploads
+      - acqform_nas:/app/backend/storage/nas
     networks:
       - default
       - webmap_net
@@ -36,3 +37,4 @@ networks:
 volumes:
   acqform_data:
   acqform_uploads:
+  acqform_nas:

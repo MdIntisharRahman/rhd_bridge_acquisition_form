@@ -14,7 +14,10 @@ import {
   CheckCircle2, 
   XCircle, 
   Building2, 
-  Users 
+  Users,
+  HardDrive,
+  FolderTree,
+  CloudUpload
 } from 'lucide-react';
 import { api } from '../../services/api';
 
@@ -22,6 +25,8 @@ export default function SupremeOperationsConsole({ currentUser }) {
   const [tasks, setTasks] = useState([]);
   const [auditLogs, setAuditLogs] = useState([]);
   const [designDivisions, setDesignDivisions] = useState([]);
+  const [nasStatus, setNasStatus] = useState(null);
+  const [syncingNas, setSyncingNas] = useState(false);
   const [loading, setLoading] = useState(true);
   const [runningType, setRunningType] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -54,19 +59,35 @@ export default function SupremeOperationsConsole({ currentUser }) {
   const loadSupremeData = async () => {
     try {
       setLoading(true);
-      const [tasksRes, logsRes, divRes] = await Promise.all([
+      const [tasksRes, logsRes, divRes, nasRes] = await Promise.all([
         api.getSupremeTasks(),
         api.getSupremeAuditLogs(null, 50),
-        api.getSupremeDesignDivisions()
+        api.getSupremeDesignDivisions(),
+        api.getNasStatus().catch(() => null)
       ]);
       setTasks(tasksRes);
       setAuditLogs(logsRes);
       setDesignDivisions(divRes);
+      setNasStatus(nasRes);
     } catch (err) {
       console.error("Failed to load Supreme console data:", err);
       setMsg({ type: 'error', text: `Failed to load sovereign state: ${err.message}` });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSyncNas = async () => {
+    try {
+      setSyncingNas(true);
+      const res = await api.syncAllNasRecords();
+      setMsg({ type: 'success', text: res.message || 'NAS directory structure synchronized successfully.' });
+      const updatedStatus = await api.getNasStatus();
+      setNasStatus(updatedStatus);
+    } catch (err) {
+      setMsg({ type: 'error', text: `NAS synchronization failed: ${err.message}` });
+    } finally {
+      setSyncingNas(false);
     }
   };
 
@@ -414,6 +435,93 @@ export default function SupremeOperationsConsole({ currentUser }) {
             >
               {runningType === 'BATCH_REBUILD' ? 'Rebuilding...' : 'Rebuild All'}
             </button>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION: Network Attached Storage (NAS) Staging & Nextcloud System Status */}
+      <div className="glass-panel p-5 shadow-xs bg-white/90 border border-[#cadbe7] rounded-2xl">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 border-b border-[#cadbe7]/70">
+          <div className="flex items-start space-x-3">
+            <div className="p-2.5 bg-[#e7f0f5] rounded-xl text-[#1c508c] shrink-0 border border-[#cadbe7]">
+              <HardDrive className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center space-x-2">
+                <h2 className="text-base font-black text-[#112047]" style={{ fontFamily: 'var(--font-display)' }}>
+                  Network Attached Storage (NAS) & Nextcloud Integration
+                </h2>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#e7f0f5] text-[#1c508c] border border-[#3699c2]/30">
+                  {nasStatus?.storage_mode || 'LOCAL_STAGING'}
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-300">
+                  {nasStatus?.readiness_signal || 'READY'}
+                </span>
+              </div>
+              <p className="text-xs text-[#536b82] mt-0.5">
+                Staged institutional folder hierarchy: <code className="text-[#1c508c] font-bold">[Zone] / [Circle] / [Division] / demand /</code> & <code className="text-[#1c508c] font-bold">deliverables /</code>.
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={handleSyncNas}
+            disabled={syncingNas}
+            className="btn-festive-blue text-xs font-bold px-4 py-2 flex items-center space-x-2 shrink-0 cursor-pointer shadow-xs active:scale-95"
+          >
+            <CloudUpload className="w-4 h-4" />
+            <span>{syncingNas ? 'Synchronizing NAS...' : 'Sync All Demands to NAS'}</span>
+          </button>
+        </div>
+
+        {/* Telemetry Matrix */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 mt-4">
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Staged Zones</span>
+            <span className="text-lg font-black text-[#112047] font-mono">{nasStatus?.telemetry?.total_zones ?? 0}</span>
+          </div>
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Circles</span>
+            <span className="text-lg font-black text-[#112047] font-mono">{nasStatus?.telemetry?.total_circles ?? 0}</span>
+          </div>
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Divisions</span>
+            <span className="text-lg font-black text-[#112047] font-mono">{nasStatus?.telemetry?.total_divisions ?? 0}</span>
+          </div>
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Demand JSONs</span>
+            <span className="text-lg font-black text-[#1c508c] font-mono">{nasStatus?.telemetry?.total_demand_jsons ?? 0}</span>
+          </div>
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Field Files</span>
+            <span className="text-lg font-black text-[#3699c2] font-mono">{nasStatus?.telemetry?.total_demand_files ?? 0}</span>
+          </div>
+          <div className="p-3 bg-[#e7f0f5]/60 rounded-xl border border-[#cadbe7]/80 text-center">
+            <span className="text-[10px] font-bold text-[#536b82] uppercase tracking-wider block">Deliverables</span>
+            <span className="text-lg font-black text-emerald-700 font-mono">{nasStatus?.telemetry?.total_deliverable_files ?? 0}</span>
+          </div>
+        </div>
+
+        {/* Directory Staging Path & Nextcloud Readiness Note */}
+        <div className="mt-4 p-3 bg-slate-50 rounded-xl border border-slate-200/90 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+          <div className="space-y-0.5 min-w-0">
+            <div className="font-bold text-[#112047] flex items-center space-x-1.5">
+              <FolderTree className="w-3.5 h-3.5 text-[#1c508c]" />
+              <span>Staging Storage Root:</span>
+              <code className="text-[11px] font-mono bg-white px-2 py-0.5 rounded border border-slate-200 text-[#112047] truncate">
+                {nasStatus?.staging_dir || '/storage/nas'}
+              </code>
+            </div>
+            <div className="text-[11px] text-[#536b82]">
+              Nextcloud Endpoint: <span className="font-mono font-semibold">{nasStatus?.nextcloud_url}</span> • Root: <span className="font-mono font-semibold">{nasStatus?.nextcloud_root_dir}</span>
+            </div>
+          </div>
+
+          <div className="shrink-0 text-right">
+            <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-semibold border border-emerald-200">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Nextcloud WebDAV Adapter Ready</span>
+            </span>
           </div>
         </div>
       </div>

@@ -396,7 +396,15 @@ class AttachmentResponse(BaseModel):
 
     @computed_field
     def download_url(self) -> str:
-        return f"/uploads/{self.stored_file_name}" if self.stored_file_name else ""
+        return f"/api/attachments/{self.id}/download" if self.id else (f"/uploads/{self.stored_file_name}" if self.stored_file_name else "")
+
+    @computed_field
+    def file_url(self) -> str:
+        return f"/api/attachments/{self.id}/download" if self.id else ""
+
+    @computed_field
+    def original_filename(self) -> str:
+        return self.file_name
 
     class Config:
         from_attributes = True

@@ -250,5 +250,40 @@ export const api = {
     a.remove();
     setTimeout(() => window.URL.revokeObjectURL(url), 1000);
     return true;
+  },
+
+  // --- Network Attached Storage (NAS) & Nextcloud Staging ---
+  getNasStatus: () => request('/nas/status'),
+  syncAllNasRecords: () => request('/nas/sync-all', { method: 'POST' }),
+  getAttachmentDownloadUrl: (attId) => `/api/attachments/${attId}/download`,
+  downloadAttachment: async (attId, fallbackFilename = 'attachment.pdf') => {
+    const token = getStoredToken();
+    const res = await fetch(`/api/attachments/${attId}/download`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    if (!res.ok) {
+      let detail = `Attachment download failed (${res.status})`;
+      try {
+        const err = await res.json();
+        detail = err.detail || err.message || detail;
+      } catch (_) {}
+      throw new Error(detail);
+    }
+    const blob = await res.blob();
+    const disposition = res.headers.get('Content-Disposition');
+    let filename = fallbackFilename;
+    if (disposition && disposition.includes('filename=')) {
+      const match = disposition.match(/filename="?([^"]+)"?/);
+      if (match && match[1]) filename = match[1];
+    }
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+    return true;
   }
 };

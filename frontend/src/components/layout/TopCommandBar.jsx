@@ -11,15 +11,26 @@ import {
 import { api } from '../../services/api';
 
 const ROLES = [
-  { key: 'SUPREME', username: 'supreme', label: 'Supreme Authority', group: 'Constitutional', badgeColor: 'bg-gradient-to-r from-[#4f46e5] to-[#7c3aed]' },
-  { key: 'WEBMASTER', username: 'webmaster', label: 'Central Webmaster', group: 'Governance', badgeColor: 'bg-gradient-to-r from-[#034081] to-[#01c1f2]' },
-  { key: 'BDD_EE_1', username: 'bdd_ee_1', label: 'Design Division-1 EE', group: 'Dhaka, Mymensingh, Rangpur', badgeColor: 'bg-[#034081]' },
-  { key: 'BDD_EE_2', username: 'bdd_ee_2', label: 'Design Division-2 EE', group: 'Sylhet, Cumilla, Chattogram', badgeColor: 'bg-[#1d4ed8]' },
-  { key: 'BDD_EE_3', username: 'bdd_ee_3', label: 'Design Division-3 EE', group: 'Khulna, Barishal, Rajshahi', badgeColor: 'bg-[#4338ca]' },
-  { key: 'BDD_SDE', username: 'bdd_sde_1', label: 'Bridge Design SDE', group: 'Structural & Hydraulic Modeling', badgeColor: 'bg-[#0284c7]' },
-  { key: 'FIELD_EE', username: 'field_ee', label: 'Field Division EE', group: 'Executive Authorization & Exchange', badgeColor: 'bg-[#059669]' },
-  { key: 'FIELD_SDE', username: 'field_sde', label: 'Field Sub-Divisional Engr', group: 'Verification & Site Execution', badgeColor: 'bg-[#10b981]' },
-  { key: 'FIELD_SAE', username: 'field_sae', label: 'Field Sub-Assistant Engr', group: 'Primary Data Acquisition', badgeColor: 'bg-[#34d399]' },
+  // 1. Constitutional Authority & Webmaster
+  { key: 'SUPREME', username: 'supreme', label: 'Supreme Authority', group: 'Constitutional Audit & System Control', badgeColor: 'bg-[#112047]' },
+  { key: 'WEBMASTER', username: 'webmaster', label: 'Central Webmaster', group: 'Senior System Analyst', badgeColor: 'bg-[#1c508c]' },
+
+  // 2. Bridge Management Wing & Design Circle Leadership
+  { key: 'BMW_ACE', username: 'bmw_ace', label: 'Bridge Management ACE', group: 'Additional Chief Engineer, BMW', badgeColor: 'bg-[#1c508c]' },
+  { key: 'BDC_SE', username: 'bdc_se', label: 'Bridge Design Circle SE', group: 'Superintending Engineer, BDC', badgeColor: 'bg-[#1c508c]' },
+
+  // 3. Bridge Design Divisions
+  { key: 'BDD_EE_1', username: 'bdd_ee_1', label: 'Design Division-1 EE', group: 'Dhaka, Mymensingh, Rangpur', badgeColor: 'bg-[#3699c2]' },
+  { key: 'BDD_EE_2', username: 'bdd_ee_2', label: 'Design Division-2 EE', group: 'Sylhet, Cumilla, Chattogram', badgeColor: 'bg-[#3699c2]' },
+  { key: 'BDD_EE_3', username: 'bdd_ee_3', label: 'Design Division-3 EE', group: 'Khulna, Barishal, Rajshahi', badgeColor: 'bg-[#3699c2]' },
+  { key: 'BDD_SDE', username: 'bdd_sde_1', label: 'Bridge Design SDE', group: 'Structural & Hydraulic Modeling', badgeColor: 'bg-[#3699c2]' },
+
+  // 4. Field Hierarchy (Demonstration Corridor: Dhaka Zone)
+  { key: 'FIELD_ACE', username: 'field_ace', label: 'Dhaka Zone ACE', group: 'Additional Chief Engineer, Dhaka Zone', badgeColor: 'bg-[#1e7e61]' },
+  { key: 'FIELD_SE', username: 'field_se', label: 'Dhaka Circle SE', group: 'Superintending Engineer, Dhaka Circle', badgeColor: 'bg-[#1e7e61]' },
+  { key: 'FIELD_EE', username: 'field_ee', label: 'Dhaka Division EE', group: 'Executive Engineer, Dhaka Road Div', badgeColor: 'bg-[#1e7e61]' },
+  { key: 'FIELD_SDE', username: 'field_sde', label: 'Dhaka Sub-Div SDE', group: 'Sub-Divisional Engineer, Dhaka Sub-Div-1', badgeColor: 'bg-[#1e7e61]' },
+  { key: 'FIELD_SAE', username: 'field_sae', label: 'Dhaka Section SAE', group: 'Sub-Assistant Engineer, Survey Team', badgeColor: 'bg-[#1e7e61]' },
 ];
 
 export default function TopCommandBar({ 
@@ -113,8 +124,7 @@ export default function TopCommandBar({
 
   const isDivisionAccount = currentUser?.username?.startsWith('ee_') || 
                             currentUser?.username?.startsWith('sde_') || 
-                            currentUser?.username?.startsWith('div_') ||
-                            Boolean(currentUser?.office_division_id && !['supreme', 'webmaster'].includes(currentUser?.username));
+                            currentUser?.username?.startsWith('div_');
   const currentRoleMeta = ROLES.find(r => r.username === currentUser?.username || r.key === currentUser?.role) || ROLES[ROLES.length - 1];
 
   const filteredDivisions = divisionList.filter(d => 
@@ -123,14 +133,14 @@ export default function TopCommandBar({
   );
 
   return (
-    <header className="glass-header !shadow-none !border-none h-16 px-4 sm:px-6 flex items-center justify-between select-none z-30 sticky top-0">
+    <header className="glass-header !shadow-none !border-none h-16 px-4 sm:px-6 flex items-center justify-between select-none z-30 sticky top-0 bg-white/85 backdrop-blur-md border-b border-[#cadbe7]/70">
           {/* Brand & System Title with Authentic RHD Logo */}
           <div className="flex items-center space-x-3">
             {/* Collapsible Sidebar Toggle Button */}
             {onToggleSidebar && (
               <button
                 onClick={onToggleSidebar}
-                className="p-2 rounded-xl bg-white/70 hover:bg-white text-[#00225a] border border-white/90 shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center shrink-0"
+                className="p-2 rounded-xl bg-white/80 hover:bg-white text-[#112047] border border-[#cadbe7] shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center shrink-0"
                 title={sidebarOpen ? "Hide navigation sidebar (Ctrl+B)" : "Open navigation sidebar (Ctrl+B)"}
                 aria-label="Toggle Sidebar"
               >
@@ -146,21 +156,21 @@ export default function TopCommandBar({
                 onError={(e) => { e.currentTarget.src = '/RHD_Logo.png'; }}
               />
               <span 
-                className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white animate-pulse shadow-xs" 
+                className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#1e7e61] ring-2 ring-white animate-pulse shadow-xs" 
                 title="Institutional Gateway Live & Synced"
               />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center space-x-2">
-                <span className="font-extrabold text-lg tracking-tight text-[#001139]" style={{ fontFamily: 'var(--font-display)' }}>
+                <span className="font-extrabold text-lg tracking-tight text-[#112047]" style={{ fontFamily: 'var(--font-display)' }}>
                   RHD ADDS
                 </span>
-                <span className="text-[#d5dbe7]">|</span>
-                <span className="text-xs text-[#034081] font-extrabold px-1.5 py-0.5 tracking-wider hidden sm:inline" style={{ fontFamily: 'var(--font-subhead)' }}>
+                <span className="text-[#cadbe7]">|</span>
+                <span className="text-xs text-[#1c508c] font-extrabold px-1.5 py-0.5 tracking-wider hidden sm:inline" style={{ fontFamily: 'var(--font-subhead)' }}>
                   System for Coordinated Exchange of Design Data
                 </span>
               </div>
-              <span className="text-[10.5px] text-[#5b6b7a] font-medium hidden md:inline">
+              <span className="text-[10.5px] text-[#536b82] font-medium hidden md:inline">
                 Bridge Design Circle • Roads and Highways Department
               </span>
             </div>
@@ -185,54 +195,54 @@ export default function TopCommandBar({
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 disabled={switching}
-                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-xs bg-white/80 hover:bg-white text-[#00225a] border border-slate-300/80 transition-all cursor-pointer shadow-xs hover:shadow-sm active:scale-98"
+                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-white/90 hover:bg-white text-[#112047] border border-[#cadbe7] transition-all cursor-pointer shadow-xs hover:shadow-sm active:scale-98"
               >
-                <UserCog className="w-3.5 h-3.5" />
+                <UserCog className="w-3.5 h-3.5 text-[#1c508c]" />
                 <div className="flex flex-col text-right">
                   <span className="font-bold text-xs" style={{ fontFamily: 'var(--font-body)' }}>
                     {isDivisionAccount ? `${currentUser.full_name}` : currentRoleMeta.label}
                   </span>
                 </div>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#034081] transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#1c508c] transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {menuOpen && (
                 <div 
-                  className="absolute right-0 top-full mt-2 w-84 sm:w-88 bg-white/95 backdrop-blur-3xl border border-white/90 rounded-2xl p-3 z-50 shadow-2xl dropdown-appear select-auto"
+                  className="absolute right-0 top-full mt-2 w-88 sm:w-92 bg-white/95 backdrop-blur-3xl border border-[#cadbe7] rounded-2xl p-3 z-50 shadow-2xl dropdown-appear select-auto"
                   style={{
-                    boxShadow: '0 28px 65px -12px rgba(0, 17, 57, 0.28), 0 12px 28px -6px rgba(0, 34, 90, 0.14), inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95), 0 0 0 1px rgba(0, 34, 90, 0.06)'
+                    boxShadow: '0 28px 65px -12px rgba(17, 32, 71, 0.22), 0 12px 28px -6px rgba(17, 32, 71, 0.12), inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95)'
                   }}
                 >
-                  {/* Header with Switcher Tabs: Roles vs 75 Divisions */}
-                  <div className="px-1 pt-0.5 pb-2.5 border-b border-slate-200/80">
-                    <div className="text-[11px] font-bold text-slate-800 uppercase tracking-wider mb-2" style={{ fontFamily: 'var(--font-caption)' }}>
-                      Profile
+                  {/* Header with Switcher Tabs: Roles vs 68 Divisions */}
+                  <div className="px-1 pt-0.5 pb-2.5 border-b border-[#cadbe7]/80">
+                    <div className="text-[11px] font-bold text-[#112047] uppercase tracking-wider mb-2" style={{ fontFamily: 'var(--font-caption)' }}>
+                      Institutional Profile Switcher
                     </div>
-                    <div className="grid grid-cols-2 gap-1 bg-slate-200/60 p-1 rounded-xs border border-slate-200/50">
+                    <div className="grid grid-cols-2 gap-1 bg-[#e7f0f5] p-1 rounded-lg border border-[#cadbe7]/50">
                       <button
                         type="button"
                         onClick={() => setSwitcherTab('roles')}
-                        className={`py-1.5 rounded-xs text-xs font-bold transition-all cursor-pointer ${
-                          switcherTab === 'roles' ? 'bg-[#034081] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        className={`py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                          switcherTab === 'roles' ? 'bg-[#1c508c] text-white shadow-xs' : 'text-[#536b82] hover:text-[#112047] hover:bg-white/60'
                         }`}
                       >
-                        Engineers (Roles)
+                        Institutional Hierarchy ({ROLES.length})
                       </button>
                       <button
                         type="button"
                         onClick={() => setSwitcherTab('divisions')}
-                        className={`py-1.5 rounded-xs text-xs font-bold transition-all cursor-pointer ${
-                          switcherTab === 'divisions' ? 'bg-[#034081] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+                        className={`py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                          switcherTab === 'divisions' ? 'bg-[#1c508c] text-white shadow-xs' : 'text-[#536b82] hover:text-[#112047] hover:bg-white/60'
                         }`}
                       >
-                        Divisions ({divisionList.length || 68})
+                        Field Divisions ({divisionList.length || 68})
                       </button>
                     </div>
                   </div>
 
                   {/* Tab 1: Roles List */}
                   {switcherTab === 'roles' && (
-                    <div className="max-h-80 overflow-y-auto py-1.5 space-y-0.5 divide-y divide-slate-100">
+                    <div className="max-h-84 overflow-y-auto py-1.5 space-y-0.5 divide-y divide-[#cadbe7]/30">
                       {ROLES.map((role) => {
                         const isActive = (currentUser?.username === role.username || currentUser?.role === role.key) && !isDivisionAccount;
                         return (
@@ -241,18 +251,18 @@ export default function TopCommandBar({
                             onClick={() => handleRoleSelect(role)}
                             className={`w-full text-left px-3 py-2 flex items-center justify-between text-xs transition-all duration-150 cursor-pointer rounded-xl hover:translate-x-0.5 ${
                               isActive
-                                ? 'bg-[#034081]/10 text-[#034081] font-bold border border-[#034081]/25'
-                                : 'hover:bg-slate-100/80 text-[#001139]'
+                                ? 'bg-[#e7f0f5] text-[#1c508c] font-bold border border-[#1c508c]/35'
+                                : 'hover:bg-[#e7f0f5]/60 text-[#112047]'
                             }`}
                           >
                             <div className="flex items-center space-x-2.5 min-w-0">
                               <div className={`w-2.5 h-2.5 rounded-full ${role.badgeColor} shrink-0`}></div>
                               <div className="min-w-0">
-                                <div className="font-bold text-slate-900 truncate" style={{ fontFamily: 'var(--font-subhead)' }}>{role.label}</div>
-                                <div className="text-[10px] text-slate-500 font-medium truncate">{role.group}</div>
+                                <div className="font-bold text-[#112047] truncate" style={{ fontFamily: 'var(--font-subhead)' }}>{role.label}</div>
+                                <div className="text-[10px] text-[#536b82] font-medium truncate">{role.group}</div>
                               </div>
                             </div>
-                            {isActive && <Check className="w-4 h-4 text-[#034081] shrink-0 ml-2" />}
+                            {isActive && <Check className="w-4 h-4 text-[#1c508c] shrink-0 ml-2" />}
                           </button>
                         );
                       })}
@@ -314,8 +324,8 @@ export default function TopCommandBar({
                                     }}
                                     className={`px-2 py-0.5 text-[10.5px] font-bold rounded-md border transition-all cursor-pointer hover:scale-105 active:scale-95 ${
                                       isEE
-                                        ? 'bg-[#034081] text-white border-[#00225a] shadow-xs ring-1 ring-blue-300'
-                                        : 'bg-white hover:bg-slate-100 text-[#034081] border-slate-300'
+                                        ? 'bg-[#1c508c] text-white border-[#112047] shadow-xs ring-1 ring-blue-300'
+                                        : 'bg-white hover:bg-[#e7f0f5] text-[#1c508c] border-[#cadbe7]'
                                     }`}
                                     title={`Login as Executive Engineer (${div.name})`}
                                   >
@@ -329,8 +339,8 @@ export default function TopCommandBar({
                                     }}
                                     className={`px-2 py-0.5 text-[10.5px] font-bold rounded-md border transition-all cursor-pointer hover:scale-105 active:scale-95 ${
                                       isSDE
-                                        ? 'bg-[#059669] text-white border-[#047857] shadow-xs ring-1 ring-emerald-300'
-                                        : 'bg-white hover:bg-slate-100 text-[#059669] border-slate-300'
+                                        ? 'bg-[#1e7e61] text-white border-[#134e40] shadow-xs ring-1 ring-emerald-300'
+                                        : 'bg-white hover:bg-emerald-50 text-[#1e7e61] border-[#cadbe7]'
                                     }`}
                                     title={`Login as Sub-Divisional Engineer (${div.name})`}
                                   >

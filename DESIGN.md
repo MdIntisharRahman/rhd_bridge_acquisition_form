@@ -1,22 +1,19 @@
 ---
-name: RHD ADDS (System for Coordinated Exchange of Design Data)
+name: RHD ADDS (Precision Design Data Acquisition & Exchange System)
 description: Precision civil & structural engineering acquisition instrument and hierarchical ministerial endorsement pipeline for Bangladesh Roads and Highways Department
+mode: operate
 colors:
-  primary: "#025ec7"
-  azure: "#429afe"
-  mint: "#15db7c"
-  yellow: "#ffff2d"
-  orange: "#e95a24"
-  navy: "#00225a"
-  slate: "#5b6b7a"
-  midnight: "#001139"
-  canvas: "#f8fafc"
-  border: "#d5dbe7"
-  cyan: "#01c1f2"
-  cobalt: "#034081"
-  neutral-bg: "#f8fafc"
-  neutral-card: "rgba(255, 255, 255, 0.72)"
-  neutral-border: "rgba(255, 255, 255, 0.88)"
+  deep-navy: "#112047"
+  denim: "#1c508c"
+  steel-blue: "#3699c2"
+  arctic-ice: "#95d4e5"
+  arctic-wash: "#e7f0f5"
+  canvas-light: "#f8fafc"
+  neutral-card: "rgba(255, 255, 255, 0.82)"
+  neutral-border: "rgba(28, 80, 140, 0.18)"
+  steel-border: "rgba(54, 153, 194, 0.35)"
+  mint-endorsed: "#1e7e61"
+  amber-revision: "#c05621"
 typography:
   display:
     fontFamily: "Outfit, sans-serif"
@@ -57,80 +54,51 @@ spacing:
   xl: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
+    backgroundColor: "{colors.denim}"
+    hoverBackgroundColor: "{colors.deep-navy}"
     textColor: "#ffffff"
     rounded: "{rounded.md}"
     padding: "8px 16px"
-  button-azure:
-    backgroundColor: "{colors.azure}"
-    textColor: "#ffffff"
-    rounded: "{rounded.md}"
-    padding: "8px 16px"
-  button-mint:
-    backgroundColor: "{colors.mint}"
-    textColor: "{colors.midnight}"
+  button-secondary:
+    backgroundColor: "{colors.arctic-wash}"
+    textColor: "{colors.deep-navy}"
+    borderColor: "{colors.steel-blue}"
     rounded: "{rounded.md}"
     padding: "8px 16px"
 ---
 
 ## Overview
 
-RHD ADDS (System for Coordinated Exchange of Design Data) is an authoritative civil and structural engineering acquisition instrument for the Roads and Highways Department (RHD), Government of the People's Republic of Bangladesh. The visual architecture pairs a double-beveled glassmorphism aesthetic with high-density tabular precision, designed for bright daylight field conditions on tablets and dual-monitor engineering scrutiny at Sarak Bhaban, Dhaka.
+RHD ADDS (System for Coordinated Exchange of Design Data) is an authoritative civil and structural engineering acquisition instrument for the Roads and Highways Department (RHD), Government of the People's Republic of Bangladesh. The interface operates in **Operate Mode**—prioritizing technical scanability, tabular density, field-survey accuracy, and ministerial chain of custody.
 
-## Colors
+## Palette: Navy / Denim / Steel Blue / Arctic Ice
 
-The palette balances government institutional authority with vibrant engineering clarity:
-- **Primary / Cobalt (`#025ec7`, `#034081`)**: Structural authority, primary actions, and navigational markers.
-- **Azure (`#429afe`)**: Interactive states, input focus halos, and active selections.
-- **Mint (`#15db7c`)**: Approved ministerial endorsements, valid verification states, and complete dossiers.
-- **Orange / Tomato (`#e95a24`)**: Required revisions, returns for correction, and critical alerts.
-- **Navy & Midnight (`#00225a`, `#001139`)**: High-contrast typography, strict headers, and high-readability label text.
-- **Canvas (`#f8fafc` to `#f1f5f9`)**: Daylight paper-like background with subtle architectural desk watermark.
+Directly inspired by the official engineering palette (`sources/navy-benim-steelblue-arctic-ice.jpg`):
+- **Deep Navy (`#112047`)**: Foundations, executive command titles, high-contrast labels, and structural anchors.
+- **Denim Blue (`#1c508c`)**: Active tabs, ministerial endorsement triggers, verified state indicators, and primary action controls.
+- **Steel Blue (`#3699c2`)**: Focus rings, secondary status accents, interactive navigation hovers, and table borders.
+- **Arctic Ice (`#95d4e5`)**: Luminous highlight pips, subtle badges, active stepper glow, and selected card accents.
+- **Arctic Wash (`#e7f0f5`)**: Glare-free daylight surface wash, frosted table headers, and neutral container fills.
+- **Canvas (`#f8fafc` to `#e7f0f5`)**: Daylight architectural drafting canvas with calm gradient depth.
 
-## Typography
+## Storage Architecture: Nextcloud NAS Staging
 
-Typography enforces data scanability and numerical precision:
-- **Display**: Outfit (Geometric, modern authority for top bar and brand titles).
+Demands and survey deliverables conform to the institutional NAS hierarchy:
+`[Zone] / [Circle] / [Division] / demand /`
+- `{code}_demand.json`: Full structural snapshot of the demand dossier, road chainage, coordinates, stratum borelogs, and endorsement trail.
+- Uploaded survey files (soil reports, site plans, cross sections, photos, demand letters).
+`[Zone] / [Circle] / [Division] / deliverables /`
+- Structural calculation sheets, CAD drawings (DWG/DXF), and approved bridge design packages produced by the Bridge Design Circle.
+
+## Typography & Scanability
+
+- **Display**: Outfit (Geometric precision for headers and system branding).
 - **Headlines & Subheads**: ITC Stone Sans / ClanPro (Structural engineering section heads).
-- **Body & Controls**: SmartGothic / Samsung Sans (High-density readability for inputs and tables).
-- **Numbers & Coordinates**: Tabular-nums with SmartGothic / JetBrains Mono strictly for GPS coordinates, chainages, and borehole depths.
-
-## Layout
-
-- **Top Precision Command Bar**: 64px glass header featuring live user profile, instant role switcher, and dynamic division badge.
-- **Collapsible Technical Sidebar**: Collapsible left navigation rail (`Ctrl+B` toggle) with direct shortcuts to Registries, Consoles, and Workspaces.
-- **6-Tab Engineering Workspaces**: Tabular workspaces for Bridge and Culvert dossiers with smooth vertical pane transitions and breadcrumb steppers.
-- **Fixed Jurisdiction Grid**: 3-column Administrative Jurisdiction grid (Zone, Circle, Division) locked to the officer's posting.
+- **Body & Inputs**: SmartGothic / Samsung Sans (Dense legibility for inputs, units, and dropdowns).
+- **Numeric & Coordinate Data**: Tabular-nums with SmartGothic / JetBrains Mono strictly for GPS coordinates, chainages, and borehole depths.
 
 ## Elevation & Depth
 
-- **Ambient Canvas**: Base architectural desk layer softened by a translucent whitish veil (`rgba(255, 255, 255, 0.26)` with `3px` blur) and calm ambient light.
-- **Double-Beveled Glass Panels**: Multi-layered specular highlights (`inset 0 1.5px 1.5px 0 rgba(209, 209, 209, 0.98)`), frosted backdrops (`backdrop-blur-md`), and soft ambient shadows.
-- **Elevated Interactive Controls**: Tactile button elevation, active state depress transitions, and distinct focus rings.
-
-## Shapes
-
-- Inputs and controls use clean `7px` to `8px` rounded corners (`rounded-lg`).
-- Cards and containers use `12px` to `16px` curvature (`rounded-xl`, `rounded-2xl`).
-- Status badges and pill indicators use `rounded-full`.
-
-## Components
-
-- **Engineering Inputs**: Frosted translucent input fields with explicit engineering units (`m`, `mm`, `m³/s`, `kN/m²`). Spin arrows removed for cleaner presentation.
-- **Radio 27**: Custom radio selector with inset rings and fluid selection animation.
-- **Unified Side Flow Panel**: Sticky right-hand workflow tracker displaying stage completeness, dossier state, and ministerial sign-off controls.
-- **SPT Geotechnical Grid**: Interactive 40-borehole strata table with auto-calculating N-values and early termination indicator.
-
-## Do's and Don'ts
-
-### Do's
-- Always display explicit engineering units next to numeric fields.
-- Keep background colors calm and non-intrusive so text and numbers remain 100% legible.
-- Lock administrative jurisdiction to the user's division profile for field accounts.
-- Enforce strict tabular numeral alignment (`font-variant-numeric: tabular-nums`).
-
-### Don'ts
-- Do not use the forbidden term "Admin"; governance is strictly `SUPREME` and `WEBMASTER`.
-- Do not use neon or saturated gradient fills behind data entry forms.
-- Do not allow field engineers to modify assigned division/circle/zone boundaries.
-- Do not use generic consumer SaaS rounded pill buttons for engineering action triggers.
+- **Double-Beveled Glass Panels**: Translucent white panels (`rgba(255, 255, 255, 0.82)`) with specular top bevel (`inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95)`) and deep navy ambient shadow (`0 20px 48px -12px rgba(17, 32, 71, 0.12)`).
+- **Subtle Contrasting Borders**: Crisp `1px` borders using `rgba(28, 80, 140, 0.18)` or `#cadbe7`.
+- **Active Focus Rings**: High-visibility `2px` ring in `#3699c2` with soft `4px` arctic wash diffusion.

@@ -41,3 +41,16 @@ Desktop.ini
 # Sources & Reference Documents
 sources/
 
+# Runtime Storage & Uploads
+backend/storage/
+backend/uploads/*.pdf
+backend/uploads/*.dwg
+backend/uploads/*.dxf
+backend/uploads/*.xlsx
+backend/uploads/*.xls
+backend/uploads/*.docx
+backend/uploads/*.jpg
+backend/uploads/*.png
+!backend/uploads/.gitkeep
+
+

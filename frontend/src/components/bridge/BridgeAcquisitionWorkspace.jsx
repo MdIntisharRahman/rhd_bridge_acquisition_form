@@ -1133,7 +1133,7 @@ export default function BridgeAcquisitionWorkspace({
                               [{att.demand_officer_type || "OFFICER"}]
                             </span>
                             <a
-                              href={`/uploads/${att.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(att.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-sky-700 hover:text-sky-900 hover:underline font-medium"
@@ -1147,7 +1147,7 @@ export default function BridgeAcquisitionWorkspace({
                           </div>
                           <div className="flex items-center space-x-2">
                             <a
-                              href={`/uploads/${att.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(att.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-2 py-0.5 text-[11px] font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 rounded border border-sky-200"
@@ -2654,7 +2654,7 @@ export default function BridgeAcquisitionWorkspace({
                           className="flex justify-between items-center text-slate-800 bg-white/60 backdrop-blur-xs p-1.5 rounded-lg border border-white/80"
                         >
                           <a
-                            href={`/uploads/${a.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(a.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="truncate max-w-[200px] text-sky-700 hover:underline font-medium"
@@ -2664,7 +2664,7 @@ export default function BridgeAcquisitionWorkspace({
                           </a>
                           <div className="flex items-center space-x-1.5">
                             <a
-                              href={`/uploads/${a.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(a.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200"
@@ -2720,7 +2720,7 @@ export default function BridgeAcquisitionWorkspace({
                           className="flex justify-between items-center text-slate-800 bg-white/60 backdrop-blur-xs p-1.5 rounded-lg border border-white/80"
                         >
                           <a
-                            href={`/uploads/${a.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(a.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="truncate max-w-[200px] text-sky-700 hover:underline font-medium"
@@ -2730,7 +2730,7 @@ export default function BridgeAcquisitionWorkspace({
                           </a>
                           <div className="flex items-center space-x-1.5">
                             <a
-                              href={`/uploads/${a.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(a.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200"
@@ -2786,7 +2786,7 @@ export default function BridgeAcquisitionWorkspace({
                           className="flex justify-between items-center text-slate-800 bg-white/60 backdrop-blur-xs p-1.5 rounded-lg border border-white/80"
                         >
                           <a
-                            href={`/uploads/${a.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(a.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="truncate max-w-[200px] text-sky-700 hover:underline font-medium"
@@ -2796,7 +2796,7 @@ export default function BridgeAcquisitionWorkspace({
                           </a>
                           <div className="flex items-center space-x-1.5">
                             <a
-                              href={`/uploads/${a.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(a.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200"
@@ -2852,7 +2852,7 @@ export default function BridgeAcquisitionWorkspace({
                           className="flex justify-between items-center text-slate-800 bg-white/60 backdrop-blur-xs p-1.5 rounded-lg border border-white/80"
                         >
                           <a
-                            href={`/uploads/${a.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(a.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="truncate max-w-[200px] text-sky-700 hover:underline font-medium"
@@ -2862,7 +2862,7 @@ export default function BridgeAcquisitionWorkspace({
                           </a>
                           <div className="flex items-center space-x-1.5">
                             <a
-                              href={`/uploads/${a.stored_file_name}`}
+                              href={api.getAttachmentDownloadUrl(a.id)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200"

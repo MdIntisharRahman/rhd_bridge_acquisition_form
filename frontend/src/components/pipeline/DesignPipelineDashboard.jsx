@@ -226,15 +226,15 @@ export default function DesignPipelineDashboard({
                 Bridges & Culverts registered
               </div>
             </div>
-            <div className="w-10 h-10 rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
-              <Layers className="w-5 h-5" />
+            <div className="h-full rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
+              <Layers className="w-7" />
             </div>
           </div>
 
           <div className="glass-panel glass-metric-card cursor-default bg-sky-50/50 border-sky-200/80 p-4 flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider text-sky-700 flex items-center space-x-1">
-                <PlayCircle className="w-3.5 h-3.5" />
+                {/* <PlayCircle className="w-3.5 h-3.5" /> */}
                 <span>Design Running</span>
               </div>
               <div className="text-2xl font-black text-sky-900 mt-1">
@@ -244,15 +244,15 @@ export default function DesignPipelineDashboard({
                 Currently under calculation
               </div>
             </div>
-            <div className="w-10 h-10 rounded-xs flex items-center justify-center metric-icon transition-transform">
-              <PlayCircle className="w-5 h-5" />
+            <div className="h-full rounded-xs flex items-center justify-center metric-icon transition-transform">
+              <PlayCircle className="w-7" />
             </div>
           </div>
 
           <div className="glass-panel glass-metric-card cursor-default bg-amber-50/50 border-amber-300/80 p-4 flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider text-amber-800 flex items-center space-x-1">
-                <AlertTriangle className="w-3.5 h-3.5" />
+                {/* <AlertTriangle className="w-3.5 h-3.5" /> */}
                 <span>Suspended (Bottleneck)</span>
               </div>
               <div className="text-2xl font-black text-amber-900 mt-1">
@@ -262,15 +262,15 @@ export default function DesignPipelineDashboard({
                 Awaiting instructions / clearances
               </div>
             </div>
-            <div className="w-10 h-10 rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
-              <AlertTriangle className="w-5 h-5" />
+            <div className="h-full rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
+              <AlertTriangle className="w-7" />
             </div>
           </div>
 
           <div className="glass-panel glass-metric-card cursor-default bg-emerald-50/50 border-emerald-200/80 p-4 flex items-center justify-between">
             <div>
               <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 flex items-center space-x-1">
-                <CheckCircle2 className="w-3.5 h-3.5" />
+                {/* <CheckCircle2 className="w-3.5 h-3.5" /> */}
                 <span>Design Sent</span>
               </div>
               <div className="text-2xl font-black text-emerald-900 mt-1">
@@ -280,8 +280,8 @@ export default function DesignPipelineDashboard({
                 Approved & dispatched packages
               </div>
             </div>
-            <div className="w-10 h-10 rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
-              <CheckCircle2 className="w-5 h-5" />
+            <div className="h-full rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
+              <CheckCircle2 className="w-7 h-7" />
             </div>
           </div>
         </div>

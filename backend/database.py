@@ -22,6 +22,14 @@ def run_auto_schema_migrations(eng):
         ("bridge_acquisitions", "prepared_design_approved_at", "TIMESTAMP"),
         ("bridge_acquisitions", "dispatched_to_field_sde_at", "TIMESTAMP"),
         ("bridge_acquisitions", "dispatched_field_sde_id", "INTEGER"),
+        ("bridge_acquisitions", "chainage_km", "FLOAT"),
+        ("bridge_acquisitions", "chainage_m", "FLOAT"),
+        ("bridge_acquisitions", "design_execution_state", "VARCHAR(50) DEFAULT 'NOT_STARTED'"),
+        ("bridge_acquisitions", "bottleneck_reason", "VARCHAR(255)"),
+        ("bridge_acquisitions", "bottleneck_notes", "TEXT"),
+        ("bridge_acquisitions", "bottleneck_updated_at", "TIMESTAMP"),
+        ("bridge_acquisitions", "design_completed_at", "TIMESTAMP"),
+        ("bridge_acquisitions", "design_target_date", "TIMESTAMP"),
         
         ("culvert_acquisitions", "assigned_field_sde_id", "INTEGER"),
         ("culvert_acquisitions", "prepared_design_notes", "TEXT"),
@@ -30,6 +38,22 @@ def run_auto_schema_migrations(eng):
         ("culvert_acquisitions", "prepared_design_approved_at", "TIMESTAMP"),
         ("culvert_acquisitions", "dispatched_to_field_sde_at", "TIMESTAMP"),
         ("culvert_acquisitions", "dispatched_field_sde_id", "INTEGER"),
+        ("culvert_acquisitions", "chainage_km", "FLOAT"),
+        ("culvert_acquisitions", "chainage_m", "FLOAT"),
+        ("culvert_acquisitions", "design_execution_state", "VARCHAR(50) DEFAULT 'NOT_STARTED'"),
+        ("culvert_acquisitions", "bottleneck_reason", "VARCHAR(255)"),
+        ("culvert_acquisitions", "bottleneck_notes", "TEXT"),
+        ("culvert_acquisitions", "bottleneck_updated_at", "TIMESTAMP"),
+        ("culvert_acquisitions", "design_completed_at", "TIMESTAMP"),
+        ("culvert_acquisitions", "design_target_date", "TIMESTAMP"),
+
+        ("rhd_divisions", "ee_name", "VARCHAR(255)"),
+        ("rhd_divisions", "contact_email", "VARCHAR(255)"),
+        ("rhd_divisions", "contact_phone", "VARCHAR(50)"),
+
+        ("attachments", "file_path", "VARCHAR(500)"),
+        ("attachments", "stored_file_name", "VARCHAR(255)"),
+        ("attachments", "demand_officer_type", "VARCHAR(50)"),
     ]
     try:
         inspector = inspect(eng)

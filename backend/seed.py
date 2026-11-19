@@ -184,27 +184,20 @@ def seed_database(seed_file_path: str = None):
     user_map = {}
     default_password_hash = get_password_hash("rhd123")
     
-    # Uninitiate provisional SE and ACE accounts per institutional directive
-    uninitiated_usernames = ["bdc_se", "bmw_ace", "field_se", "field_ace"]
-    for uname in uninitiated_usernames:
-        puser = db.query(User).filter(User.username == uname).first()
-        if puser:
-            logger.info("De-initiating provisional account: %s", uname)
-            db.delete(puser)
-    
-    # Remove any stale/legacy div_* accounts to keep directory clean
-    stale_div_users = db.query(User).filter(User.username.like("div_%")).all()
-    for sdu in stale_div_users:
-        db.delete(sdu)
-    db.flush()
-
-    # Pre-fetch Design Divisions for exact linkage of BDD accounts
+    # Pre-fetch Design Divisions and Dhaka hierarchy for exact linkage
     bdd_div_1 = db.query(RhdDivision).filter(RhdDivision.name.ilike("%Bridge Design Division-1%")).first() or \
                 db.query(RhdDivision).filter(RhdDivision.code.in_(["BDD_1", "DIV_065", "DIV_072"])).first()
     bdd_div_2 = db.query(RhdDivision).filter(RhdDivision.name.ilike("%Bridge Design Division-2%")).first() or \
                 db.query(RhdDivision).filter(RhdDivision.code.in_(["BDD_2", "DIV_066", "DIV_073"])).first()
     bdd_div_3 = db.query(RhdDivision).filter(RhdDivision.name.ilike("%Bridge Design Division-3%")).first() or \
                 db.query(RhdDivision).filter(RhdDivision.code.in_(["BDD_3", "DIV_067", "DIV_074"])).first()
+
+    dhaka_div = db.query(RhdDivision).filter(RhdDivision.name == "Dhaka").first() or \
+                db.query(RhdDivision).filter(RhdDivision.name.ilike("%Dhaka%")).first()
+    dhaka_circle = dhaka_div.circle if dhaka_div else None
+    dhaka_zone = dhaka_circle.zone if dhaka_circle else None
+
+    bdc_circle = bdd_div_1.circle if bdd_div_1 else db.query(RhdCircle).filter(RhdCircle.name.ilike("%Bridge Design Circle%")).first()
 
     design_user_map = {
         "bdd_ee_1": bdd_div_1,
@@ -215,25 +208,31 @@ def seed_database(seed_file_path: str = None):
         "bdd_sde_3": bdd_div_3,
     }
 
-    dhaka_div = db.query(RhdDivision).filter(RhdDivision.name == "Dhaka").first() or \
-                db.query(RhdDivision).filter(RhdDivision.name.ilike("%Dhaka%")).first()
-
     for u in data.get("users", []):
-        # Do not initiate SE or ACE accounts for now
-        if u.get("role") in [settings.ROLE_BDC_SE, settings.ROLE_BMW_ACE, settings.ROLE_FIELD_SE, settings.ROLE_FIELD_ACE]:
-            continue
-        if u.get("username") in uninitiated_usernames:
-            continue
+        uname = u.get("username")
+        assigned_div = design_user_map.get(uname)
+        div_id = None
+        circle_id = None
+        zone_id = None
 
-        assigned_div = design_user_map.get(u["username"])
-        if not assigned_div and u["username"] in ["field_sae", "field_sde", "field_ee"]:
-            assigned_div = dhaka_div
+        if assigned_div:
+            div_id = assigned_div.id
+            circle_id = assigned_div.circle_id
+            zone_id = assigned_div.circle.zone_id if assigned_div.circle else None
+        elif uname in ["field_sae", "field_sde", "field_ee"]:
+            div_id = dhaka_div.id if dhaka_div else None
+            circle_id = dhaka_circle.id if dhaka_circle else None
+            zone_id = dhaka_zone.id if dhaka_zone else None
+        elif uname == "field_se":
+            circle_id = dhaka_circle.id if dhaka_circle else None
+            zone_id = dhaka_zone.id if dhaka_zone else None
+        elif uname == "field_ace":
+            zone_id = dhaka_zone.id if dhaka_zone else None
+        elif uname == "bdc_se":
+            circle_id = bdc_circle.id if bdc_circle else None
+            zone_id = bdc_circle.zone_id if (bdc_circle and bdc_circle.zone) else None
 
-        div_id = assigned_div.id if assigned_div else None
-        circle_id = assigned_div.circle_id if assigned_div else None
-        zone_id = assigned_div.circle.zone_id if (assigned_div and assigned_div.circle) else None
-
-        existing_user = db.query(User).filter(User.username == u["username"]).first()
+        existing_user = db.query(User).filter(User.username == uname).first()
         if not existing_user:
             # Singleton Supreme verification
             if u["role"] == settings.ROLE_SUPREME:
@@ -243,8 +242,8 @@ def seed_database(seed_file_path: str = None):
                     continue
 
             user_obj = User(
-                username=u["username"],
-                email=u["email"],
+                username=uname,
+                email=u.get("email") or f"{uname}@rhd.gov.bd",
                 hashed_password=default_password_hash,
                 full_name=u["full_name"],
                 role=u["role"],
@@ -363,21 +362,25 @@ def seed_database(seed_file_path: str = None):
 
     # 5. Pre-seed Sample Bridge and Culvert Submissions across Workflow States
     sample_bridge = db.query(BridgeAcquisition).filter(BridgeAcquisition.code == "MIS-BRG-2026-00001").first()
+    road_n1 = db.query(Road).filter(Road.road_number == "N1").first()
+    creator = user_map.get("FIELD_SAE") or db.query(User).first()
+
     if not sample_bridge:
-        road_obj = db.query(Road).filter(Road.road_number == "N1").first()
-        div_obj = db.query(RhdDivision).filter(RhdDivision.code == "DIV_001").first()
-        creator = user_map.get("FIELD_SAE") or db.query(User).first()
-        
         sample_bridge = BridgeAcquisition(
             code="MIS-BRG-2026-00001",
             workflow_status="FORWARDED_TO_BDC_SE",
             current_holder_role="BDC_SE",
             created_by_id=creator.id if creator else None,
+            zone_id=dhaka_zone.id if dhaka_zone else None,
+            circle_id=dhaka_circle.id if dhaka_circle else None,
+            division_id=dhaka_div.id if dhaka_div else None,
             proposed_bridge_type="PC Girder Bridge",
             road_type_id=1,
-            road_id=road_obj.id if road_obj else 1,
+            road_id=road_n1.id if road_n1 else 1,
             road_name="Dhaka (Jatrabari)-Comilla (Mainamati)-Chittagong-Teknaf Road",
             road_link_name_no="N1-Link-04",
+            chainage_km=194.0,
+            chainage_m=210.0,
             location_chainage_gps_text="Ch 194+210 to Ch 194+275 (Kagazpur Bridge)",
             location_google_map_link="https://webmap.rhdbridge.com/?lat=23.4567&lng=90.8765&code=MIS-BRG-2026-00001",
             location_lat_lng="23.456700, 90.876500",
@@ -430,7 +433,6 @@ def seed_database(seed_file_path: str = None):
         db.add(sample_bridge)
         db.flush()
 
-        # Add sample audit logs
         log1 = WorkflowAuditLog(
             acquisition_type="BRIDGE",
             acquisition_id=sample_bridge.id,
@@ -476,22 +478,82 @@ def seed_database(seed_file_path: str = None):
             endorsement_note="Endorsed and forwarded to Bridge Management Wing."
         )
         db.add_all([log1, log2, log3, log4])
+    else:
+        # Guarantee zone, circle, division are strictly oriented
+        sample_bridge.zone_id = dhaka_zone.id if dhaka_zone else None
+        sample_bridge.circle_id = dhaka_circle.id if dhaka_circle else None
+        sample_bridge.division_id = dhaka_div.id if dhaka_div else None
+        if not sample_bridge.chainage_km:
+            sample_bridge.chainage_km = 194.0
+            sample_bridge.chainage_m = 210.0
 
-    # Sample Culvert
+    # Sample Bridge 2: Gazipur Division (for demonstrating multi-division jurisdiction & NAS folders)
+    gazipur_div = db.query(RhdDivision).filter(RhdDivision.name == "Gazipur").first()
+    if gazipur_div:
+        sample_bridge_2 = db.query(BridgeAcquisition).filter(BridgeAcquisition.code == "MIS-BRG-2026-00002").first()
+        road_n3 = db.query(Road).filter(Road.road_number == "N3").first()
+        if not sample_bridge_2:
+            sample_bridge_2 = BridgeAcquisition(
+                code="MIS-BRG-2026-00002",
+                workflow_status="DRAFT_FIELD",
+                current_holder_role="FIELD_SAE",
+                created_by_id=creator.id if creator else None,
+                zone_id=gazipur_div.circle.zone_id if (gazipur_div.circle and gazipur_div.circle.zone) else None,
+                circle_id=gazipur_div.circle_id,
+                division_id=gazipur_div.id,
+                proposed_bridge_type="Pre-stressed Concrete Girder Bridge",
+                road_type_id=1,
+                road_id=road_n3.id if road_n3 else None,
+                road_name="Dhaka-Mymensingh Road",
+                chainage_km=34.0,
+                chainage_m=800.0,
+                location_chainage_gps_text="Ch 34+800 (Turag Relief Bridge)",
+                location_google_map_link="https://webmap.rhdbridge.com/?lat=23.9920&lng=90.4125&code=MIS-BRG-2026-00002",
+                location_lat_lng="23.992000, 90.412500",
+                bridge_name="Turag Relief Bridge",
+                river_channel_name="Turag Overflow Canal",
+                channel_width_m=48.0,
+                nav_clearance_authority="BIWTA",
+                nav_clearance_class="Class-III",
+                nav_vertical_clearance_m=7.62,
+                nav_horizontal_clearance_m=30.48,
+                reference_datum_type="MSL",
+                reference_benchmark_location="TBM on Gazipur Sub-station wall",
+                reference_benchmark_lat_lng="23.991800, 90.412200",
+                highest_flood_level_hfl=8.20,
+                lowest_water_level_lwl=2.40,
+                standard_high_water_level_shwl=7.50,
+                proposed_bridge_length_m=50.0,
+                proposed_span_arrangement_m="25m + 25m",
+                proposed_mid_span_bottom_rl=10.50,
+                total_borehole_count=3,
+                remarks="High traffic bypass link between Gazipur industrial zone and Joydebpur."
+            )
+            db.add(sample_bridge_2)
+        else:
+            sample_bridge_2.zone_id = gazipur_div.circle.zone_id if (gazipur_div.circle and gazipur_div.circle.zone) else None
+            sample_bridge_2.circle_id = gazipur_div.circle_id
+            sample_bridge_2.division_id = gazipur_div.id
+
+    # Sample Culvert: Dhaka Road Division
     sample_culvert = db.query(CulvertAcquisition).filter(CulvertAcquisition.code == "MIS-CLV-2026-00001").first()
+    road_r110 = db.query(Road).filter(Road.road_number == "R110").first()
+
     if not sample_culvert:
-        road_obj = db.query(Road).filter(Road.road_number == "R110").first()
-        creator = user_map.get("FIELD_SAE") or db.query(User).first()
-        
         sample_culvert = CulvertAcquisition(
             code="MIS-CLV-2026-00001",
             workflow_status="PENDING_FIELD_EE_AUTH",
             current_holder_role="FIELD_EE",
             created_by_id=creator.id if creator else None,
+            zone_id=dhaka_zone.id if dhaka_zone else None,
+            circle_id=dhaka_circle.id if dhaka_circle else None,
+            division_id=dhaka_div.id if dhaka_div else None,
             road_type_id=2,
-            road_id=road_obj.id if road_obj else 2,
+            road_id=road_r110.id if road_r110 else 2,
             road_name="Dhaka-Demra Road",
             culvert_name="Demra Irrigation Culvert",
+            chainage_km=12.0,
+            chainage_m=450.0,
             location_chainage_lrp_gps="Ch 12+450 (GPS: 23.7250, 90.4910)",
             location_google_map_link="https://webmap.rhdbridge.com/?lat=23.7250&lng=90.4910&code=MIS-CLV-2026-00001",
             location_lat_lng="23.725000, 90.491000",
@@ -547,8 +609,24 @@ def seed_database(seed_file_path: str = None):
             endorsement_note="Demra culvert acquisition form completed. Awaiting EE authorization."
         )
         db.add(log_clv)
+    else:
+        sample_culvert.zone_id = dhaka_zone.id if dhaka_zone else None
+        sample_culvert.circle_id = dhaka_circle.id if dhaka_circle else None
+        sample_culvert.division_id = dhaka_div.id if dhaka_div else None
+        if not sample_culvert.chainage_km:
+            sample_culvert.chainage_km = 12.0
+            sample_culvert.chainage_m = 450.0
 
     db.commit()
+
+    # Synchronize all demand placements to the NAS folder hierarchy
+    try:
+        from backend.services.nas_storage import nas_storage
+        nas_storage.sync_all_database_records(db)
+        logger.info("NAS Staged hierarchy successfully populated with demand JSON manifests.")
+    except Exception as e:
+        logger.debug("NAS sync notice in seed: %s", e)
+
     db.close()
     logger.info("Database seeding completed successfully.")
 

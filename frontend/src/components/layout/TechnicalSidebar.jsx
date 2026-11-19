@@ -23,52 +23,52 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       id: 'dashboard',
       label: 'Portal Dashboard',
       icon: LayoutDashboard,
-      activeColor: 'bg-gradient-to-r from-[#034081] to-[#00225a] text-white shadow-md shadow-[#034081]/30',
-      iconColor: 'text-[#034081]',
-      hoverBg: 'hover:bg-[#034081]/8'
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      iconColor: 'text-[#1c508c]',
+      hoverBg: 'hover:bg-[#1c508c]/8'
     },
     {
       id: 'bridges',
       label: 'Bridge Registry',
       icon: FolderKanban,
-      activeColor: 'bg-gradient-to-r from-[#034081] to-[#2563eb] text-white shadow-md shadow-[#2563eb]/30',
-      iconColor: 'text-[#429afe]',
-      hoverBg: 'hover:bg-[#034081]/8'
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      iconColor: 'text-[#3699c2]',
+      hoverBg: 'hover:bg-[#1c508c]/8'
     },
     {
       id: 'culverts',
       label: 'Culvert Registry',
       icon: Layers,
-      activeColor: 'bg-gradient-to-r from-[#7a3869] to-[#8e4b7b] text-white shadow-md shadow-[#8e4b7b]/30',
-      iconColor: 'text-[#8e4b7b]',
-      hoverBg: 'hover:bg-[#8e4b7b]/10'
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      iconColor: 'text-[#3699c2]',
+      hoverBg: 'hover:bg-[#1c508c]/8'
     },
     {
       id: 'pipeline',
       label: 'Design Bottleneck Matrix',
       icon: Activity,
-      activeColor: 'bg-gradient-to-r from-[#c43e0e] to-[#e95a24] text-white shadow-md shadow-[#e95a24]/30',
-      iconColor: 'text-[#e95a24]',
+      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/25',
+      iconColor: 'text-[#c05621]',
       badge: 'Live',
-      hoverBg: 'hover:bg-[#e95a24]/10'
+      hoverBg: 'hover:bg-[#112047]/8'
     },
     {
       id: 'new_bridge',
       label: 'New Bridge Acquisition',
       icon: PlusCircle,
-      activeColor: 'bg-gradient-to-r from-[#087f43] to-[#0eb865] text-white shadow-md shadow-[#0eb865]/30',
-      iconColor: 'text-[#15db7c]',
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      iconColor: 'text-[#1e7e61]',
       badge: 'Acquire',
-      hoverBg: 'hover:bg-[#0eb865]/10'
+      hoverBg: 'hover:bg-[#1c508c]/8'
     },
     {
       id: 'new_culvert',
       label: 'New Culvert Acquisition',
       icon: PlusCircle,
-      activeColor: 'bg-gradient-to-r from-[#7a3869] to-[#8e4b7b] text-white shadow-md shadow-[#8e4b7b]/30',
-      iconColor: 'text-[#8e4b7b]',
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      iconColor: 'text-[#1e7e61]',
       badge: 'Acquire',
-      hoverBg: 'hover:bg-[#8e4b7b]/10'
+      hoverBg: 'hover:bg-[#1c508c]/8'
     }
   ];
 
@@ -77,9 +77,9 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       id: 'webmaster',
       label: 'Webmaster Console',
       icon: Database,
-      activeColor: 'bg-gradient-to-r from-[#034081] to-[#01c1f2] text-white shadow-md shadow-[#01c1f2]/30',
-      iconColor: 'text-[#01c1f2]',
-      hoverBg: 'hover:bg-[#01c1f2]/10'
+      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/25',
+      iconColor: 'text-[#95d4e5]',
+      hoverBg: 'hover:bg-[#112047]/8'
     });
   }
 
@@ -88,9 +88,9 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       id: 'supreme',
       label: 'Supreme Operations',
       icon: Terminal,
-      activeColor: 'bg-gradient-to-r from-[#4f46e5] to-[#7c3aed] text-white shadow-md shadow-[#7c3aed]/30',
-      iconColor: 'text-[#7c3aed]',
-      hoverBg: 'hover:bg-[#7c3aed]/10'
+      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/25',
+      iconColor: 'text-[#95d4e5]',
+      hoverBg: 'hover:bg-[#112047]/8'
     });
   }
 
@@ -151,7 +151,7 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
               <button
                 key={item.id}
                 onClick={() => setActiveView(item.id)}
-                className={`relative w-full text-left px-3 py-2.5 rounded-xl flex items-center justify-between text-xs font-semibold transition-all duration-300 cursor-pointer group border ${
+                className={`relative w-full text-left px-3 py-1 rounded-xs flex items-center justify-between text-xm font-semibold transition-all duration-300 cursor-pointer group border ${
                   isActive
                     ? 'bg-gradient-to-r from-[#034081] via-[#023166] to-[#001f54] text-white shadow-lg shadow-[#034081]/25 border-white/20'
                     : 'border-transparent text-[#00225a] hover:bg-white/85 hover:text-[#001139] hover:shadow-2xs hover:translate-x-1'
@@ -162,8 +162,8 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
                   <span className="absolute left-1 top-2 bottom-2 w-1 rounded-full bg-gradient-to-b from-[#38bdf8] to-[#15db7c] shadow-[0_0_8px_#38bdf8]" />
                 )} */}
                 <div className="flex items-center space-x-2.5">
-                  <div className={`p-1 rounded-lg ${isActive ? 'bg-white/15' : 'bg-[#00225a]/5 group-hover:bg-[#034081]/10'} transition-colors`}>
-                    <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : item.iconColor}`} />
+                  <div className={`p-1 rounded-full ${isActive ? 'border-white/15 rounded-full' : 'border-none'} transition-colors`}>
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-white w-7 h-7 p-1 stroke-3' : item.iconColor}`} />
                   </div>
                   <span className="truncate">{item.label}</span>
                 </div>
@@ -181,7 +181,7 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       </div>
 
       {/* User Information Footer Strip (Floating Frosted Glass Sanctuary Card) */}
-      <div className="relative z-10 p-2.5 m-2.5 rounded-xl bg-white/75 backdrop-blur-md border border-white/90 shadow-xs flex items-center space-x-2.5 transition-all duration-300 hover:bg-white/95">
+      <div className="relative z-10 p-2.5 m-2.5 s bg-white/75 backdrop-blur-md border border-white/90 shadow-xs flex items-center space-x-2.5 transition-all duration-300 hover:bg-white/95">
         <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-[#034081] to-[#00225a] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs ring-2 ring-[#429afe]/20" style={{ fontFamily: 'var(--font-display)' }}>
           {currentUser?.full_name ? currentUser.full_name.substring(0, 2).toUpperCase() : 'RH'}
           <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#15db7c] ring-1 ring-white comfort-status-pulse" />

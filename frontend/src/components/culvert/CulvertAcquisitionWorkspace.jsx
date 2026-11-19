@@ -1753,7 +1753,7 @@ export default function CulvertAcquisitionWorkspace({
                             [{att.demand_officer_type || 'OFFICER'}]
                           </span>
                           <a
-                            href={`/uploads/${att.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(att.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sky-700 hover:text-sky-900 hover:underline font-medium"
@@ -1767,7 +1767,7 @@ export default function CulvertAcquisitionWorkspace({
                         </div>
                         <div className="flex items-center space-x-2">
                           <a
-                            href={`/uploads/${att.stored_file_name}`}
+                            href={api.getAttachmentDownloadUrl(att.id)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-2 py-0.5 text-[11px] font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 rounded border border-sky-200"
@@ -1826,11 +1826,11 @@ export default function CulvertAcquisitionWorkspace({
                   )}
                   {attachments.filter((a) => a.slot_code === 'site_plan').map((a) => (
                     <div key={a.id} className="flex justify-between items-center text-slate-800 bg-white/60 p-1.5 rounded-lg border border-white/80">
-                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
+                      <a href={api.getAttachmentDownloadUrl(a.id)} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
                         {a.file_name}
                       </a>
                       <div className="flex items-center space-x-1">
-                        <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
+                        <a href={api.getAttachmentDownloadUrl(a.id)} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
                         {canEditPlacement && (
                           <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800 cursor-pointer">✕</button>
                         )}
@@ -1868,11 +1868,11 @@ export default function CulvertAcquisitionWorkspace({
                   )}
                   {attachments.filter((a) => a.slot_code === 'cross_section').map((a) => (
                     <div key={a.id} className="flex justify-between items-center text-slate-800 bg-white/60 p-1.5 rounded-lg border border-white/80">
-                      <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
+                      <a href={api.getAttachmentDownloadUrl(a.id)} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] text-sky-700 hover:underline font-medium">
                         {a.file_name}
                       </a>
                       <div className="flex items-center space-x-1">
-                        <a href={`/uploads/${a.stored_file_name}`} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
+                        <a href={api.getAttachmentDownloadUrl(a.id)} target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 text-[10px] text-sky-700 bg-sky-50 rounded border border-sky-200">View</a>
                         {canEditPlacement && (
                           <button onClick={() => handleDeleteAttachment(a.id)} className="text-red-600 font-bold hover:text-red-800 cursor-pointer">✕</button>
                         )}
@@ -1916,7 +1916,7 @@ export default function CulvertAcquisitionWorkspace({
                       <div className="text-emerald-700 font-mono text-[10px] font-bold bg-emerald-100/80 rounded-md py-0.5 border border-emerald-300">Image Attached ✓</div>
                       <div className="flex items-center justify-center space-x-2 text-[10px]">
                         <a
-                          href={`/uploads/${attachments.find(a => a.slot_code === `clv_photo_${dir.toLowerCase()}`).stored_file_name}`}
+                          href={api.getAttachmentDownloadUrl(attachments.find(a => a.slot_code === `clv_photo_${dir.toLowerCase()}`).id)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sky-700 hover:underline"

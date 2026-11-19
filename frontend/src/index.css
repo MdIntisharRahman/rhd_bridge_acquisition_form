@@ -10,70 +10,74 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* ==========================================================================
-     AUTHENTIC USER MORPHISM PALETTE TOKENS
+     AUTHENTIC USER PALETTE TOKENS (navy-benim-steelblue-arctic-ice.jpg)
      ========================================================================== */
-  --c-mint: #15db7c;
-  --c-azure: #429afe;
-  --c-yellow: #ffff2d;
-  --c-orange: #e95a24;
+  --c-navy: #112047;
+  --c-denim: #1c508c;
+  --c-steelblue: #3699c2;
+  --c-arctic-ice: #95d4e5;
+  --c-arctic-wash: #e7f0f5;
   --c-white: #ffffff;
-  --c-navy: #00225a;
-  --c-slate: #5b6b7a;
-  --c-midnight: #001139;
-  --c-canvas: #e9ecf3;
-  --c-border: #d5dbe7;
-  --c-cyan: #01c1f2;
-  --c-cobalt: #034081;
+  --c-slate: #536b82;
+  --c-midnight: #0c1733;
+  --c-canvas: #f8fafc;
+  --c-border: #cadbe7;
+  --c-cyan: #95d4e5;
+  --c-cobalt: #1c508c;
+  --c-mint: #1e7e61;
+  --c-azure: #3699c2;
+  --c-yellow: #f59e0b;
+  --c-orange: #c05621;
 
   /* Ambient Glass Canvas & Diffusion */
-  --canvas-bg: #e9ecf3;
-  /* Engineering Structural Canvas (Refined architectural slate & soft azure wash) */
+  --canvas-bg: #e7f0f5;
+  /* Engineering Structural Canvas (Refined architectural slate & soft arctic wash) */
   --canvas-gradient: linear-gradient(135deg,
       #f8fafc 0%,
-      #f1f5f9 45%,
-      #e2e8f0 80%,
-      #e0f2fe 100%);
-  --canvas-gradient-mesh: radial-gradient(at 15% 15%, rgba(2, 94, 199, 0.08) 0px, transparent 60%),
-    radial-gradient(at 85% 15%, rgba(14, 165, 233, 0.06) 0px, transparent 55%),
-    radial-gradient(at 50% 50%, rgba(241, 245, 249, 0.85) 0px, transparent 65%),
-    radial-gradient(at 15% 85%, rgba(2, 94, 199, 0.05) 0px, transparent 55%),
-    radial-gradient(at 85% 85%, rgba(15, 23, 42, 0.04) 0px, transparent 55%),
-    linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e0f2fe 100%);
+      #f1f5f9 40%,
+      #e7f0f5 75%,
+      #dae9f2 100%);
+  --canvas-gradient-mesh: radial-gradient(at 15% 15%, rgba(28, 80, 140, 0.08) 0px, transparent 60%),
+    radial-gradient(at 85% 15%, rgba(54, 153, 194, 0.07) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(244, 247, 250, 0.9) 0px, transparent 65%),
+    radial-gradient(at 15% 85%, rgba(17, 32, 71, 0.05) 0px, transparent 55%),
+    radial-gradient(at 85% 85%, rgba(28, 80, 140, 0.06) 0px, transparent 55%),
+    linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e7f0f5 100%);
 
-  /* Physical Frosted Glass Surfaces (Authentic to sources/morphism.jpg) */
-  --glass-surface: linear-gradient(90deg, rgba(255, 255, 255, 0.23) 0%, rgba(255, 255, 255, 0.59) 30%, rgba(247, 248, 248, 0.61) 50%, rgba(250, 255, 255, 0.77) 70%, rgba(240, 236, 236, 0.47) 100%);
-  --glass-surface-subtle: linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.35) 100%);
-  --glass-surface-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.65) 100%);
+  /* Physical Frosted Glass Surfaces */
+  --glass-surface: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.85) 30%, rgba(247, 250, 252, 0.88) 50%, rgba(250, 253, 255, 0.92) 70%, rgba(240, 246, 250, 0.8) 100%);
+  --glass-surface-subtle: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(231, 240, 245, 0.65) 100%);
+  --glass-surface-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 246, 250, 0.85) 100%);
 
-  --panel-bg: rgba(255, 255, 255, 0.62);
-  --panel-border: rgba(255, 255, 255, 0.88);
-  --panel-border-subtle: rgba(181, 181, 181, 0.43);
-  --panel-border-strong: #00225a;
+  --panel-bg: rgba(255, 255, 255, 0.8);
+  --panel-border: rgba(255, 255, 255, 0.92);
+  --panel-border-subtle: rgba(202, 219, 231, 0.6);
+  --panel-border-strong: #112047;
 
-  /* Luminous Specular Refraction & Multi-Layered Ambient Shadows (sources/morphism.jpg) */
+  /* Luminous Specular Refraction & Ambient Shadows */
   --glass-shadow:
-    0 26px 54px -12px rgba(0, 34, 90, 0.18),
-    0 8px 20px -4px rgba(0, 0, 0, 0.06),
-    inset 0 1.5px 1.5px 0 rgba(209, 209, 209, 0.98),
-    inset 1px 0 1.5px 0 rgba(209, 209, 209, 0.8),
-    inset 0 -1.5px 2px 0 rgba(209, 209, 209, 0.4),
-    inset -1px 0 1.5px 0 rgba(209, 209, 209, 0.6);
+    0 24px 50px -12px rgba(17, 32, 71, 0.14),
+    0 8px 18px -4px rgba(17, 32, 71, 0.05),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 1px 0 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1.5px 2px 0 rgba(202, 219, 231, 0.4),
+    inset -1px 0 1.5px 0 rgba(202, 219, 231, 0.5);
   --glass-shadow-hover:
-    0 34px 68px -12px rgba(0, 34, 90, 0.24),
-    0 12px 28px -3px rgba(66, 154, 254, 0.25),
+    0 30px 60px -12px rgba(17, 32, 71, 0.2),
+    0 10px 24px -3px rgba(54, 153, 194, 0.2),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 1),
-    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.6);
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.7);
   --glass-shadow-active:
-    0 14px 30px -6px rgba(3, 64, 129, 0.25),
+    0 12px 26px -6px rgba(17, 32, 71, 0.2),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
-  --glass-blur: blur(29px) saturate(190%) brightness(105%);
+  --glass-blur: blur(24px) saturate(160%) brightness(102%);
 
   /* High-Contrast Typographic Roles */
-  --text-main: #00225a;
-  --text-heading: #001139;
-  --text-body: #00225a;
-  --text-muted: #5b6b7a;
-  --text-subtle: #5b6b7a;
+  --text-main: #112047;
+  --text-heading: #112047;
+  --text-body: #112047;
+  --text-muted: #536b82;
+  --text-subtle: #6b8299;
 
   /* High-Speed Precision Motion System */
   --ease-natural: cubic-bezier(0.16, 1, 0.3, 1);
@@ -83,21 +87,26 @@
   --duration-view: 0.16s;
 
   /* Disciplinary Identity Colors Mapped to Palette */
-  --theme-azure-primary: #034081;
-  --theme-azure-deep: #00225a;
-  --theme-azure-surface: #e9ecf3;
-  --theme-azure-border: #429afe;
-  --theme-azure-text: #00225a;
-  --theme-azure-glow: rgba(66, 154, 254, 0.25);
+  --theme-azure-primary: #1c508c;
+  --theme-azure-deep: #112047;
+  --theme-azure-surface: #e7f0f5;
+  --theme-azure-border: #3699c2;
+  --theme-azure-text: #112047;
+  --theme-azure-glow: rgba(54, 153, 194, 0.25);
 
-  --theme-amber-primary: #e95a24;
-  --theme-amber-deep: #9a3412;
+  --theme-amber-primary: #c05621;
+  --theme-amber-deep: #7c2d12;
   --theme-amber-surface: #fff7ed;
   --theme-amber-border: #fed7aa;
-  --theme-amber-text: #9a3412;
-  --theme-amber-glow: rgba(233, 90, 36, 0.2);
+  --theme-amber-text: #7c2d12;
+  --theme-amber-glow: rgba(192, 86, 33, 0.2);
 
-  --theme-emerald-primary: #15db7c;
+  --theme-emerald-primary: #1e7e61;
+  --theme-emerald-deep: #134e40;
+  --theme-emerald-surface: #f0fdf4;
+  --theme-emerald-border: #86efac;
+  --theme-emerald-text: #134e40;
+  --theme-emerald-glow: rgba(30, 126, 97, 0.2);
   --theme-emerald-deep: #0eb865;
   --theme-emerald-surface: #ecfdf5;
   --theme-emerald-border: #15db7c;
@@ -212,27 +221,27 @@
     font-family: var(--font-body);
     font-variant-numeric: tabular-nums;
     border-radius: 7px;
-    background-color: rgba(255, 255, 255, 0.22);
+    background-color: rgba(255, 255, 255, 0.72);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    color: #001139;
+    border: 1px solid rgba(202, 219, 231, 0.9);
+    color: #112047;
     transition: all var(--duration-micro) ease;
   }
 
   input:hover,
   select:hover,
   textarea:hover {
-    background-color: rgba(255, 255, 255, 0.35);
-    border-color: rgba(66, 154, 254, 0.6);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: #3699c2;
   }
 
   input:focus,
   select:focus,
   textarea:focus {
-    background-color: rgba(255, 255, 255, 0.48);
-    border-color: #429afe;
-    box-shadow: 0 0 0 3px rgba(66, 154, 254, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    background-color: #ffffff;
+    border-color: #1c508c;
+    box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.9);
     outline: none;
   }
 
@@ -261,8 +270,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  background: #ffffff;
-  border-bottom: 2px solid #e2dcd2;
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 2px solid #cadbe7;
   position: relative;
 }
 
@@ -275,7 +284,7 @@
   font-family: var(--font-ui);
   font-size: 12.5px;
   font-weight: 600;
-  color: #475569;
+  color: #536b82;
   background: transparent;
   border: none;
   margin-bottom: -2px;
@@ -298,29 +307,30 @@
 }
 
 .fluid-tab-item:hover {
-  color: #0f172a;
-  background: rgba(2, 132, 199, 0.05);
+  color: #112047;
+  background: rgba(231, 240, 245, 0.7);
 }
 
 .fluid-tab-item.active {
-  color: #0284c7;
+  color: #1c508c;
   font-weight: 700;
   background: #ffffff;
 }
 
 .fluid-tab-item.active::after {
-  background: #0284c7;
+  background: #1c508c;
+  box-shadow: 0 0 8px rgba(149, 212, 229, 0.6);
   transform: scaleX(1);
 }
 
 .fluid-tab-item.active-orange {
-  color: #ea580c;
+  color: #c05621;
   font-weight: 700;
   background: #ffffff;
 }
 
 .fluid-tab-item.active-orange::after {
-  background: #ea580c;
+  background: #c05621;
   transform: scaleX(1);
 }
 
@@ -344,15 +354,15 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #e2e8f0;
+  background: #e7f0f5;
+  color: #536b82;
+  border: 1px solid #cadbe7;
 }
 
 .fluid-tab-item.active .fluid-tab-badge {
-  background: #e0f2fe;
-  color: #0369a1;
-  border-color: #bae6fd;
+  background: #1c508c;
+  color: #ffffff;
+  border-color: #1c508c;
 }
 
 .fluid-tab-item.active-orange .fluid-tab-badge {

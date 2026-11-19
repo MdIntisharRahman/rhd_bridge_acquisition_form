@@ -19,6 +19,7 @@ from backend.schemas import (
 from backend.auth import get_current_user
 from backend.workflow import transition_workflow
 from backend.security import validate_upload, validate_bangladesh_coordinates, sanitize_filename
+from backend.services.nas_storage import nas_storage
 from backend.jurisdiction import auto_populate_acquisition_hierarchy_and_vesting
 
 router = APIRouter(prefix="/acquisitions/bridge", tags=["Bridge Acquisition Data System"])
@@ -130,6 +131,11 @@ def create_bridge_acquisition(
     )
     db.add(init_log)
     db.commit()
+
+    try:
+        nas_storage.sync_demand_json(item, db)
+    except Exception as e:
+        logger.debug("NAS sync notice on create: %s", e)
 
     return item
 
@@ -245,6 +251,12 @@ def update_bridge_acquisition(
 
     db.commit()
     db.refresh(item)
+
+    try:
+        nas_storage.sync_demand_json(item, db)
+    except Exception as e:
+        logger.debug("NAS sync notice on update: %s", e)
+
     return item
 
 @router.post("/{id}/transition")
@@ -265,6 +277,12 @@ def transition_bridge_status(
         req=req,
         current_user=current_user
     )
+
+    try:
+        nas_storage.sync_demand_json(item, db)
+    except Exception as e:
+        logger.debug("NAS sync notice on transition: %s", e)
+
     return {
         "success": True,
         "acquisition_id": item.id,
@@ -287,42 +305,19 @@ async def upload_bridge_attachment(
     if not item:
         raise HTTPException(status_code=404, detail="Bridge acquisition record not found")
 
-    # Validate file type and extension whitelist
-    safe_orig_name, ext = validate_upload(file.filename)
-    stored_name = f"brg_{id}_{slot_code}_{uuid.uuid4().hex[:8]}{ext}"
-    dest_path = os.path.join(settings.UPLOAD_DIR, stored_name)
-
-    # Stream chunks with file size enforcement (prevents memory DoS)
-    total_size = 0
-    try:
-        with open(dest_path, "wb") as f:
-            while True:
-                chunk = await file.read(1024 * 1024)  # 1MB chunks
-                if not chunk:
-                    break
-                total_size += len(chunk)
-                if total_size > settings.MAX_UPLOAD_SIZE_BYTES:
-                    f.close()
-                    if os.path.exists(dest_path):
-                        os.remove(dest_path)
-                    raise HTTPException(
-                        status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-                        detail=f"Uploaded file exceeds maximum limit of {settings.MAX_UPLOAD_SIZE_BYTES // (1024*1024)} MB."
-                    )
-                f.write(chunk)
-    except HTTPException:
-        raise
-    except Exception as e:
-        if os.path.exists(dest_path):
-            os.remove(dest_path)
-        raise HTTPException(status_code=500, detail=f"File save error: {str(e)}")
+    dest_path, stored_name, total_size, rel_path = await nas_storage.save_uploaded_attachment(
+        item=item,
+        file=file,
+        slot_code=slot_code,
+        demand_officer_type=demand_officer_type
+    )
 
     # Check if demand officer already has an attachment and replace or append
     att = Attachment(
         acquisition_type="BRIDGE",
         acquisition_id=id,
         slot_code=slot_code,
-        file_name=safe_orig_name,
+        file_name=file.filename,
         stored_file_name=stored_name,
         file_path=dest_path,
         file_size=total_size,
@@ -333,6 +328,12 @@ async def upload_bridge_attachment(
     db.add(att)
     db.commit()
     db.refresh(att)
+
+    try:
+        nas_storage.sync_demand_json(item, db)
+    except Exception as e:
+        logger.debug("NAS sync notice on attachment upload: %s", e)
+
     return att
 
 @router.get("/{id}/attachments", response_model=List[AttachmentResponse])
@@ -344,6 +345,7 @@ def get_bridge_attachments(id: int, db: Session = Depends(get_db), current_user:
 
 @router.delete("/{id}/attachments/{att_id}")
 def delete_bridge_attachment(id: int, att_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    item = db.query(BridgeAcquisition).filter(BridgeAcquisition.id == id).first()
     att = db.query(Attachment).filter(
         Attachment.id == att_id,
         Attachment.acquisition_type == "BRIDGE",
@@ -360,6 +362,13 @@ def delete_bridge_attachment(id: int, att_id: int, db: Session = Depends(get_db)
 
     db.delete(att)
     db.commit()
+
+    if item:
+        try:
+            nas_storage.sync_demand_json(item, db)
+        except Exception as e:
+            logger.debug("NAS sync notice on attachment delete: %s", e)
+
     return {"success": True, "message": "Attachment deleted."}
 
 @router.get("/{id}/audit-logs", response_model=List[WorkflowAuditLogResponse])

@@ -9,9 +9,11 @@ from starlette.requests import Request
 from starlette.responses import Response, FileResponse, StreamingResponse
 
 from backend.config import settings
-from backend.database import engine, Base
+from backend.database import engine, SessionLocal, Base, run_auto_schema_migrations
 from backend.seed import seed_database
-from backend.routers import auth, master, bridge, culvert, webmap, exports, supreme, pipeline
+from backend.routers import auth, master, bridge, culvert, webmap, exports, supreme, pipeline, nas
+from backend.services.nas_storage import nas_storage
+from backend.models import Attachment
 from backend.security import sanitize_filename
 
 # Configure logging
@@ -71,20 +73,77 @@ def serve_upload(filename: str):
         raise HTTPException(status_code=400, detail="Invalid path traversal attempt.")
         
     clean_name = sanitize_filename(filename)
+    
+    # Check 1: Primary uploads directory
     file_path = os.path.join(settings.UPLOAD_DIR, clean_name)
     real_path = os.path.realpath(file_path)
     real_upload_dir = os.path.realpath(settings.UPLOAD_DIR)
     
-    if not real_path.startswith(real_upload_dir) or not os.path.exists(real_path) or not os.path.isfile(real_path):
-        raise HTTPException(status_code=404, detail="Requested engineering attachment not found.")
+    if real_path.startswith(real_upload_dir) and os.path.exists(real_path) and os.path.isfile(real_path):
+        return FileResponse(
+            real_path,
+            headers={
+                "X-Content-Type-Options": "nosniff",
+                "Content-Disposition": f'inline; filename="{clean_name}"'
+            }
+        )
+
+    # Check 2: Staged NAS directory hierarchy
+    if os.path.exists(settings.NAS_STAGING_DIR):
+        real_nas_dir = os.path.realpath(settings.NAS_STAGING_DIR)
+        for root, _, files in os.walk(settings.NAS_STAGING_DIR):
+            if clean_name in files:
+                candidate = os.path.join(root, clean_name)
+                candidate_real = os.path.realpath(candidate)
+                if candidate_real.startswith(real_nas_dir) and os.path.isfile(candidate_real):
+                    return FileResponse(
+                        candidate_real,
+                        headers={
+                            "X-Content-Type-Options": "nosniff",
+                            "Content-Disposition": f'inline; filename="{clean_name}"'
+                        }
+                    )
     
-    return FileResponse(
-        real_path,
-        headers={
-            "X-Content-Type-Options": "nosniff",
-            "Content-Disposition": f'inline; filename="{clean_name}"'
-        }
-    )
+    raise HTTPException(status_code=404, detail="Requested engineering attachment not found.")
+
+@app.get("/api/attachments/{att_id}/download")
+def download_attachment(att_id: int):
+    """Direct, secure download and preview endpoint for any uploaded engineering attachment."""
+    db = SessionLocal()
+    try:
+        att = db.query(Attachment).filter(Attachment.id == att_id).first()
+        if not att:
+            raise HTTPException(status_code=404, detail="Attachment record not found")
+        
+        # Verify file on disk
+        target_path = att.file_path
+        if not target_path or not os.path.exists(target_path):
+            # Check legacy upload dir
+            if att.stored_file_name:
+                alt = os.path.join(settings.UPLOAD_DIR, att.stored_file_name)
+                if os.path.exists(alt):
+                    target_path = alt
+            # Check NAS staging
+            if (not target_path or not os.path.exists(target_path)) and os.path.exists(settings.NAS_STAGING_DIR) and att.stored_file_name:
+                for root, _, files in os.walk(settings.NAS_STAGING_DIR):
+                    if att.stored_file_name in files:
+                        target_path = os.path.join(root, att.stored_file_name)
+                        break
+
+        if not target_path or not os.path.exists(target_path):
+            raise HTTPException(status_code=404, detail="Physical file not found in storage.")
+
+        clean_display_name = sanitize_filename(att.file_name or "downloaded_document.pdf")
+        return FileResponse(
+            target_path,
+            media_type=att.mime_type or "application/octet-stream",
+            headers={
+                "X-Content-Type-Options": "nosniff",
+                "Content-Disposition": f'inline; filename="{clean_display_name}"'
+            }
+        )
+    finally:
+        db.close()
 
 # Mount production frontend build if available
 frontend_dist = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend", "dist")
@@ -100,13 +159,23 @@ app.include_router(webmap.router, prefix=settings.API_V1_STR)
 app.include_router(exports.router, prefix=settings.API_V1_STR)
 app.include_router(supreme.router, prefix=settings.API_V1_STR)
 app.include_router(pipeline.router, prefix=settings.API_V1_STR)
+app.include_router(nas.router, prefix=settings.API_V1_STR)
 
 @app.on_event("startup")
 def on_startup():
     logger.info("Initializing RHD ADDS Backend...")
     try:
+        run_auto_schema_migrations(engine)
         seed_database()
         logger.info("RHD Master Hierarchy and Seed Accounts initialized successfully.")
+        
+        # Synchronize NAS directory structure and demand JSON manifests
+        db = SessionLocal()
+        try:
+            nas_storage.sync_all_database_records(db)
+            logger.info("NAS staged folder hierarchy and demand JSONs synchronized.")
+        finally:
+            db.close()
     except Exception as e:
         logger.error("Startup database seeding encountered error: %s", e)
 
