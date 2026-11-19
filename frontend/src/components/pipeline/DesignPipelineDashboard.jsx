@@ -290,8 +290,8 @@ export default function DesignPipelineDashboard({
       {/* Filter and Control Toolbar */}
       <div className="glass-panel p-4 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-          <span className="text-xs font-bold text-slate-600 flex items-center space-x-1 mr-1">
-            <Filter className="w-3.5 h-3.5 text-[#034081]" />
+          <span className="text-md font-bold text-slate-600 flex items-center space-x-1 mr-1">
+            <Filter className="w-4 h-4 text-[#034081]" />
             <span>State:</span>
           </span>
 
@@ -307,8 +307,8 @@ export default function DesignPipelineDashboard({
               onClick={() => setFilterState(st.key)}
               className={`px-3 py-1.5 border border-slate-700  rounded-xs text-xs font-bold transition-all cursor-pointer ${
                 filterState === st.key
-                  ? "bg-cyan-500/77 shadow-xs"
-                  : "bg-transparent hover:bg-amber-500"
+                  ? "bg-slate-700 text-white shadow-xs"
+                  : "bg-transparent hover:bg-slate-500/19"
               }`}
             >
               {st.label}

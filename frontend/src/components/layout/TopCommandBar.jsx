@@ -140,7 +140,7 @@ export default function TopCommandBar({
             {onToggleSidebar && (
               <button
                 onClick={onToggleSidebar}
-                className="p-2 rounded-xl bg-white/80 hover:bg-white text-[#112047] border border-[#cadbe7] shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center shrink-0"
+                className="p-2 rounded-full bg-white/80 hover:bg-white text-[#112047] border border-[#cadbe7] shadow-xs hover:shadow-sm transition-all cursor-pointer flex items-center justify-center shrink-0"
                 title={sidebarOpen ? "Hide navigation sidebar (Ctrl+B)" : "Open navigation sidebar (Ctrl+B)"}
                 aria-label="Toggle Sidebar"
               >
