@@ -7,7 +7,10 @@ import {
   ArrowRight, 
   Plus, 
   CircleArrowRight, 
-  FolderKanban 
+  FolderKanban, 
+  ArrowBigRightIcon,
+  ArrowBigRightDashIcon,
+  InspectIcon
 } from 'lucide-react';
 import { api } from '../../services/api';
 
@@ -238,7 +241,7 @@ export default function FieldDivisionDashboard({ currentUser, onOpenBridge, onOp
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     <span>Inspect</span>
-                    <CircleArrowRight className="w-3.5 h-3.5" />
+                    <InspectIcon className="w-3.5 h-3.5" />
                   </button>
                 </div>
               ))
@@ -280,11 +283,11 @@ export default function FieldDivisionDashboard({ currentUser, onOpenBridge, onOp
                   </div>
                   <button
                     onClick={() => item.type === 'BRIDGE' ? onOpenBridge(item.id) : onOpenCulvert(item.id)}
-                    className="px-3 py-1 rounded-xl bg-white/70 text-[#00225a] hover:bg-[#034081] hover:text-white font-semibold flex items-center space-x-1 border border-white/90 transition-colors cursor-pointer shadow-xs table-action-icon"
+                    className="px-3 py-1 rounded-xs bg-[#429afe]/15 text-[#034081] hover:bg-[#034081] hover:text-white font-semibold flex items-center space-x-1 border border-[#429afe]/40 transition-colors cursor-pointer shadow-xs"
                     style={{ fontFamily: 'var(--font-subhead)' }}
                   >
                     <span>Resume</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowBigRightDashIcon className="w-3.5 h-3.5" />
                   </button>
                 </div>
               ))

@@ -65,10 +65,10 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       id: 'new_culvert',
       label: 'New Culvert Acquisition',
       icon: PlusCircle,
-      activeColor: 'bg-[#3699c2] text-white shadow-md shadow-[#3699c2]/30',
-      iconColor: 'text-[#3699c2]',
-      badge: 'Steel Blue',
-      hoverBg: 'hover:bg-[#3699c2]/8'
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/30',
+      iconColor: 'text-[#1c508c]',
+      badge: 'Denim',
+      hoverBg: 'hover:bg-[#1c508c]/8'
     }
   ];
 

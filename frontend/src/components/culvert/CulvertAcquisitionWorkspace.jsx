@@ -702,7 +702,7 @@ export default function CulvertAcquisitionWorkspace({
           </button>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-xs font-bold text-[#0e4a63] py-0.5" style={{ fontFamily: 'var(--font-caption)' }}>
+              <span className="text-xs font-bold text-[#0f2d52] py-0.5" style={{ fontFamily: 'var(--font-caption)' }}>
                 {formData.code || 'New Culvert Acquisition'}
               </span>
               <span className="text-xs text-slate-500 font-medium">
@@ -728,7 +728,7 @@ export default function CulvertAcquisitionWorkspace({
                 style={{ fontFamily: 'var(--font-body)' }}
                 title="Download Culvert Technical Datasheet PDF"
               >
-                <Download className={`w-3.5 h-3.5 text-[#3699c2] ${downloadingExport === 'pdf' ? 'animate-spin' : ''}`} />
+                <Download className={`w-3.5 h-3.5 text-[#1c508c] ${downloadingExport === 'pdf' ? 'animate-spin' : ''}`} />
                 <span>{downloadingExport === 'pdf' ? 'Exporting...' : 'Datasheet PDF'}</span>
               </a>
               <a
@@ -764,11 +764,11 @@ export default function CulvertAcquisitionWorkspace({
               onClick={() => setActiveTab('CLV-TAB-08')}
               className={`px-3 py-1.5 rounded-xs border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
                 activeTab === 'CLV-TAB-08'
-                  ? 'bg-[#1b5d7a] text-white border-[#3699c2]'
+                  ? 'bg-[#1c508c] text-white border-[#1c508c]'
                   : 'bg-white hover:bg-slate-100 text-slate-800 border-slate-300'
               }`}
             >
-              <History className="w-3.5 h-3.5 text-[#3699c2]" />
+              <History className="w-3.5 h-3.5 text-[#1c508c]" />
               <span>Change History</span>
             </button>
           )}
@@ -1087,7 +1087,7 @@ export default function CulvertAcquisitionWorkspace({
                     <div className="flex items-center justify-between mb-1">
                       <label className="eng-label">b.2) Road Number / Code</label>
                       {currentRoad && (
-                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#e0f2fe] text-[#0e4a63] font-bold">
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#e2ebf5] text-[#0f2d52] font-bold">
                           {currentRoad.road_type_code === 'N' ? 'National Highway' : currentRoad.road_type_code === 'R' ? 'Regional Highway' : currentRoad.road_type_code === 'Z' ? 'Zilla Road' : 'RHD'}
                         </span>
                       )}
@@ -1109,7 +1109,7 @@ export default function CulvertAcquisitionWorkspace({
                           }
                           value={roadCodeInput || currentRoadNumber}
                           onChange={(e) => handleRoadCodeInput(e.target.value)}
-                          className="eng-input font-bold text-[#0e4a63] uppercase"
+                          className="eng-input font-bold text-[#0f2d52] uppercase"
                         />
                         <datalist id="culvert-road-codes-list">
                           {filteredRoads.map((r) => (
@@ -1224,11 +1224,11 @@ export default function CulvertAcquisitionWorkspace({
           <div className="eng-panel">
             <div className="eng-section-header accent-culvert">
               <span>Culvert Benchmark Datum & Hydrological Survey Levels</span>
-              <span className="font-caption text-xs font-semibold text-[#3699c2]">Datum: in m {datum}</span>
+              <span className="font-caption text-xs font-semibold text-[#1c508c]">Datum: in m {datum}</span>
             </div>
             <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
               <div>
-                <label className="block font-mono font-bold text-[#0e4a63] mb-1">2.1) Reference Benchmark / Datum Type</label>
+                <label className="block font-mono font-bold text-[#0f2d52] mb-1">2.1) Reference Benchmark / Datum Type</label>
                 <select
                       value={formData.reference_datum_type || "MSL"}
                       onChange={(e) =>
@@ -1273,7 +1273,7 @@ export default function CulvertAcquisitionWorkspace({
                     placeholder="5.80"
                     value={formData.highest_flood_level_hfl || ''}
                     onChange={e => setFormData({ ...formData, highest_flood_level_hfl: e.target.value ? parseFloat(e.target.value) : '' })}
-                    className="eng-input font-mono font-bold text-[#0e4a63]"
+                    className="eng-input font-mono font-bold text-[#0f2d52]"
                   />
                   <span className="ml-2 font-mono text-slate-500 whitespace-nowrap">in m {datum}</span>
                 </div>
@@ -1288,7 +1288,7 @@ export default function CulvertAcquisitionWorkspace({
                     placeholder="1.20"
                     value={formData.lowest_water_level_lwl || ''}
                     onChange={e => setFormData({ ...formData, lowest_water_level_lwl: e.target.value ? parseFloat(e.target.value) : '' })}
-                    className="eng-input font-mono font-bold text-[#0e4a63]"
+                    className="eng-input font-mono font-bold text-[#0f2d52]"
                   />
                   <span className="ml-2 font-mono text-slate-500 whitespace-nowrap">in m {datum}</span>
                 </div>
@@ -1303,7 +1303,7 @@ export default function CulvertAcquisitionWorkspace({
                     placeholder="5.10"
                     value={formData.standard_high_water_level_shwl || ''}
                     onChange={e => setFormData({ ...formData, standard_high_water_level_shwl: e.target.value ? parseFloat(e.target.value) : '' })}
-                    className="eng-input font-mono font-bold text-[#0e4a63]"
+                    className="eng-input font-mono font-bold text-[#0f2d52]"
                   />
                   <span className="ml-2 font-mono text-slate-500 whitespace-nowrap">in m {datum}</span>
                 </div>
@@ -1409,12 +1409,12 @@ export default function CulvertAcquisitionWorkspace({
                     />
                   </div>
                   <div>
-                    <label className="eng-label font-bold text-[#0e4a63] mb-1">Total Length (Auto-Calculated)</label>
+                    <label className="eng-label font-bold text-[#0f2d52] mb-1">Total Length (Auto-Calculated)</label>
                     <input
                       type="number"
                       readOnly
                       value={formData.total_length_m || ''}
-                      className="eng-input font-mono font-bold bg-white/60 text-[#0e4a63] border-white/80"
+                      className="eng-input font-mono font-bold bg-white/60 text-[#0f2d52] border-white/80"
                     />
                   </div>
                   <div>
@@ -1513,7 +1513,7 @@ export default function CulvertAcquisitionWorkspace({
               )}
 
               <div>
-                <label className="eng-label mb-1">(c) General Remarks for Existing Structure</label>
+                <label className="eng-label mb-1">General Remarks for Existing Structure</label>
                 <textarea
                   rows={2}
                   value={formData.existing_culvert_general_note || ''}
@@ -1558,7 +1558,7 @@ export default function CulvertAcquisitionWorkspace({
                   <select
                     value={formData.proposed_culvert_category || 'New Culvert'}
                     onChange={e => setFormData({ ...formData, proposed_culvert_category: e.target.value })}
-                    className="eng-input eng-input-culvert tabular-nums font-bold text-[#0e4a63]"
+                    className="eng-input eng-input-culvert tabular-nums font-bold text-[#0f2d52]"
                   >
                     <option value="New Culvert">New Culvert</option>
                     <option value="Widening Culvert">Widening Culvert</option>
@@ -1570,7 +1570,7 @@ export default function CulvertAcquisitionWorkspace({
               {/* Sub-form: New Culvert */}
               {formData.proposed_culvert_category === 'New Culvert' && (
                 <div className="p-3.5 bg-white/40 border border-white/60 rounded-xl space-y-3 backdrop-blur-xs">
-                  <span className="font-mono font-bold text-[#0e4a63] block">
+                  <span className="font-mono font-bold text-[#0f2d52] block">
                     New Culvert Dimensioning (Rectangular Box Culvert vs Other):
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1595,12 +1595,12 @@ export default function CulvertAcquisitionWorkspace({
                       />
                     </div>
                     <div>
-                      <label className="eng-label font-bold text-[#0e4a63] mb-1">Proposed Total Length (m)</label>
+                      <label className="eng-label font-bold text-[#0f2d52] mb-1">Proposed Total Length (m)</label>
                       <input
                         type="number"
                         readOnly
                         value={formData.proposed_total_length_m || ''}
-                        className="eng-input font-mono font-bold bg-white/60 text-[#0e4a63] border-white/80"
+                        className="eng-input font-mono font-bold bg-white/60 text-[#0f2d52] border-white/80"
                       />
                     </div>
                     <div>
@@ -1640,7 +1640,7 @@ export default function CulvertAcquisitionWorkspace({
               {/* Sub-form: Widening Culvert */}
               {formData.proposed_culvert_category === 'Widening Culvert' && (
                 <div className="p-3.5 bg-white/40 border border-white/60 rounded-xl space-y-3 backdrop-blur-xs">
-                  <span className="font-mono font-bold text-[#0e4a63] block">
+                  <span className="font-mono font-bold text-[#0f2d52] block">
                     Culvert Widening Specification:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2003,12 +2003,12 @@ export default function CulvertAcquisitionWorkspace({
       <div className="sticky bottom-2 z-30 glass-panel border border-white/80 p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-xl backdrop-blur-md rounded-2xl mb-2">
         <div className="flex items-center space-x-3 text-xs font-mono">
           <span className="text-slate-600 font-semibold">Active Datum:</span>
-          <span className="px-2.5 py-1 bg-white/60 rounded-xs text-[#3699c2] font-bold border border-slate-300">
+          <span className="px-2.5 py-1 bg-white/60 rounded-xs text-[#1c508c] font-bold border border-slate-300">
             R.L. in {datum}
           </span>
           <span className="text-slate-400">|</span>
           <span className="text-slate-600 font-semibold">Current Stage:</span>
-          <span className="px-2.5 py-1 bg-[#1b5d7a] text-white rounded-xs font-bold">
+          <span className="px-2.5 py-1 bg-[#1c508c] text-white rounded-xs font-bold">
             {formData.workflow_status || 'DRAFT_FIELD'}
           </span>
         </div>
@@ -2020,7 +2020,7 @@ export default function CulvertAcquisitionWorkspace({
             <button
               type="button"
               onClick={() => handleTransition('FORWARD_TO_EE', 'Submitted to Executive Engineer for Authorization')}
-              className="px-4 py-2 rounded-xl bg-[#1b5d7a] hover:bg-[#12475e] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+              className="px-4 py-2 rounded-xs bg-[#1c508c] hover:bg-[#143d6b] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>SUBMIT TO FIELD EE FOR AUTH</span>
@@ -2034,7 +2034,7 @@ export default function CulvertAcquisitionWorkspace({
                 <button
                   type="button"
                   onClick={() => setShowReturnModal(true)}
-                  className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>RETURN FOR CORRECTION</span>
@@ -2048,7 +2048,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Transferred by Field EE to Field SDE for customary verification',
                     )
                   }
-                  className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <FileCheck className="w-3.5 h-3.5" />
                   <span>PASS TO FIELD SDE (CUSTOMARY)</span>
@@ -2062,7 +2062,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Authorized by Field Division EE and transmitted directly to Bridge Design Division EE',
                     )
                   }
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>TRANSMIT TO BRIDGE DESIGN DIVISION EE</span>
@@ -2078,7 +2078,7 @@ export default function CulvertAcquisitionWorkspace({
                   <button
                     type="button"
                     onClick={() => setShowReturnModal(true)}
-                    className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                    className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>RETURN FOR CORRECTION</span>
@@ -2093,7 +2093,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Verified by Field SDE and returned to Field EE',
                     )
                   }
-                  className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>VERIFY & RETURN TO FIELD EE</span>
@@ -2108,7 +2108,7 @@ export default function CulvertAcquisitionWorkspace({
                         'Transmitted directly to Bridge Design Division EE',
                       )
                     }
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                    className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>TRANSMIT TO BRIDGE DESIGN EE</span>
@@ -2126,7 +2126,7 @@ export default function CulvertAcquisitionWorkspace({
                 <button
                   type="button"
                   onClick={() => setShowReturnModal(true)}
-                  className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>RETURN FOR CORRECTION</span>
@@ -2140,7 +2140,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Assigned by BDD EE to Bridge Design SDE for modeling & deliverables',
                     )
                   }
-                  className="px-4 py-2 rounded-xl bg-[#034081] hover:bg-[#00225a] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xs bg-[#034081] hover:bg-[#00225a] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>ASSIGN TO DESIGN SDE</span>
@@ -2155,7 +2155,7 @@ export default function CulvertAcquisitionWorkspace({
                 <button
                   type="button"
                   onClick={() => setShowReturnModal(true)}
-                  className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>RETURN FOR CORRECTION</span>
@@ -2170,7 +2170,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Prepared culvert design package submitted by BDD SDE to Division EE',
                     );
                   }}
-                  className="px-4 py-2 rounded-xl bg-[#1b5d7a] hover:bg-[#12475e] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xs bg-[#1c508c] hover:bg-[#143d6b] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>SUBMIT PREPARED DESIGN TO BDD EE</span>
@@ -2185,7 +2185,7 @@ export default function CulvertAcquisitionWorkspace({
                 <button
                   type="button"
                   onClick={() => setShowReturnModal(true)}
-                  className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>RETURN FOR CORRECTION</span>
@@ -2199,7 +2199,7 @@ export default function CulvertAcquisitionWorkspace({
                       'Culvert design deliverables approved by Bridge Design Division EE and transmitted directly to Field EE',
                     )
                   }
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>APPROVE & TRANSMIT DESIGN TO FIELD EE</span>
@@ -2218,7 +2218,7 @@ export default function CulvertAcquisitionWorkspace({
                     'Culvert design deliverables dispatched by Field Division EE to Field SDE for site execution',
                   )
                 }
-                className="px-4 py-2 rounded-xl bg-[#1b5d7a] hover:bg-[#12475e] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xs bg-[#1c508c] hover:bg-[#143d6b] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
               >
                 <CheckCircle className="w-3.5 h-3.5" />
                 <span>DISPATCH DESIGN TO FIELD SDE</span>

@@ -239,7 +239,7 @@ def get_webmap_layer_geojson(layer_table: str, db: Session = Depends(get_db)):
                 "tracking_code": item.code,
                 "acquisition_type": acq_type,
                 "structure_type": acq_type.upper(),
-                "structure_color": "#112047" if acq_type.lower() == "bridge" else "#3699c2",
+                "structure_color": "#112047" if acq_type.lower() == "bridge" else "#1c508c",
                 "design_division": f"Bridge Design Division {target_bdd}",
                 "field_division": div_name,
                 "field_circle": circle_name,
@@ -503,7 +503,7 @@ def get_demand_iframe_preview(acq_type: str, id: int, db: Session = Depends(get_
   </div>
 
   <div class="badges-row">
-    <span class="pill" style="background: {'#112047' if acq_type == 'bridge' else '#3699c2'}; color: #ffffff;">{acq_type.upper()}</span>
+    <span class="pill" style="background: {'#112047' if acq_type == 'bridge' else '#1c508c'}; color: #ffffff;">{acq_type.upper()}</span>
     <span class="pill pill-stage">{stage_label}</span>
     <span class="pill pill-office">Bridge Design Division {bdd_num}</span>
     <span class="pill pill-office">{div_name}</span>

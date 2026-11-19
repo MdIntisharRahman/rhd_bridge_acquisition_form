@@ -20,10 +20,10 @@ const ROLES = [
   { key: 'BDC_SE', username: 'bdc_se', label: 'Bridge Design Circle SE', group: 'Superintending Engineer, BDC', badgeColor: 'bg-[#1c508c]' },
 
   // 3. Bridge Design Divisions
-  { key: 'BDD_EE_1', username: 'bdd_ee_1', label: 'Design Division-1 EE', group: 'Dhaka, Mymensingh, Rangpur', badgeColor: 'bg-[#3699c2]' },
-  { key: 'BDD_EE_2', username: 'bdd_ee_2', label: 'Design Division-2 EE', group: 'Sylhet, Cumilla, Chattogram', badgeColor: 'bg-[#3699c2]' },
-  { key: 'BDD_EE_3', username: 'bdd_ee_3', label: 'Design Division-3 EE', group: 'Khulna, Barishal, Rajshahi', badgeColor: 'bg-[#3699c2]' },
-  { key: 'BDD_SDE', username: 'bdd_sde_1', label: 'Bridge Design SDE', group: 'Structural & Hydraulic Modeling', badgeColor: 'bg-[#3699c2]' },
+  { key: 'BDD_EE_1', username: 'bdd_ee_1', label: 'Design Division-1 EE', group: 'Dhaka, Mymensingh, Rangpur', badgeColor: 'bg-[#1c508c]' },
+  { key: 'BDD_EE_2', username: 'bdd_ee_2', label: 'Design Division-2 EE', group: 'Sylhet, Cumilla, Chattogram', badgeColor: 'bg-[#1c508c]' },
+  { key: 'BDD_EE_3', username: 'bdd_ee_3', label: 'Design Division-3 EE', group: 'Khulna, Barishal, Rajshahi', badgeColor: 'bg-[#1c508c]' },
+  { key: 'BDD_SDE', username: 'bdd_sde_1', label: 'Bridge Design SDE', group: 'Structural & Hydraulic Modeling', badgeColor: 'bg-[#1c508c]' },
 
   // 4. Field Hierarchy (Demonstration Corridor: Dhaka Zone)
   { key: 'FIELD_ACE', username: 'field_ace', label: 'Dhaka Zone ACE', group: 'Additional Chief Engineer, Dhaka Zone', badgeColor: 'bg-[#1e7e61]' },
@@ -195,7 +195,7 @@ export default function TopCommandBar({
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 disabled={switching}
-                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-white/90 hover:bg-white text-[#112047] border border-[#cadbe7] transition-all cursor-pointer shadow-xs hover:shadow-sm active:scale-98"
+                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-xs bg-white/90 hover:bg-white text-[#112047] border border-[#cadbe7] transition-all cursor-pointer shadow-xs hover:shadow-sm active:scale-98"
               >
                 <UserCog className="w-3.5 h-3.5 text-[#1c508c]" />
                 <div className="flex flex-col text-right">
@@ -218,20 +218,20 @@ export default function TopCommandBar({
                     <div className="text-[11px] font-bold text-[#112047] uppercase tracking-wider mb-2" style={{ fontFamily: 'var(--font-caption)' }}>
                       Institutional Profile Switcher
                     </div>
-                    <div className="grid grid-cols-2 gap-1 bg-[#e7f0f5] p-1 rounded-lg border border-[#cadbe7]/50">
+                    <div className="grid grid-cols-2 gap-1 bg-[#e7f0f5] p-1 rounded-xs border border-[#cadbe7]/50">
                       <button
                         type="button"
                         onClick={() => setSwitcherTab('roles')}
-                        className={`py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                        className={`py-1.5 rounded-xs text-xs font-bold transition-all cursor-pointer ${
                           switcherTab === 'roles' ? 'bg-[#1c508c] text-white shadow-xs' : 'text-[#536b82] hover:text-[#112047] hover:bg-white/60'
                         }`}
                       >
-                        Institutional Hierarchy ({ROLES.length})
+                        Hierarchy ({ROLES.length})
                       </button>
                       <button
                         type="button"
                         onClick={() => setSwitcherTab('divisions')}
-                        className={`py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                        className={`py-1.5 rounded-xs text-xs font-bold transition-all cursor-pointer ${
                           switcherTab === 'divisions' ? 'bg-[#1c508c] text-white shadow-xs' : 'text-[#536b82] hover:text-[#112047] hover:bg-white/60'
                         }`}
                       >

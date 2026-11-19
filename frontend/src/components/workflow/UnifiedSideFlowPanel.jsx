@@ -174,7 +174,7 @@ export default function UnifiedSideFlowPanel({
                   isPassed
                     ? 'bg-[#10b981]'
                     : isCurrent
-                    ? (structureType === 'culvert' ? 'bg-[#3699c2]' : 'bg-[#112047]')
+                    ? (structureType === 'culvert' ? 'bg-[#1c508c]' : 'bg-[#112047]')
                     : isFlaggedReturn
                     ? 'bg-[#ea580c]'
                     : 'bg-white/73 backdrop-blur-md border border-slate-300/63'
@@ -220,7 +220,7 @@ export default function UnifiedSideFlowPanel({
           <div
             className={`h-full rounded-full transition-all duration-500 ease-out ${
               structureType === 'culvert'
-                ? 'bg-gradient-to-r from-[#74bcd8] to-[#3699c2]'
+                ? 'bg-gradient-to-r from-[#2d70b5] to-[#1c508c]'
                 : 'bg-gradient-to-r from-[#1c508c] to-[#112047]'
             }`}
             style={{ width: `${percentage}%` }}
@@ -243,7 +243,7 @@ export default function UnifiedSideFlowPanel({
           <span
             className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
               structureType === 'culvert'
-                ? 'bg-[#3699c2]/15 text-[#0e4a63] border-[#3699c2]/30'
+                ? 'bg-[#1c508c]/15 text-[#0f2d52] border-[#1c508c]/30'
                 : 'bg-[#112047]/10 text-[#112047] border-[#112047]/20'
             }`}
             style={{ fontFamily: 'var(--font-caption)' }}
@@ -284,8 +284,8 @@ export default function UnifiedSideFlowPanel({
                     className={`w-6 h-6 rounded-md flex items-center justify-center font-bold text-[11px] shrink-0 transition-all duration-200 ${
                       isActive
                         ? structureType === 'culvert'
-                          ? 'bg-gradient-to-br from-[#74bcd8] to-[#3699c2] text-white shadow-xs scale-105'
-                          : 'bg-gradient-to-br from-[#1c508c] to-[#112047] text-white shadow-xs scale-105'
+                          ? 'bg-[#1c508c] text-white shadow-xs scale-105'
+                          : 'bg-[#112047] text-white shadow-xs scale-105'
                         : 'bg-[#e9ecf3] text-[#5b6b7a] group-hover:scale-105 group-hover:bg-[#dde2ed]'
                     }`}
                     style={{ fontFamily: 'var(--font-caption)' }}

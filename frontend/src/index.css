@@ -45,7 +45,7 @@
     linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e7f0f5 100%);
 
   /* Physical Frosted Glass Surfaces */
-  --glass-surface: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.85) 30%, rgba(247, 250, 252, 0.88) 50%, rgba(250, 253, 255, 0.92) 70%, rgba(240, 246, 250, 0.8) 100%);
+  --glass-surface: linear-gradient(90deg, rgba(255, 255, 255, 0.49) 0%, rgba(255, 255, 255, 0.37) 30%, rgba(247, 250, 252, 0.36) 50%, rgba(250, 253, 255, 0.39) 70%, rgba(240, 246, 250, 0.49) 100%);
   --glass-surface-subtle: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(231, 240, 245, 0.65) 100%);
   --glass-surface-hover: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 246, 250, 0.85) 100%);
 
@@ -134,7 +134,7 @@
   --theme-teal-text: #00225a;
   --theme-teal-glow: rgba(1, 193, 242, 0.25);
 
-  /* Bridge (NAVY) & Culvert (STEEL BLUE) Disciplines */
+  /* Bridge (NAVY) & Culvert (DENIM) Disciplines */
   --theme-bridge-primary: #112047;
   --theme-bridge-deep: #0c1733;
   --theme-bridge-surface: #e7f0f5;
@@ -142,20 +142,20 @@
   --theme-bridge-text: #112047;
   --theme-bridge-glow: rgba(17, 32, 71, 0.25);
 
-  --theme-culvert-primary: #3699c2;
-  --theme-culvert-deep: #1b5d7a;
-  --theme-culvert-surface: #f0f8fb;
-  --theme-culvert-border: #3699c2;
-  --theme-culvert-text: #0e4a63;
-  --theme-culvert-glow: rgba(54, 153, 194, 0.28);
+  --theme-culvert-primary: #1c508c;
+  --theme-culvert-deep: #143d6b;
+  --theme-culvert-surface: #f0f4f9;
+  --theme-culvert-border: #1c508c;
+  --theme-culvert-text: #0f2d52;
+  --theme-culvert-glow: rgba(28, 80, 140, 0.25);
 
-  /* Legacy Plum Compatibility Re-routed to Immaculate Steel Blue */
-  --theme-plum-primary: #3699c2;
-  --theme-plum-deep: #1b5d7a;
-  --theme-plum-surface: #f0f8fb;
-  --theme-plum-border: #3699c2;
-  --theme-plum-text: #0e4a63;
-  --theme-plum-glow: rgba(54, 153, 194, 0.25);
+  /* Legacy Plum Compatibility Re-routed to Denim */
+  --theme-plum-primary: #1c508c;
+  --theme-plum-deep: #143d6b;
+  --theme-plum-surface: #f0f4f9;
+  --theme-plum-border: #1c508c;
+  --theme-plum-text: #0f2d52;
+  --theme-plum-glow: rgba(28, 80, 140, 0.25);
 
   /* Legacy Accent Compatibility Mapped to Palette */
   --accent-blue: #112047;
@@ -165,8 +165,8 @@
   --accent-orange: #e95a24;
   --accent-orange-hover: #c43e0e;
   --accent-teal: #01c1f2;
-  --accent-plum: #3699c2;
-  --accent-plum-hover: #1b5d7a;
+  --accent-plum: #1c508c;
+  --accent-plum-hover: #143d6b;
   --accent-teal-hover: #034081;
   --accent-violet: #429afe;
   --accent-violet-hover: #034081;
@@ -249,7 +249,7 @@
   select:hover,
   textarea:hover {
     background-color: rgba(255, 255, 255, 0.95);
-    border-color: #3699c2;
+    border-color: #1c508c;
   }
 
   input:focus,
@@ -257,7 +257,7 @@
   textarea:focus {
     background-color: #ffffff;
     border-color: #1c508c;
-    box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(28, 80, 140, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.9);
     outline: none;
   }
 
@@ -540,9 +540,9 @@
 .eng-section-header.accent-navy,
 .eng-section-header.accent-bridge,
 .eng-section-header.accent-blue {
-  background: linear-gradient(90deg, rgba(17, 32, 71, 0.12) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(28, 80, 140, 0.14) 100%);
+  background: linear-gradient(90deg, rgba(38, 192, 255, 0.66) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(76, 63, 226, 0.45) 100%);
   color: #112047;
-  border-left: 3px solid #112047;
+  /* border-left: 3px solid #112047; */
 }
 
 .eng-section-header.accent-amber {
@@ -577,10 +577,11 @@
 
 .eng-section-header.accent-culvert,
 .eng-section-header.accent-plum,
+.eng-section-header.accent-denim,
 .eng-section-header.accent-steelblue {
-  background: linear-gradient(90deg, rgba(54, 153, 194, 0.18) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(149, 212, 229, 0.22) 100%);
-  color: #0e4a63;
-  border-left: 3px solid #3699c2;
+  background: linear-gradient(90deg, rgba(28, 80, 140, 0.18) 0%, rgba(255, 255, 255, 0.6) 55%, rgba(17, 32, 71, 0.08) 100%);
+  color: #0f2d52;
+  border-left: 3px solid #1c508c;
 }
 
 /* Logical Field Cluster with clear spacing cadence */
@@ -682,13 +683,14 @@
   box-shadow: 0 0 0 3px rgba(17, 32, 71, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* Culvert Focus Variant (STEEL BLUE) */
+/* Culvert Focus Variant (DENIM) */
 .eng-input-culvert:focus,
 .eng-input-plum:focus,
+.eng-input-denim:focus,
 .eng-input-steelblue:focus {
-  border-color: #3699c2;
+  border-color: #1c508c;
   background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 3px rgba(28, 80, 140, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .eng-input:disabled,
@@ -1064,15 +1066,17 @@ select.eng-input option {
 
 .left-tab-item.active-culvert,
 .left-tab-item.active-plum,
+.left-tab-item.active-denim,
 .left-tab-item.active-steelblue {
   background: rgba(255, 255, 255, 0.96);
-  border-color: #3699c2;
-  color: #0e4a63;
-  box-shadow: 0 12px 28px -6px rgba(54, 153, 194, 0.25), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  border-color: #1c508c;
+  color: #0f2d52;
+  box-shadow: 0 12px 28px -6px rgba(28, 80, 140, 0.25), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
 }
 
 .left-tab-item.active-culvert::before,
 .left-tab-item.active-plum::before,
+.left-tab-item.active-denim::before,
 .left-tab-item.active-steelblue::before {
   content: '';
   position: absolute;
@@ -1081,7 +1085,7 @@ select.eng-input option {
   bottom: 10px;
   width: 4px;
   border-radius: 0 4px 4px 0;
-  background: #3699c2;
+  background: #1c508c;
 }
 
 .left-tab-item.flagged {
@@ -1174,16 +1178,17 @@ select.eng-input option {
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */
 .btn-festive-culvert,
 .btn-festive-plum,
+.btn-festive-denim,
 .btn-festive-steelblue {
   background: transparent;
-  color: #1b5d7a;
+  color: #1c508c;
   font-family: var(--font-body);
   font-weight: 600;
   padding: 7px 16px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  border: 1px solid #3699c2;
+  border: 1px solid #1c508c;
   border-radius: var(--radius-xs);
   transition: all 0.16s ease-in-out;
   cursor: pointer;
@@ -1191,16 +1196,18 @@ select.eng-input option {
 
 .btn-festive-culvert:hover,
 .btn-festive-plum:hover,
+.btn-festive-denim:hover,
 .btn-festive-steelblue:hover {
   color: #ffffff;
-  background: #3699c2;
+  background: #1c508c;
 }
 
 .btn-festive-culvert:active,
 .btn-festive-plum:active,
+.btn-festive-denim:active,
 .btn-festive-steelblue:active {
   transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(54, 153, 194, 0.25);
+  box-shadow: 0 2px 6px rgba(28, 80, 140, 0.25);
 }
 
 .input-festive {
@@ -1217,18 +1224,20 @@ select.eng-input option {
 }
 
 .input-festive-culvert,
-.input-festive-plum {
+.input-festive-plum,
+.input-festive-denim {
   border-radius: var(--radius-xs);
-  border: 1px solid #3699c2;
+  border: 1px solid #1c508c;
   background-color: rgba(255, 255, 255, 0.95);
-  color: #0e4a63;
+  color: #0f2d52;
   outline: none;
   transition: all 0.16s ease-in-out;
 }
 .input-festive-culvert:focus,
-.input-festive-plum:focus {
-  border-color: #3699c2;
-  box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25);
+.input-festive-plum:focus,
+.input-festive-denim:focus {
+  border-color: #1c508c;
+  box-shadow: 0 0 0 3px rgba(28, 80, 140, 0.22);
 }
 
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */

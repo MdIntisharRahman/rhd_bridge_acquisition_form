@@ -3031,7 +3031,7 @@ export default function BridgeAcquisitionWorkspace({
                       "Submitted by Field Officer to Executive Engineer for Authorization",
                     )
                   }
-                  className="px-4 py-2 rounded-xl bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xs bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>SUBMIT TO FIELD EE FOR AUTH</span>
@@ -3045,7 +3045,7 @@ export default function BridgeAcquisitionWorkspace({
                     <button
                       type="button"
                       onClick={() => setShowReturnModal(true)}
-                      className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>RETURN FOR CORRECTION</span>
@@ -3059,7 +3059,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Transferred by Field EE to Field SDE for customary verification",
                         )
                       }
-                      className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <FileCheck className="w-3.5 h-3.5" />
                       <span>PASS TO FIELD SDE (CUSTOMARY)</span>
@@ -3073,7 +3073,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Authorized by Field Division EE and transmitted directly to Bridge Design Division EE",
                         )
                       }
-                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <CheckCircle className="w-3.5 h-3.5" />
                       <span>TRANSMIT TO BRIDGE DESIGN DIVISION EE</span>
@@ -3089,7 +3089,7 @@ export default function BridgeAcquisitionWorkspace({
                       <button
                         type="button"
                         onClick={() => setShowReturnModal(true)}
-                        className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                        className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>RETURN FOR CORRECTION</span>
@@ -3104,7 +3104,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Verified by Field SDE and returned to Field EE",
                         )
                       }
-                      className="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-sky-600 hover:bg-sky-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <CheckCircle className="w-3.5 h-3.5" />
                       <span>VERIFY & RETURN TO FIELD EE</span>
@@ -3119,7 +3119,7 @@ export default function BridgeAcquisitionWorkspace({
                             "Transmitted directly to Bridge Design Division EE",
                           )
                         }
-                        className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                        className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                       >
                         <Send className="w-3.5 h-3.5" />
                         <span>TRANSMIT TO BRIDGE DESIGN EE</span>
@@ -3137,7 +3137,7 @@ export default function BridgeAcquisitionWorkspace({
                     <button
                       type="button"
                       onClick={() => setShowReturnModal(true)}
-                      className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>RETURN FOR CORRECTION</span>
@@ -3151,7 +3151,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Assigned by BDD EE to Bridge Design SDE for modeling & deliverables",
                         )
                       }
-                      className="px-4 py-2 rounded-xl bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xs bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>ASSIGN TO DESIGN SDE</span>
@@ -3166,7 +3166,7 @@ export default function BridgeAcquisitionWorkspace({
                     <button
                       type="button"
                       onClick={() => setShowReturnModal(true)}
-                      className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>RETURN FOR CORRECTION</span>
@@ -3181,7 +3181,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Prepared design package submitted by BDD SDE to Division EE",
                         );
                       }}
-                      className="px-4 py-2 rounded-xl bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xs bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>SUBMIT PREPARED DESIGN TO BDD EE</span>
@@ -3196,7 +3196,7 @@ export default function BridgeAcquisitionWorkspace({
                     <button
                       type="button"
                       onClick={() => setShowReturnModal(true)}
-                      className="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-3.5 py-2 rounded-xs bg-red-600 hover:bg-red-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       <span>RETURN FOR CORRECTION</span>
@@ -3210,7 +3210,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Prepared design package approved by Bridge Design Division EE and transmitted directly to Field EE",
                         )
                       }
-                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <CheckCircle className="w-3.5 h-3.5" />
                       <span>APPROVE & TRANSMIT DESIGN TO FIELD EE</span>
@@ -3229,7 +3229,7 @@ export default function BridgeAcquisitionWorkspace({
                         "Design deliverables dispatched by Field Division EE to Field SDE for site execution",
                       )
                     }
-                    className="px-4 py-2 rounded-xl bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                    className="px-4 py-2 rounded-xs bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                   >
                     <CheckCircle className="w-3.5 h-3.5" />
                     <span>DISPATCH DESIGN TO FIELD SDE</span>

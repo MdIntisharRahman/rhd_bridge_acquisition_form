@@ -451,7 +451,7 @@ export default function SupremeOperationsConsole({ currentUser }) {
                 <h2 className="text-base font-black text-[#112047]" style={{ fontFamily: 'var(--font-display)' }}>
                   Network Attached Storage (NAS) & Nextcloud Integration
                 </h2>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#e7f0f5] text-[#1c508c] border border-[#3699c2]/30">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#e7f0f5] text-[#1c508c] border border-[#1c508c]/30">
                   {nasStatus?.storage_mode || 'LOCAL_STAGING'}
                 </span>
                 <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-50 text-emerald-700 border border-emerald-300">
