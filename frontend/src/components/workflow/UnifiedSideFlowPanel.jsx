@@ -174,7 +174,7 @@ export default function UnifiedSideFlowPanel({
                   isPassed
                     ? 'bg-[#10b981]'
                     : isCurrent
-                    ? (structureType === 'culvert' ? 'bg-[#8e4b7b]' : 'bg-[#034081]')
+                    ? (structureType === 'culvert' ? 'bg-[#3699c2]' : 'bg-[#112047]')
                     : isFlaggedReturn
                     ? 'bg-[#ea580c]'
                     : 'bg-white/73 backdrop-blur-md border border-slate-300/63'
@@ -193,13 +193,13 @@ export default function UnifiedSideFlowPanel({
           </div>
         )}
         {isPassedToSde && (
-          <div className="p-2 rounded-lg bg-sky-50 border border-sky-200 text-[#034081] text-[11px] font-semibold flex items-center space-x-1.5">
-            <FileCheck2 className="w-3.5 h-3.5 text-[#034081] shrink-0" />
+          <div className="p-2 rounded-lg bg-sky-50 border border-sky-200 text-[#112047] text-[11px] font-semibold flex items-center space-x-1.5">
+            <FileCheck2 className="w-3.5 h-3.5 text-[#112047] shrink-0" />
             <span>Under customary Field SDE verification.</span>
           </div>
         )}
         {isApproved && (
-          <div className="p-2 rounded-lg bg-[#15db7c]/15 border border-[#15db7c]/30 text-[#00225a] text-[11px] font-semibold flex items-center space-x-1.5">
+          <div className="p-2 rounded-lg bg-[#15db7c]/15 border border-[#15db7c]/30 text-[#112047] text-[11px] font-semibold flex items-center space-x-1.5">
             <Check className="w-3.5 h-3.5 text-[#15db7c] shrink-0" />
             <span>{isDispatched ? 'Delivered to Field SDE for execution.' : 'Design package delivered to Field EE.'}</span>
           </div>
@@ -211,7 +211,7 @@ export default function UnifiedSideFlowPanel({
         <div className="flex items-center justify-between text-xs">
           <span className="font-semibold text-slate-700 text-[11px]">Core Completeness</span>
           <span 
-            className="font-bold text-xs text-[#00225a] font-mono tabular-nums font-caption"
+            className="font-bold text-xs text-[#112047] font-mono tabular-nums font-caption"
           >
             {percentage}%
           </span>
@@ -220,8 +220,8 @@ export default function UnifiedSideFlowPanel({
           <div
             className={`h-full rounded-full transition-all duration-500 ease-out ${
               structureType === 'culvert'
-                ? 'bg-gradient-to-r from-[#8e4b7b] to-[#58214a]'
-                : 'bg-gradient-to-r from-[#429afe] to-[#034081]'
+                ? 'bg-gradient-to-r from-[#74bcd8] to-[#3699c2]'
+                : 'bg-gradient-to-r from-[#1c508c] to-[#112047]'
             }`}
             style={{ width: `${percentage}%` }}
           />
@@ -235,7 +235,7 @@ export default function UnifiedSideFlowPanel({
       <div className="space-y-2">
         <div className="px-1 flex items-center justify-between">
           <span
-            className="text-[11px] font-extrabold uppercase tracking-wider text-[#00225a]"
+            className="text-[11px] font-extrabold uppercase tracking-wider text-[#112047]"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             Specification Sections
@@ -243,8 +243,8 @@ export default function UnifiedSideFlowPanel({
           <span
             className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
               structureType === 'culvert'
-                ? 'bg-[#8e4b7b]/15 text-[#7a3869] border-[#8e4b7b]/30'
-                : 'bg-[#034081]/10 text-[#034081] border-[#034081]/20'
+                ? 'bg-[#3699c2]/15 text-[#0e4a63] border-[#3699c2]/30'
+                : 'bg-[#112047]/10 text-[#112047] border-[#112047]/20'
             }`}
             style={{ fontFamily: 'var(--font-caption)' }}
           >
@@ -274,8 +274,8 @@ export default function UnifiedSideFlowPanel({
                 className={`left-tab-item group ${
                   isActive
                     ? structureType === 'culvert'
-                      ? 'active-plum'
-                      : 'active'
+                      ? 'active-culvert'
+                      : 'active-bridge'
                     : ''
                 } ${isFlagged ? 'flagged' : ''}`}
               >
@@ -284,8 +284,8 @@ export default function UnifiedSideFlowPanel({
                     className={`w-6 h-6 rounded-md flex items-center justify-center font-bold text-[11px] shrink-0 transition-all duration-200 ${
                       isActive
                         ? structureType === 'culvert'
-                          ? 'bg-gradient-to-br from-[#8e4b7b] to-[#58214a] text-white shadow-xs scale-105'
-                          : 'bg-gradient-to-br from-[#429afe] to-[#034081] text-white shadow-xs scale-105'
+                          ? 'bg-gradient-to-br from-[#74bcd8] to-[#3699c2] text-white shadow-xs scale-105'
+                          : 'bg-gradient-to-br from-[#1c508c] to-[#112047] text-white shadow-xs scale-105'
                         : 'bg-[#e9ecf3] text-[#5b6b7a] group-hover:scale-105 group-hover:bg-[#dde2ed]'
                     }`}
                     style={{ fontFamily: 'var(--font-caption)' }}

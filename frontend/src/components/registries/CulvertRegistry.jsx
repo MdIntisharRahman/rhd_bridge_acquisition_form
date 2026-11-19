@@ -71,7 +71,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
       case 'ASSIGNED_TO_BDD_SDE':
         return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-blue-800" style={{ fontFamily: 'var(--font-caption)' }}>Modeling by BDD SDE</span>;
       case 'DESIGN_PREPARED_PENDING_EE':
-        return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-purple-800" style={{ fontFamily: 'var(--font-caption)' }}>Design Vetting by EE</span>;
+        return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-sky-800" style={{ fontFamily: 'var(--font-caption)' }}>Design Vetting by EE</span>;
       case 'DESIGN_APPROVED_COMPLETE':
         return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-emerald-800" style={{ fontFamily: 'var(--font-caption)' }}>Approved & Delivered</span>;
       case 'DISPATCHED_TO_FIELD_SDE':
@@ -79,7 +79,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
       case 'RETURNED_FOR_CORRECTION':
         return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-rose-800" style={{ fontFamily: 'var(--font-caption)' }}>Returned</span>;
       default:
-        return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-[#7a3869]" style={{ fontFamily: 'var(--font-caption)' }}>{status}</span>;
+        return <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold text-[#1b5d7a]" style={{ fontFamily: 'var(--font-caption)' }}>{status}</span>;
     }
     // Eliminated cards here
   };
@@ -90,7 +90,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
       <div className="pb-3 border-b-2 border-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="text-xs font-bold text-[#7a3869] uppercase py-0.5 rounded-full font-caption">
+            <span className="text-xs font-bold text-[#1b5d7a] uppercase py-0.5 rounded-full font-caption">
               Culvert Acquisition Registry
             </span>
             <span className="text-xs text-slate-500 font-medium">
@@ -104,7 +104,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
 
         <button
           onClick={onNewCulvert}
-          className="btn-festive-plum text-xs font-semibold px-4 py-2 cursor-pointer"
+          className="btn-festive-culvert text-xs font-semibold px-4 py-2 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>New Culvert Acquisition</span>
@@ -119,7 +119,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
             <div className="text-xl font-extrabold text-[#001139] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.total}</div>
           </div>
           {/* # Do NOT INTRODUCE CARDS HERE NO NO NO */}
-          <div className="w-10 h-10 text-[#7a3869] flex items-center justify-center metric-icon transition-transform">
+          <div className="w-10 h-10 text-[#3699c2] flex items-center justify-center metric-icon transition-transform">
             <Layers className="w-5 h-5" />
           </div>
         </div>
@@ -127,10 +127,10 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
         <div className="glass-panel glass-metric-card p-3.5 flex items-center justify-between">
           <div>
             <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider" style={{ fontFamily: 'var(--font-caption)' }}>Active Drafts</div>
-            <div className="text-xl font-extrabold text-[#7a3869] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.drafts}</div>
+            <div className="text-xl font-extrabold text-[#1b5d7a] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.drafts}</div>
           </div>
           {/* # Do NOT INTRODUCE CARDS HERE NO NO NO */}
-          <div className="w-10 h-10 text-[#7a3869] flex items-center justify-center glass-metric-icon transition-transform">
+          <div className="w-10 h-10 text-[#3699c2] flex items-center justify-center glass-metric-icon transition-transform">
             <FileEdit className="w-5 h-5" />
           </div>
         </div>
@@ -168,21 +168,21 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
               placeholder="Search by code (MIS-CLV-...), culvert name, road..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 eng-input eng-input-plum text-xs"
+              className="w-full pl-9 pr-3 py-1.5 eng-input eng-input-culvert text-xs"
               style={{ fontFamily: 'var(--font-body)' }}
             />
           </div>
-          <button type="submit" className="btn-festive-plum text-xs font-semibold px-4 py-1.5 cursor-pointer">
+          <button type="submit" className="btn-festive-culvert text-xs font-semibold px-4 py-1.5 cursor-pointer">
             Filter
           </button>
         </form>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-[#4a1e46] font-bold" style={{ fontFamily: 'var(--font-subhead)' }}>Stage:</span>
+          <span className="text-xs text-[#0e4a63] font-bold" style={{ fontFamily: 'var(--font-subhead)' }}>Stage:</span>
           <select
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
-            className="p-1.5 eng-input eng-input-plum text-xs cursor-pointer"
+            className="p-1.5 eng-input eng-input-culvert text-xs cursor-pointer"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <option value="">All Stages</option>
@@ -230,7 +230,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
                   return (
                     <tr key={c.id} className="hover:bg-white/40 transition-colors">
                       {/* Code */}
-                      <td className="p-3 font-semibold text-[#7a3869] whitespace-nowrap">
+                      <td className="p-3 font-semibold text-[#1b5d7a] whitespace-nowrap">
                         <button
                           onClick={() => onOpenCulvert(c.id)}
                           className="hover:underline flex items-center space-x-1 cursor-pointer"
@@ -289,7 +289,7 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
                           {/* Open in Workspace */}
                           <button
                             onClick={() => onOpenCulvert(c.id)}
-                            className="px-2.5 py-1 rounded-xs text-[#4a1e46] font-semibold flex items-center space-x-1 cursor-pointer table-action-icon"
+                            className="px-2.5 py-1 rounded-xs text-[#0e4a63] font-semibold flex items-center space-x-1 cursor-pointer table-action-icon"
                             title="Open Form Workspace"
                             style={{ fontFamily: 'var(--font-subhead)' }}
                           >
@@ -302,10 +302,10 @@ export default function CulvertRegistry({ onOpenCulvert, onNewCulvert }) {
                             href={api.getExportUrl('culvert', c.id, 'pdf')}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1 rounded-xs text-[#7a3869] table-action-icon"
+                            className="p-1 rounded-xs text-[#1b5d7a] table-action-icon"
                             title="Download Engineering Datasheet PDF"
                           >
-                            <FileText className="w-3.5 h-3.5 text-[#7a3869]" />
+                            <FileText className="w-3.5 h-3.5 text-[#3699c2]" />
                           </a>
 
                           {/* ZIP Archive */}

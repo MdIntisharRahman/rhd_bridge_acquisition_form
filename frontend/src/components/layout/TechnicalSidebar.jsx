@@ -31,44 +31,44 @@ export default function TechnicalSidebar({ activeView, setActiveView, currentUse
       id: 'bridges',
       label: 'Bridge Registry',
       icon: FolderKanban,
-      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
-      iconColor: 'text-[#3699c2]',
-      hoverBg: 'hover:bg-[#1c508c]/8'
+      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/30',
+      iconColor: 'text-[#112047]',
+      hoverBg: 'hover:bg-[#112047]/8'
     },
     {
       id: 'culverts',
       label: 'Culvert Registry',
       icon: Layers,
-      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
+      activeColor: 'bg-[#3699c2] text-white shadow-md shadow-[#3699c2]/30',
       iconColor: 'text-[#3699c2]',
-      hoverBg: 'hover:bg-[#1c508c]/8'
+      hoverBg: 'hover:bg-[#3699c2]/8'
     },
     {
       id: 'pipeline',
       label: 'Design Bottleneck Matrix',
       icon: Activity,
-      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/25',
+      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
       iconColor: 'text-[#c05621]',
       badge: 'Live',
-      hoverBg: 'hover:bg-[#112047]/8'
+      hoverBg: 'hover:bg-[#1c508c]/8'
     },
     {
       id: 'new_bridge',
       label: 'New Bridge Acquisition',
       icon: PlusCircle,
-      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
-      iconColor: 'text-[#1e7e61]',
-      badge: 'Acquire',
-      hoverBg: 'hover:bg-[#1c508c]/8'
+      activeColor: 'bg-[#112047] text-white shadow-md shadow-[#112047]/30',
+      iconColor: 'text-[#112047]',
+      badge: 'Navy',
+      hoverBg: 'hover:bg-[#112047]/8'
     },
     {
       id: 'new_culvert',
       label: 'New Culvert Acquisition',
       icon: PlusCircle,
-      activeColor: 'bg-[#1c508c] text-white shadow-md shadow-[#1c508c]/25',
-      iconColor: 'text-[#1e7e61]',
-      badge: 'Acquire',
-      hoverBg: 'hover:bg-[#1c508c]/8'
+      activeColor: 'bg-[#3699c2] text-white shadow-md shadow-[#3699c2]/30',
+      iconColor: 'text-[#3699c2]',
+      badge: 'Steel Blue',
+      hoverBg: 'hover:bg-[#3699c2]/8'
     }
   ];
 

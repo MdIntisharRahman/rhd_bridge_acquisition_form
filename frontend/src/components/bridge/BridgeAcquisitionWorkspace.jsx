@@ -861,7 +861,7 @@ export default function BridgeAcquisitionWorkspace({
                 style={{ fontFamily: "var(--font-body)" }}
                 title="Download Technical Engineering Datasheet PDF"
               >
-                <Download className={`w-3.5 h-3.5 text-[#034081] ${downloadingExport === "pdf" ? "animate-spin" : ""}`} />
+                <Download className={`w-3.5 h-3.5 text-[#112047] ${downloadingExport === "pdf" ? "animate-spin" : ""}`} />
                 <span>{downloadingExport === "pdf" ? "Exporting..." : "Datasheet PDF"}</span>
               </a>
               <a
@@ -897,7 +897,7 @@ export default function BridgeAcquisitionWorkspace({
               onClick={() => setActiveTab("TAB-08")}
               className={`px-3 py-1.5 rounded-xs border text-xs font-semibold flex items-center space-x-1.5 transition-all cursor-pointer ${
                 activeTab === "TAB-08"
-                  ? "bg-[#034081] text-white border-[#034081]"
+                  ? "bg-[#112047] text-white border-[#112047]"
                   : "bg-white/75 hover:bg-white text-slate-800 border-white/90"
               }`}
             >
@@ -1691,7 +1691,7 @@ export default function BridgeAcquisitionWorkspace({
                 {formData.nav_clearance_authority === "Railway" && (
                   <div className="p-3 bg-white/40 border border-white/60 rounded-xl space-y-2 backdrop-blur-xs">
                     <span
-                      className="font-bold text-[#001139] block text-xs"
+                      className="font-bold text-[#112047] block text-xs"
                       style={{ fontFamily: "var(--font-subhead)" }}
                     >
                       Railway Clearance Standard:
@@ -1699,7 +1699,7 @@ export default function BridgeAcquisitionWorkspace({
                     <button
                       type="button"
                       onClick={() => handleNavClassChange("General")}
-                      className="p-2 rounded-xl bg-[#00225a] hover:bg-[#034081] text-white text-xs cursor-pointer transition-all shadow-xs"
+                      className="p-2 rounded-xl bg-[#112047] hover:bg-[#112047] text-white text-xs cursor-pointer transition-all shadow-xs"
                       style={{ fontFamily: "var(--font-ui)" }}
                     >
                       Railway General Standard (V: 7.25m, H: 30.50m)
@@ -1778,7 +1778,7 @@ export default function BridgeAcquisitionWorkspace({
               <div className="eng-section-header accent-blue">
                 <span>Existing Structure Geometry & Benchmark Datum</span>
                 <span
-                  className="font-caption font-size-10 font-bold text-[#034081]"
+                  className="font-caption font-size-10 font-bold text-[#112047]"
                 >
                   Datum: in m {datum}
                 </span>
@@ -1977,7 +1977,7 @@ export default function BridgeAcquisitionWorkspace({
             <div className="eng-panel">
               <div className="eng-section-header accent-blue">
                 <span>Hydrological & Tidal Survey Water Levels</span>
-                <span className="font-caption font-size-10 font-bold text-[#034081]">
+                <span className="font-caption font-size-10 font-bold text-[#112047]">
                   Datum: in m {datum}
                 </span>
               </div>
@@ -2298,7 +2298,7 @@ export default function BridgeAcquisitionWorkspace({
                 <span>
                   Proposed Bridge Structural Geometry & Ancillary Works
                 </span>
-                <span className="font-caption text-xs font-bold text-[#034081]">
+                <span className="font-caption text-xs font-bold text-[#112047]">
                   Datum: in m {datum}
                 </span>
               </div>
@@ -2622,11 +2622,11 @@ export default function BridgeAcquisitionWorkspace({
               <div className="p-7 grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
                 {/* Field 23: Soil report with sign/seal */}
                 <div className="p-3.5 rounded-xs space-y-2">
-                  <div className="font-bold text-[#001139]">
+                  <div className="font-bold text-[#112047]">
                     23) Soil Investigation Report (Signed &amp; Sealed by EE)
                   </div>
                   {canEditPlacement && (
-                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <label className="px-3 py-1.5 rounded-xs bg-[#112047] hover:bg-[#112047] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
                       <Upload className="w-3.5 h-3.5 text-cyan-300" />
                       <span>{uploadingSlot === "soil_report" ? "Uploading..." : "Upload Soil Report PDF"}</span>
                       <input
@@ -2688,11 +2688,11 @@ export default function BridgeAcquisitionWorkspace({
 
                 {/* Field 25: Site Plan */}
                 <div className="p-3.5 rounded-xs space-y-2">
-                  <div className="font-bold text-[#001139]">
+                  <div className="font-bold text-[#112047]">
                     25) Site Plan of Proposed Bridge (Hat-Bazar, Town, GPS)
                   </div>
                   {canEditPlacement && (
-                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <label className="px-3 py-1.5 rounded-xs bg-[#112047] hover:bg-[#112047] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
                       <Upload className="w-3.5 h-3.5 text-cyan-300" />
                       <span>{uploadingSlot === "site_plan" ? "Uploading..." : "Upload Site Plan Drawing"}</span>
                       <input
@@ -2754,11 +2754,11 @@ export default function BridgeAcquisitionWorkspace({
 
                 {/* Field 26: Cross Sections */}
                 <div className="p-3.5 rounded-xs space-y-2">
-                  <div className="font-bold text-[#001139]">
+                  <div className="font-bold text-[#112047]">
                     26) Cross-Sections (&gt;= 3 Sections: CL, 10m U/S, 10m D/S)
                   </div>
                   {canEditPlacement && (
-                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <label className="px-3 py-1.5 rounded-xs bg-[#112047] hover:bg-[#112047] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
                       <Upload className="w-3.5 h-3.5 text-cyan-300" />
                       <span>{uploadingSlot === "cross_section" ? "Uploading..." : "Upload Cross-Sections"}</span>
                       <input
@@ -2820,11 +2820,11 @@ export default function BridgeAcquisitionWorkspace({
 
                 {/* Field 31: Hydro-Morphological Report */}
                 <div className="p-3.5 rounded-xs space-y-2">
-                  <div className="font-bold text-[#001139]">
+                  <div className="font-bold text-[#112047]">
                     31) Hydro-Morphological Study Report
                   </div>
                   {canEditPlacement && (
-                    <label className="px-3 py-1.5 rounded-xs bg-[#00225a] hover:bg-[#034081] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
+                    <label className="px-3 py-1.5 rounded-xs bg-[#112047] hover:bg-[#112047] text-white text-xs font-semibold inline-flex items-center space-x-1.5 cursor-pointer shadow-xs transition-all">
                       <Upload className="w-3.5 h-3.5 text-cyan-300" />
                       <span>{uploadingSlot === "hydro_morphological" ? "Uploading..." : "Upload Hydro Study"}</span>
                       <input
@@ -2900,11 +2900,11 @@ export default function BridgeAcquisitionWorkspace({
                     key={dir}
                     className="p-3 rounded-xs text-center space-y-2 "
                   >
-                    <span className=" font-bold uppercase text-[#001139] block">
+                    <span className=" font-bold uppercase text-[#112047] block">
                       {dir} Side View
                     </span>
                     {canEditPlacement && (
-                      <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#00225a]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
+                      <label className="w-full py-1.5 rounded-xs bg-transparent hover:bg-slate-200 text-[#112047]  text-[11px] font-semibold border border-slate-500 block cursor-pointer transition-all shadow-xs">
                         <span>Select Image</span>
                         <input
                           type="file"
@@ -3005,14 +3005,14 @@ export default function BridgeAcquisitionWorkspace({
               <span className="text-slate-600 font-semibold">
                 Active Datum:
               </span>
-              <span className="px-2.5 py-1 bg-white/60 rounded-xs text-[#034081] font-bold border border-slate-300">
+              <span className="px-2.5 py-1 bg-white/60 rounded-xs text-[#112047] font-bold border border-slate-300">
                 R.L. in {datum}
               </span>
               <span className="text-slate-400">|</span>
               <span className="text-slate-600 font-semibold">
                 Current Stage:
               </span>
-              <span className="px-2.5 py-1 bg-[#00225a] text-sky-200 rounded-xs font-bold">
+              <span className="px-2.5 py-1 bg-[#112047] text-sky-200 rounded-xs font-bold">
                 {formData.workflow_status || "DRAFT_FIELD"}
               </span>
             </div>
@@ -3031,7 +3031,7 @@ export default function BridgeAcquisitionWorkspace({
                       "Submitted by Field Officer to Executive Engineer for Authorization",
                     )
                   }
-                  className="px-4 py-2 rounded-xl bg-[#429afe] hover:bg-[#034081] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>SUBMIT TO FIELD EE FOR AUTH</span>
@@ -3151,7 +3151,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Assigned by BDD EE to Bridge Design SDE for modeling & deliverables",
                         )
                       }
-                      className="px-4 py-2 rounded-xl bg-[#034081] hover:bg-[#00225a] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>ASSIGN TO DESIGN SDE</span>
@@ -3181,7 +3181,7 @@ export default function BridgeAcquisitionWorkspace({
                           "Prepared design package submitted by BDD SDE to Division EE",
                         );
                       }}
-                      className="px-4 py-2 rounded-xl bg-[#429afe] hover:bg-[#034081] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                      className="px-4 py-2 rounded-xl bg-[#1c508c] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
                       <span>SUBMIT PREPARED DESIGN TO BDD EE</span>
@@ -3229,7 +3229,7 @@ export default function BridgeAcquisitionWorkspace({
                         "Design deliverables dispatched by Field Division EE to Field SDE for site execution",
                       )
                     }
-                    className="px-4 py-2 rounded-xl bg-[#034081] hover:bg-[#00225a] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-[#112047] hover:bg-[#112047] text-white font-bold flex items-center space-x-1.5 shadow-md transition-all cursor-pointer"
                   >
                     <CheckCircle className="w-3.5 h-3.5" />
                     <span>DISPATCH DESIGN TO FIELD SDE</span>

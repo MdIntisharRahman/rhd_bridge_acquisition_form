@@ -90,7 +90,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
       <div className="pb-3 border-b-2 border-slate-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center space-x-2">
-            <span className="text-xs font-bold text-[#034081] uppercase py-0.5 rounded-full font-caption" >
+            <span className="text-xs font-bold text-[#112047] uppercase py-0.5 rounded-full font-caption" >
               Bridge Acquisition Registry
             </span>
             <span className="text-xs text-slate-500 font-medium">
@@ -116,7 +116,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
         <div className="glass-panel glass-metric-card p-3.5 flex items-center justify-between">
           <div>
             <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider" style={{ fontFamily: 'var(--font-caption)' }}>Total Registered</div>
-            <div className="text-xl font-extrabold text-[#001139] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.total}</div>
+            <div className="text-xl font-extrabold text-[#112047] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.total}</div>
           </div>
           <div className="w-10 h-10 rounded-xs  flex items-center justify-center-metric-icon transition-transform">
             <Layers className="w-5 h-5" />
@@ -126,7 +126,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
         <div className="glass-panel glass-metric-card p-3.5 flex items-center justify-between">
           <div>
             <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider" style={{ fontFamily: 'var(--font-caption)' }}>Active Drafts</div>
-            <div className="text-xl font-extrabold text-[#034081] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.drafts}</div>
+            <div className="text-xl font-extrabold text-[#112047] tabular-nums mt-0.5" style={{ fontFamily: 'var(--font-display)' }}>{metrics.drafts}</div>
           </div>
           <div className="w-10 h-10 rounded-xs  flex items-center justify-center glass-metric-icon transition-transform">
             <FileEdit className="w-5 h-5" />
@@ -174,7 +174,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
         </form>
 
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-[#00225a] font-bold" style={{ fontFamily: 'var(--font-subhead)' }}>Stage:</span>
+          <span className="text-xs text-[#112047] font-bold" style={{ fontFamily: 'var(--font-subhead)' }}>Stage:</span>
           <select
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value)}
@@ -199,7 +199,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
       <div className="glass-panel overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="bg-white/40 text-[#001139] text-xs font-bold border-b border-white/60" style={{ fontFamily: 'var(--font-subhead)' }}>
+            <thead className="bg-white/40 text-[#112047] text-xs font-bold border-b border-white/60" style={{ fontFamily: 'var(--font-subhead)' }}>
               <tr>
                 <th className="p-3">Dossier Code</th>
                 <th className="p-3">Bridge Name</th>
@@ -281,7 +281,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
                         {/* Open in Workspace */}
                         <button
                           onClick={() => onOpenBridge(b.id)}
-                          className="px-2.5 py-1 rounded-xs text-[#00225a] font-semibold flex items-center space-x-1 cursor-pointer table-action-icon"
+                          className="px-2.5 py-1 rounded-xs text-[#112047] font-semibold flex items-center space-x-1 cursor-pointer table-action-icon"
                           title="Open Form Workspace"
                           style={{ fontFamily: 'var(--font-subhead)' }}
                         >
@@ -294,10 +294,10 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
                           href={api.getExportUrl('bridge', b.id, 'pdf')}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-1 rounded-xs hover:text-[#034081] table-action-icon"
+                          className="p-1 rounded-xs hover:text-[#112047] table-action-icon"
                           title="Download Engineering Datasheet PDF"
                         >
-                          <FileText className="w-3.5 h-3.5 text-[#034081]" />
+                          <FileText className="w-3.5 h-3.5 text-[#112047]" />
                         </a>
 
                         {/* ZIP Archive */}
@@ -316,7 +316,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
                           href={`/api/acquisitions/bridge/${b.id}/export-excel`}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-1 rounded-xs hover:text-[#00225a] table-action-icon"
+                          className="p-1 rounded-xs hover:text-[#112047] table-action-icon"
                           title="Download Tabular Engineering Schedule (Excel)"
                         >
                           <FileSpreadsheet className="w-3.5 h-3.5 text-[#15db7c]" />
@@ -328,7 +328,7 @@ export default function BridgeRegistry({ onOpenBridge, onNewBridge }) {
                             href={`https://webmap.rhdbridge.com/?code=${b.code}&lat=${b.location_lat_lng.split(',')[0].trim()}&lng=${b.location_lat_lng.split(',')[1]?.trim()}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="p-1 rounded-xs text-[#034081] table-action-icon"
+                            className="p-1 rounded-xs text-[#112047] table-action-icon"
                             title="Open in Live RHD Webmap GIS"
                           >
                             <Globe className="w-3.5 h-3.5" />

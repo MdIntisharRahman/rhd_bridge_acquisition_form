@@ -83,7 +83,7 @@ export default function FieldDivisionDashboard({ currentUser, onOpenBridge, onOp
           </button>
           <button
             onClick={onNewCulvert}
-            className="btn-festive-plum text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
+            className="btn-festive-culvert text-xs font-semibold px-4 py-2 cursor-pointer shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>New Culvert</span>

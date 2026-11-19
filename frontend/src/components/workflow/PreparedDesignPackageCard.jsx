@@ -96,7 +96,7 @@ export default function PreparedDesignPackageCard({
     setEditingNotes(false);
   };
 
-  const accentColor = structureType === 'culvert' ? '#8e4b7b' : '#034081';
+  const accentColor = structureType === 'culvert' ? '#3699c2' : '#112047';
 
   return (
     <div className="glass-panel p-5 space-y-5 border border-white/70 shadow-sm relative overflow-hidden">

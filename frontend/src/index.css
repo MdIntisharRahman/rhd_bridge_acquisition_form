@@ -134,30 +134,46 @@
   --theme-teal-text: #00225a;
   --theme-teal-glow: rgba(1, 193, 242, 0.25);
 
-  --theme-plum-primary: #8e4b7b;
-  --theme-plum-deep: #7a3869;
-  --theme-plum-surface: #fbf7fa;
-  --theme-plum-border: #8e4b7b;
-  --theme-plum-text: #4a1e46;
-  --theme-plum-glow: rgba(142, 75, 123, 0.25);
+  /* Bridge (NAVY) & Culvert (STEEL BLUE) Disciplines */
+  --theme-bridge-primary: #112047;
+  --theme-bridge-deep: #0c1733;
+  --theme-bridge-surface: #e7f0f5;
+  --theme-bridge-border: #1c508c;
+  --theme-bridge-text: #112047;
+  --theme-bridge-glow: rgba(17, 32, 71, 0.25);
+
+  --theme-culvert-primary: #3699c2;
+  --theme-culvert-deep: #1b5d7a;
+  --theme-culvert-surface: #f0f8fb;
+  --theme-culvert-border: #3699c2;
+  --theme-culvert-text: #0e4a63;
+  --theme-culvert-glow: rgba(54, 153, 194, 0.28);
+
+  /* Legacy Plum Compatibility Re-routed to Immaculate Steel Blue */
+  --theme-plum-primary: #3699c2;
+  --theme-plum-deep: #1b5d7a;
+  --theme-plum-surface: #f0f8fb;
+  --theme-plum-border: #3699c2;
+  --theme-plum-text: #0e4a63;
+  --theme-plum-glow: rgba(54, 153, 194, 0.25);
 
   /* Legacy Accent Compatibility Mapped to Palette */
-  --accent-blue: #034081;
-  --accent-blue-hover: #00225a;
+  --accent-blue: #112047;
+  --accent-blue-hover: #1c508c;
   --accent-green: #15db7c;
   --accent-green-hover: #0eb865;
   --accent-orange: #e95a24;
   --accent-orange-hover: #c43e0e;
   --accent-teal: #01c1f2;
-  --accent-plum: #8e4b7b;
-  --accent-plum-hover: #7a3869;
+  --accent-plum: #3699c2;
+  --accent-plum-hover: #1b5d7a;
   --accent-teal-hover: #034081;
   --accent-violet: #429afe;
   --accent-violet-hover: #034081;
   --accent-magenta: #e95a24;
   --accent-magenta-hover: #c43e0e;
-  --accent-slateblue: #034081;
-  --accent-slateblue-hover: #001139;
+  --accent-slateblue: #112047;
+  --accent-slateblue-hover: #0c1733;
 }
 
 @layer base {
@@ -521,10 +537,12 @@
   text-transform: uppercase;
 }
 
+.eng-section-header.accent-navy,
+.eng-section-header.accent-bridge,
 .eng-section-header.accent-blue {
-  /* border-top: 3px solid var(--theme-azure-primary); */
-  background: linear-gradient(90deg, rgba(66, 154, 254, 0.2) 0%, rgba(255,255,255,0.3) 57%,rgba(98, 244, 217, 0.26) 100%);
-  color: var(--theme-azure-deep);
+  background: linear-gradient(90deg, rgba(17, 32, 71, 0.12) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(28, 80, 140, 0.14) 100%);
+  color: #112047;
+  border-left: 3px solid #112047;
 }
 
 .eng-section-header.accent-amber {
@@ -557,9 +575,12 @@
   color: var(--theme-emerald-text);
 }
 
-.eng-section-header.accent-plum {
-  background: linear-gradient(90deg, rgba(135, 59, 114, 0.16) 0%,rgba(255,255,255,0.3) 57%, rgba(145, 89, 229, 0.177) 100%);
-  color: #4a1e46;
+.eng-section-header.accent-culvert,
+.eng-section-header.accent-plum,
+.eng-section-header.accent-steelblue {
+  background: linear-gradient(90deg, rgba(54, 153, 194, 0.18) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(149, 212, 229, 0.22) 100%);
+  color: #0e4a63;
+  border-left: 3px solid #3699c2;
 }
 
 /* Logical Field Cluster with clear spacing cadence */
@@ -653,18 +674,21 @@
   outline-offset: -1px;
 }
 
-/* Orange/Culvert Focus Variant */
-.eng-input-orange:focus {
-  border-color: var(--theme-coral-primary);
-  background-color: rgba(255, 255, 255, 0.48);
-  box-shadow: 0 0 0 3px rgba(233, 90, 36, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+/* Bridge Focus Variant (NAVY) */
+.eng-input-bridge:focus,
+.eng-input-navy:focus {
+  border-color: #112047;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(17, 32, 71, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* Plum/Culvert Focus Variant */
-.eng-input-plum:focus {
-  border-color: #8e4b7b;
-  background-color: rgba(255, 255, 255, 0.48);
-  box-shadow: 0 0 0 3px rgba(142, 75, 123, 0.22), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+/* Culvert Focus Variant (STEEL BLUE) */
+.eng-input-culvert:focus,
+.eng-input-plum:focus,
+.eng-input-steelblue:focus {
+  border-color: #3699c2;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .eng-input:disabled,
@@ -1038,14 +1062,18 @@ select.eng-input option {
   background: var(--c-orange);
 }
 
-.left-tab-item.active-plum {
+.left-tab-item.active-culvert,
+.left-tab-item.active-plum,
+.left-tab-item.active-steelblue {
   background: rgba(255, 255, 255, 0.96);
-  border-color: #8e4b7b;
-  color: #4a1e46;
-  box-shadow: 0 12px 28px -6px rgba(122, 56, 105, 0.22), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  border-color: #3699c2;
+  color: #0e4a63;
+  box-shadow: 0 12px 28px -6px rgba(54, 153, 194, 0.25), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
 }
 
-.left-tab-item.active-plum::before {
+.left-tab-item.active-culvert::before,
+.left-tab-item.active-plum::before,
+.left-tab-item.active-steelblue::before {
   content: '';
   position: absolute;
   left: 0;
@@ -1053,7 +1081,7 @@ select.eng-input option {
   bottom: 10px;
   width: 4px;
   border-radius: 0 4px 4px 0;
-  background: #8e4b7b;
+  background: #3699c2;
 }
 
 .left-tab-item.flagged {
@@ -1063,29 +1091,32 @@ select.eng-input option {
 
 /* Tactile Glass Buttons */
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */
+.btn-festive-bridge,
 .btn-festive-blue {
   background: transparent;
-  color: var(--c-cobalt);
+  color: var(--c-navy);
   font-family: var(--font-body);
   font-weight: 600;
   padding: 7px 16px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  border: 1px solid var(--c-cobalt);
+  border: 1px solid var(--c-navy);
   border-radius: var(--radius-xs);
   transition: all 0.16s ease-in-out;
   cursor: pointer;
 }
 
+.btn-festive-bridge:hover,
 .btn-festive-blue:hover {
   color: #ffffff;
-  background: var(--c-cobalt);
+  background: var(--c-navy);
 }
 
+.btn-festive-bridge:active,
 .btn-festive-blue:active {
   transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(3, 64, 129, 0.2);
+  box-shadow: 0 2px 6px rgba(17, 32, 71, 0.25);
 }
 
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */
@@ -1141,29 +1172,63 @@ select.eng-input option {
 }
 
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */
-.btn-festive-plum {
+.btn-festive-culvert,
+.btn-festive-plum,
+.btn-festive-steelblue {
   background: transparent;
-  color: #58214a;
+  color: #1b5d7a;
   font-family: var(--font-body);
   font-weight: 600;
   padding: 7px 16px;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  border: 1px solid #58214a;
-  border-radius:  var(--radius-xs);
+  border: 1px solid #3699c2;
+  border-radius: var(--radius-xs);
   transition: all 0.16s ease-in-out;
   cursor: pointer;
 }
 
-.btn-festive-plum:hover {
+.btn-festive-culvert:hover,
+.btn-festive-plum:hover,
+.btn-festive-steelblue:hover {
   color: #ffffff;
-  background: #58214a;
+  background: #3699c2;
 }
 
-.btn-festive-plum:active {
+.btn-festive-culvert:active,
+.btn-festive-plum:active,
+.btn-festive-steelblue:active {
   transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(122, 56, 105, 0.2);
+  box-shadow: 0 2px 6px rgba(54, 153, 194, 0.25);
+}
+
+.input-festive {
+  border-radius: var(--radius-xs);
+  border: 1px solid #112047;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #112047;
+  outline: none;
+  transition: all 0.16s ease-in-out;
+}
+.input-festive:focus {
+  border-color: #112047;
+  box-shadow: 0 0 0 3px rgba(17, 32, 71, 0.22);
+}
+
+.input-festive-culvert,
+.input-festive-plum {
+  border-radius: var(--radius-xs);
+  border: 1px solid #3699c2;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #0e4a63;
+  outline: none;
+  transition: all 0.16s ease-in-out;
+}
+.input-festive-culvert:focus,
+.input-festive-plum:focus {
+  border-color: #3699c2;
+  box-shadow: 0 0 0 3px rgba(54, 153, 194, 0.25);
 }
 
 /* DO NOT CHANGE THE SYLES FOR THESE BUTTONS */
@@ -1468,11 +1533,14 @@ select.eng-input option {
   }
 }
 
+.left-tab-item.active-bridge::before,
 .left-tab-item.active::before {
   animation: tabPillBloom 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.left-tab-item.active-plum::before {
+.left-tab-item.active-culvert::before,
+.left-tab-item.active-plum::before,
+.left-tab-item.active-steelblue::before {
   animation: tabPillBloom 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
