@@ -184,6 +184,25 @@ class NASStorageManager:
         logger.info("NAS demand JSON synchronized: %s", rel_path)
         return target_path
 
+    def get_demand_json(self, item) -> Optional[Dict[str, Any]]:
+        """Reads and returns the stored demand JSON manifest from the NAS hierarchy."""
+        try:
+            hierarchy = self.get_acquisition_hierarchy(item)
+            code_slug = re.sub(r'[^a-zA-Z0-9_\-]+', '_', item.code or f"demand_{item.id}")
+            json_filename = f"{code_slug}_demand.json"
+            target_path = os.path.join(hierarchy["abs_demand"], json_filename)
+            if os.path.exists(target_path):
+                with open(target_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            # Fallback to canonical demand.json
+            canonical_path = os.path.join(hierarchy["abs_demand"], "demand.json")
+            if os.path.exists(canonical_path):
+                with open(canonical_path, "r", encoding="utf-8") as f:
+                    return json.load(f)
+        except Exception as e:
+            logger.debug("Failed reading demand JSON for %s: %s", getattr(item, 'code', None), e)
+        return None
+
     async def save_uploaded_attachment(
         self,
         item,

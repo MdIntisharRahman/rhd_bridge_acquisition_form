@@ -11,7 +11,7 @@ from starlette.responses import Response, FileResponse, StreamingResponse
 from backend.config import settings
 from backend.database import engine, SessionLocal, Base, run_auto_schema_migrations
 from backend.seed import seed_database
-from backend.routers import auth, master, bridge, culvert, webmap, exports, supreme, pipeline, nas
+from backend.routers import auth, master, bridge, culvert, webmap, exports, supreme, pipeline, nas, webmap_exchange
 from backend.services.nas_storage import nas_storage
 from backend.models import Attachment
 from backend.security import sanitize_filename
@@ -37,7 +37,16 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         response: Response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
-        response.headers["X-Frame-Options"] = "SAMEORIGIN"
+        is_preview = request.url.path.startswith("/api/exchange/webmap/preview")
+        if is_preview:
+            # Allow Webmap portal to embed preview iframe seamlessly
+            if "x-frame-options" in response.headers:
+                del response.headers["x-frame-options"]
+            csp_frame = "frame-ancestors 'self' https://webmap.rhdbridge.com http://localhost:8484 http://127.0.0.1:8484 https://*.rhdbridge.com;"
+        else:
+            response.headers["X-Frame-Options"] = "SAMEORIGIN"
+            csp_frame = "frame-ancestors 'self' https://webmap.rhdbridge.com http://localhost:8484 http://127.0.0.1:8484;"
+            
         response.headers["X-XSS-Protection"] = "1; mode=block"
         response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
         response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(self)"
@@ -50,7 +59,7 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://webmap.rhdbridge.com; "
             "connect-src 'self' https://webmap.rhdbridge.com http://localhost:* ws://localhost:*; "
             "font-src 'self' data:; "
-            "frame-ancestors 'none';"
+            f"{csp_frame}"
         )
         response.headers["Content-Security-Policy"] = csp
         return response
@@ -160,6 +169,7 @@ app.include_router(exports.router, prefix=settings.API_V1_STR)
 app.include_router(supreme.router, prefix=settings.API_V1_STR)
 app.include_router(pipeline.router, prefix=settings.API_V1_STR)
 app.include_router(nas.router, prefix=settings.API_V1_STR)
+app.include_router(webmap_exchange.router, prefix=settings.API_V1_STR)
 
 @app.on_event("startup")
 def on_startup():

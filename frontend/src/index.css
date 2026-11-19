@@ -1559,10 +1559,10 @@ select.eng-input option {
    ========================================================================== */
 @keyframes flowChroma {
   0% {
-    background-position: 0% 0;
+    background-position: 200% 0;
   }
   100% {
-    background-position: 200% 0;
+    background-position: 0% 0;
   }
 }
 
@@ -1577,7 +1577,7 @@ select.eng-input option {
     #001f54 0%,
     #38bdf8 12%,
     #6ee7b7 26%,
-    #fde047 42%,
+    /* #fde047 42%, */
     #f43f5e 58%,
     #e879f9 74%,
     #818cf8 88%,
