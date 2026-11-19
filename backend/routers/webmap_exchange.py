@@ -140,7 +140,9 @@ def get_webmap_layers_catalog():
                 "color": color,
                 "bdd_division": bdd_num,
                 "stage": stage_slug,
-                "search_on": "[code, Tracking Code], [name, Structure Name], [road_name, Road]"
+                "classify_with": "field_division",
+                "search_on": "[field_division, Division], [code, Tracking Code], [name, Structure Name], [road_name, Road]",
+                "map_from_legends": True
             })
 
     return layers
@@ -242,6 +244,7 @@ def get_webmap_layer_geojson(layer_table: str, db: Session = Depends(get_db)):
                 "structure_color": "#112047" if acq_type.lower() == "bridge" else "#1c508c",
                 "design_division": f"Bridge Design Division {target_bdd}",
                 "field_division": div_name,
+                "division": div_name,
                 "field_circle": circle_name,
                 "field_zone": zone_name,
                 "road_name": display_road,
