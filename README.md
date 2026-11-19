@@ -1,15 +1,16 @@
-# RHD ADDS — System for Coordinated Exchange of Design Data (Bridge & Culvert Acquisition)
+# RHD DESC — Data Exchange System for Coordination (Bridge & Culvert Acquisition)
 
-[![Roads and Highways Department](https://img.shields.io/badge/RHD-Government%20of%20Bangladesh-00225a?style=flat-square)](https://rhd.gov.bd)
+[![Roads and Highways Department](https://img.shields.io/badge/RHD-Government%20of%20Bangladesh-112047?style=flat-square)](https://rhd.gov.bd)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
 [![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=flat-square&logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6.0-646cff?style=flat-square&logo=vite)](https://vitejs.dev)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite%20Fallback-336791?style=flat-square&logo=postgresql)](https://postgresql.org)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20SQLite%20Fallback-1c508c?style=flat-square&logo=postgresql)](https://postgresql.org)
 [![Nginx](https://img.shields.io/badge/Reverse%20Proxy-Nginx%20HTTPS-009639?style=flat-square&logo=nginx)](https://nginx.org)
+[![NAS](https://img.shields.io/badge/NAS%20Storage-Nextcloud%20Staged%20Hierarchy-3699c2?style=flat-square)](https://nextcloud.com)
 
-**RHD ADDS (System for Coordinated Exchange of Design Data)** is the official digital acquisition, structural vetting, and endorsement orchestration portal developed for the **Bridge Management Wing (BMW)** and **Bridge Design Circle (BDC)** of the **Roads and Highways Department (RHD)**, Ministry of Road Transport and Bridges, Bangladesh.
+**RHD DESC (Data Exchange System for Coordination)**, previously known as **RHD ADDS**, is the official digital asset acquisition, structural vetting, and ministerial design data exchange platform developed for the **Bridge Management Wing (BMW)** and **Bridge Design Circle (BDC)** of the **Roads and Highways Department (RHD)**, Ministry of Road Transport and Bridges, Government of the People's Republic of Bangladesh.
 
-The platform bridges the gap between field engineering reconnaissance (sub-divisions/divisions across all 10 RHD zones) and central structural design bureaus in Sarak Bhaban, Tejgaon, Dhaka.
+The platform bridges the gap between field engineering reconnaissance (sub-divisions/divisions across all 10 RHD zones) and the central structural design divisions (Bridge Design Division 1, 2, and 3) stationed at Sarak Bhaban, Tejgaon, Dhaka.
 
 ---
 
@@ -20,21 +21,45 @@ The platform bridges the gap between field engineering reconnaissance (sub-divis
 - **Culvert Acquisition**: Low-headroom drainage structures, slab & box culvert parameters, discharge estimations, and foundation criteria.
 - **Integrated Borelog Sub-Form**: In-situ soil profiles, SPT $N$-value stratification, and geotechnical soil layer mapping.
 
-### 2. Multi-Tier Chain of Command & Endorsements
-- **Hierarchical Workflow**: Sub-Divisional Engineer (SDE) $\rightarrow$ Executive Engineer (EE) $\rightarrow$ Superintending Engineer (SE) $\rightarrow$ Additional Chief Engineer (ACE) $\rightarrow$ Chief Engineer (CE).
-- **Formal Endorsement Dossiers**: Digital signature verification, granular correction returns with line-item remarks, and stage-by-stage revision tracking.
+### 2. Peer EE-to-EE Workflow & Endorsement Pipeline
+Direct peer exchange between Field Executive Engineers (`FIELD_EE`) and vested Bridge Design Division Executive Engineers (`BDD_EE` 1, 2, or 3) with customary Sub-Divisional Engineer (`SDE`) verification:
+1. `DRAFT_FIELD`: Initial survey entry by Field SAE / SDE.
+2. `PENDING_FIELD_EE_AUTH`: Division authorization by Field Executive Engineer.
+3. `TRANSMITTED_TO_BDD_EE`: Official transmission to vested central Bridge Design Division EE.
+4. `ASSIGNED_TO_BDD_SDE`: Sub-divisional modeling and hydraulic computation.
+5. `DESIGN_PREPARED_PENDING_EE`: Vetting of drawings, structural calculations, and BOQ.
+6. `DESIGN_APPROVED_COMPLETE`: Handover of vetted design package back to field division.
+7. `DISPATCHED_TO_FIELD_SDE`: Execution and construction handover.
 
-### 3. Design Bottleneck Matrix
-- Dynamic visual matrix categorizing pending acquisition dossiers by structural difficulty, hydraulic bottleneck, environmental compliance status, and target completion timelines.
+### 3. Nextcloud-Powered Network Assisted Storage (NAS) Integration
+Demands and delivered design assets are synchronized to a Nextcloud-powered Network Assisted Server (NAS) hierarchy:
+- **Hierarchical Directory Scheme**:
+  ```text
+  /app/backend/storage/nas/
+  └── <Zone_Name>/
+      └── <Circle_Name>/
+          └── <Division_Name>/
+              ├── demand/
+              │   ├── <Tracking_Code>_demand.json
+              │   └── <Uploaded_Field_Surveys_and_Borelogs>
+              └── deliverables/
+                  └── <Approved_CAD_Drawings_BOQ_and_Reports>
+  ```
+- **Automated Manifest Synchronization**: For every acquisition record, the backend generates and maintains a normalized `<Tracking_Code>_demand.json` containing complete structural parameters, GPS coordinates, chainage, road IDs, attachments count, and metadata envelopes.
 
-### 4. GIS & Spatial Webmap Synchronizer
-- Bi-directional integration with `https://webmap.rhdbridge.com` for chainage lookup, national road corridors (N1–N8, regional R-roads, Z-roads), and WGS84 GPS coordinate projection.
+### 4. GIS & Spatial Webmap Interoperability API
+The system exposes dedicated endpoints specifically designed for direct ingestion by the [RHD Webmap GIS Portal](https://webmap.rhdbridge.com):
+- **Dynamic Demands Catalog (`/api/exchange/webmap/layers`)**: Publishes 9 demand layers categorized across Bridge Design Divisions 1, 2, and 3 for three discrete stages: `Demand`, `Processing`, and `Delivered`. Contains `"classify_with": "field_division"`, `"map_from_legends": true`, and search field configurations.
+- **GeoJSON Feature Server (`/api/exchange/webmap/geojson/{layer_table}`)**: Generates real-time WGS84 GeoJSON FeatureCollections from database records and NAS manifests.
+- **Interactive Dossier Preview (`/api/exchange/webmap/preview/{acq_type}/{id}`)**: Serves an iframe-embeddable preview dossier into the Webmap modal, complete with real-time status badges, attachments summary, and a quick-action link to the live DESC record.
 
-### 5. Kinpaku / Crystal Architectural Interface
-- Tailored institutional UI designed according to RHD design principles:
-  - Deep Navy (`#00225a`), Azure (`#429afe`), Mint (`#15db7c`), and Royal Slate accents.
-  - Continuous animated Chroma Horizon line with synchronized cast shadow.
-  - Soothing ambient breathing backdrop and high-contrast accessible typography (`Outfit`, `ITC Stone Sans`).
+### 5. Impeccable Color System (Navy / Denim / Steel Blue / Arctic Ice)
+Designed in accordance with the official RHD visual standards:
+- **Deep Navy (`#112047`)**: Foundation anchors, bridge schemes, demand unaccepted stage, and primary headers.
+- **Denim Blue (`#1c508c`)**: Culvert schemes, processing stage, and active navigation controls.
+- **Steel Blue (`#3699c2`)**: Delivered stage, status accents, borders, and interactive hover rings.
+- **Arctic Ice (`#95d4e5`)**: Ambient pill badges, subtle borders, and highlighted pips.
+- **Pale Arctic Wash (`#e7f0f5`)**: Light translucent background containers and frosted cards.
 
 ---
 
@@ -42,10 +67,12 @@ The platform bridges the gap between field engineering reconnaissance (sub-divis
 
 | Layer | Technologies |
 |---|---|
-| **Frontend SPA** | React 19, Vite 6, Tailwind CSS v4, Lucide Icons, Modern CSS Backdrop Filters |
+| **Frontend SPA** | React 19, Vite 6, Tailwind CSS v4, Lucide Icons, Modern Backdrop Filters |
 | **Backend API** | FastAPI, Uvicorn, Pydantic v2, Python-Jose (JWT Auth), ReportLab (PDF), OpenPyXL (Excel) |
 | **Database** | PostgreSQL 15+ with PostGIS / Zero-Config SQLite Fallback (`rhd_adds_fallback.db`) |
-| **Deployment** | Docker, Docker Compose, Linux Systemd, Nginx TLS 1.3 Reverse Proxy |
+| **NAS Storage** | Structured Local / Nextcloud Network Attached Storage (`nas_storage.py`) |
+| **GIS Interop** | Custom Webmap REST GeoJSON Proxy & Dossier Preview Engines |
+| **Deployment** | Docker Compose, Linux Systemd, Nginx TLS 1.3 Reverse Proxy |
 
 ---
 
@@ -60,11 +87,12 @@ cp .env.example .env
 | Key | Description | Default |
 |---|---|---|
 | `PORT` | HTTP server port | `8787` |
-| `ENVIRONMENT` | Runtime mode (`development` or `production`) | `development` |
+| `ENVIRONMENT` | Runtime mode (`development` or `production`) | `production` |
 | `SECRET_KEY` | JWT signing and cryptographic token secret | *Secure Random String* |
 | `DATABASE_URL` | PostgreSQL connection string | `postgresql+psycopg2://...` |
-| `SQLITE_FALLBACK_URL` | SQLite fallback database path | `sqlite:///./rhd_adds_fallback.db` |
+| `SQLITE_FALLBACK_URL` | SQLite fallback database path | `sqlite:////app/data/rhd_adds_fallback.db` |
 | `WEBMAP_BASE_URL` | Base URL for RHD Webmap GIS services | `https://webmap.rhdbridge.com` |
+| `NAS_ROOT_PATH` | Base directory for NAS staged folder hierarchy | `/app/backend/storage/nas` |
 | `CORS_ALLOWED_ORIGINS` | Permitted origins for API requests | Comma-delimited origins |
 
 ---
@@ -92,54 +120,21 @@ Arguments for `start.py`:
 
 ## 🌐 Production Deployment (VPS / Headless Server)
 
-### Option A: Docker Compose (Recommended)
+The application runs in production on VPS host `62.171.150.194`:
 
 ```bash
-# Build and run containers in background
-docker compose up -d --build
+# Pull latest updates
+cd /opt/acqform
+git pull origin main
 
-# View logs
-docker compose logs -f
+# Build and recreate containers
+docker compose up -d --build acqform
+
+# View live container logs
+docker compose logs -f acqform
 ```
 
-### Option B: Native Systemd Service
-
-1. Build frontend and install backend requirements:
-   ```bash
-   npm --prefix frontend install
-   npm --prefix frontend run build
-   pip install -r backend/requirements.txt
-   ```
-2. Copy and enable the systemd service:
-   ```bash
-   sudo cp deploy/rhd-acqform.service /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable --now rhd-acqform
-   ```
-
----
-
-## 🔒 Nginx & HTTPS Configuration
-
-The production environment is configured to serve HTTPS over TLS 1.3:
-
-1. Copy the Nginx server block:
-   ```bash
-   sudo cp deploy/nginx/acqform.rhdbridge.com.conf /etc/nginx/sites-available/
-   sudo ln -sf /etc/nginx/sites-available/acqform.rhdbridge.com.conf /etc/nginx/sites-enabled/
-   ```
-2. Issue or renew Let's Encrypt certificates:
-   ```bash
-   sudo certbot certonly --webroot -w /var/www/certbot \
-     -d acqform.rhdbridge.com -d acq.rhdbridge.com \
-     --non-interactive --agree-tos
-   ```
-3. Test and reload Nginx:
-   ```bash
-   sudo nginx -t && sudo systemctl reload nginx
-   ```
-
-The application will be live at:
+The application is live and secured at:
 - **`https://acqform.rhdbridge.com`**
 - **`https://acq.rhdbridge.com`**
 

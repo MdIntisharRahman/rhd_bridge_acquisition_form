@@ -1,10 +1,10 @@
-# RHD ADDS — System for Coordinated Exchange of Design Data
+# RHD DESC — Data Exchange System for Coordination
 ## Master Codebase Index & Architectural Catalog
 
 > **Institutional Scope**: Roads and Highways Department (RHD), Ministry of Road Transport and Bridges, Government of the People's Republic of Bangladesh.  
-> **System Purpose**: National web-based digital acquisition, multi-tier ministerial endorsement, geotechnical borelog synchronization, and design demand pipeline orchestration for all national bridge and culvert assets.  
-> **Codebase Graph Index**: 1,610 Nodes • 5,758 Edges (Synchronized via `codebase-memory-mcp`)  
-> **Index Timestamp**: 2026-11-06
+> **System Purpose**: National web-based digital acquisition, multi-tier ministerial endorsement, geotechnical borelog synchronization, Nextcloud NAS staging, and design demand pipeline orchestration for all national bridge and culvert assets.  
+> **Codebase Graph Index**: 1,042 Nodes • 3,065 Edges (Synchronized via `codebase-memory-mcp`)  
+> **Index Timestamp**: 2026-11-20
 
 ---
 
@@ -14,9 +14,10 @@
 | :--- | :--- | :--- |
 | **Backend API** | Python 3.10+ / FastAPI | Pydantic V2, SQLAlchemy ORM, Uvicorn, Python-Jose (JWT), ReportLab (PDF), OpenPyXL (Excel) |
 | **Database** | SQLite (Dev/Fallback) / PostgreSQL | Relational schema with strict foreign keys, GIS coordinate bindings, JSON field strata storage |
+| **NAS Storage** | Nextcloud Network-Assisted Storage | Automatic staged hierarchy: `<Zone>/<Circle>/<Division>/demand/` and `deliverables/` |
 | **Frontend UI** | React 19 / Vite | Tailwind CSS v4, Lucide React icons, Axios, Responsive Glassmorphic Engine |
-| **GIS Integration** | RHD Live Webmap GIS | REST coordinate sync with `webmap.rhdbridge.com`, multi-layered GeoJSON layers |
-| **Design Language** | Double-Beveled Glassmorphism | Specular highlights, radiant mesh gradients, frosted inputs, and tactile micro-interactions |
+| **GIS Integration** | RHD Live Webmap GIS | REST coordinate sync with `webmap.rhdbridge.com`, multi-layered GeoJSON layers & dossiers |
+| **Design Language** | Navy / Denim / Steel Blue / Arctic Ice | Deep Navy (`#112047`), Denim (`#1c508c`), Steel Blue (`#3699c2`), Arctic Ice (`#95d4e5`) |
 
 ---
 
@@ -36,7 +37,11 @@ D:\System 47\acqform/
 │   │   ├── master.py                   # Administrative hierarchy (Zones, Circles, Divisions, Roads)
 │   │   ├── pipeline.py                 # Design Demand Pipeline & bottleneck resolution tracking
 │   │   ├── supreme.py                  # Supreme Authority governance, audit ledger, and resets
-│   │   └── webmap.py                   # Borelog geometry and GIS synchronization endpoints
+│   │   ├── webmap.py                   # Borelog geometry and GIS synchronization endpoints
+│   │   └── webmap_exchange.py          # Dynamic Webmap Demands catalog, GeoJSON, and preview dossiers
+│   ├── services/                       # Storage and external subsystem integrations
+│   │   └── nas_storage.py              # Nextcloud NAS folder sync, manifest generator, and file staging
+│   ├── storage/                        # Local staged mount for NAS hierarchy
 │   ├── uploads/                        # Persistent store for geotechnical reports, CAD drawings, photos
 │   ├── auth.py                         # Password hashing, token encoding/decoding, RBAC guards
 │   ├── config.py                       # App settings, environment variables, storage paths
