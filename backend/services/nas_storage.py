@@ -100,7 +100,7 @@ class NASStorageManager:
 
         return {
             "nas_envelope": {
-                "system": "RHD ADDS (Precision Acquisition & Ministerial Pipeline)",
+                "system": "RHD DESC (Data Exchange System for Coordination)",
                 "schema_version": "2.0.0",
                 "storage_architecture": "Nextcloud NAS Staged Hierarchy",
                 "generated_at": datetime.datetime.utcnow().isoformat() + "Z",

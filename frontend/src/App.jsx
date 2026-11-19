@@ -140,10 +140,10 @@ export default function App() {
           />
         </div>
         <div className="text-lg font-bold text-slate-900" style={{ fontFamily: 'var(--font-display)' }}>
-          RHD ADDS
+          RHD DESC
         </div>
         <div className="text-xs text-slate-600 mt-1 font-semibold" style={{ fontFamily: 'var(--font-subhead)' }}>
-          System for Coordinated Exchange of Design Data • Initializing Workspace...
+          Data Exchange System for Coordination • Initializing Workspace...
         </div>
       </div>
     );

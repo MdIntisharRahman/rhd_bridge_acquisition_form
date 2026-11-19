@@ -152,7 +152,7 @@ export default function RhdWebmapBorelogForm({
     updateCurrentBh('spt', current);
   };
 
-  // Save borehole to RHD ADDS DB
+  // Save borehole to RHD DESC DB
   const handleSaveBorehole = async () => {
     if (!acquisitionId) {
       alert("Please save the acquisition draft first before recording borehole logs.");
@@ -178,7 +178,7 @@ export default function RhdWebmapBorelogForm({
       };
 
       await api.saveBorelog(acquisitionType, acquisitionId, payload);
-      setMsg({ type: 'success', text: `Borehole BH-${activeBhIndex} saved to RHD ADDS database!` });
+      setMsg({ type: 'success', text: `Borehole BH-${activeBhIndex} saved to RHD DESC database!` });
     } catch (err) {
       setMsg({ type: 'error', text: err.message });
     } finally {

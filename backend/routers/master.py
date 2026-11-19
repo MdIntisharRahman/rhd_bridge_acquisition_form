@@ -117,7 +117,7 @@ def export_hierarchy(current_user: User = Depends(require_webmaster), db: Sessio
     users = db.query(User).all()
 
     payload = {
-        "system": "RHD ADDS Master Hierarchy Export",
+        "system": "RHD DESC Master Hierarchy Export",
         "zones": [
             {
                 "code": z.code,

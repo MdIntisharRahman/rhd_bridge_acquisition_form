@@ -21,11 +21,11 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
-logger = logging.getLogger("rhd_adds")
+logger = logging.getLogger("rhd_desc")
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    description="RHD System for Coordinated Exchange of Design Data (RHD ADDS) for the Bridge Design Circle, Roads and Highways Department, Bangladesh.",
+    description="RHD Data Exchange System for Coordination (RHD DESC) for the Bridge Design Circle, Roads and Highways Department, Bangladesh.",
     version="2.0.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",
@@ -173,7 +173,7 @@ app.include_router(webmap_exchange.router, prefix=settings.API_V1_STR)
 
 @app.on_event("startup")
 def on_startup():
-    logger.info("Initializing RHD ADDS Backend...")
+    logger.info("Initializing RHD DESC Backend...")
     try:
         run_auto_schema_migrations(engine)
         seed_database()

@@ -14,7 +14,7 @@ from backend.models import BridgeAcquisition, CulvertAcquisition, Attachment, Wo
 from backend.services.nas_storage import nas_storage
 from backend.jurisdiction import get_vested_design_division
 
-logger = logging.getLogger("rhd_adds.webmap_exchange")
+logger = logging.getLogger("rhd_desc.webmap_exchange")
 
 router = APIRouter(prefix="/exchange/webmap", tags=["Webmap Interoperability"])
 
@@ -254,6 +254,7 @@ def get_webmap_layer_geojson(layer_table: str, db: Session = Depends(get_db)):
                 "f_class_color": layer_color,
                 "preview_url": preview_url,
                 "adds_dossier_url": adds_url,
+                "desc_dossier_url": adds_url,
                 "keys": (
                     "[code, Tracking Code], "
                     "[name, Structure Name], "
@@ -284,7 +285,7 @@ def get_demand_iframe_preview(acq_type: str, id: int, db: Session = Depends(get_
     """
     Generates a high-fidelity, responsive HTML preview page tailored for
     embedding inside Webmap's modal iframe, complete with the requested
-    'Open in RHD ADDS' action button at the top.
+    'Open in RHD DESC' action button at the top.
     """
     acq_type = acq_type.upper()
     if acq_type == "BRIDGE":
@@ -498,7 +499,7 @@ def get_demand_iframe_preview(acq_type: str, id: int, db: Session = Depends(get_
     </div>
     <a href="{adds_full_url}" target="_blank" rel="noopener noreferrer" class="action-btn">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Open in RHD ADDS
+      Open in RHD DESC
     </a>
   </div>
 

@@ -163,11 +163,11 @@ export default function TopCommandBar({
             <div className="flex flex-col">
               <div className="flex items-center space-x-2">
                 <span className="font-extrabold text-lg tracking-tight text-[#112047]" style={{ fontFamily: 'var(--font-display)' }}>
-                  RHD ADDS
+                  RHD DESC
                 </span>
                 <span className="text-[#cadbe7]">|</span>
                 <span className="text-xs text-[#1c508c] font-extrabold px-1.5 py-0.5 tracking-wider hidden sm:inline" style={{ fontFamily: 'var(--font-subhead)' }}>
-                  System for Coordinated Exchange of Design Data
+                  Data Exchange System for Coordination
                 </span>
               </div>
               <span className="text-[10.5px] text-[#536b82] font-medium hidden md:inline">

@@ -352,7 +352,7 @@ def generate_acquisition_pdf(item, acq_type: str, audit_logs=None, attachments=N
             Paragraph("Authorized Field Officer", style_cell),
             Paragraph(div_name if div_name != "N/A" else "Field Division", style_cell),
             Paragraph(datetime.utcnow().strftime("%Y-%m-%d %H:%M"), style_mono),
-            Paragraph("Record initialized in RHD ADDS System.", style_cell)
+            Paragraph("Record initialized in RHD DESC (Data Exchange System for Coordination).", style_cell)
         ])
 
     t_audit = Table(audit_rows, colWidths=[35*mm, 40*mm, 35*mm, 25*mm, 45*mm])

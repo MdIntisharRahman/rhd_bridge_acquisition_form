@@ -27,7 +27,7 @@ def generate_acquisition_excel(item, acq_type: str, audit_logs=None, boreholes=N
     ws1.title = "Dossier Summary"
     
     ws1.merge_cells("A1:D1")
-    ws1["A1"] = f"RHD ADDS // {acq_type} SPECIFICATION: {item.code}"
+    ws1["A1"] = f"RHD DESC // Data Exchange System for Coordination // {acq_type}: {item.code}"
     ws1["A1"].font = Font(name="Arial", size=14, bold=True, color="FFFFFF")
     ws1["A1"].fill = fill_accent
     ws1["A1"].alignment = Alignment(horizontal="center", vertical="center")

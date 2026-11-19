@@ -9,7 +9,7 @@ if (typeof window !== 'undefined' && window.EventSource) {
     const es = new EventSource('/api/dev/live-reload');
     es.onmessage = (e) => {
       if (e.data === 'reload') {
-        console.log('[RHD ADDS] Live rebuild detected. Reloading in real time...');
+        console.log('[RHD DESC] Live rebuild detected. Reloading in real time...');
         window.location.reload();
       }
     };
